@@ -2,41 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Hades Bites Wickedly | Official Menu</title>
+  <title>Hades Bites Wickedly | Menu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Hades Bites Wickedly – Underworld-inspired food truck serving wicked stews, sliders, mac, fries, elixirs, and Cerberus-approved sweets." />
-
+  <meta name="description" content="Hades Bites Wickedly – Underworld-themed food truck serving mains, sides, kids meals, elixirs, desserts, and feasts." />
   <style>
-    :root {
-      --bg: #050508;
-      --bg-alt: #111016;
-      --panel: #17141f;
-      --accent: #f97316;
-      --accent-soft: #fbbf24;
-      --accent-red: #ef4444;
-      --text: #f9fafb;
-      --muted: #9ca3af;
-      --border: #272338;
-      --badge: #1f2937;
-      --radius-lg: 16px;
-      --radius-sm: 10px;
-      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.65);
-      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      --font-display: "Cinzel", "Trajan Pro", serif;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
-      font-family: var(--font-main);
-      background: radial-gradient(circle at top, #111827 0, #02010a 45%, #000 100%);
-      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      background-color: #fafafa;
+      color: #111827;
       line-height: 1.6;
-      min-height: 100vh;
     }
 
     a {
@@ -44,239 +19,149 @@
       text-decoration: none;
     }
 
-    .page {
-      max-width: 1150px;
-      margin: 0 auto;
-      padding: 1.5rem 1.25rem 3rem;
-    }
-
     header {
+      background-color: #111827;
+      color: #f9fafb;
+      padding: 1rem 1.5rem;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 1rem;
-      padding: 0.75rem 1rem;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      box-shadow: var(--shadow-soft);
-      position: sticky;
-      top: 0.85rem;
-      z-index: 40;
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(249, 115, 22, 0.3);
     }
 
-    .logo {
+    .logo-block {
       display: flex;
-      align-items: center;
-      gap: 0.7rem;
+      flex-direction: column;
+      gap: 0.1rem;
     }
 
-    .logo-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      border: 2px solid var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.05rem;
-      background: radial-gradient(circle at 30% 0%, #f97316 0, #7f1d1d 50%, #020617 100%);
-      box-shadow: 0 0 12px rgba(248, 250, 252, 0.25);
-    }
-
-    .logo-text-main {
-      font-family: var(--font-display);
-      letter-spacing: 0.04em;
-      font-size: 0.95rem;
+    .logo-title {
+      font-weight: 700;
+      font-size: 1.1rem;
       text-transform: uppercase;
     }
 
-    .logo-text-sub {
-      font-size: 0.7rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
+    .logo-subtitle {
+      font-size: 0.8rem;
+      opacity: 0.8;
     }
 
     nav {
       display: flex;
-      gap: 0.85rem;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
     }
 
     nav a {
-      padding: 0.2rem 0.55rem;
+      font-size: 0.85rem;
+      padding: 0.25rem 0.5rem;
       border-radius: 999px;
-      color: var(--muted);
       border: 1px solid transparent;
     }
 
     nav a:hover {
-      color: var(--accent-soft);
-      border-color: var(--accent-soft);
-      background: rgba(15, 23, 42, 0.8);
+      border-color: #f97316;
+      color: #f97316;
+      background-color: #111827;
+    }
+
+    @media (min-width: 768px) {
+      header {
+        flex-wrap: nowrap;
+      }
+      nav {
+        margin-top: 0;
+      }
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 3rem;
     }
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.2fr);
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.2fr);
       gap: 2rem;
-      padding: 2.5rem 0 1rem;
-      align-items: center;
+      margin-bottom: 2rem;
+      margin-top: 1.5rem;
     }
 
-    @media (max-width: 840px) {
+    @media (max-width: 860px) {
       .hero {
         grid-template-columns: minmax(0, 1fr);
       }
-      header {
-        flex-wrap: wrap;
-        border-radius: 20px;
-      }
-      nav {
-        justify-content: center;
-        flex-wrap: wrap;
-      }
     }
 
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.2rem, 4vw, 3rem);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
+    .hero h1 {
+      font-size: clamp(2rem, 3.2vw, 2.6rem);
+      margin-bottom: 0.5rem;
     }
 
-    .hero-title span {
-      color: var(--accent-soft);
+    .hero h1 span {
+      color: #f97316;
     }
 
-    .hero-subtitle {
+    .hero p {
+      max-width: 34rem;
       font-size: 0.95rem;
-      max-width: 32rem;
-      color: var(--muted);
-      margin-bottom: 1.25rem;
+      color: #4b5563;
+      margin-bottom: 1rem;
     }
 
     .hero-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-bottom: 1.4rem;
+      margin-bottom: 1rem;
     }
 
     .tag {
-      padding: 0.25rem 0.7rem;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
       border-radius: 999px;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: var(--muted);
-      backdrop-filter: blur(8px);
-      background: rgba(15, 23, 42, 0.7);
-    }
-
-    .tag.hot {
-      border-color: var(--accent-red);
-      color: #fecaca;
-    }
-    .tag.kid {
-      border-color: #22c55e;
-      color: #bbf7d0;
-    }
-
-    .hero-cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-    }
-
-    .btn-primary {
-      padding: 0.6rem 1.4rem;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      background: radial-gradient(circle at 0 0, #f97316 0, #b91c1c 40%, #020617 100%);
-      color: #fefce8;
-      box-shadow: 0 18px 45px rgba(248, 113, 22, 0.35);
-    }
-
-    .btn-secondary {
-      padding: 0.6rem 1.4rem;
-      border-radius: 999px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.7);
-      color: var(--muted);
+      background-color: #e5e7eb;
+      color: #374151;
     }
 
     .hero-right {
-      border-radius: 30px;
-      padding: 1.2rem 1.4rem;
-      background: radial-gradient(circle at 20% 0, #f97316 0, #4b1d3f 35%, #020617 90%);
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(249, 250, 251, 0.15);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-right::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 0 0, rgba(252, 211, 77, 0.35), transparent 55%);
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
-    .hero-right-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-highlight {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #fefce8;
-      margin-bottom: 0.3rem;
-    }
-
-    .hero-feature-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-    }
-
-    .hero-feature-text {
-      font-size: 0.85rem;
+      background-color: #111827;
       color: #f9fafb;
-      margin-bottom: 0.9rem;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
     }
 
-    .hero-feature-badges {
+    .hero-right small {
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: #fbbf24;
+    }
+
+    .hero-right h2 {
+      font-size: 1.3rem;
+      margin: 0.4rem 0;
+    }
+
+    .hero-right p {
+      margin: 0.4rem 0 0.6rem;
+      font-size: 0.9rem;
+      color: #e5e7eb;
+    }
+
+    .hero-right .mini-badges {
       display: flex;
       flex-wrap: wrap;
       gap: 0.4rem;
-      font-size: 0.68rem;
+      font-size: 0.75rem;
     }
 
-    .hero-feature-badges span {
+    .hero-right .mini-badges span {
       padding: 0.2rem 0.5rem;
       border-radius: 999px;
-      border: 1px solid rgba(15, 23, 42, 0.3);
-      background: rgba(15, 23, 42, 0.25);
+      border: 1px solid #4b5563;
     }
 
     .section {
@@ -284,24 +169,20 @@
     }
 
     .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 1.1rem;
+      margin-bottom: 1rem;
     }
 
-    .section-title {
-      font-family: var(--font-display);
+    .section-header h2 {
       font-size: 1.3rem;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.2rem;
     }
 
-    .section-subtitle {
-      font-size: 0.8rem;
-      color: var(--muted);
-      max-width: 28rem;
+    .section-header p {
+      font-size: 0.9rem;
+      color: #4b5563;
+      max-width: 32rem;
     }
 
     .menu-grid {
@@ -317,11 +198,10 @@
     }
 
     .menu-card {
-      padding: 1rem 1rem 0.9rem;
-      border-radius: var(--radius-lg);
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid rgba(31, 41, 55, 0.85);
-      box-shadow: var(--shadow-soft);
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      background-color: #ffffff;
+      padding: 0.9rem 1rem;
     }
 
     .menu-card-header {
@@ -329,158 +209,141 @@
       justify-content: space-between;
       align-items: baseline;
       gap: 0.5rem;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.2rem;
     }
 
     .menu-card-title {
-      font-size: 0.98rem;
       font-weight: 600;
+      font-size: 0.98rem;
     }
 
     .price {
       font-size: 0.85rem;
-      color: var(--accent-soft);
+      color: #6b7280;
     }
 
     .menu-card-desc {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-bottom: 0.35rem;
+      font-size: 0.86rem;
+      color: #4b5563;
+      margin-bottom: 0.3rem;
     }
 
     .menu-meta {
       display: flex;
       flex-wrap: wrap;
       gap: 0.35rem;
-      font-size: 0.68rem;
-      color: #e5e7eb;
-      margin-bottom: 0.1rem;
+      font-size: 0.72rem;
+      margin-top: 0.1rem;
     }
 
     .badge {
-      padding: 0.16rem 0.45rem;
+      padding: 0.16rem 0.5rem;
       border-radius: 999px;
-      background: var(--badge);
-      border: 1px solid rgba(75, 85, 99, 0.8);
+      background-color: #f3f4f6;
+      color: #374151;
+      border: 1px solid #e5e7eb;
     }
 
     .badge.hot {
-      border-color: var(--accent-red);
-      color: #fecaca;
+      border-color: #f97316;
+      color: #b91c1c;
     }
 
     .badge.kid {
       border-color: #22c55e;
-      color: #bbf7d0;
+      color: #15803d;
     }
 
     .badge.seasonal {
-      border-color: var(--accent-soft);
-      color: #fef9c3;
+      border-color: #fbbf24;
+      color: #92400e;
     }
 
-    .footer {
+    footer {
+      border-top: 1px solid #e5e7eb;
       margin-top: 3rem;
-      padding-top: 1.75rem;
-      border-top: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
-      gap: 1.5rem;
-      font-size: 0.85rem;
+      padding: 1.5rem 1rem 2.5rem;
+      background-color: #f9fafb;
     }
 
-    @media (max-width: 760px) {
-      .footer {
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      color: #4b5563;
+    }
+
+    @media (max-width: 780px) {
+      .footer-inner {
         grid-template-columns: minmax(0, 1fr);
       }
     }
 
     .footer-title {
-      font-family: var(--font-display);
       text-transform: uppercase;
-      letter-spacing: 0.16em;
-      margin-bottom: 0.3rem;
       font-size: 0.85rem;
-    }
-
-    .footer p {
-      color: var(--muted);
+      letter-spacing: 0.12em;
+      color: #111827;
       margin-bottom: 0.35rem;
     }
 
     .footer-links {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
+      flex-direction: column;
+      gap: 0.25rem;
       margin-top: 0.35rem;
     }
 
-    .footer-links a {
-      font-size: 0.8rem;
-      color: #e5e7eb;
-    }
-
     .footer-links a span {
-      color: var(--accent-soft);
+      color: #f97316;
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <!-- HEADER -->
-    <header>
-      <div class="logo">
-        <div class="logo-icon">🔥</div>
-        <div>
-          <div class="logo-text-main">Hades Bites Wickedly</div>
-          <div class="logo-text-sub">Underworld Street Food</div>
-        </div>
-      </div>
-      <nav>
-        <a href="#mains">Mains</a>
-        <a href="#sides">Sides</a>
-        <a href="#kids">Kids</a>
-        <a href="#drinks">Drinks</a>
-        <a href="#desserts">Desserts</a>
-        <a href="#combos">Feasts</a>
-      </nav>
-    </header>
+  <header>
+    <div class="logo-block">
+      <div class="logo-title">Hades Bites Wickedly</div>
+      <div class="logo-subtitle">Underworld Street Food</div>
+    </div>
+    <nav>
+      <a href="#mains">Mains</a>
+      <a href="#sides">Sides</a>
+      <a href="#kids">Kids</a>
+      <a href="#drinks">Drinks</a>
+      <a href="#desserts">Desserts</a>
+      <a href="#combos">Feasts</a>
+    </nav>
+  </header>
 
+  <main>
     <!-- HERO -->
     <section class="hero">
       <div>
-        <h1 class="hero-title">
-          Street Food from the <span>Underworld</span>
-        </h1>
-        <p class="hero-subtitle">
+        <h1>Street Food from the <span>Underworld</span></h1>
+        <p>
           Witchy comfort food, infernal heat, and kid-friendly bites — all guarded by Cerberus himself.
           Built for festivals, late nights, and mortals who like their meals with a little bit of chaos.
         </p>
         <div class="hero-tags">
-          <span class="tag hot">Spice paths from mild → infernal</span>
-          <span class="tag">Vegetarian & allergy-aware options</span>
-          <span class="tag kid">Kid combos: The Little Shades Menu</span>
-        </div>
-        <div class="hero-cta">
-          <a href="#mains"><button class="btn-primary">View the Full Menu</button></a>
-          <a href="#drinks"><button class="btn-secondary">Summon Elixirs</button></a>
+          <span class="tag">Spice paths: mild → infernal</span>
+          <span class="tag">Vegetarian &amp; allergy-aware options</span>
+          <span class="tag">Kids: The Little Shades Menu</span>
         </div>
       </div>
-
-      <!-- Featured seasonal: Hot Chocolate -->
       <aside class="hero-right">
-        <div class="hero-right-inner">
-          <div class="hero-highlight">Seasonal Spell • Fall / Winter</div>
-          <h2 class="hero-feature-title">Cerberus Triple-Shot Hot Chocolate</h2>
-          <p class="hero-feature-text">
-            Three paths in one cauldron: Gentle, Wicked, and Infernal. Rich, molten chocolate for cold nights,
-            haunted markets, and anyone who wants to warm their soul by the Underworld’s fire.
-          </p>
-          <div class="hero-feature-badges">
-            <span>Available fall &amp; winter</span>
-            <span>Kid &amp; adult versions</span>
-            <span>Hot drink only</span>
-          </div>
+        <small>Seasonal • Fall &amp; Winter</small>
+        <h2>Cerberus Triple-Shot Hot Chocolate</h2>
+        <p>
+          Three paths in one cauldron: Gentle, Wicked, and Infernal. Rich, molten chocolate for cold nights,
+          haunted markets, and anyone who wants to warm their soul by the Underworld’s fire.
+        </p>
+        <div class="mini-badges">
+          <span>Offered fall &amp; winter</span>
+          <span>Kid &amp; adult versions</span>
+          <span>Hot drink only</span>
         </div>
       </aside>
     </section>
@@ -488,10 +351,8 @@
     <!-- MAINS -->
     <section id="mains" class="section">
       <div class="section-header">
-        <h2 class="section-title">Mains of the Underworld</h2>
-        <p class="section-subtitle">
-          Hearty bowls, wicked sliders, and feasts for the hungry — with spice routes from Mortal to Infernal.
-        </p>
+        <h2>Mains of the Underworld</h2>
+        <p>Hearty bowls, wicked sliders, and feasts for the hungry — with spice routes from Mortal to Infernal.</p>
       </div>
       <div class="menu-grid">
         <article class="menu-card">
@@ -581,10 +442,8 @@
     <!-- SIDES -->
     <section id="sides" class="section">
       <div class="section-header">
-        <h2 class="section-title">Sides of the Fallen Fields</h2>
-        <p class="section-subtitle">
-          Build your feast with ember-crisp fries, mac cups, and fruit from the Elysian groves.
-        </p>
+        <h2>Sides of the Fallen Fields</h2>
+        <p>Build your feast with ember-crisp fries, mac cups, and fruit from the Elysian groves.</p>
       </div>
       <div class="menu-grid">
         <article class="menu-card">
@@ -644,10 +503,8 @@
     <!-- KIDS -->
     <section id="kids" class="section">
       <div class="section-header">
-        <h2 class="section-title">The Little Shades Menu</h2>
-        <p class="section-subtitle">
-          Gentle, kid-approved meals for tiny guardians and picky mortals. No heat by default, always customizable.
-        </p>
+        <h2>The Little Shades Menu</h2>
+        <p>Gentle, kid-approved meals for tiny guardians and picky mortals. No heat by default; always customizable.</p>
       </div>
       <div class="menu-grid">
         <article class="menu-card">
@@ -705,13 +562,13 @@
       </div>
     </section>
 
-    <!-- DRINKS & ELIXIRS -->
+    <!-- DRINKS -->
     <section id="drinks" class="section">
       <div class="section-header">
-        <h2 class="section-title">Drinks & Elixirs</h2>
-        <p class="section-subtitle">
-          From black lemonade drawn from the Styx to gentle mint elixirs, each drink follows an Underworld river or ritual.
-          <br />Hot Chocolate is offered as a fall/winter seasonal special or on cold days.
+        <h2>Drinks &amp; Elixirs</h2>
+        <p>
+          From black lemonade drawn from the Styx to gentle mint elixirs and icy House Waters.
+          Cerberus Triple-Shot Hot Chocolate is offered as a fall / winter seasonal hot drink.
         </p>
       </div>
       <div class="menu-grid">
@@ -842,7 +699,7 @@
           </div>
           <p class="menu-card-desc">
             Rich, molten hot chocolate served three ways: Gentle (classic), Wicked (spiced), and Infernal (dark heat).
-            Offered in kid and adult versions.
+            Offered in kid and adult versions. Available as a seasonal drink during fall and winter or on especially cold days.
           </p>
           <div class="menu-meta">
             <span class="badge seasonal">Seasonal • Fall &amp; Winter</span>
@@ -855,10 +712,8 @@
     <!-- DESSERTS -->
     <section id="desserts" class="section">
       <div class="section-header">
-        <h2 class="section-title">Underworld Desserts & Skulls</h2>
-        <p class="section-subtitle">
-          Sweet offerings for Cerberus, Persephone, and anyone who believes dessert should have a little drama.
-        </p>
+        <h2>Underworld Desserts &amp; Skulls</h2>
+        <p>Sweet offerings for Cerberus, Persephone, and anyone who believes dessert should have a little drama.</p>
       </div>
       <div class="menu-grid">
         <article class="menu-card">
@@ -867,7 +722,8 @@
             <span class="price">$5–$8</span>
           </div>
           <p class="menu-card-desc">
-            Molded chocolate skulls with rotating fillings like marshmallow, crispy crunch, or caramel. Allergen-friendly sets available.
+            Molded chocolate skulls with rotating fillings like marshmallow, crispy crunch, or caramel.
+            Allergen-friendly sets available.
           </p>
           <div class="menu-meta">
             <span class="badge">Signature dessert</span>
@@ -889,11 +745,11 @@
       </div>
     </section>
 
-    <!-- COMBO FEASTS -->
+    <!-- COMBOS -->
     <section id="combos" class="section">
       <div class="section-header">
-        <h2 class="section-title">Feast Rituals & Combos</h2>
-        <p class="section-subtitle">
+        <h2>Feast Rituals &amp; Combos</h2>
+        <p>
           Bundle your Underworld favorites into full rituals: mains, sides, and elixirs chosen by Hades, Persephone, and Cerberus.
         </p>
       </div>
@@ -917,7 +773,8 @@
             <span class="price">$28–$32</span>
           </div>
           <p class="menu-card-desc">
-            A mega-meal for serious appetites: large main, two sides, and a drink. Built for heroes, sharers, and very hungry mortals.
+            A mega-meal for serious appetites: large main, two sides, and a drink.
+            Built for heroes, sharers, and very hungry mortals.
           </p>
           <div class="menu-meta">
             <span class="badge">Heaviest combo</span>
@@ -930,7 +787,8 @@
             <span class="price">$14–$18</span>
           </div>
           <p class="menu-card-desc">
-            Light, bright combo with a gentle main, fruit or light side, and refreshing drink. Perfect for guests who prefer softer flavors.
+            Light, bright combo with a gentle main, fruit or light side, and refreshing drink.
+            Perfect for guests who prefer softer flavors.
           </p>
           <div class="menu-meta">
             <span class="badge">Lighter feast</span>
@@ -969,7 +827,8 @@
             <span class="price">$24–$34</span>
           </div>
           <p class="menu-card-desc">
-            A large, spicy shareable platter featuring your hottest mains and sides. A “test yourself on the heat” kind of feast — no prizes, just bragging rights.
+            A large, spicy shareable platter featuring your hottest mains and sides.
+            A “test yourself on the heat” kind of feast — no prizes, no rewards, just personal bragging rights and fun.
           </p>
           <div class="menu-meta">
             <span class="badge hot">Very spicy • Shareable</span>
@@ -977,18 +836,19 @@
         </article>
       </div>
     </section>
+  </main>
 
-    <!-- FOOTER -->
-    <footer class="footer" id="contact">
+  <footer>
+    <div class="footer-inner">
       <div>
-        <div class="footer-title">Summon the Truck</div>
+        <div class="footer-title">Contact</div>
         <p><strong>Phone:</strong> 540-944-8898</p>
         <p><strong>Email:</strong> HadesBitesWickedly@gmail.com</p>
         <p>Available for festivals, events, and pop-ups. Message for booking details and scheduling.</p>
       </div>
       <div>
-        <div class="footer-title">Socials of the Underworld</div>
-        <p>Follow the mischief, new specials, and location drops:</p>
+        <div class="footer-title">Socials</div>
+        <p>Follow for specials, locations, and Underworld mischief:</p>
         <div class="footer-links">
           <a href="https://www.tiktok.com/@hadesbiteswickedly" target="_blank" rel="noopener">
             TikTok: <span>@hadesbiteswickedly</span>
@@ -997,11 +857,11 @@
             Instagram: <span>@hadesbiteswickedly</span>
           </a>
         </div>
-        <p style="margin-top:0.7rem;color:#6b7280;">
+        <p style="margin-top:0.5rem;">
           Menu items, prices, and availability may vary by event, season, and the whims of the Underworld.
         </p>
       </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 </body>
 </html>
