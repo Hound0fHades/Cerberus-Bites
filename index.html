@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Hades Wicked Bites | Feast in the Underworld</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hades Wicked Bites — an underworld-themed food truck serving wicked sliders, infernal mac, underworld feasts, and elixirs. Feast in the Underworld.">
+  <meta name="description" content="Hades Wicked Bites — an underworld-themed food truck serving wicked sliders, infernal mac, bites, bowls, combos, and elixirs. Feast in the Underworld.">
   <style>
     :root {
       --bg: #050308;
@@ -196,7 +196,7 @@
     }
 
     .logo-img {
-      height: 90px; /* bigger Cerberus */
+      height: 90px;
       width: auto;
       display: block;
       filter: drop-shadow(0 0 12px rgba(202,52,0,0.8));
@@ -515,25 +515,12 @@
       text-transform: uppercase;
       font-size: 0.88rem;
       letter-spacing: 0.16em;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
     }
 
     .season-message {
       font-size: 0.82rem;
       color: var(--muted);
       margin-top: 0.25rem;
-    }
-
-    .season-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 0.1rem;
-      font-size: 1rem;
-      filter: drop-shadow(0 0 4px rgba(245,201,122,0.6));
-      animation: seasonGlow 3.6s ease-in-out infinite alternate;
     }
 
     @keyframes calloutFade {
@@ -545,32 +532,6 @@
         opacity: 1;
         transform: translateY(0);
       }
-    }
-
-    @keyframes seasonGlow {
-      0% {
-        transform: translateY(0);
-        filter: drop-shadow(0 0 4px rgba(245,201,122,0.4));
-        opacity: 0.9;
-      }
-      50% {
-        transform: translateY(-1px);
-        filter: drop-shadow(0 0 8px rgba(202,52,0,0.9));
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(1px);
-        filter: drop-shadow(0 0 5px rgba(245,201,122,0.5));
-        opacity: 0.9;
-      }
-    }
-
-    .season-whisper {
-      margin-top: 0.25rem;
-      font-size: 0.78rem;
-      font-style: italic;
-      color: var(--muted);
-      opacity: 0.9;
     }
 
     /* Secret star (hover hotspot) */
@@ -677,7 +638,7 @@
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    /* Per-item seasonal icon with tooltip */
+    /* Seasonal icon with hover tooltip */
     .seasonal-icon {
       display: inline-block;
       margin-left: 0.3rem;
@@ -759,7 +720,6 @@
       display: flex;
       justify-content: space-between;
       gap: 0.4rem;
-      align-items: center;
     }
     .menu-item-name span {
       color: var(--gold);
@@ -1001,6 +961,7 @@
 
         <div class="nav-center">
           <a href="#top" class="nav-logo-link">
+            <!-- Make sure this file name & path matches your actual logo -->
             <img src="HadesWickedBites.png" alt="Hades Wicked Bites Logo" class="logo-img">
           </a>
           <div class="nav-brand-text">
@@ -1082,6 +1043,7 @@
           <div class="section-eyebrow">The Wicked Feast</div>
           <div class="section-title-row">
             <h2 class="section-title">Underworld Menu</h2>
+            <!-- subtle ghost hotspot star -->
             <button class="secret-star" id="secretStar" aria-label="Hidden sigil">
               <span>✶</span>
             </button>
@@ -1090,14 +1052,10 @@
             Infernal comfort food for mortals of every kind — kids, picky eaters, spice fiends, and those walking gentler paths.
           </p>
 
-          <!-- Sabbat-aware Seasonal specials callout -->
+          <!-- Seasonal specials callout -->
           <div id="seasonCallout" class="season-callout">
-            <strong class="season-title">
-              <span id="seasonIcon" class="season-icon" aria-hidden="true">✶</span>
-              Seasonal Offerings
-            </strong>
+            <strong class="season-title">Seasonal Specials</strong>
             <p class="season-message">Loading seasonal offerings…</p>
-            <p class="season-whisper"></p>
           </div>
         </div>
 
@@ -1310,32 +1268,69 @@
                   </div>
                 </div>
 
-                <!-- Night Pearls variants -->
-                <div class="menu-item">
+                <!-- Seasonal Night Pearls of Persephone (rotated by JS) -->
+
+                <!-- SPRING RETURN -->
+                <div class="menu-item night-pearls" data-season="spring">
                   <div class="menu-item-name">
-                    Night Pearls of Persephone – Summer Fire
+                    Night Pearls of Persephone
                     <span
                       class="seasonal-icon"
                       aria-hidden="true"
-                      data-tooltip="Summer Seasonal"
-                    >☀️</span>
+                      data-tooltip="Seasonal Night Pearls · Spring Return"
+                    >🌷</span>
                   </div>
                   <div class="menu-item-desc">
-                    Dark chocolate–coated pomegranate “pearls” with a flicker of chili heat — forbidden fruit with a sunburn.
+                    Current Aspect: <strong>Spring Return</strong> — strawberries cloaked in moonlit or shadow chocolate,
+                    crowned with spring herbs and petals. Soft, bright, and witchy as the first warm night.
                   </div>
                 </div>
 
-                <div class="menu-item">
+                <!-- SUMMER FIRE -->
+                <div class="menu-item night-pearls" data-season="summer">
                   <div class="menu-item-name">
-                    Night Pearls of Persephone – Winter Solstice
+                    Night Pearls of Persephone
                     <span
                       class="seasonal-icon"
                       aria-hidden="true"
-                      data-tooltip="Winter Seasonal"
+                      data-tooltip="Seasonal Night Pearls · Summer Fire"
+                    >☀️</span>
+                  </div>
+                  <div class="menu-item-desc">
+                    Current Aspect: <strong>Summer Fire</strong> — dark chocolate–coated cherry “pearls”
+                    with a flicker of ember heat. Forbidden fruit for hot nights in the Underworld.
+                  </div>
+                </div>
+
+                <!-- AUTUMN HARVEST EMBER -->
+                <div class="menu-item night-pearls" data-season="autumn">
+                  <div class="menu-item-name">
+                    Night Pearls of Persephone
+                    <span
+                      class="seasonal-icon"
+                      aria-hidden="true"
+                      data-tooltip="Seasonal Night Pearls · Harvest Ember"
+                    >🍂</span>
+                  </div>
+                  <div class="menu-item-desc">
+                    Current Aspect: <strong>Harvest Ember</strong> — spiced apple “pearls” cloaked in caramel-dark chocolate
+                    and smoky cinnamon sugar. Bonfire sweets from orchard to Underworld.
+                  </div>
+                </div>
+
+                <!-- WINTER SHADOW -->
+                <div class="menu-item night-pearls" data-season="winter">
+                  <div class="menu-item-name">
+                    Night Pearls of Persephone
+                    <span
+                      class="seasonal-icon"
+                      aria-hidden="true"
+                      data-tooltip="Seasonal Night Pearls · Winter Shadow"
                     >❄️</span>
                   </div>
                   <div class="menu-item-desc">
-                    Dark chocolate–coated pomegranate “pearls” warmed with cozy winter spices — comfort from the cold side of the veil.
+                    Current Aspect: <strong>Winter Shadow</strong> — pomegranate jewels sealed in obsidian-dark chocolate,
+                    dusted for solstice rites. Sweet, deep, and made for long nights.
                   </div>
                 </div>
 
@@ -1401,15 +1396,15 @@
                     <span
                       class="seasonal-icon"
                       aria-hidden="true"
-                      data-tooltip="Cold-Season Seasonal"
-                    >🕯️</span>
+                      data-tooltip="Fall & Winter Seasonal"
+                    >🍁</span>
                   </div>
                   <div class="menu-item-desc">
                     Rich, three-headed hot chocolate with layers of dark, milk, and white cocoa,
                     topped with flame-toasted marshmallow and ember drizzle. Offered during the colder seasons.
                   </div>
                   <div class="menu-badges">
-                    <div class="badge">Kid-friendly option</div>
+                    <div class="badge">Seasonal</div>
                   </div>
                 </div>
 
@@ -1417,33 +1412,31 @@
             </div>
           </div>
 
-          <div class="menu-art">
-            <h4>How Spicy is the Underworld?</h4>
+          <!-- Menu Art / Lore Panel -->
+          <aside class="menu-art">
+            <h4>How to Feast in the Underworld</h4>
             <p>
-              Our menu is built to handle every kind of mortal: from cautious souls and little wraiths
-              to full-blown Hellfire hunters. Let us know your comfort level — we’ll match your flame.
+              Choose your path: <strong>Mortal</strong> (no heat), <strong>Wicked</strong> (embers), or <strong>Hellfire</strong> (full chaos).
+              Nearly every dish can be adapted for picky mortals, little wraiths, and those with allergies.
             </p>
             <p class="menu-spell">
-              ✴ Comfort | 🜂 Heat | ☠ Chaos<br>
-              You choose your path. We bring the fire.
+              “Eat well, drink deeply, and leave with your soul slightly spicier than before.”
             </p>
-          </div>
-
+          </aside>
         </div>
 
-        <!-- Secret Menu Panel -->
+        <!-- Secret Menu -->
         <div id="secretMenu" class="secret-menu" aria-hidden="true">
           <div class="secret-menu-inner">
-            <div class="secret-menu-label">Secret Sigil: For Those Who Found the Star</div>
-            <div class="secret-menu-title">Mentor’s Challenge Platter</div>
+            <div class="secret-menu-label">Whispers from the Labyrinth</div>
+            <div class="secret-menu-title">Minotaur’s Challenge Platter</div>
             <div class="secret-menu-desc">
-              A trial by fire: Cerberus Sliders in Inferno mode, Ashen Bites drenched in Hellfire,
-              a mini Void Bowl, and a side of Cinder Fries with Hellfire drizzle. Elixirs included for survival.
+              A heaping feast of Minotaur Nachos, Ashen Bites, and Cinder Fries with Hellfire drizzle and extra embers.
+              Built only for the truly brave — finish it and earn the Minotaur’s grudging respect.
             </div>
             <div class="secret-menu-meta">
-              Recommended for 2–3 brave mortals.
-              <span class="secret-price">Ask for current offering.</span>
-              <span class="secret-badge">Hellfire Tier</span>
+              <span class="secret-price">Price varies by event</span>
+              <span class="secret-badge">Secret Menu</span>
             </div>
           </div>
         </div>
@@ -1456,34 +1449,33 @@
       <div class="container">
         <div class="section-header">
           <div class="section-eyebrow">Lore of the Underworld Kitchen</div>
-          <h2 class="section-title">Who Runs This Realm?</h2>
+          <h2 class="section-title">Who Walks the Flames</h2>
           <p class="section-subtitle">
-            Hades Wicked Bites is run by the Hound of Hades — a mortal witch of the kitchen, following the turning
-            of the Wheel of the Year with underworld comfort food, offerings for the living and the dead, and a deep
-            respect for allergies, accessibility, and family-friendly chaos.
+            A food truck blessed by Hades, guided by Persephone’s seasons, and guarded by Cerberus —
+            all commanded by the Hound of Hades at the grill.
           </p>
         </div>
 
         <div class="about-grid">
           <div class="about-box">
-            <span class="about-label">The Underworld Kitchen</span>
+            <span class="about-label">The Hound of Hades</span>
             <p>
-              Every dish is built to be flexible. Most items can be made
-              <strong>milder or hotter</strong>, and many can be adapted for
-              <strong>gluten-free, dairy-free, and vegan</strong> paths. As the Wheel turns
-              through Yule, Ostara, Litha, Mabon, and beyond, the menu shifts too — but the
-              rule stays the same: no soul at the table goes hungry.
+              In the mortal realm, they call this a “food truck.”
+              In truth, it’s a roaming Underworld kitchen — led by the <strong>Hound of Hades</strong>,
+              keeper of comfort food, fire-tender, and guardian of every hungry soul who wanders up to the window.
             </p>
             <p class="about-quote">
-              “No one gets left out of the feast. Not in my realm.”<br>
-              — The Hound of Hades
+              “You don’t have to be brave to eat here. We’ll meet you wherever you are on the spice ladder.”
             </p>
           </div>
 
-          <div class="about-highlight">
-            <strong>Allergy & Preference Notes</strong><br><br>
-            Let us know if you or someone in your party has allergies or strong food preferences.
-            We’ll walk you through the gentlest routes through the menu and mark safe paths through the fire.
+          <div class="about-box">
+            <span class="about-label">Allergy-Aware, Mortal-Approved</span>
+            <p class="about-highlight">
+              We take allergies and sensitivities seriously:
+              <strong>GF, DF, vegan, and kid-friendly paths</strong> are clearly marked and handled with care.
+              Ask the Hound about safe routes through the menu — no soul will be left out of the feast.
+            </p>
           </div>
         </div>
       </div>
@@ -1496,49 +1488,38 @@
           <div class="section-eyebrow">Summon the Truck</div>
           <h2 class="section-title">Book Hades Wicked Bites</h2>
           <p class="section-subtitle">
-            Festivals, sabbat markets, private events, pop-ups, and rituals-adjacent gatherings.
-            Summon the Underworld Kitchen to your realm.
+            Festivals, markets, private rituals, weddings with a witchy twist — invite the Underworld Kitchen to your next gathering.
           </p>
         </div>
 
         <div class="summon-grid">
-          <div class="summon-calendar">
-            <h4>Event & Pop-Up Calendar</h4>
-            <p>
-              See where the truck is scheduled to appear, then reach out to request your own date
-              in the mortal realm.
-            </p>
-            <p style="margin-top:0.4rem;">
-              Sabbat markets, solstice nights, harvest festivals, and witchy fairs are especially welcome —
-              we walk the Wheel with you.
-            </p>
-            <div class="calendar-wrap">
-              <!-- Replace the src with your real public calendar link when ready -->
-              <iframe
-                src="https://calendar.google.com/calendar/embed?src=your-calendar-id"
-                title="Hades Wicked Bites Event Calendar"
-              ></iframe>
-            </div>
-          </div>
-
           <div class="contact-card">
-            <div class="contact-card-title">Summon the Hound of Hades</div>
+            <div class="contact-card-title">Send Your Summons</div>
             <p>
-              For booking inquiries, collaborations, and event questions, send a message with:
+              For booking inquiries, events, and collaborations, reach out with the details of your gathering:
             </p>
             <ul class="contact-card-list">
-              <li>Event type (festival, sabbat market, private party, etc.)</li>
-              <li>Location & preferred date(s)</li>
-              <li>Estimated guest count</li>
-              <li>Any dietary focus (GF, vegan, kid-heavy, etc.)</li>
+              <li>Event name, date, and location</li>
+              <li>Estimated headcount (mortals & little wraiths)</li>
+              <li>Any dietary needs or allergy considerations</li>
+              <li>Desired menu focus (sliders, bowls, feasts, or sweets)</li>
             </ul>
             <p>
-              Email:
-              <a href="mailto:your-email@example.com">your-email@example.com</a>
+              Email: <a href="mailto:bookings@hadeswickedbites.com">bookings@hadeswickedbites.com</a>
             </p>
-            <div class="contact-note">
-              Please allow a little time for replies — the Hound of Hades is often elbow-deep
-              in Ember Cheese and Hellfire sauce.
+            <p class="contact-note">
+              The Hound of Hades will reply with availability, pricing, and suggested offerings suited to your realm.
+            </p>
+          </div>
+
+          <div class="summon-calendar">
+            <h4>Glimpse the Gates</h4>
+            <p>
+              Check our public calendar for festivals, markets, and appearances where you can find the truck in the wild.
+            </p>
+            <div class="calendar-wrap">
+              <!-- Replace src with your actual embeddable calendar link -->
+              <iframe src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_EMBED_HERE"></iframe>
             </div>
           </div>
         </div>
@@ -1550,131 +1531,105 @@
   <footer>
     <div class="container">
       <div class="footer-row">
-        <div>© <span id="yearSpan"></span> Hades Wicked Bites. All rights reserved in the Underworld and beyond.</div>
+        <div>
+          © <span id="yearSpan"></span> Hades Wicked Bites. All rites reserved.
+        </div>
         <div class="footer-links">
-          <span>Designed in the Underworld.</span>
+          <span>Designed for mortals & mischief-makers.</span>
         </div>
       </div>
     </div>
   </footer>
 
+  <!-- Scripts -->
   <script>
-    // Mark body as loaded (remove overlay)
-    window.addEventListener("load", function () {
-      document.body.classList.add("loaded");
+    document.addEventListener("DOMContentLoaded", function() {
+      const body = document.body;
       const header = document.querySelector(".hb-header");
-      if (header) header.classList.add("revealed");
 
-      // Sabbat-based seasonal callout
+      // Loader + header reveal
+      setTimeout(function() {
+        body.classList.add("loaded");
+        if (header) header.classList.add("revealed");
+      }, 800);
+
+      // Header scroll shadow
+      window.addEventListener("scroll", function() {
+        if (!header) return;
+        if (window.scrollY > 10) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+
+      // Secret menu toggle
+      const secretStar = document.getElementById("secretStar");
+      const secretMenu = document.getElementById("secretMenu");
+      if (secretStar && secretMenu) {
+        secretStar.addEventListener("click", function() {
+          const isActive = secretStar.classList.toggle("active");
+          if (isActive) {
+            secretMenu.classList.add("visible");
+            secretMenu.setAttribute("aria-hidden", "false");
+          } else {
+            secretMenu.classList.remove("visible");
+            secretMenu.setAttribute("aria-hidden", "true");
+          }
+        });
+      }
+
+      // Year in footer
+      const yearSpan = document.getElementById("yearSpan");
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+
+      // Seasonal logic for Night Pearls + callout
+      const now = new Date();
+      const month = now.getMonth(); // 0–11
+
+      let season = "winter";
+      if (month >= 2 && month <= 4) {
+        season = "spring";   // Mar–May
+      } else if (month >= 5 && month <= 7) {
+        season = "summer";   // Jun–Aug
+      } else if (month >= 8 && month <= 9) {
+        season = "autumn";   // Sep–Oct
+      } else {
+        season = "winter";   // Nov–Feb
+      }
+
+      // Rotate Night Pearls of Persephone by season
+      const pearls = document.querySelectorAll(".night-pearls");
+      pearls.forEach(function(item) {
+        const itemSeason = item.getAttribute("data-season");
+        if (itemSeason === season) {
+          item.style.display = "block";
+        } else {
+          item.style.display = "none";
+        }
+      });
+
+      // Update Seasonal Specials callout copy
       const seasonCallout = document.getElementById("seasonCallout");
       if (seasonCallout) {
         const msg = seasonCallout.querySelector(".season-message");
-        const iconEl = document.getElementById("seasonIcon");
-        const whisperEl = seasonCallout.querySelector(".season-whisper");
-
         if (msg) {
-          const now = new Date();
-          const month = now.getMonth(); // 0 = Jan, 11 = Dec
-
-          let line = "";
-          let icon = "✶";
-          let label = "Seasonal Offerings";
-          let whisper = "";
-
-          if (month === 11 || month === 0) {
-            // Yule – Dec & Jan
-            line =
-              "Yule in the Underworld: Night Pearls of Persephone – Winter Solstice and Cerberus Hot Chocolate for longest nights and evergreen altars.";
-            icon = "❄️";
-            label = "Yule Offerings";
-            whisper = "“Light your candles; the longest night still breaks.” — Hades";
-          } else if (month === 1) {
-            // Imbolc – Feb
-            line =
-              "Imbolc in the Underworld: gentle Night Pearls, warm cups of Cerberus Hot Chocolate, and offerings for returning light.";
-            icon = "🕯️";
-            label = "Imbolc Offerings";
-            whisper = "“Every flame begins as a whisper.” — Persephone";
-          } else if (month === 2) {
-            // Ostara – Mar
-            line =
-              "Ostara in the Underworld: bright Night Pearls of Persephone and lighter treats to honor balance, eggs, and early bloom.";
-            icon = "🌱";
-            label = "Ostara Offerings";
-            whisper = "“Life and death turn together on this hinge.” — Persephone";
-          } else if (month === 3 || month === 4) {
-            // Beltane – Apr & May
-            line =
-              "Beltane in the Underworld: playful Night Pearls, fire-kissed bites, and feasts made for bonfires and dancing shadows.";
-            icon = "🔥";
-            label = "Beltane Offerings";
-            whisper = "“If you leap the fire, bring your appetite.” — Hades";
-          } else if (month === 5) {
-            // Litha – Jun
-            line =
-              "Litha in the Underworld: Night Pearls of Persephone – Summer Fire and Obsidian Cold Brew for sun-drunk mortals chasing the longest day.";
-            icon = "☀️";
-            label = "Litha Offerings";
-            whisper = "“The sun is high; let the flames answer.” — Hades";
-          } else if (month === 6 || month === 7) {
-            // Lughnasadh / Lammas – Jul & Aug
-            line =
-              "Lughnasadh in the Underworld: first-harvest feasts, Night Pearls of Persephone – Summer Fire, and Obsidian Cold Brew for weary reapers.";
-            icon = "🌾";
-            label = "Lughnasadh Offerings";
-            whisper = "“Break bread, share flame; you’ve earned it.” — Hades";
-          } else if (month === 8) {
-            // Mabon – Sep
-            line =
-              "Mabon in the Underworld: harvest-night platters, Night Pearls of Persephone, and Cerberus Hot Chocolate as the balance tips toward dark.";
-            icon = "🍂";
-            label = "Mabon Offerings";
-            whisper = "“The scales lean to shadow. Fill your plate.” — Persephone";
-          } else if (month === 9 || month === 10) {
-            // Samhain – Oct & Nov
-            line =
-              "Samhain in the Underworld: Night Pearls of Persephone for the dead and the living, Cerberus Hot Chocolate for graveyard walks, and feasts for veiled tables.";
-            icon = "🕯️";
-            label = "Samhain Offerings";
-            whisper = "“Set a place for your dead and pass the plate.” — Persephone";
+          let text;
+          if (season === "spring") {
+            text = "Spring in the Underworld: Seasonal Night Pearls – Spring Return, Elysian Orchard Fruit Cups, and bright comforts for Ostara and Beltane.";
+          } else if (season === "summer") {
+            text = "Summer in the Underworld: Seasonal Night Pearls – Summer Fire, Obsidian Cold Brew, and flame-kissed festival favorites.";
+          } else if (season === "autumn") {
+            text = "Harvest season in the Underworld: Seasonal Night Pearls – Harvest Ember, Minotaur Nachos, warm sweets, and feasts for Mabon and Samhain.";
+          } else {
+            text = "Winter in the Underworld: Seasonal Night Pearls – Winter Shadow, Cerberus Hot Chocolate, and deep comfort for Yule and Imbolc.";
           }
-
-          msg.textContent = line;
-
-          if (iconEl) {
-            iconEl.textContent = icon;
-            iconEl.setAttribute("aria-label", label);
-            iconEl.setAttribute("title", label);
-          }
-
-          if (whisperEl) {
-            whisperEl.textContent = whisper;
-          }
+          msg.textContent = text;
         }
       }
     });
-
-    // Sticky header scroll effect
-    window.addEventListener("scroll", function () {
-      const header = document.querySelector(".hb-header");
-      if (!header) return;
-      header.classList.toggle("scrolled", window.scrollY > 30);
-    });
-
-    // Secret menu toggle
-    const secretStar = document.getElementById("secretStar");
-    const secretMenu = document.getElementById("secretMenu");
-    if (secretStar && secretMenu) {
-      secretStar.addEventListener("click", () => {
-        const visible = secretMenu.classList.toggle("visible");
-        secretStar.classList.toggle("active", visible);
-        secretMenu.setAttribute("aria-hidden", !visible);
-      });
-    }
-
-    // Footer year
-    const yearSpan = document.getElementById("yearSpan");
-    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
