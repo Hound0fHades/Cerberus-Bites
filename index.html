@@ -515,12 +515,25 @@
       text-transform: uppercase;
       font-size: 0.88rem;
       letter-spacing: 0.16em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
     }
 
     .season-message {
       font-size: 0.82rem;
       color: var(--muted);
       margin-top: 0.25rem;
+    }
+
+    .season-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.1rem;
+      font-size: 1rem;
+      filter: drop-shadow(0 0 4px rgba(245,201,122,0.6));
+      animation: seasonGlow 3.6s ease-in-out infinite alternate;
     }
 
     @keyframes calloutFade {
@@ -532,6 +545,32 @@
         opacity: 1;
         transform: translateY(0);
       }
+    }
+
+    @keyframes seasonGlow {
+      0% {
+        transform: translateY(0);
+        filter: drop-shadow(0 0 4px rgba(245,201,122,0.4));
+        opacity: 0.9;
+      }
+      50% {
+        transform: translateY(-1px);
+        filter: drop-shadow(0 0 8px rgba(202,52,0,0.9));
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(1px);
+        filter: drop-shadow(0 0 5px rgba(245,201,122,0.5));
+        opacity: 0.9;
+      }
+    }
+
+    .season-whisper {
+      margin-top: 0.25rem;
+      font-size: 0.78rem;
+      font-style: italic;
+      color: var(--muted);
+      opacity: 0.9;
     }
 
     /* Secret star (hover hotspot) */
@@ -638,7 +677,7 @@
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    /* Seasonal icon with hover tooltip */
+    /* Per-item seasonal icon with tooltip */
     .seasonal-icon {
       display: inline-block;
       margin-left: 0.3rem;
@@ -962,7 +1001,6 @@
 
         <div class="nav-center">
           <a href="#top" class="nav-logo-link">
-            <!-- Make sure this file name & path matches your actual logo -->
             <img src="HadesWickedBites.png" alt="Hades Wicked Bites Logo" class="logo-img">
           </a>
           <div class="nav-brand-text">
@@ -1044,7 +1082,6 @@
           <div class="section-eyebrow">The Wicked Feast</div>
           <div class="section-title-row">
             <h2 class="section-title">Underworld Menu</h2>
-            <!-- subtle ghost hotspot star -->
             <button class="secret-star" id="secretStar" aria-label="Hidden sigil">
               <span>✶</span>
             </button>
@@ -1053,10 +1090,14 @@
             Infernal comfort food for mortals of every kind — kids, picky eaters, spice fiends, and those walking gentler paths.
           </p>
 
-          <!-- Seasonal specials callout -->
+          <!-- Sabbat-aware Seasonal specials callout -->
           <div id="seasonCallout" class="season-callout">
-            <strong class="season-title">Seasonal Specials</strong>
+            <strong class="season-title">
+              <span id="seasonIcon" class="season-icon" aria-hidden="true">✶</span>
+              Seasonal Offerings
+            </strong>
             <p class="season-message">Loading seasonal offerings…</p>
+            <p class="season-whisper"></p>
           </div>
         </div>
 
@@ -1360,8 +1401,8 @@
                     <span
                       class="seasonal-icon"
                       aria-hidden="true"
-                      data-tooltip="Fall & Winter Seasonal"
-                    >🍁</span>
+                      data-tooltip="Cold-Season Seasonal"
+                    >🕯️</span>
                   </div>
                   <div class="menu-item-desc">
                     Rich, three-headed hot chocolate with layers of dark, milk, and white cocoa,
@@ -1417,8 +1458,9 @@
           <div class="section-eyebrow">Lore of the Underworld Kitchen</div>
           <h2 class="section-title">Who Runs This Realm?</h2>
           <p class="section-subtitle">
-            Hades Wicked Bites is run by the Hound of Hades — a mortal chef with a witchy heart, a love of comfort food,
-            and a deep respect for allergies, accessibility, and family-friendly chaos.
+            Hades Wicked Bites is run by the Hound of Hades — a mortal witch of the kitchen, following the turning
+            of the Wheel of the Year with underworld comfort food, offerings for the living and the dead, and a deep
+            respect for allergies, accessibility, and family-friendly chaos.
           </p>
         </div>
 
@@ -1428,11 +1470,12 @@
             <p>
               Every dish is built to be flexible. Most items can be made
               <strong>milder or hotter</strong>, and many can be adapted for
-              <strong>gluten-free, dairy-free, and vegan</strong> paths. The goal is simple:
-              let every soul at the table feast together.
+              <strong>gluten-free, dairy-free, and vegan</strong> paths. As the Wheel turns
+              through Yule, Ostara, Litha, Mabon, and beyond, the menu shifts too — but the
+              rule stays the same: no soul at the table goes hungry.
             </p>
             <p class="about-quote">
-              “No one gets left out of the feast. Not on my watch.”
+              “No one gets left out of the feast. Not in my realm.”<br>
               — The Hound of Hades
             </p>
           </div>
@@ -1453,7 +1496,8 @@
           <div class="section-eyebrow">Summon the Truck</div>
           <h2 class="section-title">Book Hades Wicked Bites</h2>
           <p class="section-subtitle">
-            Festivals, private events, markets, pop-ups, and more. Summon the Underworld Kitchen to your realm.
+            Festivals, sabbat markets, private events, pop-ups, and rituals-adjacent gatherings.
+            Summon the Underworld Kitchen to your realm.
           </p>
         </div>
 
@@ -1463,6 +1507,10 @@
             <p>
               See where the truck is scheduled to appear, then reach out to request your own date
               in the mortal realm.
+            </p>
+            <p style="margin-top:0.4rem;">
+              Sabbat markets, solstice nights, harvest festivals, and witchy fairs are especially welcome —
+              we walk the Wheel with you.
             </p>
             <div class="calendar-wrap">
               <!-- Replace the src with your real public calendar link when ready -->
@@ -1479,7 +1527,7 @@
               For booking inquiries, collaborations, and event questions, send a message with:
             </p>
             <ul class="contact-card-list">
-              <li>Event type (festival, private party, market, etc.)</li>
+              <li>Event type (festival, sabbat market, private party, etc.)</li>
               <li>Location & preferred date(s)</li>
               <li>Estimated guest count</li>
               <li>Any dietary focus (GF, vegan, kid-heavy, etc.)</li>
@@ -1515,55 +1563,118 @@
     window.addEventListener("load", function () {
       document.body.classList.add("loaded");
       const header = document.querySelector(".hb-header");
-      if (header) {
-        header.classList.add("revealed");
-      }
+      if (header) header.classList.add("revealed");
 
-      // Simple seasonal callout text
-const seasonCallout = document.getElementById("seasonCallout");
-if (seasonCallout) {
-  const msg = seasonCallout.querySelector(".season-message");
-  if (msg) {
-    msg.textContent =
-      "Current seasonals include Night Pearls of Persephone (Summer Fire & Winter Solstice), Obsidian Cold Brew, and Cerberus Hot Chocolate.";
-  
+      // Sabbat-based seasonal callout
+      const seasonCallout = document.getElementById("seasonCallout");
+      if (seasonCallout) {
+        const msg = seasonCallout.querySelector(".season-message");
+        const iconEl = document.getElementById("seasonIcon");
+        const whisperEl = seasonCallout.querySelector(".season-whisper");
+
+        if (msg) {
+          const now = new Date();
+          const month = now.getMonth(); // 0 = Jan, 11 = Dec
+
+          let line = "";
+          let icon = "✶";
+          let label = "Seasonal Offerings";
+          let whisper = "";
+
+          if (month === 11 || month === 0) {
+            // Yule – Dec & Jan
+            line =
+              "Yule in the Underworld: Night Pearls of Persephone – Winter Solstice and Cerberus Hot Chocolate for longest nights and evergreen altars.";
+            icon = "❄️";
+            label = "Yule Offerings";
+            whisper = "“Light your candles; the longest night still breaks.” — Hades";
+          } else if (month === 1) {
+            // Imbolc – Feb
+            line =
+              "Imbolc in the Underworld: gentle Night Pearls, warm cups of Cerberus Hot Chocolate, and offerings for returning light.";
+            icon = "🕯️";
+            label = "Imbolc Offerings";
+            whisper = "“Every flame begins as a whisper.” — Persephone";
+          } else if (month === 2) {
+            // Ostara – Mar
+            line =
+              "Ostara in the Underworld: bright Night Pearls of Persephone and lighter treats to honor balance, eggs, and early bloom.";
+            icon = "🌱";
+            label = "Ostara Offerings";
+            whisper = "“Life and death turn together on this hinge.” — Persephone";
+          } else if (month === 3 || month === 4) {
+            // Beltane – Apr & May
+            line =
+              "Beltane in the Underworld: playful Night Pearls, fire-kissed bites, and feasts made for bonfires and dancing shadows.";
+            icon = "🔥";
+            label = "Beltane Offerings";
+            whisper = "“If you leap the fire, bring your appetite.” — Hades";
+          } else if (month === 5) {
+            // Litha – Jun
+            line =
+              "Litha in the Underworld: Night Pearls of Persephone – Summer Fire and Obsidian Cold Brew for sun-drunk mortals chasing the longest day.";
+            icon = "☀️";
+            label = "Litha Offerings";
+            whisper = "“The sun is high; let the flames answer.” — Hades";
+          } else if (month === 6 || month === 7) {
+            // Lughnasadh / Lammas – Jul & Aug
+            line =
+              "Lughnasadh in the Underworld: first-harvest feasts, Night Pearls of Persephone – Summer Fire, and Obsidian Cold Brew for weary reapers.";
+            icon = "🌾";
+            label = "Lughnasadh Offerings";
+            whisper = "“Break bread, share flame; you’ve earned it.” — Hades";
+          } else if (month === 8) {
+            // Mabon – Sep
+            line =
+              "Mabon in the Underworld: harvest-night platters, Night Pearls of Persephone, and Cerberus Hot Chocolate as the balance tips toward dark.";
+            icon = "🍂";
+            label = "Mabon Offerings";
+            whisper = "“The scales lean to shadow. Fill your plate.” — Persephone";
+          } else if (month === 9 || month === 10) {
+            // Samhain – Oct & Nov
+            line =
+              "Samhain in the Underworld: Night Pearls of Persephone for the dead and the living, Cerberus Hot Chocolate for graveyard walks, and feasts for veiled tables.";
+            icon = "🕯️";
+            label = "Samhain Offerings";
+            whisper = "“Set a place for your dead and pass the plate.” — Persephone";
+          }
+
+          msg.textContent = line;
+
+          if (iconEl) {
+            iconEl.textContent = icon;
+            iconEl.setAttribute("aria-label", label);
+            iconEl.setAttribute("title", label);
+          }
+
+          if (whisperEl) {
+            whisperEl.textContent = whisper;
+          }
         }
       }
     });
 
-    // Sticky header shadow on scroll
+    // Sticky header scroll effect
     window.addEventListener("scroll", function () {
       const header = document.querySelector(".hb-header");
       if (!header) return;
-      if (window.scrollY > 30) {
-        header.classList.add("scrolled");
-      } else {
-        header.classList.remove("scrolled");
-      }
+      header.classList.toggle("scrolled", window.scrollY > 30);
     });
 
     // Secret menu toggle
     const secretStar = document.getElementById("secretStar");
     const secretMenu = document.getElementById("secretMenu");
-
     if (secretStar && secretMenu) {
-      secretStar.addEventListener("click", function () {
+      secretStar.addEventListener("click", () => {
         const visible = secretMenu.classList.toggle("visible");
-        if (visible) {
-          secretStar.classList.add("active");
-          secretMenu.setAttribute("aria-hidden", "false");
-        } else {
-          secretStar.classList.remove("active");
-          secretMenu.setAttribute("aria-hidden", "true");
-        }
+        secretStar.classList.toggle("active", visible);
+        secretMenu.setAttribute("aria-hidden", !visible);
       });
     }
 
     // Footer year
     const yearSpan = document.getElementById("yearSpan");
-    if (yearSpan) {
-      yearSpan.textContent = new Date().getFullYear();
-    }
+    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
