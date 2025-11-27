@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Hades Wicked Bites | Feast in the Underworld</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hades Wicked Bites — an underworld-themed food truck serving wicked sliders, infernal mac, underworld feasts, and elixirs. Feast in the Underworld.">
+  <meta name="description" content="Hades Wicked Bites — an underworld-themed food truck serving wicked sliders, infernal mac, underworld feasts, elixirs, and grimoire desserts. Feast in the Underworld.">
   <link rel="canonical" href="https://hound0fhades.github.io/Hades-Wicked-Bites">
   <style>
     :root {
@@ -910,6 +910,54 @@
       gap: 0.8rem;
     }
 
+    /* === NIGHT PEARLS RECIPE STYLES === */
+    .recipe-card {
+      border-radius: 18px;
+      border: 1px solid rgba(245,201,122,0.25);
+      padding: 1.2rem 1.3rem;
+      background: radial-gradient(circle at top left, rgba(126,15,29,0.55), rgba(5,3,8,0.96));
+      box-shadow: 0 0 22px rgba(0,0,0,0.85);
+      font-size: 0.9rem;
+    }
+    .recipe-meta {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .recipe-lore {
+      font-size: 0.88rem;
+      color: var(--text);
+      margin-bottom: 0.95rem;
+    }
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+      gap: 1.2rem;
+    }
+    .recipe-subheading {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      margin-bottom: 0.35rem;
+    }
+    .recipe-card ul {
+      margin: 0 0 0.7rem;
+      padding-left: 1.1rem;
+      font-size: 0.86rem;
+      color: var(--text);
+    }
+    .recipe-card li + li {
+      margin-top: 0.25rem;
+    }
+    .recipe-footer-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.6rem;
+    }
+
     @media (max-width: 840px) {
       .hero-grid,
       .menu-grid,
@@ -931,6 +979,9 @@
       }
       .calendar-wrap {
         height: 380px;
+      }
+      .recipe-grid {
+        grid-template-columns: minmax(0,1fr);
       }
     }
   </style>
@@ -957,6 +1008,7 @@
       <div class="nav">
         <nav class="nav-links-left">
           <a href="#menu">Menu</a>
+          <a href="#night-pearls">Grimoire</a>
           <a href="#about">Lore</a>
         </nav>
 
@@ -1384,6 +1436,70 @@
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <!-- Night Pearls of Persephone Recipe -->
+    <section id="night-pearls">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Dessert Spell · Grimoire</div>
+          <h2 class="section-title">Night Pearls of Persephone</h2>
+          <p class="section-subtitle">
+            Dark chocolate–dipped pomegranate jewels that work as a stand-alone sweet,
+            a garnish for bowls, or a little chaos on a dessert platter from the Hades Wicked Bites grimoire.
+          </p>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-meta">
+            Yield: 4–6 as garnish · 2–3 as dessert · Dietary: GF, DF, vegetarian · easily vegan
+          </div>
+
+          <p class="recipe-lore">
+            Persephone’s lost seeds, stolen by Hades and drowned in midnight chocolate.
+            Sweetness first, then a sharp little truth in every bite.
+          </p>
+
+          <div class="recipe-grid">
+            <!-- Ingredients -->
+            <div>
+              <div class="recipe-subheading">Ingredients</div>
+              <ul>
+                <li>1 large pomegranate, seeds freed and patted very dry</li>
+                <li>1 cup dark chocolate chips or chopped bar (70% cacao or higher)</li>
+                <li>1 teaspoon dark syrup or honey (optional, for a softer sweetness)</li>
+                <li>Pinch of flaky sea salt for finishing</li>
+              </ul>
+
+              <div class="recipe-subheading">Optional Variants</div>
+              <ul>
+                <li><strong>Winter Solstice:</strong> Add 1/2 tsp cinnamon and a tiny pinch of clove, finish with orange zest instead of salt.</li>
+                <li><strong>Summer Fire:</strong> Add a pinch of chili powder or cayenne to the melted chocolate; keep the sea salt on top.</li>
+              </ul>
+            </div>
+
+            <!-- Directions -->
+            <div>
+              <div class="recipe-subheading">Directions</div>
+              <ul>
+                <li>Open the pomegranate, harvest the seeds in a bowl of water, then drain and pat them very dry. Any water will make the chocolate seize.</li>
+                <li>In a heat-safe bowl, gently melt the dark chocolate (microwave in short bursts or over a double boiler) until smooth and glossy.</li>
+                <li>Stir in the dark syrup or honey if using, mixing until fully combined.</li>
+                <li>Fold the dry pomegranate seeds into the melted chocolate so they’re well coated.</li>
+                <li>Use a spoon to drop small clusters onto a parchment-lined tray, or roll a few seeds at a time into “pearls.”</li>
+                <li>Finish with a light sprinkle of flaky sea salt on top of each cluster or pearl.</li>
+                <li>Chill until set, then serve cold. Keep refrigerated until you’re ready to plate.</li>
+              </ul>
+
+              <p class="recipe-footer-note">
+                For events, you can easily double or triple this recipe. Make several small trays so the chocolate sets quickly,
+                and serve within 24 hours for the best crunchy “pop.” Pairs beautifully with Blood Moon Punch,
+                Cerberus Hot Chocolate, or Obsidian Cold Brew.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
