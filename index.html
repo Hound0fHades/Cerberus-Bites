@@ -1273,8 +1273,9 @@
                   </div>
                 </div>
 
-                <!-- Night Pearls of Persephone – menu-only, seasonal sweet -->
-                <div class="menu-item">
+                <!-- Night Pearls of Persephone – seasonal sweet; fall/winter half of the year -->
+                <div class="menu-item seasonal-item"
+                     data-sabbats="mabon,samhain,yule,imbolc">
                   <div class="menu-item-name">
                     Night Pearls of Persephone
                     <span
@@ -1349,7 +1350,9 @@
                   </div>
                 </div>
 
-                <div class="menu-item">
+                <!-- Obsidian Cold Brew – summer sabbats only -->
+                <div class="menu-item seasonal-item"
+                     data-sabbats="beltane,litha,lughnasadh">
                   <div class="menu-item-name">
                     Obsidian Cold Brew
                     <span
@@ -1367,7 +1370,9 @@
                   </div>
                 </div>
 
-                <div class="menu-item">
+                <!-- Cerberus Hot Chocolate – cold half of the year -->
+                <div class="menu-item seasonal-item"
+                     data-sabbats="samhain,yule,imbolc,mabon">
                   <div class="menu-item-name">
                     Cerberus Hot Chocolate
                     <span
@@ -1617,12 +1622,11 @@
         });
       })();
 
-      // Pagan Wheel of the Year theming + seasonal callout
+      // Pagan Wheel of the Year theming + seasonal callout + seasonal item visibility
       (function () {
         const root = document.documentElement;
 
         // 🎨 Palettes tied to sabbats
-        // Each sabbat overrides the same variables used throughout the site
         const sabbatThemes = {
           yule: {
             "--bg": "#050518",
@@ -1744,15 +1748,14 @@
           const d = date.getDate();
           const md = m * 100 + d;
 
-          // Approximate windows
-          if ((md >= 1028 && md <= 1130)) return "samhain";                 // late Oct–Nov
-          if ((md >= 1201 && md <= 1231) || (md >= 101 && md <= 105)) return "yule";  // Dec–early Jan
-          if (md >= 201 && md <= 303) return "imbolc";                       // Feb–early Mar
-          if (md >= 320 && md <= 420) return "ostara";                       // late Mar–Apr
-          if (md >= 501 && md <= 515) return "beltane";                      // early May
-          if (md >= 620 && md <= 722) return "litha";                        // late Jun–July
-          if (md >= 801 && md <= 822) return "lughnasadh";                   // Aug
-          if (md >= 921 && md <= 1005) return "mabon";                       // late Sept–early Oct
+          if ((md >= 1028 && md <= 1130)) return "samhain";
+          if ((md >= 1201 && md <= 1231) || (md >= 101 && md <= 105)) return "yule";
+          if (md >= 201 && md <= 303) return "imbolc";
+          if (md >= 320 && md <= 420) return "ostara";
+          if (md >= 501 && md <= 515) return "beltane";
+          if (md >= 620 && md <= 722) return "litha";
+          if (md >= 801 && md <= 822) return "lughnasadh";
+          if (md >= 921 && md <= 1005) return "mabon";
 
           // Fallback by broader season
           if (m === 5 || m === 6) return "litha";
@@ -1840,8 +1843,21 @@
         seasonTitleEl.textContent = sabbatNames[sabbatKey] || "Seasonal Offerings from the Deep";
         seasonMessage.innerHTML = sabbatMessages[sabbatKey] || sabbatMessages["yule"];
 
-        // Optional little variant tag if you ever want to style by this
         seasonCallout.setAttribute("data-banner-variant", titleChoices[randomIndex]);
+
+        // 🌀 Rotate seasonal menu items based on sabbat
+        const seasonalItems = document.querySelectorAll('.seasonal-item');
+        seasonalItems.forEach(item => {
+          const allowed = (item.dataset.sabbats || "")
+            .split(',')
+            .map(s => s.trim())
+            .filter(Boolean);
+          if (allowed.length && !allowed.includes(sabbatKey)) {
+            item.style.display = 'none';
+          } else {
+            item.style.display = '';
+          }
+        });
       })();
     </script>
   </footer>
