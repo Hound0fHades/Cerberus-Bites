@@ -6,10 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Cerberus Bites — an underworld-themed food truck serving wicked sliders, infernal mac, underworld feasts, and elixirs. Feast in the Underworld.">
   <link rel="canonical" href="https://hound0fhades.github.io/Hades-Wicked-Bites">
-
   <style>
     :root {
-      /* These will be overridden by JS based on pagan holidays & seasons */
+      /* Base values – will be overridden by pagan holiday JS theme */
       --bg: #050308;
       --bg-alt: #0c050b;
       --accent: #ca3400;
@@ -28,7 +27,7 @@
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #1b0710 0, #050308 55%, #020107 100%);
+      background: radial-gradient(circle at top, #1b0710 0, var(--bg) 55%, #020107 100%);
       color: var(--text);
       line-height: 1.6;
       transition: background 0.4s ease, color 0.4s ease;
@@ -109,7 +108,7 @@
       font-size: 0.9rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      box-shadow: 0 0 18px rgba(0,0,0,0.7);
+      box-shadow: 0 0 18px rgba(202,52,0,0.7);
       position: relative;
       overflow: hidden;
       animation: flameFlicker 2.4s ease-in-out infinite alternate;
@@ -299,7 +298,7 @@
       text-transform: uppercase;
       background:
         radial-gradient(circle at top left, rgba(202,52,0,0.9), transparent),
-        radial-gradient(circle at bottom right, rgba(126,15,29,0.9), rgba(5,3,8,0.95));
+        radial-gradient(circle at bottom right, var(--accent-soft), rgba(5,3,8,0.95));
       color: #fff;
       box-shadow:
         0 0 16px rgba(202,52,0,0.9),
@@ -438,6 +437,14 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      align-items: stretch;
+    }
+    .hero-big-logo {
+      display: block;
+      max-width: 260px;
+      width: 80%;
+      margin: 0 auto 0.9rem;
+      filter: drop-shadow(0 0 18px rgba(0,0,0,0.85));
     }
     .hero-art-title {
       font-family: "Georgia", "Times New Roman", serif;
@@ -936,6 +943,9 @@
       .calendar-wrap {
         height: 380px;
       }
+      .hero-big-logo {
+        max-width: 220px;
+      }
     }
   </style>
 </head>
@@ -966,7 +976,7 @@
 
         <div class="nav-center">
           <a href="#top" class="nav-logo-link">
-            <!-- Make sure this file name & path matches your actual logo -->
+            <!-- Header logo -->
             <img src="CerberusLogo2.png" alt="Cerberus Bites Logo" class="logo-img">
           </a>
           <div class="nav-brand-text">
@@ -1015,6 +1025,9 @@
 
           <div class="hero-art">
             <div class="hero-art-inner">
+              <!-- BIG HERO LOGO -->
+              <img src="CerberusLogo2.png" alt="Cerberus Bites Cerberus Logo" class="hero-big-logo">
+
               <div class="hero-art-title">Tonight in the Underworld</div>
               <div class="hero-art-grid">
                 <div class="hero-card">
@@ -1027,7 +1040,7 @@
                 </div>
                 <div class="hero-card">
                   <h4>Underworld Elixirs</h4>
-                  <p>Styx sodas, Blood Moon Punch, Lethe Lemon Fizz, and more.</p>
+                  <p>Styx sodas, Blood Moon punch, Lethe Lemon Fizz, and more.</p>
                 </div>
                 <div class="hero-card">
                   <h4>The Hound of Hades</h4>
@@ -1059,7 +1072,7 @@
 
           <!-- Seasonal specials callout -->
           <div id="seasonCallout" class="season-callout">
-            <strong class="season-title">Seasonal Specials</strong>
+            <strong class="season-title">Seasonal Flames in the Underworld</strong>
             <p class="season-message">Loading seasonal offerings…</p>
           </div>
         </div>
@@ -1237,7 +1250,7 @@
                     <span>Side</span>
                   </div>
                   <div class="menu-item-desc">
-                    Single-serve cups of Acheron Mac for kids, snackers, or those dabbling lightly in the flames.
+                    Single-serve cups of Acheron mac for kids, snackers, or those dabbling lightly in the flames.
                   </div>
                 </div>
 
@@ -1273,22 +1286,23 @@
                   </div>
                 </div>
 
-                <!-- Night Pearls of Persephone – seasonal flavor text -->
+                <!-- Night Pearls of Persephone – rotates by season via JS text -->
                 <div class="menu-item">
                   <div class="menu-item-name">
                     Night Pearls of Persephone
-                    <span id="pearlsTag">Seasonal Hex</span>
+                    <span id="pearls-variant-label">Seasonal Aspect</span>
                   </div>
-                  <div class="menu-item-desc" id="pearlsDesc">
-                    Dark chocolate–dipped pomegranate jewels with a rotating seasonal twist from the Underworld.
+                  <div class="menu-item-desc" id="pearls-variant-desc">
+                    Dark chocolate–dipped pomegranate gems that shift with the Wheel of the Year.
                   </div>
                   <div class="menu-badges">
-                    <div class="badge">Rotating seasonal flavors</div>
+                    <div class="badge">Seasonal</div>
                   </div>
                 </div>
 
                 <div class="menu-group-title" style="margin-top:0.9rem;">Underworld Elixirs (Drinks)</div>
 
+                <!-- These two are “evergreen” non-seasonal -->
                 <div class="menu-item">
                   <div class="menu-item-name">
                     River Styx Soda Flight
@@ -1325,8 +1339,8 @@
                   </div>
                 </div>
 
-                <!-- Obsidian Cold Brew – summer only -->
-                <div class="menu-item" id="obsidianItem">
+                <!-- Seasonal drinks: shown/hidden based on season via JS -->
+                <div class="menu-item seasonal-drink" data-season="summer">
                   <div class="menu-item-name">
                     Obsidian Cold Brew
                     <span
@@ -1341,12 +1355,10 @@
                   </div>
                   <div class="menu-badges">
                     <div class="badge">DF option</div>
-                    <div class="badge">Summer only</div>
                   </div>
                 </div>
 
-                <!-- Cerberus Hot Chocolate – fall & winter only -->
-                <div class="menu-item" id="cerberusHotItem">
+                <div class="menu-item seasonal-drink" data-season="winter">
                   <div class="menu-item-name">
                     Cerberus Hot Chocolate
                     <span
@@ -1508,7 +1520,7 @@
               </li>
             </ul>
             <p class="contact-note">
-              Bookings live on the calendar so your date is properly claimed in the Underworld.<br>
+              Bookings live on the calendar so your date is properly claimed in the Underworld.  
               Messages here are for conversation, not reservations.
             </p>
           </aside>
@@ -1527,357 +1539,292 @@
         </div>
       </div>
     </div>
-  </footer>
-
-  <script>
-    // ========== PAGAN HOLIDAY + SEASONAL COLOR THEMES ==========
-    (function () {
-      const root = document.documentElement;
-
-      const basePalette = {
-        "--bg": "#050308",
-        "--bg-alt": "#0c050b",
-        "--accent": "#ca3400",
-        "--accent-soft": "#7e0f1d",
-        "--gold": "#f5c97a",
-        "--text": "#f4f2f6",
-        "--muted": "#b3a9c0",
-        "--border": "#312033"
-      };
-
-      const seasonPalettes = {
-        winter: {
-          "--bg": "#030414",
-          "--bg-alt": "#05071c",
-          "--accent": "#b71d32",
-          "--accent-soft": "#5b1030",
-          "--gold": "#f5e6b3",
-          "--text": "#f9fafb",
-          "--muted": "#c7c9dd",
-          "--border": "#2b2340"
-        },
-        spring: {
-          "--bg": "#050913",
-          "--bg-alt": "#08131c",
-          "--accent": "#ce3d6a",
-          "--accent-soft": "#7c2350",
-          "--gold": "#f5df9c",
-          "--text": "#fdf8ff",
-          "--muted": "#c9d2e3",
-          "--border": "#283347"
-        },
-        summer: {
-          "--bg": "#050609",
-          "--bg-alt": "#0b0914",
-          "--accent": "#f97316",
-          "--accent-soft": "#b45309",
-          "--gold": "#fde68a",
-          "--text": "#fefce8",
-          "--muted": "#facc6b",
-          "--border": "#3f2a20"
-        },
-        autumn: {
-          "--bg": "#07040a",
-          "--bg-alt": "#11040b",
-          "--accent": "#ea580c",
-          "--accent-soft": "#7f1d1d",
-          "--gold": "#fbbf77",
-          "--text": "#fef9c3",
-          "--muted": "#f5d0c5",
-          "--border": "#3f1f2b"
+    <script>
+      // Loader & header
+      window.addEventListener('load', function () {
+        // year
+        var yearSpan = document.getElementById('year');
+        if (yearSpan) {
+          yearSpan.textContent = new Date().getFullYear();
         }
-      };
-
-      const sabbatPalettes = {
-        // Yule: midnight blue, evergreen, candle-gold, red accents
-        yule: {
-          "--bg": "#020617",
-          "--bg-alt": "#02091f",
-          "--accent": "#b91c1c",
-          "--accent-soft": "#14532d",
-          "--gold": "#facc6b",
-          "--text": "#e5e7eb",
-          "--muted": "#9ca3af",
-          "--border": "#1f2937"
-        },
-        imbolc: {
-          "--bg": "#020617",
-          "--bg-alt": "#030712",
-          "--accent": "#f97316",
-          "--accent-soft": "#ea580c",
-          "--gold": "#fef3c7",
-          "--text": "#f9fafb",
-          "--muted": "#e5e7eb",
-          "--border": "#1f2937"
-        },
-        ostara: {
-          "--bg": "#041014",
-          "--bg-alt": "#051820",
-          "--accent": "#22c55e",
-          "--accent-soft": "#ec4899",
-          "--gold": "#f9e2af",
-          "--text": "#f9fafb",
-          "--muted": "#d1fae5",
-          "--border": "#064e3b"
-        },
-        beltane: {
-          "--bg": "#020617",
-          "--bg-alt": "#05161a",
-          "--accent": "#22c55e",
-          "--accent-soft": "#ef4444",
-          "--gold": "#fbbf24",
-          "--text": "#fef9c3",
-          "--muted": "#bbf7d0",
-          "--border": "#14532d"
-        },
-        litha: {
-          "--bg": "#0b1120",
-          "--bg-alt": "#111827",
-          "--accent": "#f59e0b",
-          "--accent-soft": "#ea580c",
-          "--gold": "#fde68a",
-          "--text": "#f9fafb",
-          "--muted": "#fee2e2",
-          "--border": "#1f2937"
-        },
-        lughnasadh: {
-          "--bg": "#111827",
-          "--bg-alt": "#171717",
-          "--accent": "#f97316",
-          "--accent-soft": "#b45309",
-          "--gold": "#fbbf24",
-          "--text": "#fef9c3",
-          "--muted": "#fed7aa",
-          "--border": "#3f2a20"
-        },
-        mabon: {
-          "--bg": "#030712",
-          "--bg-alt": "#111827",
-          "--accent": "#b91c1c",
-          "--accent-soft": "#43302e",
-          "--gold": "#facc6b",
-          "--text": "#fefce8",
-          "--muted": "#fecaca",
-          "--border": "#1f2937"
-        },
-        samhain: {
-          "--bg": "#02010a",
-          "--bg-alt": "#050114",
-          "--accent": "#ea580c",
-          "--accent-soft": "#7c2d12",
-          "--gold": "#facc15",
-          "--text": "#f9fafb",
-          "--muted": "#e5e7eb",
-          "--border": "#1e1b4b"
+        // hide loader
+        document.body.classList.add('loaded');
+        // reveal header
+        var header = document.querySelector('.hb-header');
+        if (header) {
+          header.classList.add('revealed');
         }
-      };
-
-      function setTheme(palette) {
-        const chosen = palette || basePalette;
-        Object.entries(chosen).forEach(([key, val]) => {
-          root.style.setProperty(key, val);
-        });
-      }
-
-      function getSeason(date) {
-        const month = date.getMonth(); // 0-11
-        if (month === 11 || month === 0 || month === 1) return "winter";
-        if (month >= 2 && month <= 4) return "spring";
-        if (month >= 5 && month <= 7) return "summer";
-        return "autumn"; // 8-10
-      }
-
-      function getSabbat(date) {
-        const m = date.getMonth();
-        const d = date.getDate();
-
-        // Ranges approximated for convenience, Northern Hemisphere
-        // Yule: Dec 20 – Jan 5
-        if ((m === 11 && d >= 20) || (m === 0 && d <= 5)) return "yule";
-        // Imbolc: Feb 1–3
-        if (m === 1 && d >= 1 && d <= 3) return "imbolc";
-        // Ostara: ~Mar 19–22
-        if (m === 2 && d >= 19 && d <= 22) return "ostara";
-        // Beltane: Apr 30 – May 2
-        if ((m === 3 && d >= 30) || (m === 4 && d <= 2)) return "beltane";
-        // Litha: Jun 20–23
-        if (m === 5 && d >= 20 && d <= 23) return "litha";
-        // Lughnasadh: Aug 1–3
-        if (m === 7 && d >= 1 && d <= 3) return "lughnasadh";
-        // Mabon: Sep 20–23
-        if (m === 8 && d >= 20 && d <= 23) return "mabon";
-        // Samhain: Oct 31 – Nov 2
-        if ((m === 9 && d >= 31) || (m === 10 && d <= 2)) return "samhain";
-
-        return null;
-      }
-
-      const now = new Date();
-      const sabbat = getSabbat(now);
-      const season = getSeason(now);
-
-      const palette =
-        (sabbat && sabbatPalettes[sabbat]) ||
-        seasonPalettes[season] ||
-        basePalette;
-
-      setTheme(palette);
-    })();
-
-    // ========== GENERAL ON-LOAD & HEADER BEHAVIOR ==========
-    window.addEventListener("load", function () {
-      // year
-      var yearSpan = document.getElementById("year");
-      if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-      }
-      // hide loader
-      document.body.classList.add("loaded");
-      // reveal header
-      var header = document.querySelector(".hb-header");
-      if (header) {
-        header.classList.add("revealed");
-      }
-    });
-
-    // shrink header on scroll
-    window.addEventListener("scroll", function () {
-      const header = document.querySelector(".hb-header");
-      if (!header) return;
-      header.classList.toggle("scrolled", window.scrollY > 20);
-    });
-
-    // ========== SECRET MENU HOVER / TAP ==========
-    (function () {
-      const star = document.getElementById("secretStar");
-      const secret = document.getElementById("secretMenu");
-      if (!star || !secret) return;
-
-      let hideTimeout;
-
-      function showSecret() {
-        clearTimeout(hideTimeout);
-        secret.classList.add("visible");
-        star.classList.add("active");
-        secret.setAttribute("aria-hidden", "false");
-      }
-
-      function scheduleHide() {
-        hideTimeout = setTimeout(function () {
-          secret.classList.remove("visible");
-          star.classList.remove("active");
-          secret.setAttribute("aria-hidden", "true");
-        }, 200);
-      }
-
-      // Hover support (desktop)
-      star.addEventListener("mouseenter", showSecret);
-      star.addEventListener("mouseleave", scheduleHide);
-      secret.addEventListener("mouseenter", showSecret);
-      secret.addEventListener("mouseleave", scheduleHide);
-
-      // Tap/click support (mobile)
-      star.addEventListener("click", function (e) {
-        e.preventDefault();
-        const visible = secret.classList.toggle("visible");
-        star.classList.toggle("active", visible);
-        secret.setAttribute("aria-hidden", String(!visible));
       });
-    })();
 
-    // ========== SEASONAL CALLOUT + NIGHT PEARLS + DRINK ROTATION ==========
-    (function () {
-      const now = new Date();
-      const month = now.getMonth(); // 0-11
+      // shrink header on scroll
+      window.addEventListener('scroll', function () {
+        const header = document.querySelector('.hb-header');
+        if (!header) return;
+        header.classList.toggle('scrolled', window.scrollY > 20);
+      });
 
-      const seasonCallout = document.getElementById("seasonCallout");
-      const seasonMessage = seasonCallout ? seasonCallout.querySelector(".season-message") : null;
-      const seasonTitleEl = seasonCallout ? seasonCallout.querySelector(".season-title") : null;
+      // Secret menu hover / tap logic
+      (function () {
+        const star = document.getElementById('secretStar');
+        const secret = document.getElementById('secretMenu');
+        if (!star || !secret) return;
 
-      const pearlsTag = document.getElementById("pearlsTag");
-      const pearlsDesc = document.getElementById("pearlsDesc");
-      const obsidianItem = document.getElementById("obsidianItem");
-      const cerberusHotItem = document.getElementById("cerberusHotItem");
+        let hideTimeout;
 
-      function getSeason() {
-        if (month === 11 || month === 0 || month === 1) return "winter";
-        if (month >= 2 && month <= 4) return "spring";
-        if (month >= 5 && month <= 7) return "summer";
-        return "autumn"; // 8-10
-      }
-
-      const season = getSeason();
-
-      // ---- Seasonal callout wording ----
-      if (seasonCallout && seasonMessage && seasonTitleEl) {
-        const seasonTitles = [
-          "Seasonal Offerings from the Deep",
-          "🔥 Seasonal Flames Active 🔥",
-          "The Season Hungers…"
-        ];
-        const randomIndex = Math.floor(Math.random() * seasonTitles.length);
-        seasonTitleEl.textContent = seasonTitles[randomIndex];
-
-        let seasonContent = "";
-        if (season === "summer") {
-          seasonContent = `☀️ <strong>Summer in Tartarus</strong><br>
-            Obsidian Cold Brew and Summer Fire Pearls are active while the fires burn hottest.`;
-        } else if (season === "winter") {
-          seasonContent = `❄️ <strong>Winter in the Underworld</strong><br>
-            Cerberus Hot Chocolate and Winter Solstice Pearls are here to keep mortals warm.`;
-        } else if (season === "spring") {
-          seasonContent = `🌱 <strong>Spring at the Gates</strong><br>
-            Ostara-bright Night Pearls of Persephone return with lighter, floral comfort.`;
-        } else {
-          // autumn
-          seasonContent = `🍂 <strong>Harvest in the Shadows</strong><br>
-            Mabon-flavored Night Pearls & cozy elixirs haunt the menu this season.`;
+        function showSecret() {
+          clearTimeout(hideTimeout);
+          secret.classList.add('visible');
+          star.classList.add('active');
+          secret.setAttribute('aria-hidden', 'false');
         }
 
-        seasonMessage.innerHTML = seasonContent;
-      }
-
-      // ---- Night Pearls seasonal flavor text ----
-      if (pearlsTag && pearlsDesc) {
-        if (season === "winter") {
-          pearlsTag.textContent = "Winter Solstice";
-          pearlsDesc.textContent =
-            "Dark chocolate–dipped pomegranate jewels warmed with gentle winter spices and a soft citrus glow — built for long nights and thick blankets.";
-        } else if (season === "summer") {
-          pearlsTag.textContent = "Summer Fire";
-          pearlsDesc.textContent =
-            "Festival-grade Night Pearls with a playful chili kick under the chocolate — mark the Hellfire batches for brave souls only.";
-        } else if (season === "spring") {
-          pearlsTag.textContent = "Ostara Bloom";
-          pearlsDesc.textContent =
-            "Bright, lightly floral Night Pearls with hints of honey and citrus — Persephone’s return written in chocolate.";
-        } else {
-          // autumn
-          pearlsTag.textContent = "Harvest Hex";
-          pearlsDesc.textContent =
-            "Night Pearls kissed with brown sugar, smoke, and a whisper of spice — perfect for bonfires, cloaks, and ghost stories.";
+        function scheduleHide() {
+          hideTimeout = setTimeout(function () {
+            secret.classList.remove('visible');
+            star.classList.remove('active');
+            secret.setAttribute('aria-hidden', 'true');
+          }, 200);
         }
-      }
 
-      // ---- Drinks rotation: only show in their active windows ----
-      // Obsidian Cold Brew: summer only (Jun–Aug = 5–7)
-      if (obsidianItem) {
-        if (month >= 5 && month <= 7) {
-          obsidianItem.style.display = "";
-        } else {
-          obsidianItem.style.display = "none";
-        }
-      }
+        // Hover support (desktop)
+        star.addEventListener('mouseenter', showSecret);
+        star.addEventListener('mouseleave', scheduleHide);
+        secret.addEventListener('mouseenter', showSecret);
+        secret.addEventListener('mouseleave', scheduleHide);
 
-      // Cerberus Hot Chocolate: fall & winter (Oct–Feb = 9,10,11,0,1)
-      if (cerberusHotItem) {
-        if (month === 9 || month === 10 || month === 11 || month === 0 || month === 1) {
-          cerberusHotItem.style.display = "";
-        } else {
-          cerberusHotItem.style.display = "none";
+        // Tap/click support (mobile)
+        star.addEventListener('click', function (e) {
+          e.preventDefault();
+          const visible = secret.classList.toggle('visible');
+          star.classList.toggle('active', visible);
+          secret.setAttribute('aria-hidden', String(!visible));
+        });
+      })();
+
+      // Pagan holiday (Wheel of the Year) theme + seasonal menu logic
+      (function () {
+        const root = document.documentElement;
+        const now = new Date();
+        const month = now.getMonth(); // 0-11
+        const day = now.getDate();
+
+        function currentSabbat() {
+          // Rough ranges for the 8 sabbats
+          const md = (month + 1) * 100 + day; // e.g. Mar 21 => 321
+
+          // Yule: Dec 21 – Feb 1
+          if (md >= 1221 || md < 202) return "Yule";
+          // Imbolc: Feb 2 – Mar 19
+          if (md >= 202 && md < 320) return "Imbolc";
+          // Ostara: Mar 20 – Apr 29
+          if (md >= 320 && md < 430) return "Ostara";
+          // Beltane: Apr 30 – Jun 20
+          if (md >= 430 && md < 621) return "Beltane";
+          // Litha: Jun 21 – Jul 31
+          if (md >= 621 && md < 801) return "Litha";
+          // Lammas / Lughnasadh: Aug 1 – Sep 21
+          if (md >= 801 && md < 922) return "Lammas";
+          // Mabon: Sep 22 – Oct 30
+          if (md >= 922 && md < 1031) return "Mabon";
+          // Samhain: Oct 31 – Dec 20
+          return "Samhain";
         }
-      }
-    })();
-  </script>
+
+        const sabbat = currentSabbat();
+
+        // Theme colors by sabbat
+        let theme;
+        switch (sabbat) {
+          case "Yule":
+            theme = {
+              accent: "#c41e3a",
+              accentSoft: "#7b1e3a",
+              gold: "#f5e6c8",
+              bg: "#050308",
+              bgAlt: "#120910",
+              muted: "#c4cad6",
+              border: "#3a293b",
+            };
+            break;
+          case "Imbolc":
+            theme = {
+              accent: "#d9b3ff",
+              accentSoft: "#b088f0",
+              gold: "#fff7d6",
+              bg: "#06040a",
+              bgAlt: "#140c1a",
+              muted: "#c8d2ff",
+              border: "#34254b",
+            };
+            break;
+          case "Ostara":
+            theme = {
+              accent: "#8dd38c",
+              accentSoft: "#4a9b6a",
+              gold: "#ffe9b5",
+              bg: "#05070a",
+              bgAlt: "#07130f",
+              muted: "#b7d7c8",
+              border: "#214736",
+            };
+            break;
+          case "Beltane":
+            theme = {
+              accent: "#e63946",
+              accentSoft: "#ff7b54",
+              gold: "#ffe29a",
+              bg: "#070308",
+              bgAlt: "#14040c",
+              muted: "#f1c0b9",
+              border: "#4a1b2b",
+            };
+            break;
+          case "Litha":
+            theme = {
+              accent: "#f97316",
+              accentSoft: "#fbbf24",
+              gold: "#ffedb5",
+              bg: "#050308",
+              bgAlt: "#120806",
+              muted: "#f1cf9c",
+              border: "#5b3217",
+            };
+            break;
+          case "Lammas":
+            theme = {
+              accent: "#d97706",
+              accentSoft: "#92400e",
+              gold: "#facc6b",
+              bg: "#060308",
+              bgAlt: "#130c06",
+              muted: "#e5d0a6",
+              border: "#4a3416",
+            };
+            break;
+          case "Mabon":
+            theme = {
+              accent: "#b45309",
+              accentSoft: "#9a3412",
+              gold: "#fbbf77",
+              bg: "#050308",
+              bgAlt: "#120706",
+              muted: "#d7c0a4",
+              border: "#4b2714",
+            };
+            break;
+          case "Samhain":
+          default:
+            theme = {
+              accent: "#f97316",
+              accentSoft: "#7e0f1d",
+              gold: "#f5c97a",
+              bg: "#050308",
+              bgAlt: "#0c050b",
+              muted: "#b3a9c0",
+              border: "#312033",
+            };
+            break;
+        }
+
+        // Apply theme to CSS variables
+        if (theme) {
+          root.style.setProperty("--accent", theme.accent);
+          root.style.setProperty("--accent-soft", theme.accentSoft);
+          root.style.setProperty("--gold", theme.gold);
+          root.style.setProperty("--bg", theme.bg);
+          root.style.setProperty("--bg-alt", theme.bgAlt);
+          root.style.setProperty("--muted", theme.muted);
+          root.style.setProperty("--border", theme.border);
+        }
+
+        // Update seasonal callout text based on sabbat
+        const seasonCallout = document.getElementById("seasonCallout");
+        if (seasonCallout) {
+          const titleEl = seasonCallout.querySelector(".season-title");
+          const msgEl = seasonCallout.querySelector(".season-message");
+          if (titleEl) {
+            titleEl.textContent = sabbat + " Flames in the Underworld";
+          }
+          if (msgEl) {
+            let msg = "";
+            switch (sabbat) {
+              case "Yule":
+                msg = "❄️ Deep winter hexes & comfort spells. Warm hands, warm hearts, no cold plates.";
+                break;
+              case "Imbolc":
+                msg = "✨ First thaw, first sparks — lighter flavors and gentle heat returning to the land.";
+                break;
+              case "Ostara":
+                msg = "🌱 Spring balance, bright greens, and lighter sweets to greet the dawn.";
+                break;
+              case "Beltane":
+                msg = "🔥 Fire festival feasts, flirt-with-the-flame spice, and celebratory bites.";
+                break;
+              case "Litha":
+                msg = "☀️ Peak sun, peak flame. Chilled elixirs and hotter-than-Hel dishes.";
+                break;
+              case "Lammas":
+                msg = "🌾 Harvest of grains and gold — hearty, ember-kissed comfort food.";
+                break;
+              case "Mabon":
+                msg = "🍂 Equal night and day, deepening flavors, and slow-fire warmth.";
+                break;
+              case "Samhain":
+              default:
+                msg = "🕯 Veil-thin nights, smoky sweets, and offerings worthy of restless spirits.";
+                break;
+            }
+            msgEl.textContent = msg;
+          }
+        }
+
+        // Seasonal drinks: only show when in season
+        const drinkEls = document.querySelectorAll(".seasonal-drink");
+        drinkEls.forEach(function (el) {
+          const season = el.getAttribute("data-season");
+          // Map sabbats to seasons
+          let currentSeason;
+          if (["Yule", "Imbolc"].includes(sabbat)) currentSeason = "winter";
+          else if (["Ostara", "Beltane"].includes(sabbat)) currentSeason = "spring";
+          else if (["Litha", "Lammas"].includes(sabbat)) currentSeason = "summer";
+          else if (["Mabon", "Samhain"].includes(sabbat)) currentSeason = "fall";
+
+          if (season === currentSeason) {
+            el.style.display = "";
+          } else {
+            el.style.display = "none";
+          }
+        });
+
+        // Night Pearls rotation (Base dessert stays, flavor/aspect changes)
+        const pearlsLabel = document.getElementById("pearls-variant-label");
+        const pearlsDesc = document.getElementById("pearls-variant-desc");
+        if (pearlsLabel && pearlsDesc) {
+          let variantName;
+          let variantLine;
+          if (["Yule", "Imbolc"].includes(sabbat)) {
+            variantName = "Winter Solstice Pearls";
+            variantLine = "Spiced chocolate with soft citrus glow for the longest nights.";
+          } else if (["Ostara", "Beltane"].includes(sabbat)) {
+            variantName = "Spring Dawn Pearls";
+            variantLine = "Lighter floral-citrus notes for returning light and blooming fields.";
+          } else if (["Litha", "Lammas"].includes(sabbat)) {
+            variantName = "Summer Fire Pearls";
+            variantLine = "Festival-grade mischief with a gentle chili spark beneath the chocolate.";
+          } else {
+            variantName = "Autumn Veil Pearls";
+            variantLine = "Deeper cocoa, smoke, and warmth for veil-thin evenings.";
+          }
+
+          pearlsLabel.textContent = variantName;
+          pearlsDesc.textContent =
+            "Dark chocolate–dipped pomegranate gems that rotate with the Wheel of the Year — tonight’s face of the fruit: " +
+            variantName +
+            ". " +
+            variantLine;
+        }
+      })();
+    </script>
+  </footer>
 </body>
 </html>
