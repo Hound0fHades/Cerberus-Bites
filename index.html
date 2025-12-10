@@ -965,7 +965,6 @@
 
         <div class="nav-center">
           <a href="#top" class="nav-logo-link">
-            <!-- Make sure this file name & path matches your actual logo -->
             <img src="CerberusLogo2.png" alt="Cerberus Bites Logo" class="logo-img">
           </a>
           <div class="nav-brand-text">
@@ -1047,7 +1046,6 @@
           <div class="section-eyebrow">The Wicked Feast</div>
           <div class="section-title-row">
             <h2 class="section-title">Underworld Menu</h2>
-            <!-- subtle ghost hotspot star -->
             <button class="secret-star" id="secretStar" aria-label="Hidden sigil">
               <span>✶</span>
             </button>
@@ -1056,7 +1054,6 @@
             Infernal comfort food for mortals of every kind — kids, picky eaters, spice fiends, and those walking gentler paths.
           </p>
 
-          <!-- Seasonal specials callout -->
           <div id="seasonCallout" class="season-callout">
             <strong class="season-title">Seasonal Offerings from the Deep</strong>
             <p class="season-message">Ask which seasonal spells are active tonight in the Underworld.</p>
@@ -1466,7 +1463,6 @@
               Choose your time directly on the calendar. Once confirmed, you’ll receive an email from our booking system.
             </p>
             <div class="calendar-wrap">
-              <!-- Setmore booking URL -->
               <iframe
                 src="https://CerberusBites.setmore.com"
                 loading="lazy"
@@ -1538,7 +1534,6 @@
         const day = now.getDate();
 
         function getSeasonGroup() {
-          // Meteorological-ish seasons for menu & pearls
           if (month === 12 || month <= 2) return "winter";
           if (month >= 3 && month <= 5) return "spring";
           if (month >= 6 && month <= 8) return "summer";
@@ -1546,24 +1541,22 @@
         }
 
         function getSabbat() {
-          const md = month * 100 + day; // e.g. March 21 => 321
+          const md = month * 100 + day;
 
-          // Approximate ranges for 8 sabbats
-          if (md >= 1220 || md <= 105) return "yule";            // Dec 20 – Jan 5
-          if (md >= 201 && md <= 205) return "imbolc";           // Feb 1 – 5
-          if (md >= 320 && md <= 405) return "ostara";           // Mar 20 – Apr 5
-          if (md >= 430 && md <= 505) return "beltane";          // Apr 30 – May 5
-          if (md >= 620 && md <= 705) return "litha";            // Jun 20 – Jul 5
-          if (md >= 801 && md <= 807) return "lughnasadh";       // Aug 1 – 7
-          if (md >= 920 && md <= 930) return "mabon";            // Sep 20 – 30
-          if (md >= 1030 && md <= 1102) return "samhain";        // Oct 30 – Nov 2
+          if (md >= 1220 || md <= 105) return "yule";
+          if (md >= 201 && md <= 205) return "imbolc";
+          if (md >= 320 && md <= 405) return "ostara";
+          if (md >= 430 && md <= 505) return "beltane";
+          if (md >= 620 && md <= 705) return "litha";
+          if (md >= 801 && md <= 807) return "lughnasadh";
+          if (md >= 920 && md <= 930) return "mabon";
+          if (md >= 1030 && md <= 1102) return "samhain";
           return "none";
         }
 
         const seasonGroup = getSeasonGroup();
         const sabbat = getSabbat();
 
-        // Pagan / Greek-myth inspired palettes
         const themes = {
           yule: {
             "--bg": "#020617",
@@ -1683,7 +1676,6 @@
           }
         };
 
-        const seasonGroup = getSeasonGroup();
         const pv = pearlVariants[seasonGroup];
         if (pv && pearlsName && pearlsDesc) {
           pearlsName.textContent = pv.name;
@@ -1769,13 +1761,11 @@
           }, 200);
         }
 
-        // Hover support (desktop)
         star.addEventListener('mouseenter', showSecret);
         star.addEventListener('mouseleave', scheduleHide);
         secret.addEventListener('mouseenter', showSecret);
         secret.addEventListener('mouseleave', scheduleHide);
 
-        // Tap/click support (mobile)
         star.addEventListener('click', function (e) {
           e.preventDefault();
           const visible = secret.classList.toggle('visible');
