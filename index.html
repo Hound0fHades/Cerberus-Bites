@@ -4,78 +4,19 @@
   <meta charset="UTF-8">
   <title>Cerberus Bites | Feast in the Underworld</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Cerberus Bites — a mythic underworld-themed food truck serving wicked sliders, infernal mac, underworld feasts, sweets, and elixirs. Feast in the Underworld.">
+  <meta name="description" content="Cerberus Bites — an underworld-themed food truck serving wicked sliders, infernal mac, underworld feasts, elixirs, and mythic sweets. Feast in the Underworld.">
   <link rel="canonical" href="https://hound0fhades.github.io/Hades-Wicked-Bites">
   <style>
     :root {
-      /* Base Greek-myth / underworld palette (overridden by sabbat classes on <body>) */
+      /* These will be overwritten by JS based on pagan season */
       --bg: #050308;
-      --bg-alt: #0b0712;
-      --accent: #c98a1f;       /* warm bronze */
-      --accent-soft: #7e2730;  /* deep wine red */
-      --gold: #f4e2b3;         /* pale marble-gold */
+      --bg-alt: #0c050b;
+      --accent: #ca3400;
+      --accent-soft: #7e0f1d;
+      --gold: #f5c97a;
       --text: #f4f2f6;
       --muted: #b3a9c0;
-      --border: #3a293f;
-    }
-
-    /* Sabbat-based theme shifts */
-    body.sabbat-yule {
-      --bg: #03040a;
-      --bg-alt: #090711;
-      --accent: #c51d32;      /* holly red */
-      --accent-soft: #5b1020;
-      --gold: #f5e5b8;
-      --muted: #c0b7d4;
-    }
-    body.sabbat-imbolc {
-      --bg: #05040b;
-      --bg-alt: #0c0716;
-      --accent: #d39c3d;      /* returning sun gold */
-      --accent-soft: #6e3051;
-      --gold: #f7e8c5;
-    }
-    body.sabbat-ostara {
-      --bg: #05030a;
-      --bg-alt: #0b0814;
-      --accent: #d0677e;      /* soft rose */
-      --accent-soft: #6f2f48;
-      --gold: #f3e3c8;
-    }
-    body.sabbat-beltane {
-      --bg: #080309;
-      --bg-alt: #140510;
-      --accent: #e24b2f;      /* fire festival red/orange */
-      --accent-soft: #7a1a21;
-      --gold: #f6ddaa;
-    }
-    body.sabbat-litha {
-      --bg: #06040b;
-      --bg-alt: #120815;
-      --accent: #f39b26;      /* sun at zenith */
-      --accent-soft: #8b3c26;
-      --gold: #f9e2a0;
-    }
-    body.sabbat-lughnasadh {
-      --bg: #07040a;
-      --bg-alt: #130810;
-      --accent: #d68b2b;      /* harvest gold */
-      --accent-soft: #7b3524;
-      --gold: #f4d39b;
-    }
-    body.sabbat-mabon {
-      --bg: #050308;
-      --bg-alt: #11060d;
-      --accent: #c65a2d;      /* autumn red/orange */
-      --accent-soft: #6b2430;
-      --gold: #f1d7a0;
-    }
-    body.sabbat-samhain {
-      --bg: #040309;
-      --bg-alt: #0a050f;
-      --accent: #e2582d;      /* bonfire orange */
-      --accent-soft: #651c25;
-      --gold: #f7e0b4;
+      --border: #312033;
     }
 
     * {
@@ -83,13 +24,15 @@
       margin: 0;
       padding: 0;
     }
+
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #171228 0, var(--bg) 55%, #020107 100%);
+      background: radial-gradient(circle at top, var(--bg-alt) 0, var(--bg) 55%, #020107 100%);
       color: var(--text);
       line-height: 1.6;
       transition: background 0.4s ease, color 0.4s ease;
     }
+
     a { color: var(--gold); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
@@ -97,7 +40,7 @@
     .loader-overlay {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at top, #201024 0, var(--bg) 55%, #020107 100%);
+      background: radial-gradient(circle at top, var(--bg-alt) 0, var(--bg) 55%, #020107 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -125,9 +68,9 @@
       font-size: 1.1rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      background: radial-gradient(circle, var(--accent) 0, #050308 65%);
+      background: radial-gradient(circle, var(--accent) 0, var(--bg) 65%);
       color: #fdf3e0;
-      box-shadow: 0 0 22px rgba(202,52,0,0.8);
+      box-shadow: 0 0 22px rgba(0,0,0,0.8);
       animation: loaderPulse 1.6s ease-in-out infinite;
     }
     .loader-text-main {
@@ -151,12 +94,18 @@
     }
 
     @keyframes loaderPulse {
-      0% { transform: scale(1); box-shadow: 0 0 10px rgba(202,52,0,0.4); }
-      50% { transform: scale(1.05); box-shadow: 0 0 26px rgba(202,52,0,0.9); }
-      100% { transform: scale(1); box-shadow: 0 0 10px rgba(202,52,0,0.4); }
+      0% { transform: scale(1); box-shadow: 0 0 10px rgba(0,0,0,0.4); }
+      50% { transform: scale(1.05); box-shadow: 0 0 26px rgba(0,0,0,0.9); }
+      100% { transform: scale(1); box-shadow: 0 0 10px rgba(0,0,0,0.4); }
     }
 
-    /* Coming Soon Banner with flicker */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* COMING SOON BANNER */
     .coming-soon-banner {
       background: linear-gradient(to right, var(--accent-soft), var(--accent), var(--accent-soft));
       padding: 0.6rem 1rem;
@@ -166,7 +115,7 @@
       font-size: 0.9rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      box-shadow: 0 0 18px rgba(202,52,0,0.7);
+      box-shadow: 0 0 18px rgba(0,0,0,0.7);
       position: relative;
       overflow: hidden;
       animation: flameFlicker 2.4s ease-in-out infinite alternate;
@@ -195,12 +144,6 @@
       }
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 1.25rem;
-    }
-
     /* === STICKY HEADER WITH CENTERED CERBERUS LOGO === */
 
     .hb-header {
@@ -216,7 +159,7 @@
       backdrop-filter: blur(10px);
       box-shadow:
         0 0 18px rgba(0,0,0,0.9),
-        inset 0 -1px 0 rgba(202,52,0,0.3);
+        inset 0 -1px 0 rgba(0,0,0,0.3);
       transform: translateY(-18px);
       opacity: 0;
       transition:
@@ -232,7 +175,7 @@
     .hb-header.scrolled {
       box-shadow:
         0 0 26px rgba(0,0,0,1),
-        0 0 30px rgba(202,52,0,0.55);
+        0 0 30px rgba(0,0,0,0.55);
     }
 
     .nav {
@@ -261,7 +204,7 @@
       height: 90px;
       width: auto;
       display: block;
-      filter: drop-shadow(0 0 12px rgba(202,52,0,0.8));
+      filter: drop-shadow(0 0 12px rgba(0,0,0,0.9));
       transition:
         height 0.25s ease,
         transform 0.25s ease,
@@ -270,7 +213,7 @@
 
     .hb-header.scrolled .logo-img {
       height: 68px;
-      filter: drop-shadow(0 0 8px rgba(202,52,0,0.7));
+      filter: drop-shadow(0 0 8px rgba(0,0,0,0.8));
     }
 
     .logo-img:hover {
@@ -280,11 +223,11 @@
     @keyframes logoFlame {
       0% {
         transform: translateY(0) scale(1);
-        filter: drop-shadow(0 0 10px rgba(202,52,0,0.8));
+        filter: drop-shadow(0 0 10px rgba(0,0,0,0.8));
       }
       100% {
         transform: translateY(-1px) scale(1.03);
-        filter: drop-shadow(0 0 18px rgba(202,52,0,1));
+        filter: drop-shadow(0 0 18px rgba(0,0,0,1));
       }
     }
 
@@ -326,7 +269,7 @@
       width: 0;
       border-radius: 999px;
       background: linear-gradient(to right, var(--gold), var(--accent), var(--accent-soft));
-      box-shadow: 0 0 10px rgba(202,52,0,0.8);
+      box-shadow: 0 0 10px rgba(0,0,0,0.8);
       opacity: 0;
       transition:
         width 0.22s ease,
@@ -359,7 +302,7 @@
         radial-gradient(circle at bottom right, rgba(126,15,29,0.9), rgba(5,3,8,0.95));
       color: #fff;
       box-shadow:
-        0 0 16px rgba(202,52,0,0.9),
+        0 0 16px rgba(0,0,0,0.9),
         0 0 4px rgba(245,201,122,0.8);
       cursor: pointer;
       position: relative;
@@ -383,7 +326,7 @@
 
     .nav-cta:hover {
       box-shadow:
-        0 0 22px rgba(202,52,0,1),
+        0 0 22px rgba(0,0,0,1),
         0 0 10px rgba(245,201,122,0.9);
     }
 
@@ -462,7 +405,7 @@
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), var(--accent-soft));
       color: #fff;
-      box-shadow: 0 0 18px rgba(202,52,0,0.7);
+      box-shadow: 0 0 18px rgba(0,0,0,0.7);
     }
     .btn-primary:hover {
       filter: brightness(1.05);
@@ -485,7 +428,7 @@
       padding: 1px;
       background: radial-gradient(circle at top, rgba(202,52,0,0.8), #050308);
       box-shadow:
-        0 0 32px rgba(202,52,0,0.45),
+        0 0 32px rgba(0,0,0,0.45),
         0 0 80px rgba(0,0,0,0.9);
     }
     .hero-art-inner {
@@ -525,6 +468,8 @@
       font-size: 0.78rem;
       color: var(--muted);
     }
+
+    /* Sections */
 
     section {
       padding: 2.5rem 0;
@@ -1002,8 +947,8 @@
   <div class="loader-overlay">
     <div class="loader-inner">
       <div class="loader-symbol">CB</div>
-      <div class="loader-text-main">Summoning Cerberus…</div>
-      <div class="loader-text-sub">Prepare for the feast.</div>
+      <div class="loader-text-main">Summoning the Underworld Kitchen…</div>
+      <div class="loader-text-sub">Please wait, mortal.</div>
     </div>
   </div>
 
@@ -1023,7 +968,6 @@
 
         <div class="nav-center">
           <a href="#top" class="nav-logo-link">
-            <!-- Cerberus logo -->
             <img src="CerberusLogo2.png" alt="Cerberus Bites Logo" class="logo-img">
           </a>
           <div class="nav-brand-text">
@@ -1051,7 +995,7 @@
               Eat wickedly. Feast in the Underworld.
             </h1>
             <p class="hero-subtitle">
-              A mythic underworld food truck serving sliders, infernal mac, bites, bowls, combos, sweets, and underworld elixirs.
+              An infernal food truck serving sliders, infernal mac, bites, bowls, combos, mythic sweets, and underworld elixirs.
               Dark, witchy, family-friendly, and allergy-aware — welcome to the Underworld Kitchen.
             </p>
             <div class="hero-tags">
@@ -1059,7 +1003,7 @@
               <div class="tag">Infernal Mac</div>
               <div class="tag">Combos</div>
               <div class="tag">Underworld Elixirs</div>
-              <div class="tag">Seasonal Sweets</div>
+              <div class="tag">Mythic Sweets</div>
               <div class="tag">Allergy Friendly Options</div>
             </div>
             <div class="hero-actions">
@@ -1085,11 +1029,11 @@
                 </div>
                 <div class="hero-card">
                   <h4>Underworld Elixirs</h4>
-                  <p>Styx sodas, Blood Moon Punch, Lethe Lemon Fizz, and more.</p>
+                  <p>Styx sodas, Blood Moon punch, Lethe Lemon Fizz, and more.</p>
                 </div>
                 <div class="hero-card">
-                  <h4>The Hound of Hades</h4>
-                  <p>The Underworld Kitchen is led by The Hound of Hades.</p>
+                  <h4>Night Pearls & Sweets</h4>
+                  <p>Rotating flavors of Night Pearls of Persephone and other Cerberus-approved desserts.</p>
                 </div>
               </div>
             </div>
@@ -1117,8 +1061,8 @@
 
           <!-- Seasonal specials callout -->
           <div id="seasonCallout" class="season-callout">
-            <strong class="season-title">Wheel of the Year</strong>
-            <p class="season-message">Consulting the fates…</p>
+            <strong class="season-title">Seasonal Flames Active</strong>
+            <p class="season-message">Consult Cerberus for tonight’s seasonal offerings…</p>
           </div>
         </div>
 
@@ -1299,62 +1243,17 @@
                   </div>
                 </div>
 
-                <!-- Night Pearls of Persephone – Base Spell (always allowed) -->
-                <div class="menu-item" data-dessert-variant="base">
+                <div class="menu-item">
                   <div class="menu-item-name">
-                    Night Pearls of Persephone
-                    <span>Dark Chocolate + Pomegranate</span>
+                    Elysian Orchard Fruit Cups
                   </div>
                   <div class="menu-item-desc">
-                    Dark chocolate–dipped pomegranate “pearls” with a kiss of Midnight Salt.  
-                    A tiny underworld promise: sweetness first, then a sharp little truth.
+                    Fresh seasonal fruit gathered from the “Elysian fields” beyond the Underworld. Light, bright, and halo-approved.
                   </div>
                   <div class="menu-badges">
-                    <div class="badge">Seasonal favorite</div>
-                  </div>
-                </div>
-
-                <!-- Winter Solstice Pearls – dark half of the year -->
-                <div class="menu-item" data-dessert-variant="winter">
-                  <div class="menu-item-name">
-                    Winter Solstice Pearls
-                    <span>
-                      Comfort Hex
-                      <span
-                        class="seasonal-icon"
-                        aria-hidden="true"
-                        data-tooltip="Dark Half of the Year"
-                      >❄️</span>
-                    </span>
-                  </div>
-                  <div class="menu-item-desc">
-                    Night Pearls rolled in spiced dark chocolate with cinnamon, clove, and a breath of orange zest —
-                    for blankets, bonfires, and long nights.
-                  </div>
-                  <div class="menu-badges">
-                    <div class="badge">Samhain · Yule · Imbolc · Mabon</div>
-                  </div>
-                </div>
-
-                <!-- Summer Fire Pearls – light half of the year -->
-                <div class="menu-item" data-dessert-variant="summer">
-                  <div class="menu-item-name">
-                    Summer Fire Pearls
-                    <span>
-                      Flame Hex
-                      <span
-                        class="seasonal-icon"
-                        aria-hidden="true"
-                        data-tooltip="Fire Festivals"
-                      >🔥</span>
-                    </span>
-                  </div>
-                  <div class="menu-item-desc">
-                    Night Pearls cloaked in chili-kissed chocolate, with optional “Hellfire” drizzle for true heat-seekers.
-                    Marked with tiny skulls when extra infernal.
-                  </div>
-                  <div class="menu-badges">
-                    <div class="badge">Beltane · Litha · Lughnasadh</div>
+                    <div class="badge">Vegan</div>
+                    <div class="badge">GF</div>
+                    <div class="badge">DF</div>
                   </div>
                 </div>
 
@@ -1367,15 +1266,22 @@
                   </div>
                 </div>
 
+                <!-- Night Pearls of Persephone – text rotates by season -->
                 <div class="menu-item">
                   <div class="menu-item-name">
-                    Cerberus Chocolate Skulls
+                    <span id="nightPearlsName">Night Pearls of Persephone</span>
+                    <span>Seasonal Hex</span>
                   </div>
-                  <div class="menu-item-desc">
-                    Dark chocolate skulls, available in classic or gently spiced for brave souls.
+                  <div class="menu-item-desc" id="nightPearlsDesc">
+                    Dark chocolate–dipped pomegranate pearls with rotating seasonal spells.
+                  </div>
+                  <div class="menu-badges">
+                    <div class="badge">Vegan option</div>
+                    <div class="badge">GF</div>
                   </div>
                 </div>
 
+                <!-- Drinks -->
                 <div class="menu-group-title" style="margin-top:0.9rem;">Underworld Elixirs (Drinks)</div>
 
                 <div class="menu-item">
@@ -1414,14 +1320,14 @@
                   </div>
                 </div>
 
-                <!-- Seasonal Drinks – only visible in their seasonal windows -->
-                <div class="menu-item" data-seasonal-drink="obsidian-cold-brew">
+                <!-- Summer-only drink -->
+                <div class="menu-item" data-season-group="summer" id="obsidianColdBrewItem">
                   <div class="menu-item-name">
                     Obsidian Cold Brew
                     <span
                       class="seasonal-icon"
                       aria-hidden="true"
-                      data-tooltip="Summer Fire Festivals"
+                      data-tooltip="Summer Seasonal"
                     >☀️</span>
                   </div>
                   <div class="menu-item-desc">
@@ -1430,17 +1336,17 @@
                   </div>
                   <div class="menu-badges">
                     <div class="badge">DF option</div>
-                    <div class="badge">Seasonal</div>
                   </div>
                 </div>
 
-                <div class="menu-item" data-seasonal-drink="cerberus-hot-chocolate">
+                <!-- Fall & Winter-only drink -->
+                <div class="menu-item" data-season-group="autumn,winter" id="cerberusHotChocolateItem">
                   <div class="menu-item-name">
                     Cerberus Hot Chocolate
                     <span
                       class="seasonal-icon"
                       aria-hidden="true"
-                      data-tooltip="Dark Half of the Year"
+                      data-tooltip="Fall & Winter Seasonal"
                     >🍁</span>
                   </div>
                   <div class="menu-item-desc">
@@ -1515,7 +1421,7 @@
               guardian of flavor, keeper of the ember flame, and alchemist of wicked comfort food.
             </p>
             <p style="margin-top:0.5rem;">
-              With a love for witchy aesthetics, Greek mythology, and soul-warming food, the Underworld Kitchen balances
+              With a love for witchy aesthetics, Greek myth, and soul-warming food, the Underworld Kitchen balances
               <strong>dark, immersive storytelling</strong> with <strong>real-world accessibility</strong>:
               kid-friendly options, allergy-aware offerings, and flexible heat levels for every mortal.
             </p>
@@ -1559,7 +1465,6 @@
               Choose your time directly on the calendar. Once confirmed, you’ll receive an email from our booking system.
             </p>
             <div class="calendar-wrap">
-              <!-- Cerberus Bites Setmore booking URL -->
               <iframe
                 src="https://CerberusBites.setmore.com"
                 loading="lazy"
@@ -1594,7 +1499,7 @@
               </li>
               <li>
                 <strong>Instagram:</strong>
-                <a href="https://instagram.com/cerberus_bites" target="_blank">@cerberus_bites</a>
+                <a href="https://www.instagram.com/cerberus_bites" target="_blank">@cerberus_bites</a>
               </li>
               <li>
                 <strong>TikTok:</strong>
@@ -1616,179 +1521,266 @@
       <div class="footer-row">
         <div>© <span id="year"></span> Cerberus Bites. All rights reserved.</div>
         <div class="footer-links">
-          <span>Eat wickedly.</span>
+          <span>Guard the flame.</span>
           <span>Feast in the Underworld.</span>
         </div>
       </div>
     </div>
-    <script>
-      window.addEventListener('load', function () {
-        // year
-        var yearSpan = document.getElementById('year');
-        if (yearSpan) {
-          yearSpan.textContent = new Date().getFullYear();
+  </footer>
+
+  <script>
+    // ===== Wheel-of-the-Year theme + seasonal logic =====
+    (function () {
+      const root = document.documentElement;
+      const now = new Date();
+      const month = now.getMonth() + 1; // 1-12
+      const day = now.getDate();
+
+      function getSeasonGroup() {
+        // Meteorological-ish seasons for menu & pearls
+        if (month === 12 || month <= 2) return "winter";
+        if (month >= 3 && month <= 5) return "spring";
+        if (month >= 6 && month <= 8) return "summer";
+        return "autumn";
+      }
+
+      function getSabbat() {
+        const md = month * 100 + day; // e.g. March 21 => 321
+
+        // Approximate ranges for 8 sabbats
+        if (md >= 1220 || md <= 105) return "yule";            // Dec 20 – Jan 5
+        if (md >= 201 && md <= 205) return "imbolc";           // Feb 1 – 5
+        if (md >= 320 && md <= 405) return "ostara";           // Mar 20 – Apr 5
+        if (md >= 430 && md <= 505) return "beltane";          // Apr 30 – May 5
+        if (md >= 620 && md <= 705) return "litha";            // Jun 20 – Jul 5
+        if (md >= 801 && md <= 807) return "lughnasadh";       // Aug 1 – 7
+        if (md >= 920 && md <= 930) return "mabon";            // Sep 20 – 30
+        if (md >= 1030 && md <= 1102) return "samhain";        // Oct 30 – Nov 2
+        return "none";
+      }
+
+      const seasonGroup = getSeasonGroup();
+      const sabbat = getSabbat();
+
+      // Pagan color palettes (Greek / mythic inspired)
+      const themes = {
+        yule: {
+          "--bg": "#040616",
+          "--bg-alt": "#111827",
+          "--accent": "#e5b90b",
+          "--accent-soft": "#64748b",
+          "--gold": "#facc6b",
+          "--text": "#f9fafb",
+          "--muted": "#cbd5f5",
+          "--border": "#334155"
+        },
+        imbolc: {
+          "--bg": "#050712",
+          "--bg-alt": "#0b1020",
+          "--accent": "#e5e7eb",
+          "--accent-soft": "#a7f3d0",
+          "--gold": "#fef3c7",
+          "--text": "#f9fafb",
+          "--muted": "#e5e7eb",
+          "--border": "#4b5563"
+        },
+        ostara: {
+          "--bg": "#020812",
+          "--bg-alt": "#06241b",
+          "--accent": "#34d399",
+          "--accent-soft": "#bbf7d0",
+          "--gold": "#facc6b",
+          "--text": "#ecfdf5",
+          "--muted": "#a7f3d0",
+          "--border": "#064e3b"
+        },
+        beltane: {
+          "--bg": "#050410",
+          "--bg-alt": "#052e16",
+          "--accent": "#16a34a",
+          "--accent-soft": "#f97316",
+          "--gold": "#facc6b",
+          "--text": "#f9fafb",
+          "--muted": "#bbf7d0",
+          "--border": "#166534"
+        },
+        litha: {
+          "--bg": "#111827",
+          "--bg-alt": "#1f2937",
+          "--accent": "#f59e0b",
+          "--accent-soft": "#f97316",
+          "--gold": "#fde68a",
+          "--text": "#f9fafb",
+          "--muted": "#e5e7eb",
+          "--border": "#4b5563"
+        },
+        lughnasadh: {
+          "--bg": "#12100b",
+          "--bg-alt": "#1f2933",
+          "--accent": "#d97706",
+          "--accent-soft": "#84cc16",
+          "--gold": "#facc6b",
+          "--text": "#f9fafb",
+          "--muted": "#e5e7eb",
+          "--border": "#374151"
+        },
+        mabon: {
+          "--bg": "#140508",
+          "--bg-alt": "#1f1723",
+          "--accent": "#b91c1c",
+          "--accent-soft": "#92400e",
+          "--gold": "#facc6b",
+          "--text": "#f9fafb",
+          "--muted": "#fed7aa",
+          "--border": "#4b1d1d"
+        },
+        samhain: {
+          "--bg": "#050308",
+          "--bg-alt": "#1a1022",
+          "--accent": "#ea580c",
+          "--accent-soft": "#7e22ce",
+          "--gold": "#facc6b",
+          "--text": "#f9fafb",
+          "--muted": "#c4b5fd",
+          "--border": "#4c1d95"
+        },
+        none: {
+          "--bg": "#050308",
+          "--bg-alt": "#0c050b",
+          "--accent": "#ca3400",
+          "--accent-soft": "#7e0f1d",
+          "--gold": "#f5c97a",
+          "--text": "#f4f2f6",
+          "--muted": "#b3a9c0",
+          "--border": "#312033"
         }
-        // hide loader
-        document.body.classList.add('loaded');
-        // reveal header
-        var header = document.querySelector('.hb-header');
-        if (header) {
-          header.classList.add('revealed');
+      };
+
+      const theme = themes[sabbat] || themes.none;
+      Object.entries(theme).forEach(([k, v]) => root.style.setProperty(k, v));
+
+      // Night Pearls flavor rotation
+      const pearlsName = document.getElementById("nightPearlsName");
+      const pearlsDesc = document.getElementById("nightPearlsDesc");
+
+      const pearlVariants = {
+        winter: {
+          name: "Night Pearls of Persephone · Winter Solstice Hex",
+          desc: "Dark chocolate–dipped pomegranate jewels warmed with cinnamon ember and a veil of orange zest for the longest nights."
+        },
+        spring: {
+          name: "Night Pearls of Persephone · Spring Dawn Pearls",
+          desc: "Bright pomegranate pearls in dark chocolate with whispers of vanilla and floral citrus — the first flowers of the Underworld."
+        },
+        summer: {
+          name: "Night Pearls of Persephone · Summer Fire Pearls",
+          desc: "Festival-grade mischief: dark chocolate pearls laced with gentle chili heat and Midnight Salt for brave mortals."
+        },
+        autumn: {
+          name: "Night Pearls of Persephone · Autumn Veil Pearls",
+          desc: "Smoky-sweet pomegranate pearls with toasted spice and a hint of dark caramel, perfect for crossing between worlds."
         }
+      };
+
+      const pv = pearlVariants[seasonGroup];
+      if (pv && pearlsName && pearlsDesc) {
+        pearlsName.textContent = pv.name;
+        pearlsDesc.textContent = pv.desc;
+      }
+
+      // Show seasonal drinks only in their seasonGroup
+      document.querySelectorAll("[data-season-group]").forEach((el) => {
+        const groups = el.dataset.seasonGroup.split(",").map(s => s.trim());
+        el.style.display = groups.includes(seasonGroup) ? "" : "none";
       });
 
-      // shrink header on scroll
-      window.addEventListener('scroll', function () {
-        const header = document.querySelector('.hb-header');
-        if (!header) return;
-        header.classList.toggle('scrolled', window.scrollY > 20);
-      });
-
-      // Secret menu hover / tap logic
-      (function () {
-        const star = document.getElementById('secretStar');
-        const secret = document.getElementById('secretMenu');
-        if (!star || !secret) return;
-
-        let hideTimeout;
-
-        function showSecret() {
-          clearTimeout(hideTimeout);
-          secret.classList.add('visible');
-          star.classList.add('active');
-          secret.setAttribute('aria-hidden', 'false');
-        }
-
-        function scheduleHide() {
-          hideTimeout = setTimeout(function () {
-            secret.classList.remove('visible');
-            star.classList.remove('active');
-            secret.setAttribute('aria-hidden', 'true');
-          }, 200);
-        }
-
-        // Hover support (desktop)
-        star.addEventListener('mouseenter', showSecret);
-        star.addEventListener('mouseleave', scheduleHide);
-        secret.addEventListener('mouseenter', showSecret);
-        secret.addEventListener('mouseleave', scheduleHide);
-
-        // Tap/click support (mobile)
-        star.addEventListener('click', function (e) {
-          e.preventDefault();
-          const visible = secret.classList.toggle('visible');
-          star.classList.toggle('active', visible);
-          secret.setAttribute('aria-hidden', String(!visible));
-        });
-      })();
-
-      // Wheel of the Year logic: sabbat, colors, seasonal items
-      (function () {
-        const now = new Date();
-        const month = now.getMonth(); // 0 = Jan
-        const day = now.getDate();
-
-        // Map month to primary sabbat "season" block
-        function getSabbat(m, d) {
-          switch (m) {
-            case 0:  // Jan
-              return 'yule';
-            case 1:  // Feb
-              return 'imbolc';
-            case 2:  // Mar
-              return 'ostara';
-            case 3:  // Apr
-              return 'beltane';
-            case 4:  // May
-              return 'beltane';
-            case 5:  // Jun
-              return 'litha';
-            case 6:  // Jul
-              return 'litha';
-            case 7:  // Aug
-              return 'lughnasadh';
-            case 8:  // Sep
-              return 'mabon';
-            case 9:  // Oct
-              return 'samhain';
-            case 10: // Nov
-              return 'samhain';
-            case 11: // Dec
-              return 'yule';
-            default:
-              return 'yule';
-          }
-        }
-
-        const sabbat = getSabbat(month, day);
-        document.body.classList.add('sabbat-' + sabbat);
-
-        const seasonCallout = document.getElementById("seasonCallout");
-        const seasonMessage = seasonCallout ? seasonCallout.querySelector(".season-message") : null;
-        const seasonTitleEl = seasonCallout ? seasonCallout.querySelector(".season-title") : null;
-
-        if (!seasonCallout || !seasonMessage || !seasonTitleEl) return;
+      // Seasonal callout messaging
+      const seasonCallout = document.getElementById("seasonCallout");
+      if (seasonCallout) {
+        const titleEl = seasonCallout.querySelector(".season-title");
+        const msgEl = seasonCallout.querySelector(".season-message");
 
         const sabbatTitles = {
-          yule: "Yule • Longest Night, Brightest Flame",
-          imbolc: "Imbolc • First Sparks of Spring",
-          ostara: "Ostara • Dawn of Balance",
-          beltane: "Beltane • Festival of Fire",
-          litha: "Litha • Zenith of the Sun",
-          lughnasadh: "Lughnasadh • First Harvest",
-          mabon: "Mabon • Second Harvest",
-          samhain: "Samhain • Veil at Its Thinnest"
+          yule: "Yule Flames in the Dark",
+          imbolc: "Imbolc Candles & Quiet Embers",
+          ostara: "Ostara’s First Light",
+          beltane: "Beltane Bonfire Feast",
+          litha: "Litha at High Noon",
+          lughnasadh: "Lughnasadh Harvest Fires",
+          mabon: "Mabon Harvest Balance",
+          samhain: "Samhain in the Underworld",
+          none: "Seasonal Offerings from the Deep"
         };
 
-        const sabbatSpecials = {
-          yule: "Winter Solstice Pearls & Cerberus Hot Chocolate",
-          imbolc: "Winter Solstice Pearls & Cerberus Hot Chocolate",
-          ostara: "Night Pearls of Persephone (Base Spell)",
-          beltane: "Summer Fire Pearls & Obsidian Cold Brew",
-          litha: "Summer Fire Pearls & Obsidian Cold Brew",
-          lughnasadh: "Summer Fire Pearls & Obsidian Cold Brew",
-          mabon: "Winter Solstice Pearls & Night Pearls of Persephone",
-          samhain: "Winter Solstice Pearls & Cerberus Hot Chocolate"
+        const sabbatMessages = {
+          winter: "Seek Winter Solstice Night Pearls and rich Cerberus Hot Chocolate when the air bites back.",
+          spring: "Look for Spring Dawn Pearls of Persephone and lighter elixirs as the realms thaw.",
+          summer: "Summer Fire Pearls and Obsidian Cold Brew answer when the nights stay hot.",
+          autumn: "Autumn Veil Pearls and Cerberus Hot Chocolate keep mortals warm as the veil thins."
         };
 
-        seasonTitleEl.textContent = sabbatTitles[sabbat] || "Wheel of the Year";
+        titleEl.textContent = sabbatTitles[sabbat] || sabbatTitles.none;
+        msgEl.textContent = sabbatMessages[seasonGroup] || "Ask the Hound of Hades which seasonal spell is active tonight.";
+      }
+    })();
 
-        seasonMessage.innerHTML = `
-          ✶ Current phase: <strong>${sabbat.charAt(0).toUpperCase() + sabbat.slice(1)}</strong><br>
-          Seasonal specials calling from the Underworld:<br>
-          <strong>${sabbatSpecials[sabbat] || "Ask the Hound what’s brewing."}</strong>
-        `;
+    // year + loader + header
+    window.addEventListener('load', function () {
+      var yearSpan = document.getElementById('year');
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+      document.body.classList.add('loaded');
+      var header = document.querySelector('.hb-header');
+      if (header) {
+        header.classList.add('revealed');
+      }
+    });
 
-        // Night Pearls variants visibility
-        const dessertEls = document.querySelectorAll("[data-dessert-variant]");
-        const allowedByVariant = {
-          base: ['yule','imbolc','ostara','beltane','litha','lughnasadh','mabon','samhain'],
-          winter: ['yule','imbolc','mabon','samhain'],
-          summer: ['beltane','litha','lughnasadh']
-        };
+    // shrink header on scroll
+    window.addEventListener('scroll', function () {
+      const header = document.querySelector('.hb-header');
+      if (!header) return;
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    });
 
-        dessertEls.forEach((el) => {
-          const variant = el.getAttribute("data-dessert-variant");
-          const allowed = allowedByVariant[variant] || [];
-          const show = allowed.includes(sabbat);
-          el.style.display = show ? "" : "none";
-        });
+    // Secret menu hover / tap logic
+    (function () {
+      const star = document.getElementById('secretStar');
+      const secret = document.getElementById('secretMenu');
+      if (!star || !secret) return;
 
-        // Seasonal drinks visibility
-        const drinkEls = document.querySelectorAll("[data-seasonal-drink]");
-        drinkEls.forEach((el) => {
-          const key = el.getAttribute("data-seasonal-drink");
-          let allowed = [];
-          if (key === "obsidian-cold-brew") {
-            allowed = ['beltane','litha','lughnasadh'];
-          } else if (key === "cerberus-hot-chocolate") {
-            allowed = ['samhain','yule','imbolc'];
-          }
-          const show = allowed.includes(sabbat);
-          el.style.display = show ? "" : "none";
-        });
-      })();
-    </script>
-  </footer>
+      let hideTimeout;
+
+      function showSecret() {
+        clearTimeout(hideTimeout);
+        secret.classList.add('visible');
+        star.classList.add('active');
+        secret.setAttribute('aria-hidden', 'false');
+      }
+
+      function scheduleHide() {
+        hideTimeout = setTimeout(function () {
+          secret.classList.remove('visible');
+          star.classList.remove('active');
+          secret.setAttribute('aria-hidden', 'true');
+        }, 200);
+      }
+
+      // Hover support (desktop)
+      star.addEventListener('mouseenter', showSecret);
+      star.addEventListener('mouseleave', scheduleHide);
+      secret.addEventListener('mouseenter', showSecret);
+      secret.addEventListener('mouseleave', scheduleHide);
+
+      // Tap/click support (mobile)
+      star.addEventListener('click', function (e) {
+        e.preventDefault();
+        const visible = secret.classList.toggle('visible');
+        star.classList.toggle('active', visible);
+        secret.setAttribute('aria-hidden', String(!visible));
+      });
+    })();
+  </script>
 </body>
 </html>
