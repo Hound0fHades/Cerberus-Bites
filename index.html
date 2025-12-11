@@ -4,11 +4,10 @@
   <meta charset="UTF-8">
   <title>Cerberus Bites | Feast in the Underworld</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Cerberus Bites — an underworld-themed food truck serving wicked sliders, infernal mac, underworld feasts, and elixirs. Feast in the Underworld.">
+  <meta name="description" content="Cerberus Bites — an underworld-themed food truck guarded by the three-headed hound of Hades, serving wicked sliders, infernal mac, underworld feasts, and elixirs. Feast in the Underworld.">
   <link rel="canonical" href="https://hound0fhades.github.io/Hades-Wicked-Bites">
   <style>
     :root {
-      /* Base (between sabbats) infernal theme */
       --bg: #050308;
       --bg-alt: #0c050b;
       --accent: #ca3400;
@@ -18,7 +17,6 @@
       --muted: #b3a9c0;
       --border: #312033;
     }
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -26,7 +24,7 @@
     }
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, var(--bg-alt) 0, var(--bg) 55%, #020107 100%);
+      background: radial-gradient(circle at top, #1b0710 0, #050308 55%, #020107 100%);
       color: var(--text);
       line-height: 1.6;
       transition: background 0.4s ease, color 0.4s ease;
@@ -38,7 +36,7 @@
     .loader-overlay {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at top, var(--bg-alt) 0, var(--bg) 55%, #020107 100%);
+      background: radial-gradient(circle at top, #2b0915 0, #050308 55%, #020107 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -66,7 +64,7 @@
       font-size: 1.1rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      background: radial-gradient(circle, var(--accent) 0, var(--bg) 65%);
+      background: radial-gradient(circle, #ca3400 0, #050308 65%);
       color: #fdf3e0;
       box-shadow: 0 0 22px rgba(202,52,0,0.8);
       animation: loaderPulse 1.6s ease-in-out infinite;
@@ -99,7 +97,7 @@
 
     /* Coming Soon Banner with flicker */
     .coming-soon-banner {
-      background: linear-gradient(to right, var(--accent-soft), var(--accent), var(--accent-soft));
+      background: linear-gradient(to right, #7e0f1d, #ca3400, #7e0f1d);
       padding: 0.6rem 1rem;
       text-align: center;
       color: #f5e6dc;
@@ -266,7 +264,7 @@
       height: 2px;
       width: 0;
       border-radius: 999px;
-      background: linear-gradient(to right, var(--gold), var(--accent), var(--accent-soft));
+      background: linear-gradient(to right, #f5c97a, #ca3400, #7e0f1d);
       box-shadow: 0 0 10px rgba(202,52,0,0.8);
       opacity: 0;
       transition:
@@ -424,14 +422,14 @@
       border-radius: 24px;
       border: 1px solid rgba(245,201,122,0.3);
       padding: 1px;
-      background: radial-gradient(circle at top, rgba(202,52,0,0.8), var(--bg));
+      background: radial-gradient(circle at top, rgba(202,52,0,0.8), #050308);
       box-shadow:
         0 0 32px rgba(202,52,0,0.45),
         0 0 80px rgba(0,0,0,0.9);
     }
     .hero-art-inner {
       border-radius: 22px;
-      background: radial-gradient(circle at bottom, var(--bg) 0, #140308 40%, var(--bg) 100%);
+      background: radial-gradient(circle at bottom, #050308 0, #140308 40%, #050308 100%);
       padding: 1.3rem;
       display: flex;
       flex-direction: column;
@@ -754,7 +752,7 @@
       border-radius: 20px;
       border: 1px solid rgba(245,201,122,0.25);
       padding: 1rem;
-      background: radial-gradient(circle at top, rgba(202,52,0,0.7), var(--bg));
+      background: radial-gradient(circle at top, rgba(202,52,0,0.7), #050308);
       font-size: 0.8rem;
     }
     .menu-art h4 {
@@ -777,9 +775,54 @@
     /* About */
     .about-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
       gap: 2rem;
+      align-items: flex-start;
     }
+
+    .about-crest {
+      border-radius: 18px;
+      border: 1px solid rgba(245,201,122,0.25);
+      padding: 1.2rem 1.3rem;
+      background: radial-gradient(circle at top, rgba(10,6,18,0.95), rgba(5,3,8,0.98));
+      text-align: center;
+      box-shadow: 0 0 22px rgba(0,0,0,0.9);
+    }
+
+    .about-crest-logo {
+      max-width: 220px;
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto 0.8rem;
+      filter: drop-shadow(0 0 16px rgba(202,52,0,0.85));
+    }
+
+    .about-crest-title {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.75rem;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+
+    .about-crest-text {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.7;
+      font-family: "Georgia", "Times New Roman", serif;
+    }
+
+    .about-crest-text strong {
+      color: var(--gold);
+    }
+
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
     .about-box {
       border-radius: 18px;
       border: 1px solid rgba(245,201,122,0.25);
@@ -811,46 +854,12 @@
       padding: 0.9rem 1rem;
       font-size: 0.8rem;
       color: var(--muted);
-    }
-
-    /* New: right-side column & crest card */
-    .about-side {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .about-crest {
-      border-radius: 18px;
-      border: 1px solid rgba(245,201,122,0.25);
-      padding: 1.1rem 1.2rem;
-      background: radial-gradient(circle at top, rgba(5,3,8,0.95), rgba(24,16,32,0.98));
-      text-align: center;
-      box-shadow: 0 0 24px rgba(0,0,0,0.9);
-    }
-    .about-crest img {
-      max-width: 180px;
-      width: 100%;
-      height: auto;
-      display: block;
-      margin: 0 auto 0.75rem;
-      filter: drop-shadow(0 0 18px rgba(245,201,122,0.7));
-    }
-    .about-crest-title {
-      font-family: "Georgia", "Times New Roman", serif;
-      font-size: 0.95rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.4rem;
-    }
-    .about-crest-text {
-      font-size: 0.8rem;
-      color: var(--muted);
+      background: radial-gradient(circle at bottom right, rgba(126,15,29,0.4), rgba(5,3,8,0.96));
     }
 
     /* Contact / Summon */
     .contact {
-      background: radial-gradient(circle at top, #15020b, var(--bg));
+      background: radial-gradient(circle at top, #15020b, #050308);
     }
     .summon-grid {
       display: grid;
@@ -863,7 +872,7 @@
       border-radius: 20px;
       border: 1px solid rgba(245,201,122,0.25);
       padding: 1.3rem 1.4rem;
-      background: radial-gradient(circle at top, rgba(202,52,0,0.7), var(--bg));
+      background: radial-gradient(circle at top, rgba(202,52,0,0.7), #050308);
       box-shadow: 0 0 24px rgba(0,0,0,0.9);
       font-size: 0.85rem;
       color: var(--muted);
@@ -879,7 +888,7 @@
       margin-top: 0.6rem;
       border-radius: 14px;
       overflow: hidden;
-      background: var(--bg);
+      background: #050308;
       border: 1px solid rgba(245,201,122,0.3);
       height: 460px;
     }
@@ -947,15 +956,6 @@
       gap: 0.8rem;
     }
 
-    /* Tiny debug line */
-    .debug-line {
-      margin-top: 0.35rem;
-      font-size: 0.65rem;
-      color: var(--muted);
-      opacity: 0.35;
-      text-align: right;
-    }
-
     @media (max-width: 840px) {
       .hero-grid,
       .menu-grid,
@@ -978,11 +978,8 @@
       .calendar-wrap {
         height: 380px;
       }
-      .about-side {
-        gap: 1rem;
-      }
-      .debug-line {
-        text-align: left;
+      .about-crest {
+        text-align: center;
       }
     }
   </style>
@@ -1014,7 +1011,7 @@
 
         <div class="nav-center">
           <a href="#top" class="nav-logo-link">
-            <!-- Make sure this file name & path matches your actual logo -->
+            <!-- Big Cerberus logo for header -->
             <img src="CerberusLogo2.png" alt="Cerberus Bites Logo" class="logo-img">
           </a>
           <div class="nav-brand-text">
@@ -1036,14 +1033,15 @@
       <div class="container">
         <div class="hero-grid">
           <div>
-            <div class="hero-eyebrow">Underworld food truck • roaming realm of mortals</div>
+            <div class="hero-eyebrow">Underworld food truck • realm guarded by Cerberus</div>
             <h1 class="hero-title">
               <span>Cerberus Bites</span><br>
               Eat wickedly. Feast in the Underworld.
             </h1>
             <p class="hero-subtitle">
-              An infernal food truck serving sliders, infernal mac, bites, bowls, combos, and underworld elixirs.
-              Dark, witchy, family-friendly, and allergy-aware — welcome to the Underworld Kitchen.
+              An infernal food truck serving sliders, infernal mac, bites, bowls, combos, and underworld elixirs —
+              all under the watchful gaze of the three-headed hound of Hades. Dark, mythic, family-friendly, and
+              allergy-aware — welcome to the Underworld Kitchen.
             </p>
             <div class="hero-tags">
               <div class="tag">Sliders</div>
@@ -1305,25 +1303,6 @@
 
                 <div class="menu-item">
                   <div class="menu-item-name">
-                    Night Pearls of Persephone
-                    <span
-                      class="seasonal-icon"
-                      aria-hidden="true"
-                      data-tooltip="Rotating Seasonal Flavors"
-                    >✶</span>
-                  </div>
-                  <div class="menu-item-desc">
-                    Dark-chocolate–dipped pomegranate jewels in a rotating seasonal hex:
-                    <span id="pearlsVariantLabel">Base Spell</span>.
-                  </div>
-                  <div class="menu-badges">
-                    <div class="badge">Seasonal</div>
-                    <div class="badge">Vegan-friendly option</div>
-                  </div>
-                </div>
-
-                <div class="menu-item">
-                  <div class="menu-item-name">
                     Underworld Churros
                   </div>
                   <div class="menu-item-desc">
@@ -1470,25 +1449,38 @@
         </div>
 
         <div class="about-grid">
-          <!-- Left column: founder lore -->
-          <div class="about-box">
-            <span class="about-label">The Infernal Founder</span>
-            <p>
-              Cerberus Bites is helmed by <strong>The Hound of Hades</strong> —
-              guardian of flavor, keeper of the ember flame, and alchemist of wicked comfort food.
+          <!-- Crest + Creed Column -->
+          <div class="about-crest">
+            <img src="CerberusLogo2.png" alt="Cerberus Bites Crest Logo" class="about-crest-logo">
+            <div class="about-crest-title">Official Crest of Cerberus Bites</div>
+            <p class="about-crest-text">
+              <strong>We are the guardians of souls who enter this realm.</strong><br>
+              I watch the flames.<br>
+              I guard the bites.<br>
+              I guide the hungry.<br>
+              We are the eternal watchdog of hunger and flame —<br>
+              and if we don’t approve it, it doesn’t leave the kitchen.
             </p>
-            <p style="margin-top:0.5rem;">
-              With a love for myth, witchy aesthetics, fantasy worlds, and soul-warming food, the Underworld Kitchen balances
-              <strong>dark, immersive storytelling</strong> with <strong>real-world accessibility</strong>:
-              kid-friendly options, allergy-aware offerings, and flexible heat levels for every mortal.
-            </p>
-            <div class="about-quote">
-              “Everyone deserves a little magic with their meal — whether they walk in darkness or in daylight.”
-            </div>
           </div>
 
-          <!-- Right column: values + big crest logo -->
-          <div class="about-side">
+          <!-- Lore Content Column -->
+          <div class="about-content">
+            <div class="about-box">
+              <span class="about-label">The Infernal Founder</span>
+              <p>
+                Cerberus Bites is helmed by <strong>The Hound of Hades</strong> —
+                guardian of flavor, keeper of the ember flame, and alchemist of wicked comfort food.
+              </p>
+              <p style="margin-top:0.5rem;">
+                With a love for witchy aesthetics, Greek myth, and soul-warming food, the Underworld Kitchen balances
+                <strong>dark, immersive storytelling</strong> with <strong>real-world accessibility</strong>:
+                kid-friendly options, allergy-aware offerings, and flexible heat levels for every mortal.
+              </p>
+              <div class="about-quote">
+                “Everyone deserves a little magic with their meal — whether they walk in darkness or in daylight.”
+              </div>
+            </div>
+
             <div class="about-highlight">
               <span class="about-label">What the Underworld Stands For</span>
               <p>
@@ -1499,15 +1491,6 @@
               </p>
               <p style="margin-top:0.4rem;">
                 ✶ <strong>Story-driven, heart-led food.</strong> Every dish, name, and visual is part of a living mythology built to be fun, immersive, and unforgettable.
-              </p>
-            </div>
-
-            <div class="about-crest">
-              <img src="CerberusLogo2.png" alt="Cerberus Bites Crest">
-              <div class="about-crest-title">Official Crest of Cerberus Bites</div>
-              <p class="about-crest-text">
-                Three-headed guardian of the Underworld Kitchen, watching over every slider, mac, bite, and Night Pearl of Persephone
-                that leaves the window.
               </p>
             </div>
           </div>
@@ -1589,12 +1572,8 @@
           <span>Feast in the Underworld.</span>
         </div>
       </div>
-      <!-- Tiny debug line (quietly tells you what the script thinks is active) -->
-      <div id="debugLine" class="debug-line" aria-hidden="true"></div>
     </div>
-
     <script>
-      // Loader + header reveal
       window.addEventListener('load', function () {
         // year
         var yearSpan = document.getElementById('year');
@@ -1655,223 +1634,43 @@
         });
       })();
 
-      // Pagan holiday theme + seasonal callout + Night Pearls rotation + tiny debug line
+      // Seasonal callout logic (simple)
       (function () {
-        const root = document.documentElement;
-
-        const baseTheme = {
-          bg: '#050308',
-          bgAlt: '#0c050b',
-          accent: '#ca3400',
-          accentSoft: '#7e0f1d',
-          gold: '#f5c97a',
-          text: '#f4f2f6',
-          muted: '#b3a9c0',
-          border: '#312033'
-        };
-
-        const sabbatThemes = {
-          Imbolc: {
-            bg: '#05040a',
-            bgAlt: '#111827',
-            accent: '#e5e7eb',
-            accentSoft: '#fde68a',
-            gold: '#f9f5d7',
-            text: '#f9fafb',
-            muted: '#cbd5f5',
-            border: '#374151'
-          },
-          Ostara: {
-            bg: '#040711',
-            bgAlt: '#064e3b',
-            accent: '#34d399',
-            accentSoft: '#a7f3d0',
-            gold: '#fef3c7',
-            text: '#ecfdf5',
-            muted: '#a7f3d0',
-            border: '#065f46'
-          },
-          Beltane: {
-            bg: '#110308',
-            bgAlt: '#3f0f1f',
-            accent: '#f97316',
-            accentSoft: '#fbbf24',
-            gold: '#fef3c7',
-            text: '#fefce8',
-            muted: '#fed7aa',
-            border: '#7c2d12'
-          },
-          Litha: {
-            bg: '#020617',
-            bgAlt: '#1e293b',
-            accent: '#facc15',
-            accentSoft: '#fbbf24',
-            gold: '#fef9c3',
-            text: '#fefce8',
-            muted: '#e5e7eb',
-            border: '#334155'
-          },
-          Lughnasadh: {
-            bg: '#0b0503',
-            bgAlt: '#422006',
-            accent: '#ea580c',
-            accentSoft: '#f97316',
-            gold: '#facc15',
-            text: '#fef9c3',
-            muted: '#fed7aa',
-            border: '#713f12'
-          },
-          Mabon: {
-            bg: '#030712',
-            bgAlt: '#1e1b4b',
-            accent: '#a855f7',
-            accentSoft: '#6366f1',
-            gold: '#fbbf24',
-            text: '#f9fafb',
-            muted: '#c4b5fd',
-            border: '#3730a3'
-          },
-          Samhain: {
-            bg: '#02010a',
-            bgAlt: '#111827',
-            accent: '#f97316',
-            accentSoft: '#7e0f1d',
-            gold: '#facc15',
-            text: '#f9fafb',
-            muted: '#9ca3af',
-            border: '#312e81'
-          },
-          Yule: {
-            bg: '#020617',
-            bgAlt: '#082f49',
-            accent: '#164e63',
-            accentSoft: '#047857',
-            gold: '#facc15',
-            text: '#e5f2ff',
-            muted: '#93c5fd',
-            border: '#0f172a'
-          }
-        };
-
-        function applyTheme(theme) {
-          root.style.setProperty('--bg', theme.bg);
-          root.style.setProperty('--bg-alt', theme.bgAlt);
-          root.style.setProperty('--accent', theme.accent);
-          root.style.setProperty('--accent-soft', theme.accentSoft);
-          root.style.setProperty('--gold', theme.gold);
-          root.style.setProperty('--text', theme.text);
-          root.style.setProperty('--muted', theme.muted);
-          root.style.setProperty('--border', theme.border);
-        }
-
-        // Start with base theme (between sabbats)
-        applyTheme(baseTheme);
-
         const now = new Date();
-        const month = now.getMonth() + 1; // 1–12
-        const day = now.getDate();
-        const mmdd = month * 100 + day;
+        const month = now.getMonth(); // 0 = Jan
 
-        let activeSabbat = null;
-
-        // Simple sabbat windows (inclusive)
-        if (mmdd >= 201 && mmdd <= 202) {
-          activeSabbat = 'Imbolc';
-        } else if (mmdd >= 319 && mmdd <= 322) {
-          activeSabbat = 'Ostara';
-        } else if (mmdd >= 430 && mmdd <= 501) {
-          activeSabbat = 'Beltane';
-        } else if (mmdd >= 620 && mmdd <= 623) {
-          activeSabbat = 'Litha';
-        } else if (mmdd >= 801 && mmdd <= 802) {
-          activeSabbat = 'Lughnasadh';
-        } else if (mmdd >= 921 && mmdd <= 923) {
-          activeSabbat = 'Mabon';
-        } else if (mmdd === 1031 || mmdd === 1101) {
-          activeSabbat = 'Samhain';
-        } else if (mmdd >= 1220 && mmdd <= 1223) {
-          activeSabbat = 'Yule';
-        }
-
-        if (activeSabbat && sabbatThemes[activeSabbat]) {
-          applyTheme(sabbatThemes[activeSabbat]);
-        }
-
-        // Seasonal callout logic + rotating titles
         const seasonCallout = document.getElementById("seasonCallout");
         const seasonMessage = seasonCallout ? seasonCallout.querySelector(".season-message") : null;
         const seasonTitleEl = seasonCallout ? seasonCallout.querySelector(".season-title") : null;
 
-        let currentSeason = 'Unknown';
+        if (!seasonCallout || !seasonMessage || !seasonTitleEl) return;
 
-        if (month === 12 || month === 1 || month === 2) {
-          currentSeason = 'Winter';
-        } else if (month >= 3 && month <= 5) {
-          currentSeason = 'Spring';
-        } else if (month >= 6 && month <= 8) {
-          currentSeason = 'Summer';
+        const seasonTitles = [
+          "🔥 Seasonal Flames Active 🔥",
+          "Seasonal Offerings from the Deep",
+          "The Season Hungers…"
+        ];
+
+        const randomIndex = Math.floor(Math.random() * seasonTitles.length);
+        seasonTitleEl.textContent = seasonTitles[randomIndex];
+
+        let seasonContent = "";
+
+        if (month >= 5 && month <= 8) {
+          // JUNE — SEPT (Summer)
+          seasonContent = `☀️ <strong>Summer in Tartarus</strong><br>
+            Try our Obsidian Cold Brew while the fires burn hottest.`;
+        } else if (month === 10 || month === 11 || month === 0 || month === 1) {
+          // OCT — JAN (Fall/Winter)
+          seasonContent = `🍁 <strong>Winter in the Underworld</strong><br>
+            Warm yourself with Cerberus Hot Chocolate — three heads, triple cocoa fury.`;
         } else {
-          currentSeason = 'Autumn';
+          // Spring / in-between
+          seasonContent = `✨ <strong>Soul-Stirring Transition</strong><br>
+            Limited availability — ask the Hound of Hades what’s brewing.`;
         }
 
-        if (seasonCallout && seasonMessage && seasonTitleEl) {
-          const seasonTitles = [
-            "🔥 Seasonal Flames Active 🔥",
-            "Seasonal Offerings from the Deep",
-            "The Season Hungers…"
-          ];
-          const randomIndex = Math.floor(Math.random() * seasonTitles.length);
-          seasonTitleEl.textContent = seasonTitles[randomIndex];
-
-          let seasonContent = "";
-
-          if (currentSeason === 'Winter') {
-            seasonContent = `🍁 <strong>Winter in the Underworld</strong><br>
-              Warm yourself with Cerberus Hot Chocolate and our Winter Solstice Night Pearls of Persephone.`;
-          } else if (currentSeason === 'Summer') {
-            seasonContent = `☀️ <strong>Summer in Tartarus</strong><br>
-              Cool off with Obsidian Cold Brew and Summer Fire Night Pearls of Persephone.`;
-          } else if (currentSeason === 'Spring') {
-            seasonContent = `✨ <strong>Spring Thaw</strong><br>
-              Ask the Hound of Hades about Spring Thaw Night Pearls and lighter elixirs.`;
-          } else {
-            seasonContent = `🕯️ <strong>Autumn Veil</strong><br>
-              Richer elixirs and Autumn Veil Night Pearls drift onto the menu — supplies may be limited.`;
-          }
-
-          // If a sabbat is active, mention it in the callout without changing the base text
-          if (activeSabbat) {
-            seasonContent += `<br><br><em>Current sabbat: ${activeSabbat}.</em>`;
-          }
-
-          seasonMessage.innerHTML = seasonContent;
-        }
-
-        // Night Pearls flavor rotation by season
-        const pearlsLabel = document.getElementById("pearlsVariantLabel");
-        if (pearlsLabel) {
-          let labelText = "Base Spell";
-
-          if (currentSeason === 'Winter') {
-            labelText = "Winter Solstice Pearls";
-          } else if (currentSeason === 'Spring') {
-            labelText = "Spring Thaw Pearls";
-          } else if (currentSeason === 'Summer') {
-            labelText = "Summer Fire Pearls";
-          } else {
-            labelText = "Autumn Veil Pearls";
-          }
-
-          pearlsLabel.textContent = labelText;
-        }
-
-        // Tiny debug line in footer for you
-        const debugEl = document.getElementById('debugLine');
-        if (debugEl) {
-          const isoDate = now.toISOString().slice(0, 10);
-          debugEl.textContent =
-            `Debug • Season: ${currentSeason} • Sabbat: ${activeSabbat || 'None'} • Date: ${isoDate}`;
-        }
+        seasonMessage.innerHTML = seasonContent;
       })();
     </script>
   </footer>
