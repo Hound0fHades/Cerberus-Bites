@@ -818,7 +818,7 @@
     }
 
     .about-crest-text strong {
-      font-weight: 600; /* keep emphasis but no longer gold */
+      font-weight: 600; /* emphasis, not gold */
     }
 
     .about-content {
@@ -1056,7 +1056,6 @@
             </div>
             <div class="hero-actions">
               <a href="#menu" class="btn btn-primary">View the Menu</a>
-              <a href="#contact" class="btn btn-ghost">Summon for Events</a>
               <div class="hero-note">
                 GF / DF / vegan-friendly paths through the Underworld are available.
               </div>
@@ -1412,7 +1411,7 @@
                       class="seasonal-icon"
                       aria-hidden="true"
                       data-tooltip="Fall & Winter Seasonal"
-                    >🍁</span>
+                    >🍁❄️</span>
                   </div>
                   <div class="menu-item-desc">
                     Rich, three-headed hot chocolate with layers of dark, milk, and white cocoa,
@@ -1668,7 +1667,6 @@
         const now = new Date();
         const month = now.getMonth(); // 0 = Jan
 
-        // --- Determine season ---
         // Spring: Mar–May (2–4)
         // Summer: Jun–Aug (5–7)
         // Fall:   Sep–Nov (8–10)
@@ -1684,7 +1682,6 @@
           season = "winter";
         }
 
-        // --- Seasonal callout content ---
         const seasonCallout = document.getElementById("seasonCallout");
         const seasonMessage = seasonCallout ? seasonCallout.querySelector(".season-message") : null;
         const seasonTitleEl = seasonCallout ? seasonCallout.querySelector(".season-title") : null;
@@ -1703,7 +1700,7 @@
             seasonContent = `☀️ <strong>Summer in Tartarus</strong><br>
               Obsidian Cold Brew flows freely, and Summer Fire Pearls of Persephone crackle with gentle heat.`;
           } else if (season === "fall" || season === "winter") {
-            seasonContent = `🍁 <strong>Winter in the Underworld</strong><br>
+            seasonContent = `🍁❄️ <strong>Winter in the Underworld</strong><br>
               Warm your soul with Cerberus Hot Chocolate and Winter Solstice Pearls of Persephone.`;
           } else {
             seasonContent = `✨ <strong>Soul-Stirring Transition</strong><br>
@@ -1712,7 +1709,7 @@
           seasonMessage.innerHTML = seasonContent;
         }
 
-        // --- Night Pearls seasonal flavor line ---
+        // Night Pearls seasonal flavor line
         const pearlsSeasonLine = document.getElementById("pearlsSeasonLine");
         if (pearlsSeasonLine) {
           let line = "";
@@ -1728,7 +1725,7 @@
           pearlsSeasonLine.textContent = line;
         }
 
-        // --- Show/hide seasonal drinks based on season ---
+        // Show/hide seasonal drinks based on season
         const coldBrewItem = document.getElementById("obsidianColdBrew");
         const hotChocItem = document.getElementById("cerberusHotChocolate");
 
