@@ -6,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Cerberus Bites — an underworld-themed food truck guarded by the three-headed hound of Hades, serving wicked sliders, infernal mac, underworld feasts, and elixirs. Feast in the Underworld.">
   <link rel="canonical" href="https://hound0fhades.github.io/Hades-Wicked-Bites">
+
   <style>
     :root {
+      /* Base (IN-BETWEEN SABBATS) theme — do not change */
       --bg: #050308;
       --bg-alt: #0c050b;
       --accent: #ca3400;
@@ -16,19 +18,24 @@
       --text: #f4f2f6;
       --muted: #b3a9c0;
       --border: #312033;
+
+      /* Holiday helpers (optional, used by JS) */
+      --banner-a: var(--accent-soft);
+      --banner-b: var(--accent);
+      --hero-top: #1b0710;
+      --loader-top: #2b0915;
     }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #1b0710 0, #050308 55%, #020107 100%);
+      background: radial-gradient(circle at top, var(--hero-top) 0, var(--bg) 55%, #020107 100%);
       color: var(--text);
       line-height: 1.6;
       transition: background 0.4s ease, color 0.4s ease;
     }
+
     a { color: var(--gold); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
@@ -36,7 +43,7 @@
     .loader-overlay {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at top, #2b0915 0, #050308 55%, #020107 100%);
+      background: radial-gradient(circle at top, var(--loader-top) 0, var(--bg) 55%, #020107 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -64,7 +71,7 @@
       font-size: 1.1rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      background: radial-gradient(circle, #ca3400 0, #050308 65%);
+      background: radial-gradient(circle, var(--accent) 0, var(--bg) 65%);
       color: #fdf3e0;
       box-shadow: 0 0 22px rgba(202,52,0,0.8);
       animation: loaderPulse 1.6s ease-in-out infinite;
@@ -97,7 +104,7 @@
 
     /* Coming Soon Banner with flicker */
     .coming-soon-banner {
-      background: linear-gradient(to right, #7e0f1d, #ca3400, #7e0f1d);
+      background: linear-gradient(to right, var(--banner-a), var(--banner-b), var(--banner-a));
       padding: 0.6rem 1rem;
       text-align: center;
       color: #f5e6dc;
@@ -105,7 +112,7 @@
       font-size: 0.9rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      box-shadow: 0 0 18px rgba(202,52,0,0.7);
+      box-shadow: 0 0 18px rgba(0,0,0,0.35);
       position: relative;
       overflow: hidden;
       animation: flameFlicker 2.4s ease-in-out infinite alternate;
@@ -134,44 +141,26 @@
       }
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 1.25rem;
-    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; }
 
     /* === STICKY HEADER WITH CENTERED CERBERUS LOGO === */
-
     .hb-header {
       position: sticky;
       top: 0;
       z-index: 50;
-      background: linear-gradient(
-        to right,
-        rgba(5, 3, 8, 0.96),
-        rgba(7, 1, 1, 0.96)
-      );
+      background: linear-gradient(to right, rgba(5,3,8,0.96), rgba(7,1,1,0.96));
       border-bottom: 1px solid rgba(245,201,122,0.22);
       backdrop-filter: blur(10px);
-      box-shadow:
-        0 0 18px rgba(0,0,0,0.9),
-        inset 0 -1px 0 rgba(202,52,0,0.3);
+      box-shadow: 0 0 18px rgba(0,0,0,0.9), inset 0 -1px 0 rgba(202,52,0,0.3);
       transform: translateY(-18px);
       opacity: 0;
       transition:
         transform 0.55s cubic-bezier(0.22,0.9,0.35,1.1),
         opacity 0.55s ease;
     }
-
-    .hb-header.revealed {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
+    .hb-header.revealed { transform: translateY(0); opacity: 1; }
     .hb-header.scrolled {
-      box-shadow:
-        0 0 26px rgba(0,0,0,1),
-        0 0 30px rgba(202,52,0,0.55);
+      box-shadow: 0 0 26px rgba(0,0,0,1), 0 0 30px rgba(202,52,0,0.55);
     }
 
     .nav {
@@ -183,48 +172,22 @@
       font-size: 0.95rem;
     }
 
-    .nav-center {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      text-align: center;
-    }
-
-    .nav-logo-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    .nav-center { display: flex; align-items: center; gap: 0.6rem; text-align: center; }
+    .nav-logo-link { display: flex; align-items: center; justify-content: center; }
 
     .logo-img {
       height: 90px;
       width: auto;
       display: block;
       filter: drop-shadow(0 0 12px rgba(202,52,0,0.8));
-      transition:
-        height 0.25s ease,
-        transform 0.25s ease,
-        filter 0.25s ease;
+      transition: height 0.25s ease, transform 0.25s ease, filter 0.25s ease;
     }
-
-    .hb-header.scrolled .logo-img {
-      height: 68px;
-      filter: drop-shadow(0 0 8px rgba(202,52,0,0.7));
-    }
-
-    .logo-img:hover {
-      animation: logoFlame 1s ease-in-out infinite alternate;
-    }
+    .hb-header.scrolled .logo-img { height: 68px; filter: drop-shadow(0 0 8px rgba(202,52,0,0.7)); }
+    .logo-img:hover { animation: logoFlame 1s ease-in-out infinite alternate; }
 
     @keyframes logoFlame {
-      0% {
-        transform: translateY(0) scale(1);
-        filter: drop-shadow(0 0 10px rgba(202,52,0,0.8));
-      }
-      100% {
-        transform: translateY(-1px) scale(1.03);
-        filter: drop-shadow(0 0 18px rgba(202,52,0,1));
-      }
+      0% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 10px rgba(202,52,0,0.8)); }
+      100% { transform: translateY(-1px) scale(1.03); filter: drop-shadow(0 0 18px rgba(202,52,0,1)); }
     }
 
     .nav-brand-text .brand-name {
@@ -233,7 +196,6 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
-
     .nav-brand-text .brand-subtitle {
       font-size: 0.7rem;
       letter-spacing: 0.16em;
@@ -241,12 +203,7 @@
       color: var(--muted);
     }
 
-    .nav-links-left {
-      display: flex;
-      gap: 1.4rem;
-      font-size: 0.85rem;
-    }
-
+    .nav-links-left { display: flex; gap: 1.4rem; font-size: 0.85rem; }
     .nav-links-left a {
       position: relative;
       text-transform: uppercase;
@@ -255,7 +212,6 @@
       padding-bottom: 0.15rem;
       transition: color 0.2s ease;
     }
-
     .nav-links-left a::after {
       content: "";
       position: absolute;
@@ -264,27 +220,14 @@
       height: 2px;
       width: 0;
       border-radius: 999px;
-      background: linear-gradient(to right, #f5c97a, #ca3400, #7e0f1d);
-      box-shadow: 0 0 10px rgba(202,52,0,0.8);
+      background: linear-gradient(to right, var(--gold), var(--accent), var(--accent-soft));
+      box-shadow: 0 0 10px rgba(0,0,0,0.55);
       opacity: 0;
-      transition:
-        width 0.22s ease,
-        opacity 0.22s ease;
+      transition: width 0.22s ease, opacity 0.22s ease;
     }
-
-    .nav-links-left a:hover {
-      color: var(--gold);
-    }
-
-    .nav-links-left a:hover::after {
-      width: 100%;
-      opacity: 1;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-    }
+    .nav-links-left a:hover { color: var(--gold); }
+    .nav-links-left a:hover::after { width: 100%; opacity: 1; }
+    .nav-right { display: flex; align-items: center; }
 
     .nav-cta {
       border-radius: 999px;
@@ -297,15 +240,12 @@
         radial-gradient(circle at top left, rgba(202,52,0,0.9), transparent),
         radial-gradient(circle at bottom right, rgba(126,15,29,0.9), rgba(5,3,8,0.95));
       color: #fff;
-      box-shadow:
-        0 0 16px rgba(202,52,0,0.9),
-        0 0 4px rgba(245,201,122,0.8);
+      box-shadow: 0 0 16px rgba(202,52,0,0.9), 0 0 4px rgba(245,201,122,0.8);
       cursor: pointer;
       position: relative;
       overflow: hidden;
       white-space: nowrap;
     }
-
     .nav-cta::after {
       content: "";
       position: absolute;
@@ -315,25 +255,13 @@
       transition: transform 0.35s ease-out;
       pointer-events: none;
     }
+    .nav-cta:hover::after { transform: translateX(120%); }
+    .nav-cta:hover { box-shadow: 0 0 22px rgba(202,52,0,1), 0 0 10px rgba(245,201,122,0.9); }
 
-    .nav-cta:hover::after {
-      transform: translateX(120%);
-    }
-
-    .nav-cta:hover {
-      box-shadow:
-        0 0 22px rgba(202,52,0,1),
-        0 0 10px rgba(245,201,122,0.9);
-    }
-
-    main {
-      padding-bottom: 4rem;
-    }
+    main { padding-bottom: 4rem; }
 
     /* Hero */
-    .hero {
-      padding: 3.5rem 0 3rem;
-    }
+    .hero { padding: 3.5rem 0 3rem; }
     .hero-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
@@ -355,21 +283,14 @@
       margin-bottom: 1rem;
       text-shadow: 0 0 18px rgba(0,0,0,0.8);
     }
-    .hero-title span {
-      color: var(--accent);
-    }
+    .hero-title span { color: var(--accent); }
     .hero-subtitle {
       color: var(--muted);
       font-size: 0.95rem;
       max-width: 32rem;
       margin-bottom: 1.4rem;
     }
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1.6rem;
-    }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.6rem; }
     .tag {
       border-radius: 999px;
       border: 1px solid rgba(245,201,122,0.3);
@@ -378,13 +299,9 @@
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: var(--gold);
+      background: rgba(5,3,8,0.25);
     }
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
     .btn {
       display: inline-flex;
       align-items: center;
@@ -401,35 +318,27 @@
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), var(--accent-soft));
       color: #fff;
-      box-shadow: 0 0 18px rgba(202,52,0,0.7);
+      box-shadow: 0 0 18px rgba(0,0,0,0.35);
     }
-    .btn-primary:hover {
-      filter: brightness(1.05);
-    }
+    .btn-primary:hover { filter: brightness(1.05); }
     .btn-ghost {
       border-color: rgba(245,201,122,0.5);
       color: var(--gold);
       background: rgba(5,3,8,0.6);
     }
-    .btn-ghost:hover {
-      background: rgba(245,201,122,0.08);
-    }
-    .hero-note {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
+    .btn-ghost:hover { background: rgba(245,201,122,0.08); }
+    .hero-note { font-size: 0.8rem; color: var(--muted); }
+
     .hero-art {
       border-radius: 24px;
       border: 1px solid rgba(245,201,122,0.3);
       padding: 1px;
-      background: radial-gradient(circle at top, rgba(202,52,0,0.8), #050308);
-      box-shadow:
-        0 0 32px rgba(202,52,0,0.45),
-        0 0 80px rgba(0,0,0,0.9);
+      background: radial-gradient(circle at top, rgba(202,52,0,0.8), var(--bg));
+      box-shadow: 0 0 32px rgba(0,0,0,0.35), 0 0 80px rgba(0,0,0,0.9);
     }
     .hero-art-inner {
       border-radius: 22px;
-      background: radial-gradient(circle at bottom, #050308 0, #140308 40%, #050308 100%);
+      background: radial-gradient(circle at bottom, var(--bg) 0, rgba(20,3,8,0.9) 40%, var(--bg) 100%);
       padding: 1.3rem;
       display: flex;
       flex-direction: column;
@@ -441,12 +350,7 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
     }
-    .hero-art-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.75rem;
-      font-size: 0.8rem;
-    }
+    .hero-art-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; font-size: 0.8rem; }
     .hero-card {
       border-radius: 16px;
       border: 1px solid rgba(245,201,122,0.25);
@@ -460,19 +364,10 @@
       color: var(--gold);
       margin-bottom: 0.2rem;
     }
-    .hero-card p {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
+    .hero-card p { font-size: 0.78rem; color: var(--muted); }
 
-    section {
-      padding: 2.5rem 0;
-      border-top: 1px solid rgba(245,201,122,0.12);
-    }
-    .section-header {
-      margin-bottom: 1.5rem;
-      text-align: left;
-    }
+    section { padding: 2.5rem 0; border-top: 1px solid rgba(245,201,122,0.12); }
+    .section-header { margin-bottom: 1.5rem; text-align: left; }
     .section-eyebrow {
       text-transform: uppercase;
       letter-spacing: 0.28em;
@@ -480,24 +375,13 @@
       color: var(--gold);
       margin-bottom: 0.2rem;
     }
-
-    .section-title-row {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
+    .section-title-row { display: flex; align-items: center; gap: 0.6rem; }
     .section-title {
       font-family: "Georgia", "Times New Roman", serif;
       font-size: 1.4rem;
       margin-bottom: 0.3rem;
     }
-
-    .section-subtitle {
-      font-size: 0.88rem;
-      color: var(--muted);
-      max-width: 32rem;
-    }
+    .section-subtitle { font-size: 0.88rem; color: var(--muted); max-width: 32rem; }
 
     /* Seasonal specials callout */
     .season-callout {
@@ -510,35 +394,22 @@
       box-shadow: 0 0 18px rgba(0,0,0,0.6);
       animation: calloutFade 0.7s ease-out both;
     }
-
     .season-title {
       color: var(--gold);
       text-transform: uppercase;
       font-size: 0.88rem;
       letter-spacing: 0.16em;
     }
-
-    .season-message {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-top: 0.25rem;
-    }
+    .season-message { font-size: 0.82rem; color: var(--muted); margin-top: 0.25rem; }
 
     @keyframes calloutFade {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Secret star (hover hotspot) */
+    /* Secret star */
     .secret-star {
-      width: 18px;
-      height: 18px;
+      width: 18px; height: 18px;
       border-radius: 999px;
       border: 1px solid rgba(245,201,122,0.55);
       display: inline-flex;
@@ -551,20 +422,10 @@
       box-shadow: 0 0 6px rgba(245,201,122,0.4);
       transition: opacity 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
       background: radial-gradient(circle at top, rgba(245,201,122,0.2), transparent 60%);
-      border-style: solid;
     }
-    .secret-star span {
-      transform: translateY(-0.5px);
-    }
-    .secret-star:hover {
-      opacity: 0.9;
-      transform: scale(1.05);
-      box-shadow: 0 0 10px rgba(245,201,122,0.8);
-    }
-    .secret-star.active {
-      opacity: 1;
-      box-shadow: 0 0 12px rgba(245,201,122,1), 0 0 20px rgba(202,52,0,0.9);
-    }
+    .secret-star span { transform: translateY(-0.5px); }
+    .secret-star:hover { opacity: 0.9; transform: scale(1.05); box-shadow: 0 0 10px rgba(245,201,122,0.8); }
+    .secret-star.active { opacity: 1; box-shadow: 0 0 12px rgba(245,201,122,1), 0 0 20px rgba(0,0,0,0.55); }
 
     /* Secret menu panel */
     .secret-menu {
@@ -590,14 +451,8 @@
       opacity: 0.7;
       pointer-events: none;
     }
-    .secret-menu-inner {
-      position: relative;
-      z-index: 1;
-    }
-    .secret-menu.visible {
-      display: block;
-      animation: fadeInUp 0.38s ease forwards;
-    }
+    .secret-menu-inner { position: relative; z-index: 1; }
+    .secret-menu.visible { display: block; animation: fadeInUp 0.38s ease forwards; }
     .secret-menu-label {
       text-transform: uppercase;
       letter-spacing: 0.22em;
@@ -610,28 +465,20 @@
       font-size: 1rem;
       margin-bottom: 0.3rem;
     }
-    .secret-menu-desc {
-      color: var(--muted);
-      margin-bottom: 0.5rem;
-    }
-    .secret-menu-meta {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-    .secret-price {
-      color: var(--gold);
-      font-weight: 600;
-    }
+    .secret-menu-desc { color: var(--muted); margin-bottom: 0.5rem; }
+    .secret-menu-meta { font-size: 0.78rem; color: var(--muted); }
+    .secret-price { color: var(--gold); font-weight: 600; }
     .secret-badge {
       display: inline-block;
       margin-left: 0.4rem;
       padding: 0.05rem 0.45rem;
       border-radius: 999px;
-      border: 1px solid rgba(202,52,0,0.7);
+      border: 1px solid rgba(0,0,0,0.0);
       font-size: 0.68rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: #f5e6dc;
+      background: rgba(0,0,0,0.25);
     }
 
     @keyframes fadeInUp {
@@ -639,15 +486,8 @@
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    /* Seasonal icon with hover tooltip */
-    .seasonal-icon {
-      display: inline-block;
-      margin-left: 0.3rem;
-      font-size: 0.85rem;
-      position: relative;
-      cursor: default;
-    }
-
+    /* Seasonal icon tooltip */
+    .seasonal-icon { display: inline-block; margin-left: 0.3rem; font-size: 0.85rem; position: relative; cursor: default; }
     .seasonal-icon::after {
       content: attr(data-tooltip);
       position: absolute;
@@ -669,15 +509,13 @@
       transition: opacity 0.2s ease;
       z-index: 5;
     }
-
     .seasonal-icon::before {
       content: "";
       position: absolute;
       left: 50%;
       bottom: 118%;
       transform: translateX(-50%) rotate(45deg);
-      width: 8px;
-      height: 8px;
+      width: 8px; height: 8px;
       background: rgba(5,3,8,0.96);
       border-left: 1px solid rgba(245,201,122,0.6);
       border-bottom: 1px solid rgba(245,201,122,0.6);
@@ -685,23 +523,12 @@
       transition: opacity 0.2s ease;
       z-index: 4;
     }
-
     .seasonal-icon:hover::after,
-    .seasonal-icon:hover::before {
-      opacity: 1;
-    }
+    .seasonal-icon:hover::before { opacity: 1; }
 
     /* Menu */
-    .menu-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 2rem;
-    }
-    .menu-columns {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
-    }
+    .menu-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 2rem; }
+    .menu-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
     .menu-group-title {
       text-transform: uppercase;
       letter-spacing: 0.22em;
@@ -709,40 +536,13 @@
       color: var(--gold);
       margin-bottom: 0.4rem;
     }
-    .menu-item {
-      padding: 0.55rem 0;
-      border-bottom: 1px dashed rgba(245,201,122,0.25);
-    }
-    .menu-item:last-child {
-      border-bottom: none;
-    }
-    .menu-item-name {
-      font-size: 0.9rem;
-      display: flex;
-      justify-content: space-between;
-      gap: 0.4rem;
-    }
-    .menu-item-name span {
-      color: var(--gold);
-      font-size: 0.8rem;
-      opacity: 0.9;
-    }
-    .menu-item-desc {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-top: 0.1rem;
-    }
-    .menu-item-subline {
-      display: block;
-      margin-top: 0.15rem;
-    }
-    .menu-badges {
-      margin-top: 0.25rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.25rem;
-      font-size: 0.7rem;
-    }
+    .menu-item { padding: 0.55rem 0; border-bottom: 1px dashed rgba(245,201,122,0.25); }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item-name { font-size: 0.9rem; display: flex; justify-content: space-between; gap: 0.4rem; }
+    .menu-item-name span { color: var(--gold); font-size: 0.8rem; opacity: 0.9; }
+    .menu-item-desc { font-size: 0.8rem; color: var(--muted); margin-top: 0.1rem; }
+    .menu-item-subline { display: block; margin-top: 0.15rem; }
+    .menu-badges { margin-top: 0.25rem; display: flex; flex-wrap: wrap; gap: 0.25rem; font-size: 0.7rem; }
     .badge {
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.12);
@@ -750,13 +550,14 @@
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: var(--muted);
+      background: rgba(0,0,0,0.18);
     }
 
     .menu-art {
       border-radius: 20px;
       border: 1px solid rgba(245,201,122,0.25);
       padding: 1rem;
-      background: radial-gradient(circle at top, rgba(202,52,0,0.7), #050308);
+      background: radial-gradient(circle at top, rgba(202,52,0,0.7), var(--bg));
       font-size: 0.8rem;
     }
     .menu-art h4 {
@@ -766,9 +567,7 @@
       color: var(--gold);
       margin-bottom: 0.5rem;
     }
-    .menu-art p {
-      color: var(--muted);
-    }
+    .menu-art p { color: var(--muted); }
     .menu-spell {
       font-family: "Georgia", "Times New Roman", serif;
       font-style: italic;
@@ -794,7 +593,7 @@
     }
 
     .about-crest-logo {
-      max-width: 220px;
+      max-width: 260px;
       width: 100%;
       height: auto;
       display: block;
@@ -817,15 +616,9 @@
       font-family: "Georgia", "Times New Roman", serif;
     }
 
-    .about-crest-text strong {
-      font-weight: 600; /* emphasis, not gold */
-    }
+    .about-crest-text strong { font-weight: 600; }
 
-    .about-content {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
+    .about-content { display: flex; flex-direction: column; gap: 1.2rem; }
 
     .about-box {
       border-radius: 18px;
@@ -835,9 +628,7 @@
       font-size: 0.9rem;
       color: var(--muted);
     }
-    .about-box strong {
-      color: var(--gold);
-    }
+    .about-box strong { color: var(--gold); }
     .about-label {
       text-transform: uppercase;
       letter-spacing: 0.22em;
@@ -861,22 +652,19 @@
       background: radial-gradient(circle at bottom right, rgba(126,15,29,0.4), rgba(5,3,8,0.96));
     }
 
-    /* Contact / Summon */
-    .contact {
-      background: radial-gradient(circle at top, #15020b, #050308);
-    }
+    /* Contact */
+    .contact { background: radial-gradient(circle at top, #15020b, var(--bg)); }
     .summon-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
       gap: 2rem;
     }
 
-    /* Calendar panel */
     .summon-calendar {
       border-radius: 20px;
       border: 1px solid rgba(245,201,122,0.25);
       padding: 1.3rem 1.4rem;
-      background: radial-gradient(circle at top, rgba(202,52,0,0.7), #050308);
+      background: radial-gradient(circle at top, rgba(202,52,0,0.7), var(--bg));
       box-shadow: 0 0 24px rgba(0,0,0,0.9);
       font-size: 0.85rem;
       color: var(--muted);
@@ -892,17 +680,12 @@
       margin-top: 0.6rem;
       border-radius: 14px;
       overflow: hidden;
-      background: #050308;
+      background: var(--bg);
       border: 1px solid rgba(245,201,122,0.3);
       height: 460px;
     }
-    .calendar-wrap iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
+    .calendar-wrap iframe { width: 100%; height: 100%; border: 0; }
 
-    /* Simple contact card (email-only inquiries) */
     .contact-card {
       border-radius: 20px;
       border: 1px solid rgba(245,201,122,0.25);
@@ -919,27 +702,11 @@
       color: var(--gold);
       margin-bottom: 0.4rem;
     }
-    .contact-card p {
-      margin-bottom: 0.6rem;
-    }
-    .contact-card-list {
-      list-style: none;
-      padding-left: 0;
-      margin: 0.3rem 0 0.6rem;
-    }
-    .contact-card-list li {
-      margin-bottom: 0.25rem;
-    }
-    .contact-card-list li::before {
-      content: "✶";
-      color: var(--accent);
-      margin-right: 0.35rem;
-    }
-    .contact-note {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-top: 0.3rem;
-    }
+    .contact-card p { margin-bottom: 0.6rem; }
+    .contact-card-list { list-style: none; padding-left: 0; margin: 0.3rem 0 0.6rem; }
+    .contact-card-list li { margin-bottom: 0.25rem; }
+    .contact-card-list li::before { content: "✶"; color: var(--accent); margin-right: 0.35rem; }
+    .contact-note { font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem; }
 
     footer {
       border-top: 1px solid rgba(245,201,122,0.18);
@@ -954,42 +721,21 @@
       align-items: center;
       justify-content: space-between;
     }
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-    }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 0.8rem; }
 
     @media (max-width: 840px) {
-      .hero-grid,
-      .menu-grid,
-      .about-grid,
-      .summon-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .nav-links-left {
-        display: none;
-      }
-      .nav {
-        justify-content: space-between;
-      }
-      .logo-img {
-        height: 80px;
-      }
-      .hb-header.scrolled .logo-img {
-        height: 62px;
-      }
-      .calendar-wrap {
-        height: 380px;
-      }
-      .about-crest {
-        text-align: center;
-      }
+      .hero-grid, .menu-grid, .about-grid, .summon-grid { grid-template-columns: minmax(0, 1fr); }
+      .nav-links-left { display: none; }
+      .nav { justify-content: space-between; }
+      .logo-img { height: 80px; }
+      .hb-header.scrolled .logo-img { height: 62px; }
+      .calendar-wrap { height: 380px; }
+      .about-crest { text-align: center; }
     }
   </style>
 </head>
-<body>
 
+<body>
   <!-- Loading overlay -->
   <div class="loader-overlay">
     <div class="loader-inner">
@@ -1015,7 +761,6 @@
 
         <div class="nav-center">
           <a href="#top" class="nav-logo-link">
-            <!-- Big Cerberus logo for header -->
             <img src="CerberusLogo2.png" alt="Cerberus Bites Logo" class="logo-img">
           </a>
           <div class="nav-brand-text">
@@ -1097,16 +842,12 @@
           <div class="section-eyebrow">The Wicked Feast</div>
           <div class="section-title-row">
             <h2 class="section-title">Underworld Menu</h2>
-            <!-- subtle ghost hotspot star -->
-            <button class="secret-star" id="secretStar" aria-label="Hidden sigil">
-              <span>✶</span>
-            </button>
+            <button class="secret-star" id="secretStar" aria-label="Hidden sigil"><span>✶</span></button>
           </div>
           <p class="section-subtitle">
             Infernal comfort food for mortals of every kind — kids, picky eaters, spice fiends, and those walking gentler paths.
           </p>
 
-          <!-- Seasonal specials callout -->
           <div id="seasonCallout" class="season-callout">
             <strong class="season-title">Seasonal Specials</strong>
             <p class="season-message">Loading seasonal offerings…</p>
@@ -1121,24 +862,16 @@
                 <div class="menu-group-title">Mains</div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    Cerberus Sliders
-                    <span>Signature</span>
-                  </div>
+                  <div class="menu-item-name">Cerberus Sliders <span>Signature</span></div>
                   <div class="menu-item-desc">
                     Three wicked mini burgers with molten cheese, Cerberus seasoning, and Underworld aioli.
                     Also available plain for mortal palates.
                   </div>
-                  <div class="menu-badges">
-                    <div class="badge">Kid-friendly option</div>
-                  </div>
+                  <div class="menu-badges"><div class="badge">Kid-friendly option</div></div>
                 </div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    Acheron Mac
-                    <span>Infernal Mac</span>
-                  </div>
+                  <div class="menu-item-name">Acheron Mac <span>Infernal Mac</span></div>
                   <div class="menu-item-desc">
                     Smoky, creamy mac with ember-seasoned cheese. Choose Mortal (plain), Wicked (medium), or Hellfire (spicy),
                     with optional GF/DF substitutes.
@@ -1150,10 +883,7 @@
                 </div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    Ashen Bites
-                    <span>Chicken or Tofu</span>
-                  </div>
+                  <div class="menu-item-name">Ashen Bites <span>Chicken or Tofu</span></div>
                   <div class="menu-item-desc">
                     Crispy bites of chicken or tofu served plain, with Ember Honey, or drenched in Cerberus Lime Inferno glaze.
                   </div>
@@ -1164,10 +894,7 @@
                 </div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    The Void Bowl
-                    <span>Custom</span>
-                  </div>
+                  <div class="menu-item-name">The Void Bowl <span>Custom</span></div>
                   <div class="menu-item-desc">
                     Rice or cauliflower base with charred veggies and your choice of chicken, pork, tofu, or full-veggie.
                     Sauce intensity from “Mortal” to “Infernal”.
@@ -1180,51 +907,33 @@
                 </div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    Minotaur Nachos
-                    <span>Shareable</span>
-                  </div>
+                  <div class="menu-item-name">Minotaur Nachos <span>Shareable</span></div>
                   <div class="menu-item-desc">
                     Black or classic chips loaded with ember cheese, protein of choice, and optional Hellfire drizzle.
                   </div>
-                  <div class="menu-badges">
-                    <div class="badge">GF chips option</div>
-                  </div>
+                  <div class="menu-badges"><div class="badge">GF chips option</div></div>
                 </div>
 
                 <div class="menu-group-title" style="margin-top:0.9rem;">Combos & Feasts</div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    Cerberus Trio Combo
-                    <span>Combo</span>
-                  </div>
+                  <div class="menu-item-name">Cerberus Trio Combo <span>Combo</span></div>
                   <div class="menu-item-desc">
                     Three Cerberus Sliders (or Mortal-style plain), Cinder or Mortal Fries, and one Underworld Elixir.
                   </div>
-                  <div class="menu-badges">
-                    <div class="badge">Best-seller</div>
-                  </div>
+                  <div class="menu-badges"><div class="badge">Best-seller</div></div>
                 </div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    Underworld Feast for Two
-                    <span>Shareable</span>
-                  </div>
+                  <div class="menu-item-name">Underworld Feast for Two <span>Shareable</span></div>
                   <div class="menu-item-desc">
                     Mix of sliders, Ashen Bites, a shared side, and two elixirs. Built for couples, covens, or best fiends.
                   </div>
-                  <div class="menu-badges">
-                    <div class="badge">Shareable</div>
-                  </div>
+                  <div class="menu-badges"><div class="badge">Shareable</div></div>
                 </div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    Little Wraith Combo
-                    <span>Kids</span>
-                  </div>
+                  <div class="menu-item-name">Little Wraith Combo <span>Kids</span></div>
                   <div class="menu-item-desc">
                     One plain slider or Ashen Bites, Mortal Fries or fruit cup, and a small elixir or juice.
                   </div>
@@ -1240,21 +949,15 @@
                 <div class="menu-group-title">Kid & Picky Paths</div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    Mortal Slider Meal
-                  </div>
+                  <div class="menu-item-name">Mortal Slider Meal</div>
                   <div class="menu-item-desc">
                     Simple slider with cheese, no spice, served with Mortal Fries and ketchup. Perfect for cautious mortals.
                   </div>
-                  <div class="menu-badges">
-                    <div class="badge">Kid-friendly</div>
-                  </div>
+                  <div class="menu-badges"><div class="badge">Kid-friendly</div></div>
                 </div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    Gentle Ember Bowl
-                  </div>
+                  <div class="menu-item-name">Gentle Ember Bowl</div>
                   <div class="menu-item-desc">
                     Rice or fries topped with plain chicken or tofu, light seasoning only, with sauce on the side.
                   </div>
@@ -1267,10 +970,7 @@
                 <div class="menu-group-title" style="margin-top:0.9rem;">Sides & Sweets</div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    Cinder Fries
-                    <span>or Mortal Fries</span>
-                  </div>
+                  <div class="menu-item-name">Cinder Fries <span>or Mortal Fries</span></div>
                   <div class="menu-item-desc">
                     Ember-spiced or plain fries with Underworld aioli, Cerberus Lime Inferno, or classic dips.
                   </div>
@@ -1281,19 +981,14 @@
                 </div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    Ember Mac Cups
-                    <span>Side</span>
-                  </div>
+                  <div class="menu-item-name">Ember Mac Cups <span>Side</span></div>
                   <div class="menu-item-desc">
                     Single-serve cups of Acheron mac for kids, snackers, or those dabbling lightly in the flames.
                   </div>
                 </div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    Elysian Orchard Fruit Cups
-                  </div>
+                  <div class="menu-item-name">Elysian Orchard Fruit Cups</div>
                   <div class="menu-item-desc">
                     Fresh seasonal fruit gathered from the “Elysian fields” beyond the Underworld. Light, bright, and halo-approved.
                   </div>
@@ -1305,32 +1000,22 @@
                 </div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    Underworld Churros
-                  </div>
-                  <div class="menu-item-desc">
-                    Cinnamon-ash sugar churros with optional flame caramel dip.
-                  </div>
+                  <div class="menu-item-name">Underworld Churros</div>
+                  <div class="menu-item-desc">Cinnamon-ash sugar churros with optional flame caramel dip.</div>
                 </div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    Cerberus Chocolate Skulls
-                  </div>
+                  <div class="menu-item-name">Cerberus Chocolate Skulls</div>
                   <div class="menu-item-desc">
                     Dark chocolate skulls, available in classic or gently spiced for brave souls.
                   </div>
                 </div>
 
-                <!-- Night Pearls of Persephone with rotating seasonal flavor -->
+                <!-- Night Pearls -->
                 <div class="menu-item">
                   <div class="menu-item-name">
                     Night Pearls of Persephone
-                    <span
-                      class="seasonal-icon"
-                      aria-hidden="true"
-                      data-tooltip="Rotating Seasonal Hex"
-                    >🌙</span>
+                    <span class="seasonal-icon" aria-hidden="true" data-tooltip="Rotating Seasonal Hex">🌙</span>
                   </div>
                   <div class="menu-item-desc">
                     Dark chocolate–dipped pomegranate “pearls” born in the Underworld.
@@ -1351,36 +1036,28 @@
                 <div class="menu-group-title" style="margin-top:0.9rem;">Underworld Elixirs (Drinks)</div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    River Styx Soda Flight
-                  </div>
+                  <div class="menu-item-name">River Styx Soda Flight</div>
                   <div class="menu-item-desc">
                     Trio of mini sodas in rotating underworld flavors — perfect for tasting all the rivers at once.
                   </div>
                 </div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    Blood Moon Punch
-                  </div>
+                  <div class="menu-item-name">Blood Moon Punch</div>
                   <div class="menu-item-desc">
                     Deep red citrus-berry punch, available still or lightly sparkling. Non-alcoholic, spooky on purpose.
                   </div>
                 </div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    Lethe Lemon Fizz
-                  </div>
+                  <div class="menu-item-name">Lethe Lemon Fizz</div>
                   <div class="menu-item-desc">
                     Tart lemon-lime fizz with a hint of vanilla. Refreshing enough to forget your mortal worries.
                   </div>
                 </div>
 
                 <div class="menu-item">
-                  <div class="menu-item-name">
-                    Elysian Spring Water
-                  </div>
+                  <div class="menu-item-name">Elysian Spring Water</div>
                   <div class="menu-item-desc">
                     Still or sparkling water from the “upper realms” — for those pacing their journey through the flames.
                   </div>
@@ -1389,29 +1066,19 @@
                 <div class="menu-item" id="obsidianColdBrew">
                   <div class="menu-item-name">
                     Obsidian Cold Brew
-                    <span
-                      class="seasonal-icon"
-                      aria-hidden="true"
-                      data-tooltip="Summer Seasonal"
-                    >☀️</span>
+                    <span class="seasonal-icon" aria-hidden="true" data-tooltip="Summer Seasonal">☀️</span>
                   </div>
                   <div class="menu-item-desc">
                     Dark roast cold brew over ice, optionally sweetened with ember syrup or oat milk.
                     Brewed in the shadow of Tartarus and served chilled for the hottest nights.
                   </div>
-                  <div class="menu-badges">
-                    <div class="badge">DF option</div>
-                  </div>
+                  <div class="menu-badges"><div class="badge">DF option</div></div>
                 </div>
 
                 <div class="menu-item" id="cerberusHotChocolate">
                   <div class="menu-item-name">
                     Cerberus Hot Chocolate
-                    <span
-                      class="seasonal-icon"
-                      aria-hidden="true"
-                      data-tooltip="Fall & Winter Seasonal"
-                    >🍁❄️</span>
+                    <span class="seasonal-icon" aria-hidden="true" data-tooltip="Fall & Winter Seasonal">🍁❄️</span>
                   </div>
                   <div class="menu-item-desc">
                     Rich, three-headed hot chocolate with layers of dark, milk, and white cocoa,
@@ -1427,7 +1094,6 @@
             </div>
           </div>
 
-          <!-- Spellbook-style panel -->
           <aside class="menu-art">
             <h4>The Spellbook of Hunger</h4>
             <p>
@@ -1447,7 +1113,6 @@
           </aside>
         </div>
 
-        <!-- SECRET MENU: Minotaur’s Challenge Platter ONLY -->
         <div id="secretMenu" class="secret-menu" aria-hidden="true">
           <div class="secret-menu-inner">
             <div class="secret-menu-label">Hidden Runes of the Underworld</div>
@@ -1478,7 +1143,6 @@
         </div>
 
         <div class="about-grid">
-          <!-- Crest + Creed Column -->
           <div class="about-crest">
             <img src="CerberusLogo2.png" alt="Cerberus Bites Crest Logo" class="about-crest-logo">
             <div class="about-crest-title">Official Crest of Cerberus Bites</div>
@@ -1491,7 +1155,6 @@
             </p>
           </div>
 
-          <!-- Lore Content Column -->
           <div class="about-content">
             <div class="about-box">
               <span class="about-label">The Infernal Founder</span>
@@ -1526,7 +1189,7 @@
       </div>
     </section>
 
-    <!-- Contact / Summon -->
+    <!-- Contact -->
     <section id="contact" class="contact">
       <div class="container">
         <div class="section-header">
@@ -1538,14 +1201,12 @@
         </div>
 
         <div class="summon-grid">
-          <!-- Calendar -->
           <div class="summon-calendar">
             <h4>Claim Your Date in the Underworld</h4>
             <p class="form-helper">
               Choose your time directly on the calendar. Once confirmed, you’ll receive an email from our booking system.
             </p>
             <div class="calendar-wrap">
-              <!-- Setmore booking URL -->
               <iframe
                 src="https://CerberusBites.setmore.com"
                 loading="lazy"
@@ -1556,7 +1217,6 @@
             </div>
           </div>
 
-          <!-- Simple contact card (email-only inquiries) -->
           <aside class="contact-card">
             <div class="contact-card-title">General Inquiries</div>
             <p>
@@ -1564,25 +1224,13 @@
               send a message through one of these gates to the Underworld:
             </p>
             <ul class="contact-card-list">
-              <li>
-                <strong>Email:</strong>
-                <a href="mailto:cerberusbites@hotmail.com">cerberusbites@hotmail.com</a>
-              </li>
-              <li>
-                <strong>Phone:</strong>
-                <a href="tel:15409448898">540-944-8898</a>
-              </li>
-              <li>
-                <strong>Instagram:</strong>
-                <a href="https://www.instagram.com/cerberus_bites" target="_blank">@cerberus_bites</a>
-              </li>
-              <li>
-                <strong>TikTok:</strong>
-                <a href="https://www.tiktok.com/@cerberusbites" target="_blank">@cerberusbites</a>
-              </li>
+              <li><strong>Email:</strong> <a href="mailto:cerberusbites@hotmail.com">cerberusbites@hotmail.com</a></li>
+              <li><strong>Phone:</strong> <a href="tel:15409448898">540-944-8898</a></li>
+              <li><strong>Instagram:</strong> <a href="https://www.instagram.com/cerberus_bites" target="_blank">@cerberus_bites</a></li>
+              <li><strong>TikTok:</strong> <a href="https://www.tiktok.com/@cerberusbites" target="_blank">@cerberusbites</a></li>
             </ul>
             <p class="contact-note">
-              Bookings live on the calendar so your date is properly claimed in the Underworld.  
+              Bookings live on the calendar so your date is properly claimed in the Underworld.
               Messages here are for conversation, not reservations.
             </p>
           </aside>
@@ -1600,22 +1248,31 @@
           <span>Feast in the Underworld.</span>
         </div>
       </div>
+
+      <!-- Tiny debug line -->
+      <div id="themeDebug" style="margin-top:0.5rem; font-size:0.72rem; opacity:0.75;">
+        Theme: loading…
+      </div>
     </div>
+
     <script>
+      // Prevent loader getting stuck
       window.addEventListener('load', function () {
-        // year
         var yearSpan = document.getElementById('year');
-        if (yearSpan) {
-          yearSpan.textContent = new Date().getFullYear();
-        }
-        // hide loader
+        if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
         document.body.classList.add('loaded');
-        // reveal header
+
         var header = document.querySelector('.hb-header');
-        if (header) {
-          header.classList.add('revealed');
-        }
+        if (header) header.classList.add('revealed');
       });
+
+      // Safety fallback: if load event doesn't fire (rare), hide loader after 4s
+      setTimeout(function () {
+        document.body.classList.add('loaded');
+        var header = document.querySelector('.hb-header');
+        if (header) header.classList.add('revealed');
+      }, 4000);
 
       // shrink header on scroll
       window.addEventListener('scroll', function () {
@@ -1662,6 +1319,198 @@
         });
       })();
 
+      // ===== Pagan Holiday Theme (Wheel of the Year) =====
+      (function applyPaganHolidayTheme() {
+        const root = document.documentElement;
+        const debugEl = document.getElementById("themeDebug");
+
+        // Base (IN-BETWEEN SABBATS) theme — keep exactly as you requested
+        const baseTheme = {
+          bg: "#050308",
+          bgAlt: "#0c050b",
+          accent: "#ca3400",
+          accentSoft: "#7e0f1d",
+          gold: "#f5c97a",
+          text: "#f4f2f6",
+          muted: "#b3a9c0",
+          border: "#312033",
+          bannerA: "#7e0f1d",
+          bannerB: "#ca3400",
+          heroTop: "#1b0710",
+          loaderTop: "#2b0915"
+        };
+
+        // Holiday palettes (only active during sabbat windows)
+        const themes = {
+          yule: {
+            bg: "#05040a",
+            bgAlt: "#060b10",
+            accent: "#1f6f4a",
+            accentSoft: "#0e3a2b",
+            gold: "#f5c97a",
+            text: "#f4f2f6",
+            muted: "#b3a9c0",
+            border: "#1f2a2c",
+            bannerA: "#0e3a2b",
+            bannerB: "#1f6f4a",
+            heroTop: "#061014",
+            loaderTop: "#0b1a1d"
+          },
+          imbolc: {
+            bg: "#07060b",
+            bgAlt: "#0f0c14",
+            accent: "#e8e2ff",
+            accentSoft: "#b7a7ff",
+            gold: "#f5c97a",
+            text: "#f4f2f6",
+            muted: "#b3a9c0",
+            border: "#2a2436",
+            bannerA: "#b7a7ff",
+            bannerB: "#e8e2ff",
+            heroTop: "#14112a",
+            loaderTop: "#19153a"
+          },
+          ostara: {
+            bg: "#05070a",
+            bgAlt: "#0a1110",
+            accent: "#2bb673",
+            accentSoft: "#ff78b6",
+            gold: "#f5c97a",
+            text: "#f4f2f6",
+            muted: "#b3a9c0",
+            border: "#213032",
+            bannerA: "#ff78b6",
+            bannerB: "#2bb673",
+            heroTop: "#0a1b14",
+            loaderTop: "#12261b"
+          },
+          beltane: {
+            bg: "#06020a",
+            bgAlt: "#120312",
+            accent: "#ff2d6d",
+            accentSoft: "#ffb000",
+            gold: "#f5c97a",
+            text: "#f4f2f6",
+            muted: "#b3a9c0",
+            border: "#341c2b",
+            bannerA: "#ff2d6d",
+            bannerB: "#ffb000",
+            heroTop: "#1b0616",
+            loaderTop: "#25081e"
+          },
+          litha: {
+            bg: "#050308",
+            bgAlt: "#0d0702",
+            accent: "#ff7a00",
+            accentSoft: "#ffd000",
+            gold: "#f5c97a",
+            text: "#f4f2f6",
+            muted: "#b3a9c0",
+            border: "#3a220d",
+            bannerA: "#ff7a00",
+            bannerB: "#ffd000",
+            heroTop: "#1a0800",
+            loaderTop: "#2a0e00"
+          },
+          lughnasadh: {
+            bg: "#070405",
+            bgAlt: "#120a06",
+            accent: "#d28a00",
+            accentSoft: "#8b1e00",
+            gold: "#f5c97a",
+            text: "#f4f2f6",
+            muted: "#b3a9c0",
+            border: "#3a2416",
+            bannerA: "#8b1e00",
+            bannerB: "#d28a00",
+            heroTop: "#190c05",
+            loaderTop: "#251107"
+          },
+          mabon: {
+            bg: "#060408",
+            bgAlt: "#12060b",
+            accent: "#b14a00",
+            accentSoft: "#2f6b3d",
+            gold: "#f5c97a",
+            text: "#f4f2f6",
+            muted: "#b3a9c0",
+            border: "#3a2026",
+            bannerA: "#2f6b3d",
+            bannerB: "#b14a00",
+            heroTop: "#18070c",
+            loaderTop: "#250b12"
+          },
+          samhain: {
+            bg: "#04010a",
+            bgAlt: "#0a0211",
+            accent: "#7b2cff",
+            accentSoft: "#1b0b2b",
+            gold: "#f5c97a",
+            text: "#f4f2f6",
+            muted: "#b3a9c0",
+            border: "#2b163a",
+            bannerA: "#1b0b2b",
+            bannerB: "#7b2cff",
+            heroTop: "#090017",
+            loaderTop: "#0f0024"
+          }
+        };
+
+        function inWindow(now, monthIndex, day, windowDays) {
+          const y = now.getFullYear();
+          const center = new Date(y, monthIndex, day);
+          const start = new Date(center); start.setDate(center.getDate() - windowDays);
+          const end = new Date(center);   end.setDate(center.getDate() + windowDays);
+
+          // year wrap support
+          if (end < start) return (now >= start || now <= end);
+          return (now >= start && now <= end);
+        }
+
+        function getSabbatKey(now) {
+          const w = 7;
+
+          // Yule: Dec 21 (plus early Jan overlap)
+          if (inWindow(now, 11, 21, w) || inWindow(now, 0, 1, w)) return "yule";
+          if (inWindow(now, 1, 1, w)) return "imbolc";
+          if (inWindow(now, 2, 20, w)) return "ostara";
+          if (inWindow(now, 4, 1, w)) return "beltane";
+          if (inWindow(now, 5, 21, w)) return "litha";
+          if (inWindow(now, 7, 1, w)) return "lughnasadh";
+          if (inWindow(now, 8, 21, w)) return "mabon";
+          if (inWindow(now, 9, 31, w)) return "samhain";
+
+          return "base";
+        }
+
+        function setVars(t) {
+          root.style.setProperty("--bg", t.bg);
+          root.style.setProperty("--bg-alt", t.bgAlt);
+          root.style.setProperty("--accent", t.accent);
+          root.style.setProperty("--accent-soft", t.accentSoft);
+          root.style.setProperty("--gold", t.gold);
+          root.style.setProperty("--text", t.text);
+          root.style.setProperty("--muted", t.muted);
+          root.style.setProperty("--border", t.border);
+
+          root.style.setProperty("--banner-a", t.bannerA);
+          root.style.setProperty("--banner-b", t.bannerB);
+          root.style.setProperty("--hero-top", t.heroTop);
+          root.style.setProperty("--loader-top", t.loaderTop);
+        }
+
+        const now = new Date();
+        const sabbat = getSabbatKey(now);
+        const chosen = (sabbat === "base") ? baseTheme : (themes[sabbat] || baseTheme);
+
+        setVars(chosen);
+
+        if (debugEl) {
+          const label = sabbat === "base" ? "In-between Sabbats (Base)" : sabbat.toUpperCase();
+          debugEl.textContent = `Theme: ${label} • ${now.toLocaleDateString()} • ${now.toLocaleTimeString()}`;
+        }
+      })();
+
       // Seasonal callout + rotating Night Pearls flavor + drink visibility
       (function () {
         const now = new Date();
@@ -1672,15 +1521,10 @@
         // Fall:   Sep–Nov (8–10)
         // Winter: Dec–Feb (11,0,1)
         let season;
-        if (month >= 2 && month <= 4) {
-          season = "spring";
-        } else if (month >= 5 && month <= 7) {
-          season = "summer";
-        } else if (month >= 8 && month <= 10) {
-          season = "fall";
-        } else {
-          season = "winter";
-        }
+        if (month >= 2 && month <= 4) season = "spring";
+        else if (month >= 5 && month <= 7) season = "summer";
+        else if (month >= 8 && month <= 10) season = "fall";
+        else season = "winter";
 
         const seasonCallout = document.getElementById("seasonCallout");
         const seasonMessage = seasonCallout ? seasonCallout.querySelector(".season-message") : null;
@@ -1692,8 +1536,7 @@
             "Seasonal Offerings from the Deep",
             "The Season Hungers…"
           ];
-          const randomIndex = Math.floor(Math.random() * seasonTitles.length);
-          seasonTitleEl.textContent = seasonTitles[randomIndex];
+          seasonTitleEl.textContent = seasonTitles[Math.floor(Math.random() * seasonTitles.length)];
 
           let seasonContent = "";
           if (season === "summer") {
@@ -1709,7 +1552,6 @@
           seasonMessage.innerHTML = seasonContent;
         }
 
-        // Night Pearls seasonal flavor line
         const pearlsSeasonLine = document.getElementById("pearlsSeasonLine");
         if (pearlsSeasonLine) {
           let line = "";
@@ -1737,7 +1579,6 @@
             coldBrewItem.style.display = "none";
             hotChocItem.style.display = "";
           } else {
-            // Spring / in-between: neither seasonal drink is on the board
             coldBrewItem.style.display = "none";
             hotChocItem.style.display = "none";
           }
