@@ -8,7 +8,6 @@
 
   <style>
     :root{
-      /* BASE (between sabbats) */
       --bg:#050308;
       --bg-alt:#0c050b;
       --accent:#ca3400;
@@ -168,10 +167,15 @@
 
     .nav-center{display:flex;align-items:center;gap:.6rem;text-align:center}
     .nav-logo-link{display:flex;align-items:center;justify-content:center}
+
     .logo-img{
       height:90px;width:auto;display:block;
       filter:drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 80%, transparent));
       transition:height .25s ease, transform .25s ease, filter .25s ease;
+      -webkit-touch-callout:none;
+      -webkit-user-select:none;
+      user-select:none;
+      touch-action:manipulation;
     }
     .hb-header.scrolled .logo-img{height:68px;filter:drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 70%, transparent))}
     .logo-img:hover{animation:logoFlame 1s ease-in-out infinite alternate}
@@ -180,21 +184,12 @@
       100%{transform:translateY(-1px) scale(1.03);filter:drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 100%, transparent))}
     }
 
-    /* Helps long-press / pointer events work on mobile */
-    .nav-logo-link{
-      -webkit-touch-callout:none;
-      -webkit-user-select:none;
-      user-select:none;
-      touch-action:manipulation;
-    }
-
     .nav-brand-text .brand-name{
       font-family:"Georgia","Times New Roman",serif;
       font-size:1.05rem;
       letter-spacing:.1em;
       text-transform:uppercase;
     }
-    .nav-brand-text .brand-subtitle{display:none}
 
     .nav-right{display:flex;align-items:center}
     .nav-cta{
@@ -284,13 +279,11 @@
       color:#fff;
       box-shadow:0 0 18px color-mix(in srgb, var(--accent) 70%, transparent);
     }
-    .btn-primary:hover{filter:brightness(1.05)}
     .btn-ghost{
       border-color:rgba(245,201,122,.5);
       color:var(--gold);
       background:rgba(5,3,8,.6);
     }
-    .btn-ghost:hover{background:rgba(245,201,122,.08)}
     .hero-note{font-size:.8rem;color:var(--muted)}
 
     .hero-art{
@@ -528,9 +521,7 @@
     .footer-row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between}
     .footer-links{display:flex;flex-wrap:wrap;gap:.8rem}
 
-    /* =========================
-       Admin Modal (Hidden)
-       ========================= */
+    /* Admin Modal (Hidden) */
     .admin-modal{
       position:fixed; inset:0;
       display:none;
@@ -576,11 +567,6 @@
       letter-spacing:.16em;
       text-transform:uppercase;
       font-size:.72rem;
-    }
-    .admin-grid{
-      display:grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap:1rem;
     }
     .admin-pin-row{
       display:flex;
@@ -671,10 +657,7 @@
       font-size:1.1rem;
       line-height:1;
     }
-    .admin-step:disabled{
-      opacity:.35;
-      cursor:not-allowed;
-    }
+    .admin-step:disabled{opacity:.35;cursor:not-allowed}
     .admin-pill{
       min-width:52px;
       text-align:center;
@@ -732,7 +715,7 @@
 
         <div class="nav-center">
           <a href="#top" class="nav-logo-link" aria-label="Cerberus Bites Home">
-            <img src="CerberusLogo2.png" alt="Cerberus Bites Logo" class="logo-img">
+            <img src="CerberusLogo2.png" alt="Cerberus Bites Logo" class="logo-img" id="headerLogoImg">
           </a>
           <div class="nav-brand-text">
             <div class="brand-name">Cerberus Bites</div>
@@ -828,7 +811,6 @@
           <div>
             <div class="menu-columns">
 
-              <!-- LEFT COLUMN -->
               <div>
                 <div class="menu-group-title">🥪 Melts</div>
 
@@ -857,7 +839,6 @@
                 </div>
               </div>
 
-              <!-- RIGHT COLUMN -->
               <div>
                 <div class="menu-group-title">🥣 Sides</div>
 
@@ -874,7 +855,6 @@
             </div>
           </div>
 
-          <!-- Spellbook copy (no giveaway text) -->
           <aside class="menu-art">
             <h4>The Spellbook of Sourdough</h4>
             <p>
@@ -889,7 +869,7 @@
           </aside>
         </div>
 
-        <!-- SECRET MENU (no hints elsewhere; only star reveals) -->
+        <!-- Secret menu: no hints elsewhere -->
         <div id="secretMenu" class="secret-menu" aria-hidden="true">
           <div class="secret-menu-inner">
             <div class="secret-menu-label">—</div>
@@ -1000,7 +980,7 @@
     </div>
   </footer>
 
-  <!-- Hidden Admin Modal (opens ONLY by holding logo ~3s) -->
+  <!-- Hidden Admin Modal -->
   <div class="admin-modal" id="adminModal" aria-hidden="true">
     <div class="admin-panel" role="dialog" aria-modal="true" aria-label="Cerberus Admin">
       <div class="admin-top">
@@ -1008,31 +988,29 @@
         <button class="admin-close" id="adminClose" type="button">Close</button>
       </div>
 
-      <div class="admin-grid">
-        <div>
-          <div class="admin-pin-row">
-            <input id="adminPin" type="password" inputmode="numeric" autocomplete="off" placeholder="PIN" aria-label="Enter PIN" />
-            <button class="admin-btn" id="adminUnlock" type="button">Unlock</button>
-            <button class="admin-btn ghost" id="adminLock" type="button">Lock</button>
-          </div>
-          <div class="admin-warn" id="adminWarn">Wrong PIN.</div>
-
-          <div class="admin-controls-wrap" id="adminControls">
-            <div class="admin-actions">
-              <button class="admin-btn ghost" id="adminReset" type="button">Reset counts</button>
-            </div>
-          </div>
-
-          <div class="admin-list" id="adminList"></div>
+      <div>
+        <div class="admin-pin-row">
+          <input id="adminPin" type="password" inputmode="numeric" autocomplete="off" placeholder="PIN" aria-label="Enter PIN" />
+          <button class="admin-btn" id="adminUnlock" type="button">Unlock</button>
+          <button class="admin-btn ghost" id="adminLock" type="button">Lock</button>
         </div>
+        <div class="admin-warn" id="adminWarn">Wrong PIN.</div>
+
+        <div class="admin-controls-wrap" id="adminControls">
+          <div class="admin-actions">
+            <button class="admin-btn ghost" id="adminReset" type="button">Reset counts</button>
+          </div>
+        </div>
+
+        <div class="admin-list" id="adminList"></div>
       </div>
     </div>
   </div>
 
   <script>
-    /* ==========================================================
-       1) Pagan Sabbat Color Shifting (between sabbats = base)
-       ========================================================== */
+    /* =========================
+       Themes
+       ========================= */
     function fmt(d){
       const m=String(d.getMonth()+1).padStart(2,"0");
       const day=String(d.getDate()).padStart(2,"0");
@@ -1107,7 +1085,6 @@
       applyPalette(BASE,"Between Sabbats","Base palette");
     }
 
-    /* Seasonal Shout-Out */
     function setSeasonCallout(){
       const seasonCallout=document.getElementById("seasonCallout");
       const seasonMessage=seasonCallout?seasonCallout.querySelector(".season-message"):null;
@@ -1136,25 +1113,22 @@
       seasonMessage.innerHTML=msg;
     }
 
-    /* Secret menu (tap to toggle; tap outside to close; hover works on desktop) */
+    /* =========================
+       Secret Menu (FIXED)
+       - tap star toggles
+       - tap anywhere else closes (pointerdown works on mobile)
+       ========================= */
     function initSecretMenu(){
       const star=document.getElementById("secretStar");
       const secret=document.getElementById("secretMenu");
       if(!star||!secret) return;
 
-      let autoHideTimer=null;
-
       function show(){
-        clearTimeout(autoHideTimer);
         secret.classList.add("visible");
         star.classList.add("active");
         secret.setAttribute("aria-hidden","false");
-
-        // Optional auto-hide (keeps it from "sticking" on touch devices)
-        autoHideTimer=setTimeout(hide, 6000);
       }
       function hide(){
-        clearTimeout(autoHideTimer);
         secret.classList.remove("visible");
         star.classList.remove("active");
         secret.setAttribute("aria-hidden","true");
@@ -1162,34 +1136,35 @@
       function toggle(e){
         e.preventDefault();
         e.stopPropagation();
-        const isOpen = secret.classList.contains("visible");
-        if(isOpen) hide();
-        else show();
+        secret.classList.contains("visible") ? hide() : show();
       }
 
       star.addEventListener("click", toggle);
 
-      // Tap/click outside closes (fixes "won't hide" on mobile)
-      document.addEventListener("click", (e)=>{
+      // 🔥 The key fix: pointerdown closes on mobile reliably
+      document.addEventListener("pointerdown", (e)=>{
         if(!secret.classList.contains("visible")) return;
-        const clickedInside = secret.contains(e.target) || star.contains(e.target);
-        if(!clickedInside) hide();
+        if(secret.contains(e.target) || star.contains(e.target)) return;
+        hide();
       });
 
-      // Desktop hover behavior
+      // Desktop hover (optional, but keeps your vibe)
+      let hoverTimer=null;
+      const scheduleHide=()=>{
+        clearTimeout(hoverTimer);
+        hoverTimer=setTimeout(()=>{
+          if(!secret.matches(":hover") && !star.matches(":hover")) hide();
+        }, 160);
+      };
       star.addEventListener("mouseenter", show);
-      star.addEventListener("mouseleave", ()=>setTimeout(()=>{
-        if(!secret.matches(":hover") && !star.matches(":hover")) hide();
-      }, 180));
+      star.addEventListener("mouseleave", scheduleHide);
       secret.addEventListener("mouseenter", show);
-      secret.addEventListener("mouseleave", ()=>setTimeout(()=>{
-        if(!secret.matches(":hover") && !star.matches(":hover")) hide();
-      }, 180));
+      secret.addEventListener("mouseleave", scheduleHide);
     }
 
-    /* ==========================================================
-       Sold Out / Almost Gone Tracker (local-only)
-       ========================================================== */
+    /* =========================
+       Inventory Tracker
+       ========================= */
     const TRACKED=[
       { id:"cerberus_melt", name:"Cerberus Melt", warnAt:2, defaultLeft:6 },
       { id:"gatekeeper_turkey", name:"Gatekeeper Turkey", warnAt:2, defaultLeft:6 },
@@ -1218,22 +1193,17 @@
       return "OK";
     }
 
-    /* Staff PIN kept only in JS (not displayed) */
     const STAFF_PIN = "1395";
-    window.CerberusAdmin = {
-      check: (pin)=>String(pin)===STAFF_PIN
-    };
+    window.CerberusAdmin = { check: (pin)=>String(pin)===STAFF_PIN };
 
     window.CerberusInv={
       get: ()=>getState(),
       set: (id,left)=>{ const s=getState(); if(s.items[id]){ s.items[id].left=Math.max(0,Number(left)||0); s.items[id].sold=(s.items[id].left<=0); setState(s);} },
       dec: (id,n=1)=>{ const s=getState(); if(s.items[id]){ s.items[id].left=Math.max(0,s.items[id].left-(Number(n)||1)); s.items[id].sold=(s.items[id].left<=0); setState(s);} },
       inc: (id,n=1)=>{ const s=getState(); if(s.items[id]){ s.items[id].left=s.items[id].left+(Number(n)||1); s.items[id].sold=false; setState(s);} },
-      sold: (id,on=true)=>{ const s=getState(); if(s.items[id]){ s.items[id].sold=!!on; if(on) s.items[id].left=0; setState(s);} },
       reset: ()=>{ localStorage.removeItem(INV_KEY); getState(); }
     };
 
-    /* Ops settings for Next Drop */
     (function(){
       const OPS_KEY="cb_ops_settings_v1";
       const defaults={ nextDrop:"Next batch in ~20 min", nextDropTime:"" };
@@ -1253,7 +1223,6 @@
         return { it, st, status };
       });
 
-      // Mark SOLD OUT on menu items
       list.forEach(x=>{
         const el=document.querySelector(`[data-id="${x.it.id}"]`);
         if(el) el.classList.toggle("is-soldout", x.status==="SOLD OUT");
@@ -1296,12 +1265,14 @@
       }
     }
 
-    /* ==========================================================
-       Hidden Admin: Hold logo ~3 seconds to open PIN modal
-       ========================================================== */
+    /* =========================
+       Admin Hold-to-Open (FIXED)
+       - hold LOGO IMG ~3.2s
+       - normal tap still scrolls to #top
+       ========================= */
     function initHiddenAdminOnLogo(){
-      const headerLogoLink = document.querySelector('.hb-header .nav-logo-link');
-      if(!headerLogoLink) return;
+      const logoImg = document.getElementById("headerLogoImg");
+      if(!logoImg) return;
 
       const modal = document.getElementById("adminModal");
       const closeBtn = document.getElementById("adminClose");
@@ -1313,74 +1284,98 @@
       const controlsWrap = document.getElementById("adminControls");
       const listEl = document.getElementById("adminList");
 
-      const HOLD_MS = 3200; // ~3 seconds
-      let holdTimer = null;
-      let isHolding = false;
+      const HOLD_MS = 3200;
+
+      let holdTimer=null;
+      let openedByHold=false;
+      let downAt=0;
+      let downX=0, downY=0;
 
       function openModal(){
-        if(!modal) return;
+        openedByHold=true;
         modal.classList.add("open");
         modal.setAttribute("aria-hidden","false");
-        if(warn) warn.style.display = "none";
-        if(controlsWrap) controlsWrap.style.display = "none";
+        if(warn) warn.style.display="none";
+        if(controlsWrap) controlsWrap.style.display="none";
         if(pinInput){
-          pinInput.value = "";
-          setTimeout(()=>pinInput.focus(), 60);
+          pinInput.value="";
+          setTimeout(()=>pinInput.focus(), 80);
         }
         renderAdminList(false);
       }
-
       function closeModal(){
-        if(!modal) return;
         modal.classList.remove("open");
         modal.setAttribute("aria-hidden","true");
-        if(warn) warn.style.display = "none";
-        if(controlsWrap) controlsWrap.style.display = "none";
+        if(warn) warn.style.display="none";
+        if(controlsWrap) controlsWrap.style.display="none";
+        openedByHold=false;
       }
 
       function cancelHold(){
-        isHolding = false;
         if(holdTimer) clearTimeout(holdTimer);
-        holdTimer = null;
+        holdTimer=null;
       }
 
       function startHold(e){
-        // prevent link jump while holding
-        e.preventDefault();
-        e.stopPropagation();
-
+        openedByHold=false;
         cancelHold();
-        isHolding = true;
+        downAt=Date.now();
 
-        holdTimer = setTimeout(()=>{
-          isHolding = false;
-          openModal();
-        }, HOLD_MS);
+        if(e.touches && e.touches[0]){
+          downX=e.touches[0].clientX; downY=e.touches[0].clientY;
+        } else {
+          downX=e.clientX || 0; downY=e.clientY || 0;
+        }
+
+        holdTimer=setTimeout(openModal, HOLD_MS);
       }
 
-      // Pointer events = best on mobile + desktop
-      headerLogoLink.addEventListener("pointerdown", startHold);
-      headerLogoLink.addEventListener("pointerup", cancelHold);
-      headerLogoLink.addEventListener("pointercancel", cancelHold);
-      headerLogoLink.addEventListener("pointerleave", cancelHold);
+      function moveHold(e){
+        // cancel if they drag/scroll (prevents accidental opens)
+        let x=0,y=0;
+        if(e.touches && e.touches[0]){
+          x=e.touches[0].clientX; y=e.touches[0].clientY;
+        } else {
+          x=e.clientX || 0; y=e.clientY || 0;
+        }
+        const dx=Math.abs(x-downX), dy=Math.abs(y-downY);
+        if(dx>10 || dy>10) cancelHold();
+      }
 
-      // If they tap quickly, allow normal jump to top
-      headerLogoLink.addEventListener("click", (e)=>{
-        if(holdTimer || isHolding){
+      // Use both pointer + touch + mouse for max compatibility
+      logoImg.addEventListener("pointerdown", startHold);
+      logoImg.addEventListener("pointerup", cancelHold);
+      logoImg.addEventListener("pointercancel", cancelHold);
+      logoImg.addEventListener("pointermove", moveHold);
+      logoImg.addEventListener("pointerleave", cancelHold);
+
+      logoImg.addEventListener("touchstart", startHold, {passive:true});
+      logoImg.addEventListener("touchmove", moveHold, {passive:true});
+      logoImg.addEventListener("touchend", cancelHold);
+      logoImg.addEventListener("touchcancel", cancelHold);
+
+      logoImg.addEventListener("mousedown", startHold);
+      logoImg.addEventListener("mousemove", moveHold);
+      logoImg.addEventListener("mouseup", cancelHold);
+      logoImg.addEventListener("mouseleave", cancelHold);
+
+      // If hold fired, prevent the click from also jumping
+      logoImg.closest("a")?.addEventListener("click", (e)=>{
+        if(openedByHold){
           e.preventDefault();
           e.stopPropagation();
+          openedByHold=false; // reset after blocking once
         }
       });
 
-      if(closeBtn) closeBtn.addEventListener("click", closeModal);
-      if(modal) modal.addEventListener("click", (e)=>{ if(e.target === modal) closeModal(); });
-      window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeModal(); });
+      closeBtn.addEventListener("click", closeModal);
+      modal.addEventListener("click", (e)=>{ if(e.target===modal) closeModal(); });
+      window.addEventListener("keydown", (e)=>{ if(e.key==="Escape") closeModal(); });
 
       function renderAdminList(unlocked){
-        if(!listEl) return;
         listEl.innerHTML = "";
-
         const state = CerberusInv.get();
+
         TRACKED.forEach(it=>{
           const st = state.items[it.id];
           const status = statusFor(st, it.warnAt);
@@ -1435,29 +1430,29 @@
       }
 
       function unlock(){
-        const pin = pinInput ? pinInput.value : "";
+        const pin = pinInput.value;
         if(CerberusAdmin.check(pin)){
-          if(warn) warn.style.display = "none";
-          if(controlsWrap) controlsWrap.style.display = "block";
+          warn.style.display = "none";
+          controlsWrap.style.display = "block";
           renderAdminList(true);
           renderInventory();
         } else {
-          if(warn) warn.style.display = "block";
-          if(controlsWrap) controlsWrap.style.display = "none";
+          warn.style.display = "block";
+          controlsWrap.style.display = "none";
         }
       }
 
-      if(unlockBtn) unlockBtn.addEventListener("click", unlock);
-      if(pinInput) pinInput.addEventListener("keydown", (e)=>{ if(e.key === "Enter") unlock(); });
+      unlockBtn.addEventListener("click", unlock);
+      pinInput.addEventListener("keydown", (e)=>{ if(e.key==="Enter") unlock(); });
 
-      if(lockBtn) lockBtn.addEventListener("click", ()=>{
-        if(controlsWrap) controlsWrap.style.display = "none";
-        if(pinInput) pinInput.value = "";
-        if(warn) warn.style.display = "none";
+      lockBtn.addEventListener("click", ()=>{
+        controlsWrap.style.display = "none";
+        pinInput.value = "";
+        warn.style.display = "none";
         renderAdminList(false);
       });
 
-      if(resetBtn) resetBtn.addEventListener("click", ()=>{
+      resetBtn.addEventListener("click", ()=>{
         CerberusInv.reset();
         renderAdminList(true);
         renderInventory();
