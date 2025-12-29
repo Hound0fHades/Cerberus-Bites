@@ -2,609 +2,544 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Cerberus Bites | Sourdough from the Underworld</title>
+  <title>Cerberus Bites | Feast in the Underworld</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Cerberus Bites — Sourdough melts forged in flame. If the hound doesn’t approve it, it doesn’t leave the kitchen." />
+  <meta name="description" content="Cerberus Bites — Sourdough melts forged in flame. The Hound tends the flame; Cerberus stands watch. If they don’t agree, it doesn’t leave the kitchen." />
 
   <style>
-    :root {
-      /* BASE (between sabbats) — your original vibe */
-      --bg: #050308;
-      --bg-alt: #0c050b;
-      --accent: #ca3400;
-      --accent-soft: #7e0f1d;
-      --gold: #f5c97a;
-      --text: #f4f2f6;
-      --muted: #b3a9c0;
-      --border: #312033;
+    :root{
+      /* BASE (between sabbats) — original vibe */
+      --bg:#050308;
+      --bg-alt:#0c050b;
+      --accent:#ca3400;
+      --accent-soft:#7e0f1d;
+      --gold:#f5c97a;
+      --text:#f4f2f6;
+      --muted:#b3a9c0;
+      --border:#312033;
 
-      --theme-name: "Base";
-      --theme-window: "Between sabbats";
+      /* helper vars set by JS */
+      --theme-name:"Base";
+      --theme-window:"Between sabbats";
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *{box-sizing:border-box;margin:0;padding:0}
 
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, color-mix(in srgb, var(--accent-soft) 22%, #000 78%) 0, var(--bg) 60%, #020107 100%);
-      color: var(--text);
-      line-height: 1.6;
-      transition: background 0.45s ease, color 0.45s ease;
+    body{
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:radial-gradient(circle at top,
+        color-mix(in srgb, var(--accent-soft) 22%, #000 78%) 0,
+        var(--bg) 60%,
+        #020107 100%);
+      color:var(--text);
+      line-height:1.6;
+      transition:background .45s ease,color .45s ease;
     }
+    a{color:var(--gold);text-decoration:none}
+    a:hover{text-decoration:underline}
 
-    a { color: var(--gold); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; }
+    .container{max-width:1100px;margin:0 auto;padding:0 1.25rem}
 
     /* Loading Overlay */
-    .loader-overlay {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at top, color-mix(in srgb, var(--accent-soft) 28%, #000 72%) 0, var(--bg) 60%, #020107 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      transition: opacity 0.6s ease, transform 0.6s ease;
+    .loader-overlay{
+      position:fixed;inset:0;
+      background:radial-gradient(circle at top,
+        color-mix(in srgb, var(--accent-soft) 28%, #000 72%) 0,
+        var(--bg) 60%,
+        #020107 100%);
+      display:flex;align-items:center;justify-content:center;
+      z-index:9999;
+      transition:opacity .6s ease, transform .6s ease;
     }
-    .loader-inner {
-      text-align: center;
-      padding: 1.5rem 2rem;
-      border-radius: 20px;
-      border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
-      background: radial-gradient(circle at top, color-mix(in srgb, var(--accent-soft) 68%, transparent), rgba(5,3,8,0.98));
-      box-shadow: 0 0 30px rgba(0,0,0,0.9);
+    .loader-inner{
+      text-align:center;
+      padding:1.5rem 2rem;
+      border-radius:20px;
+      border:1px solid color-mix(in srgb, var(--gold) 55%, transparent);
+      background:radial-gradient(circle at top,
+        color-mix(in srgb, var(--accent-soft) 68%, transparent),
+        rgba(5,3,8,.98));
+      box-shadow:0 0 30px rgba(0,0,0,.9);
     }
-    .loader-symbol {
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 0.9rem;
-      border-radius: 999px;
-      border: 1px solid color-mix(in srgb, var(--gold) 70%, transparent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Georgia", "Times New Roman", serif;
-      font-size: 1.05rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      background: radial-gradient(circle, var(--accent) 0, var(--bg) 68%);
-      color: #fdf3e0;
-      box-shadow: 0 0 22px color-mix(in srgb, var(--accent) 80%, transparent);
-      animation: loaderPulse 1.6s ease-in-out infinite;
+    .loader-symbol{
+      width:56px;height:56px;margin:0 auto .9rem;
+      border-radius:999px;
+      border:1px solid color-mix(in srgb, var(--gold) 70%, transparent);
+      display:flex;align-items:center;justify-content:center;
+      font-family:"Georgia","Times New Roman",serif;
+      font-size:1.05rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      background:radial-gradient(circle, var(--accent) 0, var(--bg) 68%);
+      color:#fdf3e0;
+      box-shadow:0 0 22px color-mix(in srgb, var(--accent) 80%, transparent);
+      animation:loaderPulse 1.6s ease-in-out infinite;
     }
-    .loader-text-main {
-      font-family: "Georgia", "Times New Roman", serif;
-      font-size: 1rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: color-mix(in srgb, var(--gold) 70%, #fff 30%);
-      margin-bottom: 0.35rem;
+    .loader-text-main{
+      font-family:"Georgia","Times New Roman",serif;
+      font-size:1rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:color-mix(in srgb, var(--gold) 70%, #fff 30%);
+      margin-bottom:.35rem;
     }
-    .loader-text-sub {
-      font-size: 0.8rem;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .loader-text-sub{
+      font-size:.8rem;
+      color:var(--muted);
+      letter-spacing:.08em;
+      text-transform:uppercase;
     }
-    body.loaded .loader-overlay {
-      opacity: 0;
-      transform: translateY(-12px);
-      pointer-events: none;
+    body.loaded .loader-overlay{
+      opacity:0;
+      transform:translateY(-12px);
+      pointer-events:none;
     }
-    @keyframes loaderPulse {
-      0% { transform: scale(1); box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 40%, transparent); }
-      50% { transform: scale(1.05); box-shadow: 0 0 26px color-mix(in srgb, var(--accent) 85%, transparent); }
-      100% { transform: scale(1); box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 40%, transparent); }
+    @keyframes loaderPulse{
+      0%{transform:scale(1);box-shadow:0 0 10px color-mix(in srgb, var(--accent) 40%, transparent)}
+      50%{transform:scale(1.05);box-shadow:0 0 26px color-mix(in srgb, var(--accent) 85%, transparent)}
+      100%{transform:scale(1);box-shadow:0 0 10px color-mix(in srgb, var(--accent) 40%, transparent)}
     }
 
-    /* Coming Soon Banner (UPDATED) */
-    .coming-soon-banner {
-      background: linear-gradient(to right, var(--accent-soft), var(--accent), var(--accent-soft));
-      padding: 0.65rem 1rem;
-      text-align: center;
-      color: #f5e6dc;
-      font-family: "Georgia", "Times New Roman", serif;
-      font-size: 0.9rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 70%, transparent);
-      position: relative;
-      overflow: hidden;
-      animation: flameFlicker 2.4s ease-in-out infinite alternate;
+    /* Banner: Coming Soon then Cerberus Bites then Feast */
+    .coming-soon-banner{
+      background:linear-gradient(to right, var(--accent-soft), var(--accent), var(--accent-soft));
+      padding:.65rem 1rem;
+      text-align:center;
+      color:#f5e6dc;
+      font-family:"Georgia","Times New Roman",serif;
+      font-size:.9rem;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      box-shadow:0 0 18px color-mix(in srgb, var(--accent) 70%, transparent);
+      position:relative;
+      overflow:hidden;
+      animation:flameFlicker 2.4s ease-in-out infinite alternate;
     }
-    .coming-soon-banner .banner-coming {
-      display: inline-block;
-      margin: 0 0.35rem;
-      padding: 0.12rem 0.55rem;
-      border-radius: 999px;
-      border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
-      color: #fff;
-      letter-spacing: 0.2em;
-      box-shadow:
-        0 0 10px color-mix(in srgb, var(--accent) 75%, transparent),
-        0 0 18px color-mix(in srgb, var(--gold) 55%, transparent);
-      background:
-        radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--gold) 22%, transparent), transparent 55%),
-        radial-gradient(circle at 70% 70%, color-mix(in srgb, var(--accent) 55%, transparent), transparent 60%),
-        rgba(5,3,8,0.35);
-      text-shadow: 0 0 10px rgba(0,0,0,0.85);
-      animation: comingGlow 1.6s ease-in-out infinite alternate;
+    .banner-coming{
+      display:inline-block;
+      padding:.12rem .55rem;
+      border-radius:999px;
+      border:1px solid color-mix(in srgb, var(--gold) 60%, transparent);
+      box-shadow:0 0 18px color-mix(in srgb, var(--accent) 75%, transparent);
+      margin-right:.5rem;
     }
-    @keyframes comingGlow {
-      0% { filter: brightness(1); box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 70%, transparent), 0 0 16px color-mix(in srgb, var(--gold) 45%, transparent); }
-      100% { filter: brightness(1.08); box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 95%, transparent), 0 0 26px color-mix(in srgb, var(--gold) 65%, transparent); }
-    }
-
-    @keyframes flameFlicker {
-      0% { opacity: 0.9; text-shadow: 0 0 6px rgba(0,0,0,0.8), 0 0 14px color-mix(in srgb, var(--gold) 60%, transparent); transform: translateY(0); }
-      55% { opacity: 1; text-shadow: 0 0 9px rgba(0,0,0,0.9), 0 0 18px color-mix(in srgb, var(--gold) 85%, transparent); transform: translateY(-0.6px); }
-      100% { opacity: 1; text-shadow: 0 0 11px rgba(0,0,0,0.95), 0 0 22px color-mix(in srgb, var(--gold) 95%, transparent); transform: translateY(-0.4px); }
+    @keyframes flameFlicker{
+      0%{opacity:.9;text-shadow:0 0 6px rgba(0,0,0,.8),0 0 14px color-mix(in srgb, var(--gold) 60%, transparent);transform:translateY(0)}
+      55%{opacity:1;text-shadow:0 0 9px rgba(0,0,0,.9),0 0 18px color-mix(in srgb, var(--gold) 85%, transparent);transform:translateY(-.6px)}
+      100%{opacity:1;text-shadow:0 0 11px rgba(0,0,0,.95),0 0 22px color-mix(in srgb, var(--gold) 95%, transparent);transform:translateY(-.4px)}
     }
 
     /* Sticky header */
-    .hb-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: linear-gradient(to right, rgba(5, 3, 8, 0.96), rgba(7, 1, 1, 0.96));
-      border-bottom: 1px solid rgba(245,201,122,0.22);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 18px rgba(0,0,0,0.9), inset 0 -1px 0 color-mix(in srgb, var(--accent) 30%, transparent);
-      transform: translateY(-18px);
-      opacity: 0;
-      transition: transform 0.55s cubic-bezier(0.22,0.9,0.35,1.1), opacity 0.55s ease;
+    .hb-header{
+      position:sticky;top:0;z-index:50;
+      background:linear-gradient(to right, rgba(5,3,8,.96), rgba(7,1,1,.96));
+      border-bottom:1px solid rgba(245,201,122,.22);
+      backdrop-filter:blur(10px);
+      box-shadow:0 0 18px rgba(0,0,0,.9), inset 0 -1px 0 color-mix(in srgb, var(--accent) 30%, transparent);
+      transform:translateY(-18px);
+      opacity:0;
+      transition:transform .55s cubic-bezier(.22,.9,.35,1.1), opacity .55s ease;
     }
-    .hb-header.revealed { transform: translateY(0); opacity: 1; }
-    .hb-header.scrolled {
-      box-shadow: 0 0 26px rgba(0,0,0,1), 0 0 30px color-mix(in srgb, var(--accent) 55%, transparent);
+    .hb-header.revealed{transform:translateY(0);opacity:1}
+    .hb-header.scrolled{
+      box-shadow:0 0 26px rgba(0,0,0,1), 0 0 30px color-mix(in srgb, var(--accent) 55%, transparent);
     }
 
-    .nav { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; padding: 0.4rem 0; font-size: 0.95rem; }
-    .nav-links-left { display: flex; gap: 1.4rem; font-size: 0.85rem; }
-    .nav-links-left a {
-      position: relative;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--muted);
-      padding-bottom: 0.15rem;
-      transition: color 0.2s ease;
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:1.25rem;padding:.4rem 0;font-size:.95rem}
+    .nav-links-left{display:flex;gap:1.4rem;font-size:.85rem}
+    .nav-links-left a{
+      position:relative;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:var(--muted);
+      padding-bottom:.15rem;
+      transition:color .2s ease;
     }
-    .nav-links-left a::after {
-      content: "";
-      position: absolute;
-      left: 0; bottom: -0.2rem;
-      height: 2px; width: 0;
-      border-radius: 999px;
-      background: linear-gradient(to right, var(--gold), var(--accent), var(--accent-soft));
-      box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 80%, transparent);
-      opacity: 0;
-      transition: width 0.22s ease, opacity 0.22s ease;
+    .nav-links-left a::after{
+      content:"";
+      position:absolute;left:0;bottom:-.2rem;
+      height:2px;width:0;border-radius:999px;
+      background:linear-gradient(to right, var(--gold), var(--accent), var(--accent-soft));
+      box-shadow:0 0 10px color-mix(in srgb, var(--accent) 80%, transparent);
+      opacity:0;
+      transition:width .22s ease, opacity .22s ease;
     }
-    .nav-links-left a:hover { color: var(--gold); }
-    .nav-links-left a:hover::after { width: 100%; opacity: 1; }
+    .nav-links-left a:hover{color:var(--gold)}
+    .nav-links-left a:hover::after{width:100%;opacity:1}
 
-    .nav-center { display: flex; align-items: center; gap: 0.6rem; text-align: center; }
-    .nav-logo-link { display: flex; align-items: center; justify-content: center; }
-    .logo-img {
-      height: 90px; width: auto; display: block;
-      filter: drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 80%, transparent));
-      transition: height 0.25s ease, transform 0.25s ease, filter 0.25s ease;
+    .nav-center{display:flex;align-items:center;gap:.6rem;text-align:center}
+    .nav-logo-link{display:flex;align-items:center;justify-content:center}
+    .logo-img{
+      height:90px;width:auto;display:block;
+      filter:drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 80%, transparent));
+      transition:height .25s ease, transform .25s ease, filter .25s ease;
     }
-    .hb-header.scrolled .logo-img { height: 68px; filter: drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 70%, transparent)); }
-    .logo-img:hover { animation: logoFlame 1s ease-in-out infinite alternate; }
-    @keyframes logoFlame {
-      0% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 10px color-mix(in srgb, var(--accent) 80%, transparent)); }
-      100% { transform: translateY(-1px) scale(1.03); filter: drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 100%, transparent)); }
+    .hb-header.scrolled .logo-img{height:68px;filter:drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 70%, transparent))}
+    .logo-img:hover{animation:logoFlame 1s ease-in-out infinite alternate}
+    @keyframes logoFlame{
+      0%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 10px color-mix(in srgb, var(--accent) 80%, transparent))}
+      100%{transform:translateY(-1px) scale(1.03);filter:drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 100%, transparent))}
     }
 
-    .nav-brand-text .brand-name {
-      font-family: "Georgia", "Times New Roman", serif;
-      font-size: 1.05rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+    .nav-brand-text .brand-name{
+      font-family:"Georgia","Times New Roman",serif;
+      font-size:1.05rem;
+      letter-spacing:.1em;
+      text-transform:uppercase;
     }
+    /* remove "Sourdough from the Underworld" from header area */
+    .nav-brand-text .brand-subtitle{display:none}
 
-    /* UPDATED: remove "Sourdough from the Underworld" from header area */
-    .nav-brand-text .brand-subtitle { display: none; }
-
-    .nav-right { display: flex; align-items: center; }
-    .nav-cta {
-      border-radius: 999px;
-      border: 1px solid color-mix(in srgb, var(--gold) 85%, transparent);
-      padding: 0.45rem 1.2rem;
-      font-size: 0.8rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+    .nav-right{display:flex;align-items:center}
+    .nav-cta{
+      border-radius:999px;
+      border:1px solid color-mix(in srgb, var(--gold) 85%, transparent);
+      padding:.45rem 1.2rem;
+      font-size:.8rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
       background:
         radial-gradient(circle at top left, color-mix(in srgb, var(--accent) 90%, transparent), transparent),
-        radial-gradient(circle at bottom right, color-mix(in srgb, var(--accent-soft) 90%, transparent), rgba(5,3,8,0.95));
-      color: #fff;
-      box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 90%, transparent), 0 0 4px color-mix(in srgb, var(--gold) 80%, transparent);
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      white-space: nowrap;
+        radial-gradient(circle at bottom right, color-mix(in srgb, var(--accent-soft) 90%, transparent), rgba(5,3,8,.95));
+      color:#fff;
+      box-shadow:0 0 16px color-mix(in srgb, var(--accent) 90%, transparent), 0 0 4px color-mix(in srgb, var(--gold) 80%, transparent);
+      cursor:pointer;
+      position:relative;
+      overflow:hidden;
+      white-space:nowrap;
     }
-    .nav-cta::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 0% 50%, color-mix(in srgb, var(--gold) 35%, transparent), transparent 55%);
-      transform: translateX(-120%);
-      transition: transform 0.35s ease-out;
-      pointer-events: none;
+    .nav-cta::after{
+      content:"";
+      position:absolute;inset:0;
+      background:radial-gradient(circle at 0% 50%, color-mix(in srgb, var(--gold) 35%, transparent), transparent 55%);
+      transform:translateX(-120%);
+      transition:transform .35s ease-out;
+      pointer-events:none;
     }
-    .nav-cta:hover::after { transform: translateX(120%); }
-    .nav-cta:hover {
-      box-shadow: 0 0 22px color-mix(in srgb, var(--accent) 100%, transparent), 0 0 10px color-mix(in srgb, var(--gold) 90%, transparent);
+    .nav-cta:hover::after{transform:translateX(120%)}
+    .nav-cta:hover{
+      box-shadow:0 0 22px color-mix(in srgb, var(--accent) 100%, transparent), 0 0 10px color-mix(in srgb, var(--gold) 90%, transparent);
     }
 
-    main { padding-bottom: 4rem; }
+    main{padding-bottom:4rem}
 
     /* Hero */
-    .hero { padding: 3.2rem 0 2.8rem; }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 2.5rem;
-      align-items: center;
+    .hero{padding:3.2rem 0 2.8rem}
+    .hero-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+      gap:2.5rem;
+      align-items:center;
     }
-    .hero-eyebrow {
-      text-transform: uppercase;
-      letter-spacing: 0.3em;
-      font-size: 0.7rem;
-      color: var(--gold);
-      opacity: 0.92;
-      margin-bottom: 0.75rem;
-    }
-    .hero-title {
-      font-family: "Georgia", "Times New Roman", serif;
-      font-size: clamp(2.1rem, 4vw, 3rem);
-      line-height: 1.1;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 18px rgba(0,0,0,0.8);
-    }
-    .hero-title span { color: var(--accent); }
-    .hero-subtitle {
-      color: var(--muted);
-      font-size: 0.95rem;
-      max-width: 34rem;
-      margin-bottom: 1.4rem;
+    .hero-eyebrow{
+      text-transform:uppercase;
+      letter-spacing:.3em;
+      font-size:.7rem;
+      color:var(--gold);
+      opacity:.92;
+      margin-bottom:.75rem;
     }
 
-    /* UPDATED: size down "Sourdough from the Underworld" under big title */
-    .hero-subtitle .subline {
-      display: block;
-      margin-top: 0.35rem;
-      font-size: 0.82rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: color-mix(in srgb, var(--muted) 88%, #fff 12%);
+    /* Big Cerberus Bites (bigger), subtitle smaller */
+    .hero-title{
+      font-family:"Georgia","Times New Roman",serif;
+      line-height:1.05;
+      margin-bottom:1rem;
+      text-shadow:0 0 18px rgba(0,0,0,.8);
+    }
+    .hero-title .hero-brand{
+      display:block;
+      font-size:clamp(2.6rem, 5vw, 3.5rem);
+      color:var(--text);
+    }
+    .hero-title .hero-subbrand{
+      display:block;
+      margin-top:.25rem;
+      font-size:clamp(1.05rem, 2vw, 1.35rem);
+      letter-spacing:.08em;
+      color:var(--gold);
+      text-transform:uppercase;
+      opacity:.95;
     }
 
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      padding: 0.55rem 1.3rem;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      cursor: pointer;
-      text-decoration: none;
+    .hero-subtitle{
+      color:var(--muted);
+      font-size:.95rem;
+      max-width:38rem;
+      margin-bottom:1.25rem;
     }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
-      color: #fff;
-      box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 70%, transparent);
-    }
-    .btn-primary:hover { filter: brightness(1.05); }
 
-    .hero-art {
-      border-radius: 24px;
-      border: 1px solid rgba(245,201,122,0.3);
-      padding: 1px;
-      background: radial-gradient(circle at top, color-mix(in srgb, var(--accent) 75%, transparent), var(--bg));
-      box-shadow: 0 0 32px color-mix(in srgb, var(--accent) 45%, transparent), 0 0 80px rgba(0,0,0,0.9);
+    /* removed hero tags per request */
+    .hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      border-radius:999px;border:1px solid transparent;
+      padding:.55rem 1.3rem;font-size:.85rem;
+      text-transform:uppercase;letter-spacing:.16em;
+      cursor:pointer;text-decoration:none;
     }
-    .hero-art-inner {
-      border-radius: 22px;
-      background: radial-gradient(circle at bottom, var(--bg) 0, color-mix(in srgb, var(--accent-soft) 18%, var(--bg) 82%) 45%, var(--bg) 100%);
-      padding: 1.3rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+    .btn-primary{
+      background:linear-gradient(135deg, var(--accent), var(--accent-soft));
+      color:#fff;
+      box-shadow:0 0 18px color-mix(in srgb, var(--accent) 70%, transparent);
     }
-    .hero-art-title {
-      font-family: "Georgia", "Times New Roman", serif;
-      font-size: 1.05rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+    .btn-primary:hover{filter:brightness(1.05)}
+    .btn-ghost{
+      border-color:rgba(245,201,122,.5);
+      color:var(--gold);
+      background:rgba(5,3,8,.6);
     }
-    .hero-art-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; font-size: 0.8rem; }
-    .hero-card {
-      border-radius: 16px;
-      border: 1px solid rgba(245,201,122,0.25);
-      padding: 0.6rem 0.7rem;
-      background: radial-gradient(circle at top left, color-mix(in srgb, var(--accent-soft) 55%, transparent), rgba(5,3,8,0.9));
-    }
-    .hero-card h4 {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--gold);
-      margin-bottom: 0.2rem;
-    }
-    .hero-card p { font-size: 0.78rem; color: var(--muted); }
+    .btn-ghost:hover{background:rgba(245,201,122,.08)}
+    .hero-note{font-size:.8rem;color:var(--muted)}
 
-    section { padding: 2.5rem 0; border-top: 1px solid rgba(245,201,122,0.12); }
-    .section-header { margin-bottom: 1.5rem; text-align: left; }
-    .section-eyebrow { text-transform: uppercase; letter-spacing: 0.28em; font-size: 0.7rem; color: var(--gold); margin-bottom: 0.2rem; }
-    .section-title { font-family: "Georgia", "Times New Roman", serif; font-size: 1.4rem; margin-bottom: 0.3rem; }
-    .section-subtitle { font-size: 0.88rem; color: var(--muted); max-width: 40rem; }
+    .hero-art{
+      border-radius:24px;border:1px solid rgba(245,201,122,.3);
+      padding:1px;
+      background:radial-gradient(circle at top, color-mix(in srgb, var(--accent) 75%, transparent), var(--bg));
+      box-shadow:0 0 32px color-mix(in srgb, var(--accent) 45%, transparent), 0 0 80px rgba(0,0,0,.9);
+    }
+    .hero-art-inner{
+      border-radius:22px;
+      background:radial-gradient(circle at bottom, var(--bg) 0, color-mix(in srgb, var(--accent-soft) 18%, var(--bg) 82%) 45%, var(--bg) 100%);
+      padding:1.3rem;
+      display:flex;flex-direction:column;gap:1rem;
+    }
+    .hero-art-title{
+      font-family:"Georgia","Times New Roman",serif;
+      font-size:1.05rem;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
+    .hero-art-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;font-size:.8rem}
+    .hero-card{
+      border-radius:16px;border:1px solid rgba(245,201,122,.25);
+      padding:.7rem .75rem;
+      background:radial-gradient(circle at top left, color-mix(in srgb, var(--accent-soft) 55%, transparent), rgba(5,3,8,.9));
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card h4{
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:var(--gold);
+      margin-bottom:.25rem;
+    }
+    .hero-card p{font-size:.78rem;color:var(--muted)}
+
+    /* SOLD OUT overlay stamp for ops/menu items */
+    .soldout-stamp{
+      position:absolute;
+      top:.6rem;right:.6rem;
+      padding:.2rem .55rem;
+      border-radius:999px;
+      border:1px solid color-mix(in srgb, var(--gold) 55%, transparent);
+      background:rgba(0,0,0,.35);
+      color:var(--gold);
+      font-size:.68rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      box-shadow:0 0 16px color-mix(in srgb, var(--accent) 55%, transparent);
+      transform:rotate(6deg);
+      display:none;
+      pointer-events:none;
+    }
+    .is-soldout .soldout-stamp{display:inline-block}
+    .is-soldout{opacity:.75}
+
+    section{padding:2.5rem 0;border-top:1px solid rgba(245,201,122,.12)}
+    .section-header{margin-bottom:1.5rem;text-align:left}
+    .section-eyebrow{text-transform:uppercase;letter-spacing:.28em;font-size:.7rem;color:var(--gold);margin-bottom:.2rem}
+    .section-title-row{display:flex;align-items:center;gap:.6rem}
+    .section-title{font-family:"Georgia","Times New Roman",serif;font-size:1.4rem;margin-bottom:.3rem}
+    .section-subtitle{font-size:.88rem;color:var(--muted);max-width:40rem}
 
     /* Seasonal callout */
-    .season-callout {
-      border: 1px solid rgba(245,201,122,0.35);
-      border-radius: 14px;
-      padding: 0.9rem 1.2rem;
-      margin: 1rem 0 1.5rem;
-      background: radial-gradient(circle at top left, color-mix(in srgb, var(--accent) 16%, transparent), rgba(5,3,8,0.9));
-      backdrop-filter: blur(4px);
-      box-shadow: 0 0 18px rgba(0,0,0,0.6);
+    .season-callout{
+      border:1px solid rgba(245,201,122,.35);
+      border-radius:14px;
+      padding:.9rem 1.2rem;
+      margin:1rem 0 1.5rem;
+      background:radial-gradient(circle at top left, color-mix(in srgb, var(--accent) 16%, transparent), rgba(5,3,8,.9));
+      backdrop-filter:blur(4px);
+      box-shadow:0 0 18px rgba(0,0,0,.6);
+      animation:calloutFade .7s ease-out both;
     }
-    .season-title {
-      color: var(--gold);
-      text-transform: uppercase;
-      font-size: 0.88rem;
-      letter-spacing: 0.16em;
-    }
-    .season-message { font-size: 0.82rem; color: var(--muted); margin-top: 0.25rem; }
+    .season-title{color:var(--gold);text-transform:uppercase;font-size:.88rem;letter-spacing:.16em}
+    .season-message{font-size:.82rem;color:var(--muted);margin-top:.25rem}
+    @keyframes calloutFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
     /* Secret star */
-    .secret-star {
-      width: 18px; height: 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(245,201,122,0.55);
-      display: inline-flex; align-items: center; justify-content: center;
-      font-size: 0.7rem;
-      color: #f5e6dc;
-      cursor: pointer;
-      opacity: 0.45;
-      box-shadow: 0 0 6px rgba(245,201,122,0.4);
-      transition: opacity 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-      background: radial-gradient(circle at top, rgba(245,201,122,0.2), transparent 60%);
+    .secret-star{
+      width:18px;height:18px;border-radius:999px;
+      border:1px solid rgba(245,201,122,.55);
+      display:inline-flex;align-items:center;justify-content:center;
+      font-size:.7rem;color:#f5e6dc;cursor:pointer;
+      opacity:.45;
+      box-shadow:0 0 6px rgba(245,201,122,.4);
+      transition:opacity .25s ease, transform .25s ease, box-shadow .25s ease;
+      background:radial-gradient(circle at top, rgba(245,201,122,.2), transparent 60%);
     }
-    .secret-star span { transform: translateY(-0.5px); }
-    .secret-star:hover { opacity: 0.9; transform: scale(1.05); box-shadow: 0 0 10px rgba(245,201,122,0.8); }
-    .secret-star.active { opacity: 1; box-shadow: 0 0 12px rgba(245,201,122,1), 0 0 20px rgba(202,52,0,0.9); }
+    .secret-star span{transform:translateY(-.5px)}
+    .secret-star:hover{opacity:.9;transform:scale(1.05);box-shadow:0 0 10px rgba(245,201,122,.8)}
+    .secret-star.active{opacity:1;box-shadow:0 0 12px rgba(245,201,122,1),0 0 20px rgba(202,52,0,.9)}
 
     /* Secret menu panel */
-    .secret-menu {
-      margin-top: 1.4rem;
-      border-radius: 18px;
-      border: 1px dashed rgba(245,201,122,0.4);
-      background: radial-gradient(circle at top left, rgba(15,3,10,0.97), rgba(5,3,8,0.98));
-      padding: 1.1rem 1.2rem;
-      font-size: 0.85rem;
-      display: none;
-      position: relative;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(8px);
+    .secret-menu{
+      margin-top:1.4rem;
+      border-radius:18px;
+      border:1px dashed rgba(245,201,122,.4);
+      background:radial-gradient(circle at top left, rgba(15,3,10,.97), rgba(5,3,8,.98));
+      padding:1.1rem 1.2rem;
+      font-size:.85rem;
+      display:none;
+      position:relative;
+      overflow:hidden;
+      opacity:0;
+      transform:translateY(8px);
     }
-    .secret-menu::before {
-      content: "";
-      position: absolute;
-      inset: 0;
+    .secret-menu::before{
+      content:"";
+      position:absolute;inset:0;
       background:
-        radial-gradient(circle at 10% 0%, rgba(245,201,122,0.18), transparent 55%),
-        radial-gradient(circle at 90% 100%, rgba(202,52,0,0.25), transparent 60%);
-      opacity: 0.7;
-      pointer-events: none;
+        radial-gradient(circle at 10% 0%, rgba(245,201,122,.18), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(202,52,0,.25), transparent 60%);
+      opacity:.7;
+      pointer-events:none;
     }
-    .secret-menu-inner { position: relative; z-index: 1; }
-    .secret-menu.visible { display: block; animation: fadeInUp 0.38s ease forwards; }
-    .secret-menu-label {
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      font-size: 0.72rem;
-      color: var(--gold);
-      margin-bottom: 0.3rem;
+    .secret-menu-inner{position:relative;z-index:1}
+    .secret-menu.visible{display:block;animation:fadeInUp .38s ease forwards}
+    .secret-menu-label{text-transform:uppercase;letter-spacing:.22em;font-size:.72rem;color:var(--gold);margin-bottom:.3rem}
+    .secret-menu-title{font-family:"Georgia","Times New Roman",serif;font-size:1rem;margin-bottom:.25rem}
+    .secret-menu-desc{color:var(--muted);margin-bottom:.5rem}
+    .secret-menu-meta{font-size:.78rem;color:var(--muted)}
+    .secret-price{color:var(--gold);font-weight:600}
+    .secret-badge{
+      display:inline-block;margin-left:.4rem;
+      padding:.05rem .45rem;border-radius:999px;
+      border:1px solid rgba(202,52,0,.7);
+      font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;
+      color:#f5e6dc;
     }
-    .secret-menu-title { font-family: "Georgia", "Times New Roman", serif; font-size: 1rem; margin-bottom: 0.25rem; }
-    .secret-menu-desc { color: var(--muted); margin-bottom: 0.5rem; }
-    .secret-menu-meta { font-size: 0.78rem; color: var(--muted); }
-    .secret-price { color: var(--gold); font-weight: 600; }
-    .secret-badge {
-      display: inline-block;
-      margin-left: 0.4rem;
-      padding: 0.05rem 0.45rem;
-      border-radius: 999px;
-      border: 1px solid rgba(202,52,0,0.7);
-      font-size: 0.68rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #f5e6dc;
-    }
-    @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInUp{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
 
     /* Menu */
-    .menu-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 2rem; }
-    .menu-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
-    .menu-group-title {
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      font-size: 0.75rem;
-      color: var(--gold);
-      margin-bottom: 0.4rem;
-    }
-    .menu-item { padding: 0.55rem 0; border-bottom: 1px dashed rgba(245,201,122,0.25); }
-    .menu-item:last-child { border-bottom: none; }
-    .menu-item-name { font-size: 0.92rem; display: flex; justify-content: space-between; gap: 0.4rem; }
-    .menu-item-name span { color: var(--gold); font-size: 0.85rem; opacity: 0.95; }
-    .menu-item-desc { font-size: 0.82rem; color: var(--muted); margin-top: 0.1rem; }
-
-    .menu-badges { margin-top: 0.25rem; display: flex; flex-wrap: wrap; gap: 0.25rem; font-size: 0.7rem; }
-    .badge {
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      padding: 0.05rem 0.45rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
+    .menu-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:2rem}
+    .menu-columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+    .menu-group-title{text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;color:var(--gold);margin-bottom:.4rem}
+    .menu-item{padding:.55rem 0;border-bottom:1px dashed rgba(245,201,122,.25);position:relative}
+    .menu-item:last-child{border-bottom:none}
+    .menu-item-name{font-size:.92rem;display:flex;justify-content:space-between;gap:.4rem}
+    .menu-item-name span{color:var(--gold);font-size:.85rem;opacity:.95}
+    .menu-item-desc{font-size:.82rem;color:var(--muted);margin-top:.1rem}
+    .menu-badges{margin-top:.25rem;display:flex;flex-wrap:wrap;gap:.25rem;font-size:.7rem}
+    .badge{
+      border-radius:999px;border:1px solid rgba(255,255,255,.12);
+      padding:.05rem .45rem;text-transform:uppercase;letter-spacing:.12em;
+      color:var(--muted);
     }
 
-    .menu-art {
-      border-radius: 20px;
-      border: 1px solid rgba(245,201,122,0.25);
-      padding: 1rem;
-      background: radial-gradient(circle at top, color-mix(in srgb, var(--accent) 60%, transparent), var(--bg));
-      font-size: 0.82rem;
+    .menu-art{
+      border-radius:20px;border:1px solid rgba(245,201,122,.25);
+      padding:1rem;
+      background:radial-gradient(circle at top, color-mix(in srgb, var(--accent) 60%, transparent), var(--bg));
+      font-size:.82rem;
     }
-    .menu-art h4 {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--gold);
-      margin-bottom: 0.5rem;
-    }
-    .menu-art p { color: var(--muted); }
-    .menu-spell { font-family: "Georgia", "Times New Roman", serif; font-style: italic; margin-top: 0.5rem; color: #f8e8c4; }
+    .menu-art h4{font-size:.9rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:.5rem}
+    .menu-art p{color:var(--muted)}
+    .menu-spell{font-family:"Georgia","Times New Roman",serif;font-style:italic;margin-top:.5rem;color:#f8e8c4}
 
     /* About/Lore */
-    .about-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-      gap: 2rem;
-      align-items: flex-start;
+    .about-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);
+      gap:2rem;
+      align-items:flex-start;
     }
-    .about-crest {
-      border-radius: 18px;
-      border: 1px solid rgba(245,201,122,0.25);
-      padding: 1.2rem 1.3rem;
-      background: radial-gradient(circle at top, rgba(10,6,18,0.95), rgba(5,3,8,0.98));
-      text-align: center;
-      box-shadow: 0 0 22px rgba(0,0,0,0.9);
+    .about-crest{
+      border-radius:18px;border:1px solid rgba(245,201,122,.25);
+      padding:1.2rem 1.3rem;
+      background:radial-gradient(circle at top, rgba(10,6,18,.95), rgba(5,3,8,.98));
+      text-align:center;
+      box-shadow:0 0 22px rgba(0,0,0,.9);
     }
-    .about-crest-logo {
-      max-width: 260px;
-      width: 100%;
-      height: auto;
-      display: block;
-      margin: 0 auto 0.8rem;
-      filter: drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 85%, transparent));
+    .about-crest-logo{
+      max-width:260px;width:100%;height:auto;display:block;margin:0 auto .8rem;
+      filter:drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 85%, transparent));
     }
-    .about-crest-title {
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-size: 0.75rem;
-      color: var(--gold);
-      margin-bottom: 0.6rem;
+    .about-crest-title{text-transform:uppercase;letter-spacing:.2em;font-size:.75rem;color:var(--gold);margin-bottom:.6rem}
+    .about-crest-text{
+      font-size:.82rem;color:var(--muted);line-height:1.7;
+      font-family:"Georgia","Times New Roman",serif;
     }
-    .about-crest-text {
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.7;
-      font-family: "Georgia", "Times New Roman", serif;
+    .about-content{display:flex;flex-direction:column;gap:1.2rem}
+    .about-box{
+      border-radius:18px;border:1px solid rgba(245,201,122,.25);
+      padding:1.1rem 1.2rem;
+      background:radial-gradient(circle at top left, color-mix(in srgb, var(--accent-soft) 60%, transparent), rgba(5,3,8,.95));
+      font-size:.9rem;color:var(--muted);
     }
-    .about-content { display: flex; flex-direction: column; gap: 1.2rem; }
-    .about-box {
-      border-radius: 18px;
-      border: 1px solid rgba(245,201,122,0.25);
-      padding: 1.1rem 1.2rem;
-      background: radial-gradient(circle at top left, color-mix(in srgb, var(--accent-soft) 60%, transparent), rgba(5,3,8,0.95));
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-    .about-box strong { color: var(--gold); }
-    .about-label {
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      font-size: 0.75rem;
-      color: var(--gold);
-      margin-bottom: 0.4rem;
-      display: block;
-    }
-    .about-quote { font-family: "Georgia", "Times New Roman", serif; font-style: italic; margin-top: 0.7rem; color: #f8e8c4; }
-    .about-highlight {
-      border-radius: 16px;
-      border: 1px dashed rgba(245,201,122,0.4);
-      padding: 0.9rem 1rem;
-      font-size: 0.82rem;
-      color: var(--muted);
-      background: radial-gradient(circle at bottom right, color-mix(in srgb, var(--accent-soft) 40%, transparent), rgba(5,3,8,0.96));
+    .about-box strong{color:var(--gold)}
+    .about-label{text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;color:var(--gold);margin-bottom:.4rem;display:block}
+    .about-quote{font-family:"Georgia","Times New Roman",serif;font-style:italic;margin-top:.7rem;color:#f8e8c4}
+    .about-highlight{
+      border-radius:16px;border:1px dashed rgba(245,201,122,.4);
+      padding:.9rem 1rem;font-size:.82rem;color:var(--muted);
+      background:radial-gradient(circle at bottom right, color-mix(in srgb, var(--accent-soft) 40%, transparent), rgba(5,3,8,.96));
     }
 
     /* Contact */
-    .contact { background: radial-gradient(circle at top, rgba(21,2,11,1), var(--bg)); }
-    .summon-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 2rem; }
+    .contact{background:radial-gradient(circle at top, rgba(21,2,11,1), var(--bg))}
+    .summon-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:2rem}
 
-    .summon-calendar {
-      border-radius: 20px;
-      border: 1px solid rgba(245,201,122,0.25);
-      padding: 1.3rem 1.4rem;
-      background: radial-gradient(circle at top, color-mix(in srgb, var(--accent) 65%, transparent), var(--bg));
-      box-shadow: 0 0 24px rgba(0,0,0,0.9);
-      font-size: 0.85rem;
-      color: var(--muted);
+    .summon-calendar{
+      border-radius:20px;border:1px solid rgba(245,201,122,.25);
+      padding:1.3rem 1.4rem;
+      background:radial-gradient(circle at top, color-mix(in srgb, var(--accent) 65%, transparent), var(--bg));
+      box-shadow:0 0 24px rgba(0,0,0,.9);
+      font-size:.85rem;color:var(--muted);
     }
-    .summon-calendar h4 {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--gold);
-      margin-bottom: 0.4rem;
+    .summon-calendar h4{
+      font-size:.9rem;text-transform:uppercase;letter-spacing:.16em;
+      color:var(--gold);margin-bottom:.4rem;
     }
-    .calendar-wrap {
-      margin-top: 0.6rem;
-      border-radius: 14px;
-      overflow: hidden;
-      background: #050308;
-      border: 1px solid rgba(245,201,122,0.3);
-      height: 460px;
+    .calendar-wrap{
+      margin-top:.6rem;border-radius:14px;overflow:hidden;
+      background:#050308;border:1px solid rgba(245,201,122,.3);
+      height:460px;
     }
-    .calendar-wrap iframe { width: 100%; height: 100%; border: 0; }
+    .calendar-wrap iframe{width:100%;height:100%;border:0}
 
-    .contact-card {
-      border-radius: 20px;
-      border: 1px solid rgba(245,201,122,0.25);
-      padding: 1.3rem 1.4rem;
-      background: radial-gradient(circle at top left, color-mix(in srgb, var(--accent-soft) 70%, transparent), rgba(5,3,8,0.96));
-      box-shadow: 0 0 24px rgba(0,0,0,0.9);
-      font-size: 0.85rem;
-      color: var(--muted);
+    .contact-card{
+      border-radius:20px;border:1px solid rgba(245,201,122,.25);
+      padding:1.3rem 1.4rem;
+      background:radial-gradient(circle at top left, color-mix(in srgb, var(--accent-soft) 70%, transparent), rgba(5,3,8,.96));
+      box-shadow:0 0 24px rgba(0,0,0,.9);
+      font-size:.85rem;color:var(--muted);
     }
-    .contact-card-title {
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--gold);
-      margin-bottom: 0.4rem;
+    .contact-card-title{
+      font-size:.95rem;text-transform:uppercase;letter-spacing:.18em;
+      color:var(--gold);margin-bottom:.4rem;
     }
-    .contact-card-list { list-style: none; padding-left: 0; margin: 0.3rem 0 0.6rem; }
-    .contact-card-list li { margin-bottom: 0.25rem; }
-    .contact-card-list li::before { content: "✶"; color: var(--accent); margin-right: 0.35rem; }
+    .contact-card-list{list-style:none;padding-left:0;margin:.3rem 0 .6rem}
+    .contact-card-list li{margin-bottom:.25rem}
+    .contact-card-list li::before{content:"✶";color:var(--accent);margin-right:.35rem}
 
-    footer {
-      border-top: 1px solid rgba(245,201,122,0.18);
-      padding: 1rem 0 1.6rem;
-      font-size: 0.75rem;
-      color: var(--muted);
+    footer{
+      border-top:1px solid rgba(245,201,122,.18);
+      padding:1rem 0 1.6rem;
+      font-size:.75rem;color:var(--muted);
     }
-    .footer-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; justify-content: space-between; }
-    .footer-links { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+    .footer-row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between}
+    .footer-links{display:flex;flex-wrap:wrap;gap:.8rem}
 
-    @media (max-width: 840px) {
-      .hero-grid, .menu-grid, .about-grid, .summon-grid { grid-template-columns: minmax(0, 1fr); }
-      .nav-links-left { display: none; }
-      .nav { justify-content: space-between; }
-      .logo-img { height: 80px; }
-      .hb-header.scrolled .logo-img { height: 62px; }
-      .calendar-wrap { height: 380px; }
+    @media (max-width:840px){
+      .hero-grid,.menu-grid,.about-grid,.summon-grid{grid-template-columns:minmax(0,1fr)}
+      .nav-links-left{display:none}
+      .nav{justify-content:space-between}
+      .logo-img{height:80px}
+      .hb-header.scrolled .logo-img{height:62px}
+      .calendar-wrap{height:380px}
     }
   </style>
 </head>
@@ -619,18 +554,20 @@
     </div>
   </div>
 
-  <!-- Banner (UPDATED) -->
+  <!-- Banner -->
   <div class="coming-soon-banner">
-    🐺 Cerberus Bites • <span class="banner-coming">COMING SOON</span> • Feast in the Underworld 🐺
+    <span class="banner-coming">🔥 COMING SOON 🔥</span>
+    Cerberus Bites • Feast in the Underworld
   </div>
 
-  <!-- Header (UPDATED: subtitle removed) -->
+  <!-- Header -->
   <header class="hb-header">
     <div class="container">
       <div class="nav">
         <nav class="nav-links-left">
           <a href="#menu">Menu</a>
           <a href="#about">Lore</a>
+          <a href="#contact">Bookings</a>
         </nav>
 
         <div class="nav-center">
@@ -639,7 +576,7 @@
           </a>
           <div class="nav-brand-text">
             <div class="brand-name">Cerberus Bites</div>
-            <!-- subtitle removed on purpose -->
+            <div class="brand-subtitle">Sourdough from the Underworld</div>
           </div>
         </div>
 
@@ -656,44 +593,54 @@
       <div class="container">
         <div class="hero-grid">
           <div>
-            <div class="hero-eyebrow">house-fermented sourdough • butter-crisped • guarded by the hound</div>
+            <div class="hero-eyebrow">house-fermented sourdough • guarded by the hound</div>
 
             <h1 class="hero-title">
-              <span>🐺 Cerberus Bites</span><br>
-              Sourdough from the Underworld.
+              <span class="hero-brand">Cerberus Bites</span>
+              <span class="hero-subbrand">Sourdough from the Underworld</span>
             </h1>
 
-            <p class="hero-subtitle">
-              All melts served on house-fermented sourdough — crisped in butter, pulled hot, and watched closely.
-              If the hound doesn’t approve it, it doesn’t leave the kitchen.
-              <span class="subline">Sourdough from the Underworld</span>
+            <p class="hero-subtitle" id="heroCopy">
+              All melts are served on house-fermented sourdough.
+              <br>
+              “The Hound tends the flame; Cerberus stands watch. If they don’t agree, it doesn’t leave the kitchen.”
             </p>
 
             <div class="hero-actions">
               <a href="#menu" class="btn btn-primary">View the Menu</a>
+              <a href="#contact" class="btn btn-ghost">Book the Hound</a>
+              <div class="hero-note">Ask about allergies at the window — we’ll guide your path.</div>
             </div>
           </div>
 
+          <!-- Ops Boxes -->
           <div class="hero-art">
             <div class="hero-art-inner">
               <div class="hero-art-title">Tonight in the Underworld</div>
               <div class="hero-art-grid">
-                <div class="hero-card">
-                  <h4>Signature Melt</h4>
-                  <p>Cerberus Melt — triple cheese, butter-crisped sourdough.</p>
+                <div class="hero-card" id="opsAlmostGone">
+                  <span class="soldout-stamp">SOLD OUT</span>
+                  <h4>Almost Gone</h4>
+                  <p>Loading inventory…</p>
                 </div>
-                <div class="hero-card">
-                  <h4>Gatekeeper</h4>
-                  <p>Smoked turkey, sharp cheddar, black garlic aioli.</p>
+                <div class="hero-card" id="opsSoldOut">
+                  <span class="soldout-stamp">SOLD OUT</span>
+                  <h4>Sold Out</h4>
+                  <p>Loading inventory…</p>
                 </div>
-                <div class="hero-card">
-                  <h4>Hellfire</h4>
-                  <p>Blackened chicken, pepper jack, ember mayo.</p>
+                <div class="hero-card" id="opsBatchCounter">
+                  <span class="soldout-stamp">SOLD OUT</span>
+                  <h4>Batch Counter</h4>
+                  <p>Loading inventory…</p>
                 </div>
-                <div class="hero-card">
-                  <h4>Hidden Sigil</h4>
-                  <p>Find the ✶ — ask for what the gate keeps.</p>
+                <div class="hero-card" id="opsNextDrop">
+                  <span class="soldout-stamp">SOLD OUT</span>
+                  <h4>Next Drop</h4>
+                  <p>Loading timing…</p>
                 </div>
+              </div>
+              <div style="margin-top:.6rem;font-size:.72rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;">
+                Staff PIN: <span style="color:var(--gold);font-weight:600;">1395</span>
               </div>
             </div>
           </div>
@@ -707,9 +654,12 @@
       <div class="container">
         <div class="section-header">
           <div class="section-eyebrow">The Wicked Feast</div>
-          <h2 class="section-title">CERBERUS BITES Menu</h2>
+          <div class="section-title-row">
+            <h2 class="section-title">Cerberus Bites Menu</h2>
+            <button class="secret-star" id="secretStar" aria-label="Hidden sigil"><span>✶</span></button>
+          </div>
           <p class="section-subtitle">
-            Sourdough from the Underworld. All melts served on house-fermented sourdough.
+            All melts served on house-fermented sourdough.
           </p>
 
           <div id="seasonCallout" class="season-callout">
@@ -722,34 +672,41 @@
           <div>
             <div class="menu-columns">
 
+              <!-- LEFT COLUMN -->
               <div>
                 <div class="menu-group-title">🥪 Melts</div>
 
-                <div class="menu-item">
+                <div class="menu-item" data-id="cerberus_melt">
+                  <span class="soldout-stamp">SOLD OUT</span>
                   <div class="menu-item-name">Cerberus Melt <span>$9</span></div>
                   <div class="menu-item-desc">Triple cheese on butter-crisped sourdough.</div>
                 </div>
 
-                <div class="menu-item">
+                <div class="menu-item" data-id="gatekeeper_turkey">
+                  <span class="soldout-stamp">SOLD OUT</span>
                   <div class="menu-item-name">Gatekeeper Turkey Melt <span>$11</span></div>
                   <div class="menu-item-desc">Smoked turkey, sharp cheddar, black garlic aioli.</div>
                 </div>
 
-                <div class="menu-item">
+                <div class="menu-item" data-id="hellfire_chicken">
+                  <span class="soldout-stamp">SOLD OUT</span>
                   <div class="menu-item-name">Hellfire Chicken Melt <span>$11</span></div>
                   <div class="menu-item-desc">Blackened chicken, pepper jack, ember mayo.</div>
                 </div>
 
-                <div class="menu-item">
+                <div class="menu-item" data-id="persephone_garden">
+                  <span class="soldout-stamp">SOLD OUT</span>
                   <div class="menu-item-name">Persephone’s Garden (Vegan) 🌿 <span>$10</span></div>
                   <div class="menu-item-desc">Roasted mushrooms, caramelized onion, herb oil.</div>
                 </div>
               </div>
 
+              <!-- RIGHT COLUMN -->
               <div>
                 <div class="menu-group-title">🥣 Sides</div>
 
-                <div class="menu-item">
+                <div class="menu-item" data-id="tomato_soup">
+                  <span class="soldout-stamp">SOLD OUT</span>
                   <div class="menu-item-name">Charred Tomato Soup (Cup) <span>$4</span></div>
                   <div class="menu-item-desc">Rich, smoky, perfect for dipping.</div>
                   <div class="menu-badges">
@@ -761,21 +718,42 @@
             </div>
           </div>
 
+          <!-- Spellbook-style panel -->
           <aside class="menu-art">
             <h4>The Spellbook of Sourdough</h4>
             <p>
               House-fermented loaves. Butter-crisped edges. Cheese pulls that don’t lie.
-              The hound keeps the gate — and the standard.
+              The Hound tends the flame — Cerberus keeps the gate.
             </p>
-            <p class="menu-spell">
-              “Three heads. One rule: the bread must crackle.”
+            <p class="menu-spell">“Three heads. One rule: the bread must crackle.”</p>
+            <p style="margin-top:.7rem;">
+              ✶ Vegan paths available<br>
+              ✶ Add soup to any melt +$3<br>
+              ✶ The hidden sigil reveals what the gate keeps
             </p>
           </aside>
         </div>
+
+        <!-- SECRET MENU (The Black Gate) -->
+        <div id="secretMenu" class="secret-menu" aria-hidden="true">
+          <div class="secret-menu-inner">
+            <div class="secret-menu-label">🔥 Off-Menu — Ask if Available</div>
+            <div class="secret-menu-title">The Black Gate</div>
+            <p class="secret-menu-desc">
+              Extra-butter sourdough, triple cheese, black garlic aioli, charred dark.
+              <br><em>When it’s gone, it’s gone.</em>
+            </p>
+            <p class="secret-menu-meta">
+              <span class="secret-price">$12</span>
+              <span class="secret-badge">Off-menu</span>
+            </p>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- About -->
+    <!-- About / Lore -->
     <section id="about">
       <div class="container">
         <div class="section-header">
@@ -790,10 +768,8 @@
             <div class="about-crest-title">Official Crest of Cerberus Bites</div>
             <p class="about-crest-text">
               <strong>We are the guardians of souls who enter this realm.</strong><br>
-              I watch the flames.<br>
-              I guard the bites.<br>
-              I guide the hungry.<br>
-              We are the eternal watchdog of hunger and flame — and if we don’t approve it, it doesn’t leave the kitchen.
+              The Hound tends the flame; Cerberus stands watch.<br>
+              If they don’t agree, it doesn’t leave the kitchen.
             </p>
           </div>
 
@@ -810,15 +786,15 @@
             <div class="about-highlight">
               <span class="about-label">What We Stand For</span>
               <p>✶ <strong>Quality first.</strong> Sourdough is the star — everything else serves it.</p>
-              <p style="margin-top:0.4rem;">✶ <strong>Fast service.</strong> A tight menu that moves.</p>
-              <p style="margin-top:0.4rem;">✶ <strong>Mythic experience.</strong> The gatekeeper vibe is part of the meal.</p>
+              <p style="margin-top:.4rem;">✶ <strong>Fast service.</strong> A tight menu that moves.</p>
+              <p style="margin-top:.4rem;">✶ <strong>Mythic experience.</strong> The gatekeeper vibe is part of the meal.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact -->
+    <!-- Contact / Summon -->
     <section id="contact" class="contact">
       <div class="container">
         <div class="section-header">
@@ -836,8 +812,7 @@
                 src="https://CerberusBites.setmore.com"
                 loading="lazy"
                 scrolling="yes"
-                title="Cerberus Bites booking calendar">
-              </iframe>
+                title="Cerberus Bites booking calendar"></iframe>
             </div>
           </div>
 
@@ -862,6 +837,7 @@
         <div>© <span id="year"></span> Cerberus Bites. All rights reserved.</div>
         <div class="footer-links">
           <span>Feast in the Underworld.</span>
+          <span>Guarded by Cerberus.</span>
         </div>
       </div>
     </div>
@@ -869,15 +845,15 @@
 
   <script>
     /* ==========================================================
-       Pagan Sabbat Color Shifting (between sabbats = base)
+       1) Pagan Sabbat Color Shifting (between sabbats = base)
        ========================================================== */
-    function fmt(d) {
-      const m = String(d.getMonth() + 1).padStart(2, "0");
-      const day = String(d.getDate()).padStart(2, "0");
+    function fmt(d){
+      const m=String(d.getMonth()+1).padStart(2,"0");
+      const day=String(d.getDate()).padStart(2,"0");
       return `${m}/${day}`;
     }
 
-    const sabbats = [
+    const sabbats=[
       { key:"yule", name:"Yule", month:11, day:21, windowDays:12,
         palette:{ bg:"#050308", bgAlt:"#0c050b", accent:"#2aa1ff", accentSoft:"#1b3a6a", gold:"#f5c97a", text:"#f4f2f6", muted:"#b3a9c0", border:"#2a2a44" } },
       { key:"imbolc", name:"Imbolc", month:1, day:1, windowDays:10,
@@ -896,107 +872,287 @@
         palette:{ bg:"#040207", bgAlt:"#0b0410", accent:"#8f2cff", accentSoft:"#3b0f6d", gold:"#f5c97a", text:"#f4f2f6", muted:"#c0b4d1", border:"#2f1b3a" } },
     ];
 
-    const BASE = {
-      bg: "#050308",
-      bgAlt: "#0c050b",
-      accent: "#ca3400",
-      accentSoft: "#7e0f1d",
-      gold: "#f5c97a",
-      text: "#f4f2f6",
-      muted: "#b3a9c0",
-      border: "#312033"
-    };
+    const BASE={ bg:"#050308", bgAlt:"#0c050b", accent:"#ca3400", accentSoft:"#7e0f1d", gold:"#f5c97a", text:"#f4f2f6", muted:"#b3a9c0", border:"#312033" };
 
-    function clampDateToYear(now, month, day) {
-      return new Date(now.getFullYear(), month, day, 12, 0, 0);
+    function clampDateToYear(now,month,day){
+      return new Date(now.getFullYear(),month,day,12,0,0);
     }
-    function dayDiff(a, b) {
-      const ms = 24 * 60 * 60 * 1000;
-      const ua = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-      const ub = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-      return Math.round((ua - ub) / ms);
+    function dayDiff(a,b){
+      const ms=24*60*60*1000;
+      const ua=Date.UTC(a.getFullYear(),a.getMonth(),a.getDate());
+      const ub=Date.UTC(b.getFullYear(),b.getMonth(),b.getDate());
+      return Math.round((ua-ub)/ms);
     }
-    function applyPalette(p) {
-      const r = document.documentElement.style;
-      r.setProperty("--bg", p.bg);
-      r.setProperty("--bg-alt", p.bgAlt);
-      r.setProperty("--accent", p.accent);
-      r.setProperty("--accent-soft", p.accentSoft);
-      r.setProperty("--gold", p.gold);
-      r.setProperty("--text", p.text);
-      r.setProperty("--muted", p.muted);
-      r.setProperty("--border", p.border);
+    function applyPalette(p,themeName,windowLabel){
+      const r=document.documentElement.style;
+      r.setProperty("--bg",p.bg);
+      r.setProperty("--bg-alt",p.bgAlt);
+      r.setProperty("--accent",p.accent);
+      r.setProperty("--accent-soft",p.accentSoft);
+      r.setProperty("--gold",p.gold);
+      r.setProperty("--text",p.text);
+      r.setProperty("--muted",p.muted);
+      r.setProperty("--border",p.border);
+      r.setProperty("--theme-name",`"${themeName}"`);
+      r.setProperty("--theme-window",`"${windowLabel}"`);
     }
-    function setHolidayTheme() {
-      const now = new Date();
-      let active = null;
 
-      for (const s of sabbats) {
-        const targetThisYear = clampDateToYear(now, s.month, s.day);
-        const targetPrevYear = new Date(now.getFullYear() - 1, s.month, s.day, 12, 0, 0);
-        const targetNextYear = new Date(now.getFullYear() + 1, s.month, s.day, 12, 0, 0);
+    function setHolidayTheme(){
+      const now=new Date();
+      let active=null;
 
-        for (const t of [targetPrevYear, targetThisYear, targetNextYear]) {
-          const d = Math.abs(dayDiff(now, t));
-          if (d <= s.windowDays) {
-            if (!active || d < active.distance) active = { sabbat: s, target: t, distance: d };
+      for(const s of sabbats){
+        const tThis=clampDateToYear(now,s.month,s.day);
+        const tPrev=new Date(now.getFullYear()-1,s.month,s.day,12,0,0);
+        const tNext=new Date(now.getFullYear()+1,s.month,s.day,12,0,0);
+        for(const t of [tPrev,tThis,tNext]){
+          const d=Math.abs(dayDiff(now,t));
+          if(d<=s.windowDays){
+            if(!active || d<active.distance) active={sabbat:s,target:t,distance:d};
           }
         }
       }
 
-      if (active) {
-        applyPalette(active.sabbat.palette);
-      } else {
-        applyPalette(BASE);
+      if(active){
+        const s=active.sabbat;
+        const start=new Date(active.target); start.setDate(start.getDate()-s.windowDays);
+        const end=new Date(active.target); end.setDate(end.getDate()+s.windowDays);
+        applyPalette(s.palette,s.name,`${fmt(start)}–${fmt(end)}`);
+        return {name:s.name, window:`${fmt(start)}–${fmt(end)}`};
       }
+
+      applyPalette(BASE,"Between Sabbats","Base palette");
+      return {name:"Between Sabbats", window:"Base palette"};
     }
 
-    /* Seasonal shout-out (melt/soup safe copy) */
-    function setSeasonCallout() {
-      const seasonCallout = document.getElementById("seasonCallout");
-      const seasonMessage = seasonCallout ? seasonCallout.querySelector(".season-message") : null;
-      const seasonTitleEl = seasonCallout ? seasonCallout.querySelector(".season-title") : null;
-      if (!seasonCallout || !seasonMessage || !seasonTitleEl) return;
+    /* ==========================================================
+       2) Seasonal Shout-Out (melt/soup friendly)
+       ========================================================== */
+    function setSeasonCallout(){
+      const seasonCallout=document.getElementById("seasonCallout");
+      const seasonMessage=seasonCallout?seasonCallout.querySelector(".season-message"):null;
+      const seasonTitleEl=seasonCallout?seasonCallout.querySelector(".season-title"):null;
+      if(!seasonCallout||!seasonMessage||!seasonTitleEl) return;
 
-      const now = new Date();
-      const m = now.getMonth();
-      const titles = ["🔥 Seasonal Shout-Out 🔥", "The Season Hungers…", "A Sign from the Gate"];
-      seasonTitleEl.textContent = titles[Math.floor(Math.random() * titles.length)];
+      const now=new Date();
+      const m=now.getMonth();
+      const titles=["🔥 Seasonal Shout-Out 🔥","The Season Hungers…","A Sign from the Gate"];
+      seasonTitleEl.textContent=titles[Math.floor(Math.random()*titles.length)];
 
-      let msg = "";
-      if (m === 11 || m === 0 || m === 1) {
-        msg = `❄️ <strong>Cold nights at the gate</strong><br>Soup hits harder in winter — add Charred Tomato Soup to any melt for +$3.`;
-      } else if (m >= 2 && m <= 4) {
-        msg = `🌿 <strong>Spring returns</strong><br>Persephone’s Garden is in bloom — roasted mushrooms, onion, herb oil.`;
-      } else if (m >= 5 && m <= 7) {
-        msg = `☀️ <strong>Summer heat</strong><br>Hellfire Chicken brings the ember — ask for extra char if you’re brave.`;
+      let msg="";
+      if(m===11||m===0||m===1){
+        msg=`❄️ <strong>Cold nights at the gate</strong><br>
+             Soup hits harder in winter — add Charred Tomato Soup to any melt for +$3.`;
+      } else if(m>=2 && m<=4){
+        msg=`🌿 <strong>Spring returns</strong><br>
+             Persephone’s Garden is in bloom — roasted mushrooms, onion, herb oil.`;
+      } else if(m>=5 && m<=7){
+        msg=`☀️ <strong>Summer heat</strong><br>
+             Hellfire Chicken brings the ember — ask for extra char if you’re brave.`;
       } else {
-        msg = `🍂 <strong>Autumn at the Black Gate</strong><br>Gatekeeper Turkey + soup is the cleanest combo when the air turns sharp.`;
+        msg=`🍂 <strong>Autumn at the Black Gate</strong><br>
+             Gatekeeper Turkey + soup is the cleanest combo when the air turns sharp.`;
       }
-      seasonMessage.innerHTML = msg;
+      seasonMessage.innerHTML=msg;
     }
 
-    /* Loader + header reveal */
-    function hideLoader() {
-      document.body.classList.add('loaded');
-      const header = document.querySelector('.hb-header');
-      if (header) header.classList.add('revealed');
+    /* ==========================================================
+       3) Secret menu hover/tap
+       ========================================================== */
+    function initSecretMenu(){
+      const star=document.getElementById("secretStar");
+      const secret=document.getElementById("secretMenu");
+      if(!star||!secret) return;
+
+      let hideTimeout;
+      function showSecret(){
+        clearTimeout(hideTimeout);
+        secret.classList.add("visible");
+        star.classList.add("active");
+        secret.setAttribute("aria-hidden","false");
+      }
+      function scheduleHide(){
+        hideTimeout=setTimeout(()=>{
+          secret.classList.remove("visible");
+          star.classList.remove("active");
+          secret.setAttribute("aria-hidden","true");
+        },200);
+      }
+      star.addEventListener("mouseenter",showSecret);
+      star.addEventListener("mouseleave",scheduleHide);
+      secret.addEventListener("mouseenter",showSecret);
+      secret.addEventListener("mouseleave",scheduleHide);
+
+      star.addEventListener("click",(e)=>{
+        e.preventDefault();
+        const visible=secret.classList.toggle("visible");
+        star.classList.toggle("active",visible);
+        secret.setAttribute("aria-hidden",String(!visible));
+      });
     }
 
-    window.addEventListener('load', function () {
-      document.getElementById('year').textContent = new Date().getFullYear();
-      setHolidayTheme();
-      setSeasonCallout();
+    /* ==========================================================
+       4) Sold Out / Almost Gone Tracker (local-only)
+       ========================================================== */
+    const TRACKED = [
+      { id:"cerberus_melt", name:"Cerberus Melt", warnAt:2, defaultLeft:6 },
+      { id:"gatekeeper_turkey", name:"Gatekeeper Turkey", warnAt:2, defaultLeft:6 },
+      { id:"hellfire_chicken", name:"Hellfire Chicken", warnAt:2, defaultLeft:6 },
+      { id:"persephone_garden", name:"Persephone’s Garden", warnAt:2, defaultLeft:4 },
+      { id:"tomato_soup", name:"Charred Tomato Soup", warnAt:2, defaultLeft:8 },
+    ];
+    const INV_KEY="cb_inventory_v1";
+
+    function getState(){
+      try{
+        const raw=JSON.parse(localStorage.getItem(INV_KEY));
+        if(raw && raw.items) return raw;
+      }catch(e){}
+      // init
+      const items={};
+      TRACKED.forEach(it=>{
+        items[it.id]={ left: it.defaultLeft, sold:false };
+      });
+      const init={ items };
+      localStorage.setItem(INV_KEY, JSON.stringify(init));
+      return init;
+    }
+    function setState(next){
+      localStorage.setItem(INV_KEY, JSON.stringify(next));
+    }
+    function statusFor(st, warnAt){
+      if(!st) return "OK";
+      if(st.sold || st.left<=0) return "SOLD OUT";
+      if(st.left<=warnAt) return "ALMOST GONE";
+      return "OK";
+    }
+
+    // Staff helpers: run in DevTools console:
+    // CerberusInv.dec("cerberus_melt")  CerberusInv.sold("tomato_soup", true)  CerberusInv.reset()
+    window.CerberusInv = {
+      get: ()=>getState(),
+      set: (id,left)=>{ const s=getState(); if(s.items[id]){ s.items[id].left=Math.max(0,Number(left)||0); s.items[id].sold=(s.items[id].left<=0); setState(s);} },
+      dec: (id,n=1)=>{ const s=getState(); if(s.items[id]){ s.items[id].left=Math.max(0,s.items[id].left-(Number(n)||1)); s.items[id].sold=(s.items[id].left<=0); setState(s);} },
+      inc: (id,n=1)=>{ const s=getState(); if(s.items[id]){ s.items[id].left=s.items[id].left+(Number(n)||1); s.items[id].sold=false; setState(s);} },
+      sold: (id,on=true)=>{ const s=getState(); if(s.items[id]){ s.items[id].sold=!!on; if(on) s.items[id].left=0; setState(s);} },
+      reset: ()=>{ localStorage.removeItem(INV_KEY); getState(); }
+    };
+
+    function renderInventory(){
+      const state=getState();
+      const list=TRACKED.map(it=>{
+        const st=state.items[it.id];
+        const status=statusFor(st,it.warnAt);
+        return { it, st, status };
+      });
+
+      // Apply classes + SOLD OUT stamps to menu items
+      list.forEach(x=>{
+        const el=document.querySelector(`[data-id="${x.it.id}"]`);
+        if(!el) return;
+        el.classList.toggle("is-soldout", x.status==="SOLD OUT");
+      });
+
+      // Ops cards
+      const almost = list.filter(x=>x.status==="ALMOST GONE").sort((a,b)=>a.st.left-b.st.left);
+      const sold   = list.filter(x=>x.status==="SOLD OUT");
+      const ok     = list.filter(x=>x.status!=="SOLD OUT").sort((a,b)=>a.st.left-b.st.left);
+
+      // 1) Almost Gone
+      const elAlmost=document.getElementById("opsAlmostGone");
+      if(elAlmost){
+        elAlmost.classList.toggle("is-soldout", false);
+        if(almost.length===0){
+          elAlmost.querySelector("p").textContent="Nothing in the danger zone (yet).";
+        }else{
+          elAlmost.querySelector("p").textContent = almost.slice(0,3)
+            .map(x=>`${x.it.name} — ${x.st.left} left`).join(" • ");
+        }
+      }
+
+      // 2) Sold Out
+      const elSold=document.getElementById("opsSoldOut");
+      if(elSold){
+        if(sold.length===0){
+          elSold.classList.toggle("is-soldout", false);
+          elSold.querySelector("p").textContent="No sell-outs yet.";
+        }else{
+          elSold.classList.toggle("is-soldout", true);
+          elSold.querySelector("p").textContent = sold.slice(0,3).map(x=>x.it.name).join(" • ") + (sold.length>3?` +${sold.length-3} more`:"");
+        }
+      }
+
+      // 3) Batch Counter (no “limited batches” wording; just counts)
+      const elBatch=document.getElementById("opsBatchCounter");
+      if(elBatch){
+        const totalLeft = ok.reduce((sum,x)=>sum + Math.max(0,x.st.left),0);
+        elBatch.classList.toggle("is-soldout", totalLeft===0);
+        elBatch.querySelector("p").textContent = `${totalLeft} total left • ${almost.length} low • ${ok.length} live`;
+      }
+
+      // 4) Next Drop (editable via CerberusOps)
+      const elDrop=document.getElementById("opsNextDrop");
+      if(elDrop){
+        const ops = window.CerberusOps ? window.CerberusOps.get() : { nextDrop:"Next batch in ~20 min", nextDropTime:"" };
+        const text = ops.nextDropTime ? `Next drop: ${ops.nextDropTime}` : (ops.nextDrop || "Next drop soon");
+        elDrop.classList.toggle("is-soldout", false);
+        elDrop.querySelector("p").textContent=text;
+      }
+
+      // Show SOLD OUT stamp in cards when appropriate (only on sold-out cards)
+      // Cards already toggle .is-soldout; stamp text is exactly "SOLD OUT" per request.
+    }
+
+    /* Ops settings (for Next Drop text/time) */
+    (function(){
+      const OPS_KEY="cb_ops_settings_v1";
+      const defaults={ nextDrop:"Next batch in ~20 min", nextDropTime:"" };
+      function getOps(){
+        try{ return Object.assign({}, defaults, JSON.parse(localStorage.getItem(OPS_KEY))||{}); }
+        catch(e){ return Object.assign({}, defaults); }
+      }
+      function setOps(next){ localStorage.setItem(OPS_KEY, JSON.stringify(next)); }
+      window.CerberusOps = {
+        get: ()=>getOps(),
+        set: (obj)=>setOps(Object.assign({}, getOps(), obj))
+      };
+    })();
+
+    /* ==========================================================
+       5) Loader + header reveal + fail-safe
+       ========================================================== */
+    function hideLoader(){
+      document.body.classList.add("loaded");
+      const header=document.querySelector(".hb-header");
+      if(header) header.classList.add("revealed");
+    }
+
+    window.addEventListener("load",()=>{
+      document.getElementById("year").textContent=new Date().getFullYear();
       hideLoader();
     });
-
     setTimeout(hideLoader, 2500);
 
-    window.addEventListener('scroll', function () {
-      const header = document.querySelector('.hb-header');
-      if (!header) return;
-      header.classList.toggle('scrolled', window.scrollY > 20);
+    window.addEventListener("scroll",()=>{
+      const header=document.querySelector(".hb-header");
+      if(!header) return;
+      header.classList.toggle("scrolled", window.scrollY>20);
     });
+
+    /* ==========================================================
+       6) Boot
+       ========================================================== */
+    (function boot(){
+      setHolidayTheme();
+      setSeasonCallout();
+      initSecretMenu();
+
+      // inventory render loop
+      window.addEventListener("storage", renderInventory);
+      window.addEventListener("load", renderInventory);
+      setInterval(renderInventory, 1500);
+      renderInventory();
+    })();
   </script>
 </body>
 </html>
