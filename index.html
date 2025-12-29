@@ -186,7 +186,6 @@
       letter-spacing:.1em;
       text-transform:uppercase;
     }
-    /* remove subtitle from header area */
     .nav-brand-text .brand-subtitle{display:none}
 
     .nav-right{display:flex;align-items:center}
@@ -436,7 +435,7 @@
     }
     .menu-art h4{font-size:.9rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:.5rem}
     .menu-art p{color:var(--muted)}
-    .menu-spell{font-family:"Georgia","Times New Roman",serif;font-style:italic;margin-top:.5rem;color:#f8e8c4}
+    .menu-spell{font-family:"Georgia","Times New Roman",serif;font-style:italic;margin-top:.6rem;color:#f8e8c4}
 
     /* About/Lore */
     .about-grid{
@@ -564,7 +563,6 @@
           </a>
           <div class="nav-brand-text">
             <div class="brand-name">Cerberus Bites</div>
-            <div class="brand-subtitle">Sourdough from the Underworld</div>
           </div>
         </div>
 
@@ -627,9 +625,7 @@
                   <p>Loading timing…</p>
                 </div>
               </div>
-              <div style="margin-top:.6rem;font-size:.72rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;">
-                Staff PIN: <span style="color:var(--gold);font-weight:600;">1395</span>
-              </div>
+              <!-- Staff PIN removed from visible UI -->
             </div>
           </div>
 
@@ -644,7 +640,7 @@
           <div class="section-eyebrow">The Wicked Feast</div>
           <div class="section-title-row">
             <h2 class="section-title">Cerberus Bites Menu</h2>
-            <button class="secret-star" id="secretStar" aria-label="Hidden sigil"><span>✶</span></button>
+            <button class="secret-star" id="secretStar" aria-label="Secret menu"><span>✶</span></button>
           </div>
           <p class="section-subtitle">
             All melts served on house-fermented sourdough.
@@ -706,29 +702,30 @@
             </div>
           </div>
 
+          <!-- Spellbook copy (no “hidden sigil” anywhere) -->
           <aside class="menu-art">
             <h4>The Spellbook of Sourdough</h4>
             <p>
-              House-fermented loaves. Butter-crisped edges. Cheese pulls that don’t lie.
-              The Hound tends the flame — Cerberus keeps the gate.
+              House-fermented loaves, butter-crisped edges, and cheese pulls forged in flame.
+              The Hound tends the heat — Cerberus keeps the gate.
             </p>
             <p class="menu-spell">“Three heads. One rule: the bread must crackle.”</p>
-            <p style="margin-top:.7rem;">
-              ✶ Vegan paths available<br>
-              ✶ Add soup to any melt +$3<br>
-              ✶ The hidden sigil reveals what the gate keeps
+            <p style="margin-top:.75rem;line-height:1.8;">
+              ✶ Vegan path: <strong>Persephone’s Garden</strong><br>
+              ✶ Dip rite: <strong>Charred Tomato Soup</strong> (+$3 with any melt)<br>
+              ✶ Off-menu: <strong>The Black Gate</strong> (ask if available)
             </p>
           </aside>
         </div>
 
-        <!-- SECRET MENU -->
+        <!-- SECRET MENU (Off-menu) -->
         <div id="secretMenu" class="secret-menu" aria-hidden="true">
           <div class="secret-menu-inner">
-            <div class="secret-menu-label">🔥 Off-Menu — Ask if Available</div>
+            <div class="secret-menu-label">🔥 Off-Menu</div>
             <div class="secret-menu-title">The Black Gate</div>
             <p class="secret-menu-desc">
-              Extra-butter sourdough, triple cheese, black garlic aioli, charred dark.
-              <br><em>When it’s gone, it’s gone.</em>
+              Extra-butter sourdough, triple cheese, black garlic aioli — charred dark.
+              <br><em>Ask if available.</em>
             </p>
             <p class="secret-menu-meta">
               <span class="secret-price">$12</span>
@@ -750,7 +747,6 @@
         </div>
 
         <div class="about-grid">
-          <!-- ✅ Crest restored to original wording/format -->
           <div class="about-crest">
             <img src="CerberusLogo2.png" alt="Cerberus Bites Crest Logo" class="about-crest-logo">
             <div class="about-crest-title">Official Crest of Cerberus Bites</div>
@@ -1004,6 +1000,13 @@
       return "OK";
     }
 
+    /* Staff PIN kept only in JS (not displayed) */
+    const STAFF_PIN = "1395";
+    window.CerberusAdmin = {
+      pin: STAFF_PIN,
+      check: (pin)=>String(pin)===STAFF_PIN
+    };
+
     window.CerberusInv={
       get: ()=>getState(),
       set: (id,left)=>{ const s=getState(); if(s.items[id]){ s.items[id].left=Math.max(0,Number(left)||0); s.items[id].sold=(s.items[id].left<=0); setState(s);} },
@@ -1052,7 +1055,7 @@
 
       const elSold=document.getElementById("opsSoldOut");
       if(elSold){
-        const has = sold.length>0;
+        const has=sold.length>0;
         elSold.classList.toggle("is-soldout", has);
         elSold.querySelector("p").textContent = has
           ? sold.slice(0,3).map(x=>x.it.name).join(" • ") + (sold.length>3?` +${sold.length-3} more`:"")
