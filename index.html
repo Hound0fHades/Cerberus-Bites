@@ -1,977 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Cerberus Bites | Sourdough from the Underworld</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Cerberus Bites — Sourdough from the Underworld. Melts on house-fermented sourdough, guarded by the three-headed hound." />
-  <link rel="canonical" href="https://hound0fhades.github.io/Hades-Wicked-Bites" />
-  <style>
-    :root{
-      /* Base (between sabbats) — kept as your familiar dark/ember palette */
-      --bg:#050308;
-      --bg-alt:#0c050b;
-      --accent:#ca3400;
-      --accent-soft:#7e0f1d;
-      --gold:#f5c97a;
-      --text:#f4f2f6;
-      --muted:#b3a9c0;
-      --border:#312033;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background: radial-gradient(circle at top, #1b0710 0, var(--bg) 55%, #020107 100%);
-      color:var(--text);
-      line-height:1.6;
-      transition:background .4s ease,color .4s ease;
-    }
-    a{color:var(--gold);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .container{max-width:1100px;margin:0 auto;padding:0 1.25rem}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hound Of Hades</title>
 
-    /* Loading Overlay */
-    .loader-overlay{
-      position:fixed;inset:0;
-      background: radial-gradient(circle at top, #2b0915 0, var(--bg) 55%, #020107 100%);
-      display:flex;align-items:center;justify-content:center;
-      z-index:9999;
-      transition:opacity .6s ease,transform .6s ease;
-    }
-    .loader-inner{
-      text-align:center;
-      padding:1.5rem 2rem;
-      border-radius:20px;
-      border:1px solid rgba(245,201,122,.4);
-      background: radial-gradient(circle at top, rgba(126,15,29,.9), rgba(5,3,8,.98));
-      box-shadow:0 0 30px rgba(0,0,0,.9);
-    }
-    .loader-symbol{
-      width:52px;height:52px;margin:0 auto .8rem;
-      border-radius:999px;
-      border:1px solid rgba(245,201,122,.7);
-      display:flex;align-items:center;justify-content:center;
-      font-family:"Georgia","Times New Roman",serif;
-      font-size:1.1rem;letter-spacing:.12em;text-transform:uppercase;
-      background: radial-gradient(circle, var(--accent) 0, var(--bg) 65%);
-      color:#fdf3e0;
-      box-shadow:0 0 22px rgba(202,52,0,.8);
-      animation:loaderPulse 1.6s ease-in-out infinite;
-    }
-    .loader-text-main{
-      font-family:"Georgia","Times New Roman",serif;
-      font-size:1rem;letter-spacing:.16em;text-transform:uppercase;
-      color:#f8e8c4;margin-bottom:.4rem;
-    }
-    .loader-text-sub{
-      font-size:.8rem;color:var(--muted);
-      letter-spacing:.08em;text-transform:uppercase;
-    }
-    body.loaded .loader-overlay{opacity:0;transform:translateY(-12px);pointer-events:none}
-    @keyframes loaderPulse{
-      0%{transform:scale(1);box-shadow:0 0 10px rgba(202,52,0,.4)}
-      50%{transform:scale(1.05);box-shadow:0 0 26px rgba(202,52,0,.9)}
-      100%{transform:scale(1);box-shadow:0 0 10px rgba(202,52,0,.4)}
-    }
+<link href="https://fonts.googleapis.com/css2?family=Satisfy&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 
-    /* Coming Soon Banner */
-    .coming-soon-banner{
-      background:linear-gradient(to right,var(--accent-soft),var(--accent),var(--accent-soft));
-      padding:.6rem 1rem;text-align:center;
-      color:#f5e6dc;
-      font-family:"Georgia","Times New Roman",serif;
-      font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;
-      box-shadow:0 0 18px rgba(202,52,0,.7);
-      animation:flameFlicker 2.4s ease-in-out infinite alternate;
-    }
-    @keyframes flameFlicker{
-      0%{opacity:.88;text-shadow:0 0 6px rgba(0,0,0,.8),0 0 14px rgba(245,201,122,.6);transform:translateY(0)}
-      40%{opacity:1;text-shadow:0 0 8px rgba(0,0,0,.9),0 0 18px rgba(245,201,122,.9);transform:translateY(-.5px)}
-      70%{opacity:.93;text-shadow:0 0 5px rgba(0,0,0,.7),0 0 12px rgba(245,201,122,.5);transform:translateY(.5px)}
-      100%{opacity:1;text-shadow:0 0 10px rgba(0,0,0,.95),0 0 22px rgba(245,201,122,1);transform:translateY(-.4px)}
-    }
+<style>
+:root{
+  --text:#ffffff;
+  --muted:rgba(255,255,255,.84);
+  --border:rgba(255,255,255,.16);
 
-    /* Sticky Header */
-    .hb-header{
-      position:sticky;top:0;z-index:50;
-      background:linear-gradient(to right, rgba(5,3,8,.96), rgba(7,1,1,.96));
-      border-bottom:1px solid rgba(245,201,122,.22);
-      backdrop-filter:blur(10px);
-      box-shadow:0 0 18px rgba(0,0,0,.9), inset 0 -1px 0 rgba(202,52,0,.3);
-      transform:translateY(-18px);opacity:0;
-      transition:transform .55s cubic-bezier(.22,.9,.35,1.1),opacity .55s ease;
-    }
-    .hb-header.revealed{transform:translateY(0);opacity:1}
-    .hb-header.scrolled{box-shadow:0 0 26px rgba(0,0,0,1), 0 0 30px rgba(202,52,0,.55)}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:1.25rem;padding:.4rem 0;font-size:.95rem}
-    .nav-links-left{display:flex;gap:1.4rem;font-size:.85rem}
-    .nav-links-left a{
-      position:relative;text-transform:uppercase;letter-spacing:.14em;
-      color:var(--muted);padding-bottom:.15rem;transition:color .2s ease
-    }
-    .nav-links-left a::after{
-      content:"";position:absolute;left:0;bottom:-.2rem;height:2px;width:0;border-radius:999px;
-      background:linear-gradient(to right,var(--gold),var(--accent),var(--accent-soft));
-      box-shadow:0 0 10px rgba(202,52,0,.8);opacity:0;
-      transition:width .22s ease,opacity .22s ease;
-    }
-    .nav-links-left a:hover{color:var(--gold)}
-    .nav-links-left a:hover::after{width:100%;opacity:1}
-    .nav-center{display:flex;align-items:center;gap:.6rem;text-align:center}
-    .nav-logo-link{display:flex;align-items:center;justify-content:center}
-    .logo-img{
-      height:90px;width:auto;display:block;
-      filter:drop-shadow(0 0 12px rgba(202,52,0,.8));
-      transition:height .25s ease,transform .25s ease,filter .25s ease;
-    }
-    .hb-header.scrolled .logo-img{height:68px;filter:drop-shadow(0 0 8px rgba(202,52,0,.7))}
-    .logo-img:hover{animation:logoFlame 1s ease-in-out infinite alternate}
-    @keyframes logoFlame{
-      0%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 10px rgba(202,52,0,.8))}
-      100%{transform:translateY(-1px) scale(1.03);filter:drop-shadow(0 0 18px rgba(202,52,0,1))}
-    }
-    .nav-brand-text .brand-name{
-      font-family:"Georgia","Times New Roman",serif;
-      font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;
-    }
-    .nav-brand-text .brand-subtitle{
-      font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)
-    }
-    .nav-right{display:flex;align-items:center}
-    .nav-cta{
-      border-radius:999px;border:1px solid rgba(245,201,122,.85);
-      padding:.45rem 1.2rem;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;
-      background:
-        radial-gradient(circle at top left, rgba(202,52,0,.9), transparent),
-        radial-gradient(circle at bottom right, rgba(126,15,29,.9), rgba(5,3,8,.95));
-      color:#fff;
-      box-shadow:0 0 16px rgba(202,52,0,.9), 0 0 4px rgba(245,201,122,.8);
-      cursor:pointer;position:relative;overflow:hidden;white-space:nowrap;
-    }
-    .nav-cta::after{
-      content:"";position:absolute;inset:0;
-      background:radial-gradient(circle at 0% 50%, rgba(245,201,122,.35), transparent 55%);
-      transform:translateX(-120%);transition:transform .35s ease-out;pointer-events:none;
-    }
-    .nav-cta:hover::after{transform:translateX(120%)}
-    .nav-cta:hover{box-shadow:0 0 22px rgba(202,52,0,1), 0 0 10px rgba(245,201,122,.9)}
+  --bg-overlay:rgba(0,0,0,.55);
 
-    main{padding-bottom:4rem}
+  /* seasonal vars (set by JS) */
+  --accent:#c0171d;
+  --accent2:#ff6b6b;
+  --glow-strong:rgba(255,255,255,.14);
 
-    /* Hero */
-    .hero{padding:3.2rem 0 2.6rem}
-    .hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:2.5rem;align-items:center}
-    .hero-eyebrow{text-transform:uppercase;letter-spacing:.3em;font-size:.7rem;color:var(--gold);opacity:.9;margin-bottom:.75rem}
-    .hero-title{
-      font-family:"Georgia","Times New Roman",serif;
-      font-size:clamp(2.1rem,4vw,2.9rem);
-      line-height:1.1;margin-bottom:1rem;text-shadow:0 0 18px rgba(0,0,0,.8)
-    }
-    .hero-title span{color:var(--accent)}
-    .hero-subtitle{color:var(--muted);font-size:.95rem;max-width:32rem;margin-bottom:1.2rem}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      border-radius:999px;border:1px solid transparent;
-      padding:.55rem 1.3rem;font-size:.85rem;
-      text-transform:uppercase;letter-spacing:.16em;cursor:pointer;text-decoration:none;
-    }
-    .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-soft));color:#fff;box-shadow:0 0 18px rgba(202,52,0,.7)}
-    .btn-primary:hover{filter:brightness(1.05)}
-    .hero-note{font-size:.8rem;color:var(--muted)}
+  /* glass */
+  --card-tint: rgba(0,0,0,.56);
+  --section-tint: rgba(0,0,0,.22);
 
-    /* Ops boxes (Tonight in the Underworld) */
-    .hero-art{
-      border-radius:24px;border:1px solid rgba(245,201,122,.3);
-      padding:1px;background:radial-gradient(circle at top, rgba(202,52,0,.8), var(--bg));
-      box-shadow:0 0 32px rgba(202,52,0,.45), 0 0 80px rgba(0,0,0,.9);
-    }
-    .hero-art-inner{
-      border-radius:22px;
-      background:radial-gradient(circle at bottom, var(--bg) 0, #140308 40%, var(--bg) 100%);
-      padding:1.3rem;display:flex;flex-direction:column;gap:1rem;
-    }
-    .hero-art-title{
-      font-family:"Georgia","Times New Roman",serif;
-      font-size:1.1rem;letter-spacing:.15em;text-transform:uppercase;
-    }
-    .hero-art-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;font-size:.8rem}
-    .hero-card{
-      border-radius:16px;border:1px solid rgba(245,201,122,.25);
-      padding:.7rem .8rem;
-      background:radial-gradient(circle at top left, rgba(126,15,29,.45), rgba(5,3,8,.9));
-      position:relative;overflow:hidden;
-    }
-    .hero-card h4{
-      font-size:.8rem;text-transform:uppercase;letter-spacing:.16em;color:var(--gold);margin-bottom:.3rem
-    }
-    .hero-card p{font-size:.78rem;color:var(--muted)}
+  --btn:rgba(0,0,0,.65);
+  --glow:rgba(255,255,255,.18);
+}
 
-    section{padding:2.5rem 0;border-top:1px solid rgba(245,201,122,.12)}
-    .section-header{margin-bottom:1.5rem;text-align:left}
-    .section-eyebrow{text-transform:uppercase;letter-spacing:.28em;font-size:.7rem;color:var(--gold);margin-bottom:.2rem}
-    .section-title{font-family:"Georgia","Times New Roman",serif;font-size:1.4rem;margin-bottom:.3rem}
-    .section-subtitle{font-size:.88rem;color:var(--muted);max-width:36rem}
+*{box-sizing:border-box}
+html,body{height:100%}
 
-    /* Seasonal callout */
-    .season-callout{
-      border:1px solid rgba(245,201,122,.35);
-      border-radius:14px;
-      padding:.9rem 1.2rem;
-      margin:1rem 0 1.5rem;
-      background:radial-gradient(circle at top left, rgba(202,52,0,.18), rgba(5,3,8,.9));
-      backdrop-filter:blur(4px);
-      box-shadow:0 0 18px rgba(0,0,0,.6);
-      animation:calloutFade .7s ease-out both;
-    }
-    .season-title{color:var(--gold);text-transform:uppercase;font-size:.88rem;letter-spacing:.16em}
-    .season-message{font-size:.82rem;color:var(--muted);margin-top:.25rem}
-    @keyframes calloutFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  color:var(--text);
+  min-height:100vh;
 
-    /* Menu */
-    .menu-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:2rem}
-    .menu-group-title{text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;color:var(--gold);margin-bottom:.6rem}
-    .menu-item{
-      padding:.7rem 0;border-bottom:1px dashed rgba(245,201,122,.25);
-      position:relative;
-    }
-    .menu-item:last-child{border-bottom:none}
-    .menu-item-name{
-      font-size:.95rem;display:flex;justify-content:space-between;gap:.4rem;align-items:flex-end;
-    }
-    .menu-price{color:var(--gold);font-size:.9rem;opacity:.95;white-space:nowrap}
-    .menu-item-desc{font-size:.82rem;color:var(--muted);margin-top:.15rem;max-width:40rem}
-    .menu-art{
-      border-radius:20px;border:1px solid rgba(245,201,122,.25);
-      padding:1rem;background:radial-gradient(circle at top, rgba(202,52,0,.55), var(--bg));
-      font-size:.82rem;
-    }
-    .menu-art h4{
-      font-size:.9rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:.5rem
-    }
-    .menu-art p{color:var(--muted)}
-    .menu-spell{font-family:"Georgia","Times New Roman",serif;font-style:italic;margin-top:.5rem;color:#f8e8c4}
+  /* ✅ no stretched weirdness */
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
 
-    /* SOLD OUT = HYPE stamp */
-    .hype-stamp{
-      position:absolute;top:12px;right:10px;
-      transform:rotate(-12deg);
-      border:2px solid rgba(245,201,122,.85);
-      color:#fff;
-      background:radial-gradient(circle at top left, rgba(202,52,0,.95), rgba(126,15,29,.85));
-      box-shadow:0 0 18px rgba(202,52,0,.8);
-      padding:.25rem .55rem;border-radius:10px;
-      font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;
-      opacity:0;pointer-events:none;
-    }
-    .menu-item.soldout .hype-stamp{opacity:1}
-    .menu-item.soldout .menu-item-name,
-    .menu-item.soldout .menu-item-desc{opacity:.45}
-    .menu-item.almost .menu-item-name{filter:brightness(1.05)}
-    .menu-item.almost::before{
-      content:"Almost Gone";
-      position:absolute;left:0;top:-10px;
-      font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;
-      color:var(--gold);
-      padding:.1rem .45rem;border-radius:999px;
-      border:1px solid rgba(245,201,122,.4);
-      background:rgba(5,3,8,.75);
-      box-shadow:0 0 10px rgba(245,201,122,.18);
-    }
+  padding:34px 14px;
+  background:
+    linear-gradient(var(--bg-overlay),var(--bg-overlay)),
+    url("cerberuslinkbackground.png");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
 
-    /* Contact */
-    .contact{background:radial-gradient(circle at top, #15020b, var(--bg))}
-    .summon-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:2rem}
-    .summon-calendar{
-      border-radius:20px;border:1px solid rgba(245,201,122,.25);
-      padding:1.3rem 1.4rem;
-      background:radial-gradient(circle at top, rgba(202,52,0,.6), var(--bg));
-      box-shadow:0 0 24px rgba(0,0,0,.9);
-      font-size:.85rem;color:var(--muted);
-    }
-    .summon-calendar h4{
-      font-size:.9rem;text-transform:uppercase;letter-spacing:.16em;color:var(--gold);margin-bottom:.4rem
-    }
-    .calendar-wrap{
-      margin-top:.6rem;border-radius:14px;overflow:hidden;
-      background:var(--bg);border:1px solid rgba(245,201,122,.3);
-      height:460px;
-    }
-    .calendar-wrap iframe{width:100%;height:100%;border:0}
+/* ✅ Desktop: center nicely, no long empty card */
+@media (min-width: 900px){
+  body{
+    align-items:center;
+    padding:48px 22px;
+  }
+}
 
-    .contact-card{
-      border-radius:20px;border:1px solid rgba(245,201,122,.25);
-      padding:1.3rem 1.4rem;
-      background:radial-gradient(circle at top left, rgba(126,15,29,.6), rgba(5,3,8,.96));
-      box-shadow:0 0 24px rgba(0,0,0,.9);
-      font-size:.85rem;color:var(--muted);
-    }
-    .contact-card-title{
-      font-size:.95rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:.4rem
-    }
-    .contact-card-list{list-style:none;padding-left:0;margin:.3rem 0 .6rem}
-    .contact-card-list li{margin-bottom:.25rem}
-    .contact-card-list li::before{content:"✶";color:var(--accent);margin-right:.35rem}
-    .contact-note{font-size:.78rem;color:var(--muted);margin-top:.3rem}
+.card{
+  width:100%;
+  max-width:560px;
 
-    footer{
-      border-top:1px solid rgba(245,201,122,.18);
-      padding:1rem 0 1.6rem;
-      font-size:.75rem;color:var(--muted);
-    }
-    .footer-row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between}
-    .footer-links{display:flex;flex-wrap:wrap;gap:.8rem}
+  /* ✅ IMPORTANT: prevents tall empty box */
+  height:auto;
+  min-height:unset;
 
-    /* Tiny debug line */
-    .tiny-debug{
-      font-size:.68rem;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      color:rgba(179,169,192,.75);
-      margin-top:.5rem;
-    }
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:22px;
 
-    @media (max-width:840px){
-      .hero-grid,.menu-grid,.summon-grid{grid-template-columns:minmax(0,1fr)}
-      .nav-links-left{display:none}
-      .nav{justify-content:space-between}
-      .logo-img{height:80px}
-      .hb-header.scrolled .logo-img{height:62px}
-      .calendar-wrap{height:380px}
-    }
-  </style>
+  background:
+    linear-gradient(135deg, rgba(0,0,0,.35), rgba(0,0,0,.52)),
+    radial-gradient(circle at 20% 10%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 58%),
+    radial-gradient(circle at 80% 90%, color-mix(in srgb, var(--accent2) 12%, transparent), transparent 62%),
+    var(--card-tint);
+
+  backdrop-filter: blur(10px);
+}
+
+/* ✅ Slightly narrower on very large screens (looks cleaner) */
+@media (min-width: 1100px){
+  .card{ max-width: 520px; }
+}
+
+.avatar{
+  width:120px;height:120px;
+  border-radius:50%;
+  border:3px solid #fff;
+  display:block;
+  margin:0 auto 12px;
+  object-fit:cover;
+  box-shadow:0 10px 24px rgba(0,0,0,.35);
+}
+
+h1{
+  font-family:Satisfy,cursive;
+  text-align:center;
+  margin:0 0 6px;
+  font-size:2.4rem;
+}
+
+.tagline{
+  text-align:center;
+  font-size:.92rem;
+  color:var(--muted);
+  margin:0 0 14px;
+}
+
+.socials{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin-bottom:16px;
+}
+
+.icon-btn{
+  width:44px;height:44px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:rgba(0,0,0,.22);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  color:inherit;
+  position:relative;
+  overflow:hidden;
+  transition:.2s;
+}
+
+.icon-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 24px rgba(0,0,0,.38);
+}
+
+.icon-btn::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background:
+    radial-gradient(circle at 30% 30%,var(--glow-strong),transparent 45%),
+    radial-gradient(circle at 70% 70%,var(--glow),transparent 55%);
+  opacity:0;
+  transition:.25s;
+}
+.icon-btn:hover::before{opacity:.7}
+.icon-btn i{font-size:22px;z-index:1}
+
+/* FetLife SVG */
+.icon-btn.fetlife svg{
+  width:26px;height:26px;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.35));
+}
+
+.tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:0 0 14px;
+}
+
+.tab{
+  padding:10px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:rgba(0,0,0,.26);
+  font-weight:700;
+  cursor:pointer;
+  color:var(--text);
+}
+.tab.active{background:rgba(255,255,255,.12)}
+
+.panel{display:none}
+.panel.active{display:block}
+
+.section-card{
+  border:1px solid color-mix(in srgb, var(--accent) 22%, var(--border));
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:14px;
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--accent) 8%, transparent),
+      color-mix(in srgb, var(--accent2) 6%, transparent)
+    ),
+    var(--section-tint);
+}
+
+.about-text p{
+  margin:0 0 14px;
+  line-height:1.8;
+  font-size:.97rem;
+  color:var(--muted);
+}
+.about-text p:last-child{ margin-bottom:0; }
+
+.links{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.link-btn{
+  padding:14px 16px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--accent) 18%, var(--btn)),
+      color-mix(in srgb, var(--accent2) 14%, var(--btn))
+    );
+  color:#fff;
+  text-decoration:none;
+  font-weight:800;
+  display:flex;
+  justify-content:space-between;
+  transition:.2s;
+}
+.link-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 30px rgba(0,0,0,.28);
+}
+
+/* ✅ Apple Music: tight on phone, a bit bigger on desktop */
+.music-wrap{
+  padding:8px;
+  border-radius:16px;
+  background:rgba(0,0,0,.20);
+  border:1px solid var(--border);
+}
+.music-wrap iframe{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  height:128px; /* phone */
+}
+@media(min-width:900px){
+  .music-wrap iframe{ height:150px; } /* desktop */
+}
+
+footer{
+  text-align:center;
+  font-size:.75rem;
+  color:rgba(255,255,255,.6);
+  margin-top:4px;
+}
+</style>
 </head>
+
 <body>
+<main class="card">
 
-  <!-- Loading overlay -->
-  <div class="loader-overlay">
-    <div class="loader-inner">
-      <div class="loader-symbol">CB</div>
-      <div class="loader-text-main">Summoning the Underworld Kitchen…</div>
-      <div class="loader-text-sub">Please wait, mortal.</div>
-      <div class="tiny-debug" id="tinyDebug">debug: booting…</div>
-    </div>
+  <img class="avatar" src="houndsprofile.png" alt="Hound Of Hades">
+
+  <h1>Hound Of Hades</h1>
+  <p class="tagline">Fantasy • Crafting • Culinary Adventures • Cosplay</p>
+
+  <div class="socials">
+    <a class="icon-btn" href="https://www.instagram.com/hound.0f.hades" target="_blank" rel="noopener">
+      <i class="bx bxl-instagram"></i>
+    </a>
+    <a class="icon-btn" href="https://www.tiktok.com/@hound..of..hades" target="_blank" rel="noopener">
+      <i class="bx bxl-tiktok"></i>
+    </a>
+    <a class="icon-btn" href="https://x.com/Hound_0f_Hades" target="_blank" rel="noopener">
+      <i class="fa-brands fa-x-twitter"></i>
+    </a>
+
+    <!-- FetLife (Age verification only) -->
+    <a class="icon-btn fetlife" href="https://fetlife.com/Hound0fHades" data-gate="dob" aria-label="FetLife">
+      <!-- heart + horns + tail -->
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M22 18c-8-10 1-14 6-7" fill="#8f0b10"/>
+        <path d="M42 18c8-10-1-14-6-7" fill="#8f0b10"/>
+        <path d="M32 50c-8-5-18-12-18-22 0-7 5-12 12-12 3 0 5 1 6 4 1-3 3-4 6-4 7 0 12 5 12 12 0 10-10 17-18 22z" fill="#c0171d"/>
+        <path d="M44 41c10 1 10 12-2 10" fill="none" stroke="#c0171d" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="42.5" cy="50" r="1.6" fill="#c0171d"/>
+      </svg>
+    </a>
+
+    <!-- Snapchat (Password gate) -->
+    <a class="icon-btn" href="https://www.snapchat.com/add/hound0fhades" data-gate="password" aria-label="Snapchat">
+      <i class="bx bxl-snapchat"></i>
+    </a>
   </div>
 
-  <!-- COMING SOON BANNER -->
-  <div class="coming-soon-banner">
-    🐺🔥 Cerberus Bites • COMING SOON • Sourdough from the Underworld 🐺🔥
+  <div class="tabs">
+    <button class="tab active" data-tab="about" type="button">About</button>
+    <button class="tab" data-tab="tributes" type="button">Tributes</button>
   </div>
 
-  <!-- HEADER -->
-  <header class="hb-header">
-    <div class="container">
-      <div class="nav">
-        <nav class="nav-links-left">
-          <a href="#menu">Menu</a>
-          <a href="#contact">Bookings</a>
-        </nav>
-
-        <div class="nav-center">
-          <a href="#top" class="nav-logo-link">
-            <img src="CerberusLogo2.png" alt="Cerberus Bites Logo" class="logo-img" />
-          </a>
-          <div class="nav-brand-text">
-            <div class="brand-name">Cerberus Bites</div>
-            <div class="brand-subtitle">Sourdough from the Underworld</div>
-          </div>
-        </div>
-
-        <div class="nav-right">
-          <a href="#contact" class="nav-cta">Summon the Hound</a>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <!-- Hero -->
-    <section class="hero" id="top">
-      <div class="container">
-        <div class="hero-grid">
-          <div>
-            <div class="hero-eyebrow">House-fermented sourdough • melts • soup • limited drops</div>
-            <h1 class="hero-title">
-              <span>🐺🔥 Cerberus Bites</span><br />
-              Sourdough from the Underworld.
-            </h1>
-            <p class="hero-subtitle">
-              All melts served on house-fermented sourdough — butter-crisped, molten, and guarded by the three-headed hound.
-              Limited batches. When it’s gone, it’s gone.
-            </p>
-            <div class="hero-actions">
-              <a href="#menu" class="btn btn-primary">View the Menu</a>
-              <div class="hero-note">Tip: “Sold Out = Hype” — check what’s almost gone before you blink.</div>
-            </div>
-          </div>
-
-          <!-- Ops Boxes -->
-          <div class="hero-art" aria-label="Tonight in the Underworld">
-            <div class="hero-art-inner">
-              <div class="hero-art-title">Tonight in the Underworld</div>
-              <div class="hero-art-grid">
-                <div class="hero-card" id="opsAlmostGone">
-                  <h4>What’s Almost Gone</h4>
-                  <p>Loading…</p>
-                </div>
-                <div class="hero-card" id="opsSoldOut">
-                  <h4>Sold Out = Hype</h4>
-                  <p>Loading…</p>
-                </div>
-                <div class="hero-card" id="opsBatchCounter">
-                  <h4>Batch Counter</h4>
-                  <p>Loading…</p>
-                </div>
-                <div class="hero-card" id="opsNextDrop">
-                  <h4>Next Drop</h4>
-                  <p>Loading…</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Menu -->
-    <section id="menu">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-eyebrow">The Sourdough Board</div>
-          <h2 class="section-title">Menu</h2>
-          <p class="section-subtitle">
-            All melts served on house-fermented sourdough. Soup for dipping. Limited drops — track what’s almost gone.
-          </p>
-
-          <!-- Seasonal / Holiday callout (kept — tied into theme shifting below) -->
-          <div id="seasonCallout" class="season-callout">
-            <strong class="season-title">Seasonal & Holiday Vibes</strong>
-            <p class="season-message">Loading the wheel…</p>
-          </div>
-        </div>
-
-        <div class="menu-grid">
-          <div>
-
-            <div class="menu-group-title">🥪 Melts</div>
-
-            <div class="menu-item" data-id="cerberus_melt">
-              <div class="hype-stamp">Sold Out = Hype</div>
-              <div class="menu-item-name">
-                <strong>Cerberus Melt</strong>
-                <span class="menu-price">$9</span>
-              </div>
-              <div class="menu-item-desc">Triple cheese on butter-crisped sourdough.</div>
-            </div>
-
-            <div class="menu-item" data-id="gatekeeper_turkey">
-              <div class="hype-stamp">Sold Out = Hype</div>
-              <div class="menu-item-name">
-                <strong>Gatekeeper Turkey Melt</strong>
-                <span class="menu-price">$11</span>
-              </div>
-              <div class="menu-item-desc">Smoked turkey, sharp cheddar, black garlic aioli.</div>
-            </div>
-
-            <div class="menu-item" data-id="hellfire_chicken">
-              <div class="hype-stamp">Sold Out = Hype</div>
-              <div class="menu-item-name">
-                <strong>Hellfire Chicken Melt</strong>
-                <span class="menu-price">$11</span>
-              </div>
-              <div class="menu-item-desc">Blackened chicken, pepper jack, ember mayo.</div>
-            </div>
-
-            <div class="menu-item" data-id="persephone_garden">
-              <div class="hype-stamp">Sold Out = Hype</div>
-              <div class="menu-item-name">
-                <strong>Persephone’s Garden (Vegan) 🌿</strong>
-                <span class="menu-price">$10</span>
-              </div>
-              <div class="menu-item-desc">Roasted mushrooms, caramelized onion, herb oil.</div>
-            </div>
-
-            <div class="menu-group-title" style="margin-top:1.2rem;">🥣 Sides</div>
-
-            <div class="menu-item" data-id="tomato_soup">
-              <div class="hype-stamp">Sold Out = Hype</div>
-              <div class="menu-item-name">
-                <strong>Charred Tomato Soup (Cup)</strong>
-                <span class="menu-price">$4</span>
-              </div>
-              <div class="menu-item-desc">Rich, smoky, perfect for dipping.</div>
-            </div>
-
-            <div class="menu-item" aria-label="Add-on">
-              <div class="menu-item-name">
-                <strong>Add to any melt</strong>
-                <span class="menu-price">+$3</span>
-              </div>
-              <div class="menu-item-desc">Upgrade your melt with an extra layer of underworld indulgence.</div>
-            </div>
-
-            <!-- Secret Menu: The Black Gate -->
-            <div id="secretMenu" class="menu-item" data-id="black_gate" style="margin-top:1.2rem;">
-              <div class="hype-stamp">Sold Out = Hype</div>
-              <div class="menu-item-name">
-                <strong>🔥 OFF-MENU (Ask if Available) — The Black Gate</strong>
-                <span class="menu-price">$12</span>
-              </div>
-              <div class="menu-item-desc">
-                Extra-butter sourdough, triple cheese, black garlic aioli, charred dark.<br />
-                Limited. When it’s gone, it’s gone.
-              </div>
-            </div>
-
-          </div>
-
-          <aside class="menu-art">
-            <h4>How the Board Works</h4>
-            <p>
-              We drop limited batches through the night. When an item hits zero, it’s marked sold out — and yes,
-              that’s the point: <em>Sold Out = Hype</em>.
-            </p>
-            <p class="menu-spell">“If it’s almost gone, grab it — the Underworld doesn’t wait.”</p>
-            <p style="margin-top:.7rem;">
-              Want to control counts?<br />
-              Open DevTools → Console and run:<br />
-              <code style="color:var(--gold)">CerberusTracker.sellOne("cerberus_melt")</code><br />
-              <code style="color:var(--gold)">CerberusTracker.setLeft("tomato_soup", 1)</code><br />
-              <code style="color:var(--gold)">CerberusTracker.setLeft("hellfire_chicken", 0)</code>
-            </p>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact / Bookings -->
-    <section id="contact" class="contact">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-eyebrow">Bookings & Inquiries</div>
-          <h2 class="section-title">Summon Cerberus Bites</h2>
-          <p class="section-subtitle">
-            Use the calendar to claim your date. For everything else, reach out directly.
-          </p>
-        </div>
-
-        <div class="summon-grid">
-          <div class="summon-calendar">
-            <h4>Claim Your Date</h4>
-            <p class="form-helper">Choose your time directly on the calendar.</p>
-            <div class="calendar-wrap">
-              <iframe
-                src="https://CerberusBites.setmore.com"
-                loading="lazy"
-                scrolling="yes"
-                frameborder="0"
-                title="Cerberus Bites booking calendar">
-              </iframe>
-            </div>
-          </div>
-
-          <aside class="contact-card">
-            <div class="contact-card-title">General Inquiries</div>
-            <p>For questions, collaborations, press, or other mischief:</p>
-            <ul class="contact-card-list">
-              <li><strong>Email:</strong> <a href="mailto:cerberusbites@hotmail.com">cerberusbites@hotmail.com</a></li>
-              <li><strong>Phone:</strong> <a href="tel:15409448898">540-944-8898</a></li>
-              <li><strong>Instagram:</strong> <a href="https://www.instagram.com/cerberus_bites" target="_blank">@cerberus_bites</a></li>
-              <li><strong>TikTok:</strong> <a href="https://www.tiktok.com/@cerberusbites" target="_blank">@cerberusbites</a></li>
-            </ul>
-            <p class="contact-note">Bookings live on the calendar. Messages here are for conversation, not reservations.</p>
-          </aside>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-row">
-        <div>© <span id="year"></span> Cerberus Bites. All rights reserved.</div>
-        <div class="footer-links">
-          <span>Sourdough from the Underworld.</span>
-          <span>Sold Out = Hype.</span>
-        </div>
-      </div>
+  <section class="panel active" id="about">
+    <div class="section-card about-text">
+      <p>As a true bibliophile, I find immense joy in the written fantasy world, whether in the form of reading or audiobooks. But my passions extend far beyond the literary realm - I'm an avid crafter, a curious explorer of the world, and a passionate seeker of new culinary adventures.</p>
+      <p>The thrill of travel, both domestically and internationally, fuels my spirit, with Ireland, Scotland, and Greece topping my dream destination list, the latter driven by a deep fascination with Greek mythology.</p>
+      <p>This past year, I've delved into the captivating world of cosplay, creating outfits that have been an absolute delight. The sheer joy of cooking, or simply embarking on culinary explorations, is an exhilarating experience unto itself.</p>
+      <p>Beyond these creative outlets, spending quality time with my partner, loved ones, and friends is what truly brings me the greatest joy and fulfillment. The opportunity to be immersed in these enriching experiences would be a dream come true!</p>
     </div>
 
-    <script>
-      // ====== Boot / Loader / Header ======
-      window.addEventListener('load', function () {
-        const yearSpan = document.getElementById('year');
-        if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    <div class="section-card music-wrap">
+      <iframe
+        src="https://embed.music.apple.com/us/playlist/links-list/pl.u-BNA6rk3FAXAo29?ls"
+        loading="lazy"
+        allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+        title="Apple Music Playlist">
+      </iframe>
+    </div>
+  </section>
 
-        const dbg = document.getElementById('tinyDebug');
-        if(dbg) dbg.textContent = "debug: loaded ✓";
+  <section class="panel" id="tributes">
+    <div class="section-card">
+      <div class="links">
+        <a class="link-btn" href="https://www.amazon.com/hz/wishlist/ls/2FX1Z68HYLD7Q" target="_blank" rel="noopener">Offerings</a>
+        <a class="link-btn" href="https://www.amazon.com/hz/wishlist/ls/G7B3W3YZACIY" target="_blank" rel="noopener">Offerings</a>
+        <a class="link-btn" href="https://cash.app/$Hound0fHades" target="_blank" rel="noopener">CashApp</a>
+        <a class="link-btn" href="https://venmo.com/code?user_id=4332566748333514766" target="_blank" rel="noopener">Venmo</a>
+      </div>
+    </div>
+  </section>
 
-        document.body.classList.add('loaded');
+  <footer>© Hound Of Hades</footer>
+</main>
 
-        const header = document.querySelector('.hb-header');
-        if (header) header.classList.add('revealed');
+<script>
+/* Tabs */
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById(t.dataset.tab).classList.add('active');
+  });
+});
 
-        // initial render after load
-        setTimeout(function(){
-          renderMenuFromState();
-        }, 50);
-      });
+/* Gates */
+const SNAP_PASSWORD = "I Bite";
 
-      window.addEventListener('scroll', function () {
-        const header = document.querySelector('.hb-header');
-        if (!header) return;
-        header.classList.toggle('scrolled', window.scrollY > 20);
-      });
+function verify18(){
+  const year = prompt("Age verification required.\nEnter your birth year (YYYY):");
+  if(!year) return false;
+  const y = parseInt(year, 10);
+  if(Number.isNaN(y)) return false;
+  return (new Date().getFullYear() - y) >= 18;
+}
 
-      // ====== Holiday / Sabbat Theme Shifter ======
-      // Keeps your base palette when "between sabbats". Only switches during the holiday windows.
-      (function(){
-        const d = new Date();
-        const m = d.getMonth(); // 0-11
-        const day = d.getDate();
+document.querySelectorAll('[data-gate]').forEach(link=>{
+  link.addEventListener('click', (e)=>{
+    const type = link.dataset.gate;
+    if(type === "password"){
+      e.preventDefault();
+      const pw = prompt("Password required:");
+      if(pw === SNAP_PASSWORD) window.open(link.href, "_blank", "noopener");
+      return;
+    }
+    if(type === "dob"){
+      e.preventDefault();
+      if(verify18()) window.open(link.href, "_blank", "noopener");
+      return;
+    }
+  });
+});
 
-        // Helper: apply CSS vars
-        function applyTheme(t){
-          const r = document.documentElement.style;
-          Object.keys(t).forEach(k=>r.setProperty(k, t[k]));
-        }
+/* Subtle Wheel of the Year (seasonal tint shift) */
+const themes=[
+  {start:[12,1], end:[1,31],  a:"#d6b15f", b:"#6fd3ff"}, // Yule
+  {start:[2,1],  end:[3,19],  a:"#ffd9f0", b:"#ffe58a"}, // Imbolc
+  {start:[3,20], end:[4,30],  a:"#78e08f", b:"#ffeaa7"}, // Ostara
+  {start:[5,1],  end:[6,19],  a:"#ff4d6d", b:"#ffb703"}, // Beltane
+  {start:[6,20], end:[7,31],  a:"#ffdd57", b:"#ff7a00"}, // Litha
+  {start:[8,1],  end:[9,21],  a:"#ff9f1c", b:"#d00000"}, // Lughnasadh
+  {start:[9,22], end:[10,31], a:"#a3cb38", b:"#b33939"}, // Mabon
+  {start:[11,1], end:[11,30], a:"#9b5de5", b:"#f15bb5"}  // Samhain
+];
 
-        // Default (between sabbats) = your original palette (already in :root)
-        // Holiday windows (simple, predictable windows so it actually triggers)
-        // You can tweak these anytime.
-        const themes = {
-          yule: {
-            "--accent":"#2b6f62",
-            "--accent-soft":"#163a33",
-            "--gold":"#f5c97a",
-            "--bg":"#050308",
-            "--bg-alt":"#0c050b"
-          },
-          imbolc: {
-            "--accent":"#d9c9ff",
-            "--accent-soft":"#6a4b9c",
-            "--gold":"#f5c97a",
-            "--bg":"#050308",
-            "--bg-alt":"#0c050b"
-          },
-          ostara: {
-            "--accent":"#46b36f",
-            "--accent-soft":"#2e6b45",
-            "--gold":"#f5c97a",
-            "--bg":"#050308",
-            "--bg-alt":"#0c050b"
-          },
-          beltane: {
-            "--accent":"#d63a2f",
-            "--accent-soft":"#7e0f1d",
-            "--gold":"#f5c97a",
-            "--bg":"#050308",
-            "--bg-alt":"#0c050b"
-          },
-          litha: {
-            "--accent":"#f28b00",
-            "--accent-soft":"#a93b00",
-            "--gold":"#f5c97a",
-            "--bg":"#050308",
-            "--bg-alt":"#0c050b"
-          },
-          lughnasadh: {
-            "--accent":"#c77c2a",
-            "--accent-soft":"#7a3e13",
-            "--gold":"#f5c97a",
-            "--bg":"#050308",
-            "--bg-alt":"#0c050b"
-          },
-          mabon: {
-            "--accent":"#b35b2e",
-            "--accent-soft":"#5c2412",
-            "--gold":"#f5c97a",
-            "--bg":"#050308",
-            "--bg-alt":"#0c050b"
-          },
-          samhain: {
-            "--accent":"#8b2cff",
-            "--accent-soft":"#3b0b63",
-            "--gold":"#f5c97a",
-            "--bg":"#050308",
-            "--bg-alt":"#0c050b"
-          }
-        };
+function md(m,d){ return m*100 + d; }
+const now = new Date();
+const today = md(now.getMonth()+1, now.getDate());
+let theme = themes[0];
 
-        // Windows (approx) — change to your preferred calendar if you want:
-        // Samhain: Oct 25–Nov 7
-        // Yule: Dec 18–Jan 5
-        // Imbolc: Jan 30–Feb 3
-        // Ostara: Mar 18–Mar 24
-        // Beltane: Apr 28–May 3
-        // Litha: Jun 18–Jun 24
-        // Lughnasadh: Jul 30–Aug 3
-        // Mabon: Sep 20–Sep 26
-        function inWindow(month, startDay, endDay){
-          return (m === month && day >= startDay && day <= endDay);
-        }
-        // Cross-year window helper for Yule (Dec -> Jan)
-        function inYule(){
-          return (m === 11 && day >= 18) || (m === 0 && day <= 5);
-        }
+themes.forEach(t=>{
+  const s = md(t.start[0], t.start[1]);
+  const e = md(t.end[0], t.end[1]);
+  const inRange = (s > e) ? (today >= s || today <= e) : (today >= s && today <= e);
+  if(inRange) theme = t;
+});
 
-        let holiday = "";
-        if(inWindow(9,25,31) || inWindow(10,1,7)) holiday = "samhain";
-        else if(inYule()) holiday = "yule";
-        else if(inWindow(0,30,31) || inWindow(1,1,3)) holiday = "imbolc";
-        else if(inWindow(2,18,24)) holiday = "ostara";
-        else if(inWindow(3,28,30) || inWindow(4,1,3)) holiday = "beltane";
-        else if(inWindow(5,18,24)) holiday = "litha";
-        else if(inWindow(6,30,31) || inWindow(7,1,3)) holiday = "lughnasadh";
-        else if(inWindow(8,20,26)) holiday = "mabon";
-        // else: between sabbats → keep your base palette
-
-        if(holiday && themes[holiday]) applyTheme(themes[holiday]);
-
-        // Seasonal/holiday callout text
-        const seasonCallout = document.getElementById("seasonCallout");
-        const seasonMessage = seasonCallout ? seasonCallout.querySelector(".season-message") : null;
-        const seasonTitleEl = seasonCallout ? seasonCallout.querySelector(".season-title") : null;
-
-        if(seasonCallout && seasonMessage && seasonTitleEl){
-          if(holiday){
-            const titles = {
-              samhain: "🕯️ Samhain Watchfires",
-              yule: "🌲 Yule Hearthlight",
-              imbolc: "🕯️ Imbolc Flame",
-              ostara: "🌿 Ostara Bloom",
-              beltane: "🔥 Beltane Fire",
-              litha: "☀️ Litha Sun",
-              lughnasadh: "🌾 Lughnasadh Harvest",
-              mabon: "🍂 Mabon Balance"
-            };
-            seasonTitleEl.textContent = titles[holiday] || "Seasonal & Holiday Vibes";
-            seasonMessage.innerHTML =
-              `Theme active: <strong>${seasonTitleEl.textContent}</strong><br>
-               Between sabbats, the site returns to its base underworld palette.`;
-          } else {
-            seasonTitleEl.textContent = "Between Sabbats";
-            seasonMessage.innerHTML =
-              `Base palette active — the Underworld is steady between the rites.<br>
-               Next shift happens during the holiday windows you set.`;
-          }
-        }
-      })();
-
-      // ===== Sold Out + Batch Tracker (Cerberus Bites) =====
-      const TRACKED = [
-        { id: "cerberus_melt", name: "Cerberus Melt" },
-        { id: "gatekeeper_turkey", name: "Gatekeeper Turkey Melt" },
-        { id: "hellfire_chicken", name: "Hellfire Chicken Melt" },
-        { id: "persephone_garden", name: "Persephone’s Garden (Vegan)" },
-        { id: "tomato_soup", name: "Charred Tomato Soup (Cup)" }
-      ];
-
-      const STORAGE_KEY = "cb_soldout_state_v1";
-
-      function getState(){
-        try{
-          const raw = localStorage.getItem(STORAGE_KEY);
-          if(raw) return JSON.parse(raw);
-        }catch(e){}
-
-        const items = {};
-        TRACKED.forEach(it=>{
-          items[it.id] = { left: 3, soldOut: false };
-        });
-        return { items };
-      }
-
-      function setState(next){
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-      }
-
-      function statusFor(st){
-        if(!st) return "LIVE";
-        if(st.soldOut || st.left <= 0) return "SOLD OUT";
-        if(st.left <= 1) return "ALMOST GONE";
-        return "LIVE";
-      }
-
-      // Optional helper you can use in DevTools
-      window.CerberusTracker = {
-        state: () => getState(),
-        setLeft: (id, n) => {
-          const s = getState();
-          if(s.items[id]){
-            s.items[id].left = Math.max(0, n);
-            s.items[id].soldOut = n <= 0;
-            setState(s);
-          }
-        },
-        sellOne: (id) => {
-          const s = getState();
-          if(s.items[id]){
-            s.items[id].left--;
-            if(s.items[id].left <= 0) s.items[id].soldOut = true;
-            setState(s);
-          }
-        },
-        reset: () => localStorage.removeItem(STORAGE_KEY)
-      };
-
-      // ===== Render menu styling (SOLD OUT / ALMOST) + sort Almost Gone to top =====
-      function renderMenuFromState(){
-        const state = getState();
-        if(!state || !state.items) return;
-
-        const menuSection = document.getElementById("menu");
-        const listRoot = menuSection ? menuSection.querySelector(".menu-grid > div") : null;
-        if(!listRoot) return;
-
-        const nodes = Array.from(document.querySelectorAll('.menu-item[data-id]'))
-          .filter(el => el.getAttribute("data-id") !== "black_gate"); // keep secret item fixed
-
-        // Update classes
-        nodes.forEach(el=>{
-          const id = el.getAttribute("data-id");
-          const st = state.items[id];
-          const status = statusFor(st);
-
-          el.classList.remove("soldout","almost");
-
-          if(status === "SOLD OUT") el.classList.add("soldout");
-          if(status === "ALMOST GONE") el.classList.add("almost");
-        });
-
-        // Move "Almost Gone" items to the top of their group (right under the Melts header)
-        // We only reorder the melt items (not add-on, not sides header).
-        const meltsHeader = listRoot.querySelector(".menu-group-title");
-        if(!meltsHeader) return;
-
-        // Identify melt items by id set (first 4)
-        const meltIds = new Set(["cerberus_melt","gatekeeper_turkey","hellfire_chicken","persephone_garden"]);
-        const meltEls = nodes.filter(el => meltIds.has(el.getAttribute("data-id")));
-
-        // Sort: almost first, then live, then sold out; within that least left first
-        meltEls.sort((a,b)=>{
-          const sa = statusFor(state.items[a.dataset.id]);
-          const sb = statusFor(state.items[b.dataset.id]);
-
-          const rank = (s)=> (s==="ALMOST GONE" ? 0 : s==="LIVE" ? 1 : 2);
-          const ra = rank(sa), rb = rank(sb);
-          if(ra !== rb) return ra - rb;
-
-          const la = (state.items[a.dataset.id]?.left ?? 999);
-          const lb = (state.items[b.dataset.id]?.left ?? 999);
-          return la - lb;
-        });
-
-        // Reinsert in order right after the Melts header
-        const firstMelt = listRoot.querySelector('.menu-item[data-id="cerberus_melt"]');
-        if(firstMelt){
-          meltEls.forEach(el=>{
-            listRoot.insertBefore(el, firstMelt);
-          });
-        }
-      }
-
-      // ===== Ops Boxes (Tonight in the Underworld) =====
-      (function(){
-        const OPS_KEY = "cb_ops_settings_v1";
-        function getOps(){
-          try{ return JSON.parse(localStorage.getItem(OPS_KEY)) || {}; }
-          catch(e){ return {}; }
-        }
-        function setOps(next){
-          localStorage.setItem(OPS_KEY, JSON.stringify(next));
-        }
-        const defaults = {
-          nextDrop: "Next batch in ~20 min",
-          nextDropTime: "",
-          statusNote: ""
-        };
-        function plural(n, word){
-          return n === 1 ? `${n} ${word}` : `${n} ${word}s`;
-        }
-
-        function renderOps(){
-          const state = (typeof getState === "function") ? getState() : null;
-          if(!state || !state.items) return;
-
-          const ops = Object.assign({}, defaults, getOps());
-
-          const list = TRACKED.map(it=>{
-            const st = state.items[it.id];
-            const status = statusFor(st);
-            return { it, st, status };
-          });
-
-          const available = list.filter(x=>x.status !== "SOLD OUT");
-          const soldout = list.filter(x=>x.status === "SOLD OUT");
-          const almost = list.filter(x=>x.status === "ALMOST GONE");
-
-          available.sort((a,b)=>(a.st?.left ?? 999) - (b.st?.left ?? 999));
-
-          // 1) Almost Gone box
-          const elAlmost = document.getElementById("opsAlmostGone");
-          if(elAlmost){
-            if(almost.length === 0){
-              elAlmost.querySelector("p").textContent = "Nothing in the danger zone (yet).";
-            } else {
-              const top = almost
-                .slice()
-                .sort((a,b)=>(a.st?.left ?? 999) - (b.st?.left ?? 999))
-                .slice(0,3)
-                .map(x=>`${x.it.name} — ${plural(x.st.left, "batch")} left`)
-                .join(" • ");
-              elAlmost.querySelector("p").textContent = top;
-            }
-          }
-
-          // 2) Sold Out box
-          const elSold = document.getElementById("opsSoldOut");
-          if(elSold){
-            if(soldout.length === 0){
-              elSold.querySelector("p").textContent = "No sell-outs yet. (For now.)";
-            } else {
-              const names = soldout.slice(0,3).map(x=>x.it.name).join(" • ");
-              const extra = soldout.length > 3 ? ` +${soldout.length - 3} more` : "";
-              elSold.querySelector("p").textContent = names + extra;
-            }
-          }
-
-          // 3) Batch Counter box
-          const elBatch = document.getElementById("opsBatchCounter");
-          if(elBatch){
-            const totalLeft = available.reduce((sum,x)=>sum + Math.max(0, x.st.left), 0);
-            const lowCount = almost.length;
-            const availCount = available.length;
-            elBatch.querySelector("p").textContent =
-              `${plural(totalLeft, "batch")} left • ${plural(lowCount, "item")} low • ${plural(availCount, "item")} live`;
-          }
-
-          // 4) Next Drop box
-          const elDrop = document.getElementById("opsNextDrop");
-          if(elDrop){
-            const text = ops.nextDropTime
-              ? `Next batch drop: ${ops.nextDropTime}`
-              : ops.nextDrop;
-            elDrop.querySelector("p").textContent = text;
-          }
-
-          // Sync menu visuals too
-          renderMenuFromState();
-        }
-
-        window.addEventListener("load", renderOps);
-        window.addEventListener("storage", renderOps);
-        setInterval(renderOps, 2000);
-
-        // Tiny helper for you in console:
-        // CerberusOps.set({ nextDropTime: "9:30 PM" })
-        window.CerberusOps = {
-          get: ()=>Object.assign({}, defaults, getOps()),
-          set: (obj)=>setOps(Object.assign({}, getOps(), obj))
-        };
-      })();
-    </script>
-  </footer>
+document.documentElement.style.setProperty("--accent", theme.a);
+document.documentElement.style.setProperty("--accent2", theme.b);
+document.documentElement.style.setProperty("--glow-strong", `color-mix(in srgb, ${theme.a} 30%, transparent)`);
+</script>
 </body>
 </html>
