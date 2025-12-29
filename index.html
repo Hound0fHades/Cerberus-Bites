@@ -360,7 +360,6 @@
     .season-message{font-size:.82rem;color:var(--muted);margin-top:.25rem}
     @keyframes calloutFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-    /* Secret star (base) */
     .secret-star{
       width:18px;height:18px;border-radius:999px;
       border:1px solid rgba(245,201,122,.55);
@@ -368,31 +367,12 @@
       font-size:.7rem;color:#f5e6dc;cursor:pointer;
       opacity:.45;
       box-shadow:0 0 6px rgba(245,201,122,.4);
-      transition:opacity .25s ease, transform .25s ease, box-shadow .25s ease, filter .25s ease;
+      transition:opacity .25s ease, transform .25s ease, box-shadow .25s ease;
       background:radial-gradient(circle at top, rgba(245,201,122,.2), transparent 60%);
     }
     .secret-star span{transform:translateY(-.5px)}
     .secret-star:hover{opacity:.9;transform:scale(1.05);box-shadow:0 0 10px rgba(245,201,122,.8)}
     .secret-star.active{opacity:1;box-shadow:0 0 12px rgba(245,201,122,1),0 0 20px rgba(202,52,0,.9)}
-
-    /* ✅ Option A: accidental reveal only */
-    .secret-star.is-hidden{
-      opacity:0;
-      transform:scale(.92);
-      pointer-events:none;
-      filter:blur(.4px);
-    }
-    .secret-star.is-revealed{
-      opacity:.55;
-      transform:scale(1);
-      pointer-events:auto;
-      filter:none;
-    }
-    .secret-hotspot{
-      position:relative;
-      user-select:none;
-      cursor:default;
-    }
 
     .secret-menu{
       margin-top:1.4rem;
@@ -548,6 +528,171 @@
       .hb-header.scrolled .logo-img{height:62px}
       .calendar-wrap{height:380px}
     }
+
+    /* ===== Hidden Admin Modal ===== */
+    .admin-modal{
+      position:fixed; inset:0;
+      display:none;
+      align-items:center; justify-content:center;
+      background:rgba(0,0,0,.62);
+      z-index:10000;
+      padding:1rem;
+    }
+    .admin-modal.open{ display:flex; }
+
+    .admin-card{
+      width:min(560px, 100%);
+      border-radius:18px;
+      border:1px solid rgba(245,201,122,.28);
+      background:radial-gradient(circle at top, rgba(15,3,10,.98), rgba(5,3,8,.98));
+      box-shadow:0 0 30px rgba(0,0,0,.9), 0 0 18px color-mix(in srgb, var(--accent) 35%, transparent);
+      padding:1rem 1.05rem 1.05rem;
+      color:var(--text);
+    }
+
+    .admin-head{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:1rem;
+      margin-bottom:.8rem;
+    }
+    .admin-kicker{
+      font-size:.72rem;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:var(--gold);
+      opacity:.9;
+    }
+    .admin-title{
+      font-family:"Georgia","Times New Roman",serif;
+      font-size:1.05rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .admin-close{
+      border:1px solid rgba(245,201,122,.25);
+      background:rgba(5,3,8,.55);
+      color:var(--gold);
+      border-radius:12px;
+      padding:.35rem .55rem;
+      cursor:pointer;
+    }
+
+    .admin-row{
+      display:grid;
+      grid-template-columns: 64px 1fr auto;
+      gap:.6rem;
+      align-items:center;
+      margin-bottom:.5rem;
+    }
+    .admin-label{
+      font-size:.78rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+    .admin-input{
+      width:100%;
+      border-radius:12px;
+      border:1px solid rgba(245,201,122,.25);
+      background:rgba(5,3,8,.55);
+      padding:.55rem .7rem;
+      color:var(--text);
+      outline:none;
+    }
+    .admin-input:focus{
+      border-color:rgba(245,201,122,.45);
+      box-shadow:0 0 0 3px rgba(202,52,0,.18);
+    }
+    .admin-btn{
+      border-radius:999px;
+      border:1px solid rgba(245,201,122,.28);
+      background:rgba(5,3,8,.55);
+      color:var(--gold);
+      padding:.5rem .9rem;
+      font-size:.75rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .admin-btn-primary{
+      background:linear-gradient(135deg, var(--accent), var(--accent-soft));
+      border-color:transparent;
+      color:#fff;
+      box-shadow:0 0 16px color-mix(in srgb, var(--accent) 55%, transparent);
+    }
+    .admin-btn-ghost{ background:rgba(245,201,122,.06); }
+
+    .admin-warn{
+      margin:.35rem 0 .6rem;
+      color:#ffd6d6;
+      font-size:.82rem;
+    }
+
+    .admin-mini{
+      color:var(--muted);
+      font-size:.82rem;
+      margin:.25rem 0 .75rem;
+    }
+
+    .admin-list{
+      display:flex;
+      flex-direction:column;
+      gap:.55rem;
+    }
+
+    .admin-item{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap:.6rem;
+      padding:.6rem .7rem;
+      border-radius:14px;
+      border:1px solid rgba(245,201,122,.18);
+      background:rgba(5,3,8,.45);
+    }
+    .admin-item h4{
+      margin:0;
+      font-size:.9rem;
+      color:var(--text);
+      font-weight:600;
+    }
+    .admin-item .admin-sub{
+      font-size:.75rem;
+      color:var(--muted);
+      margin-top:.1rem;
+    }
+    .admin-controls{
+      display:flex;
+      align-items:center;
+      gap:.35rem;
+    }
+    .admin-pill{
+      min-width:44px;
+      text-align:center;
+      padding:.35rem .55rem;
+      border-radius:999px;
+      border:1px solid rgba(245,201,122,.22);
+      color:var(--gold);
+      font-size:.8rem;
+      letter-spacing:.12em;
+      background:rgba(0,0,0,.25);
+    }
+    .admin-step{
+      width:38px; height:34px;
+      display:inline-flex; align-items:center; justify-content:center;
+      border-radius:12px;
+      border:1px solid rgba(245,201,122,.22);
+      background:rgba(5,3,8,.55);
+      color:var(--gold);
+      cursor:pointer;
+    }
+
+    .admin-footer{
+      display:flex;
+      justify-content:space-between;
+      gap:.6rem;
+      margin-top:.8rem;
+      flex-wrap:wrap;
+    }
   </style>
 </head>
 
@@ -657,13 +802,10 @@
       <div class="container">
         <div class="section-header">
           <div class="section-eyebrow">The Wicked Feast</div>
-
-          <!-- ✅ Hotspot wraps title row; star is hidden by default -->
-          <div class="section-title-row secret-hotspot" id="secretHotspot">
+          <div class="section-title-row">
             <h2 class="section-title">Cerberus Bites Menu</h2>
-            <button class="secret-star is-hidden" id="secretStar" aria-label="Extra details"><span>✶</span></button>
+            <button class="secret-star" id="secretStar" aria-label="Secret menu"><span>✶</span></button>
           </div>
-
           <p class="section-subtitle">
             All melts served on house-fermented sourdough.
           </p>
@@ -724,7 +866,7 @@
             </div>
           </div>
 
-          <!-- Spellbook copy (no secret/menu spoilers) -->
+          <!-- Spellbook (no off-menu mention) -->
           <aside class="menu-art">
             <h4>The Spellbook of Sourdough</h4>
             <p>
@@ -739,10 +881,10 @@
           </aside>
         </div>
 
-        <!-- SECRET MENU (The Black Gate) — no hints in copy above -->
+        <!-- SECRET MENU (only discoverable via ✶ button) -->
         <div id="secretMenu" class="secret-menu" aria-hidden="true">
           <div class="secret-menu-inner">
-            <div class="secret-menu-label">🔥</div>
+            <div class="secret-menu-label">—</div>
             <div class="secret-menu-title">The Black Gate</div>
             <p class="secret-menu-desc">
               Extra-butter sourdough, triple cheese, black garlic aioli, charred dark.
@@ -750,7 +892,7 @@
             </p>
             <p class="secret-menu-meta">
               <span class="secret-price">$12</span>
-              <span class="secret-badge">Limited</span>
+              <span class="secret-badge">—</span>
             </p>
           </div>
         </div>
@@ -849,6 +991,37 @@
       </div>
     </div>
   </footer>
+
+  <!-- Hidden Admin Modal (appears only after holding the header logo ~3s) -->
+  <div class="admin-modal" id="adminModal" aria-hidden="true">
+    <div class="admin-card" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+      <div class="admin-head">
+        <div>
+          <div class="admin-kicker">Manager</div>
+          <div class="admin-title" id="adminTitle">Cerberus Inventory</div>
+        </div>
+        <button class="admin-close" id="adminClose" aria-label="Close">✕</button>
+      </div>
+
+      <div class="admin-row">
+        <label class="admin-label" for="adminPin">PIN</label>
+        <input class="admin-input" id="adminPin" type="password" inputmode="numeric" placeholder="Enter PIN" />
+        <button class="admin-btn admin-btn-primary" id="adminUnlock">Unlock</button>
+      </div>
+
+      <div class="admin-warn" id="adminWarn" style="display:none;">Wrong PIN.</div>
+
+      <div id="adminControls" style="display:none;">
+        <div class="admin-mini">Tap + / − to adjust. “0” marks SOLD OUT automatically.</div>
+        <div class="admin-list" id="adminList"></div>
+
+        <div class="admin-footer">
+          <button class="admin-btn" id="adminReset">Reset Defaults</button>
+          <button class="admin-btn admin-btn-ghost" id="adminLock">Lock</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
     /* ==========================================================
@@ -969,9 +1142,6 @@
         secret.classList.add("visible");
         star.classList.add("active");
         secret.setAttribute("aria-hidden","false");
-        // keep star visible once discovered
-        star.classList.add("is-revealed");
-        star.classList.remove("is-hidden");
       }
       function scheduleHide(){
         hideTimeout=setTimeout(()=>{
@@ -990,40 +1160,7 @@
         const visible=secret.classList.toggle("visible");
         star.classList.toggle("active",visible);
         secret.setAttribute("aria-hidden",String(!visible));
-        if(visible){
-          star.classList.add("is-revealed");
-          star.classList.remove("is-hidden");
-        }
       });
-    }
-
-    /* ✅ Option A: accidental reveal hotspot */
-    function initAccidentalReveal(){
-      const hotspot=document.getElementById("secretHotspot");
-      const star=document.getElementById("secretStar");
-      const secret=document.getElementById("secretMenu");
-      if(!hotspot || !star) return;
-
-      let hideTimer;
-
-      function revealBriefly(){
-        clearTimeout(hideTimer);
-        star.classList.remove("is-hidden");
-        star.classList.add("is-revealed");
-
-        hideTimer=setTimeout(()=>{
-          if(!secret || !secret.classList.contains("visible")){
-            star.classList.add("is-hidden");
-            star.classList.remove("is-revealed");
-          }
-        },4500);
-      }
-
-      hotspot.addEventListener("click",(e)=>{
-        if(e.target.closest("#secretStar")) return;
-        revealBriefly();
-      });
-      hotspot.addEventListener("mouseenter",revealBriefly);
     }
 
     /* ==========================================================
@@ -1058,9 +1195,8 @@
     }
 
     /* Staff PIN kept only in JS (not displayed) */
-    const STAFF_PIN="1395";
-    window.CerberusAdmin={
-      pin: STAFF_PIN,
+    const STAFF_PIN = "1395";
+    window.CerberusAdmin = {
       check: (pin)=>String(pin)===STAFF_PIN
     };
 
@@ -1135,6 +1271,168 @@
       }
     }
 
+    /* ==========================================================
+       Hidden Admin Panel — hold HEADER logo ~3 seconds
+       ========================================================== */
+    function initHiddenAdminOnLogo(){
+      const headerLogoLink = document.querySelector('.hb-header .nav-logo-link');
+      if(!headerLogoLink) return;
+
+      const modal = document.getElementById("adminModal");
+      const closeBtn = document.getElementById("adminClose");
+      const unlockBtn = document.getElementById("adminUnlock");
+      const lockBtn = document.getElementById("adminLock");
+      const resetBtn = document.getElementById("adminReset");
+      const pinInput = document.getElementById("adminPin");
+      const warn = document.getElementById("adminWarn");
+      const controlsWrap = document.getElementById("adminControls");
+      const listEl = document.getElementById("adminList");
+
+      const HOLD_MS = 3000;
+      let holdTimer = null;
+      let holding = false;
+
+      function openModal(){
+        if(!modal) return;
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden","false");
+        if(warn) warn.style.display = "none";
+        if(controlsWrap) controlsWrap.style.display = "none";
+        if(pinInput){
+          pinInput.value = "";
+          setTimeout(()=>pinInput.focus(), 50);
+        }
+        renderAdminList(false);
+      }
+
+      function closeModal(){
+        if(!modal) return;
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden","true");
+        if(warn) warn.style.display = "none";
+        if(controlsWrap) controlsWrap.style.display = "none";
+      }
+
+      function startHold(e){
+        e.preventDefault();
+        if(holdTimer) clearTimeout(holdTimer);
+        holding = true;
+        holdTimer = setTimeout(()=>{
+          holding = false;
+          openModal();
+        }, HOLD_MS);
+      }
+      function cancelHold(){
+        holding = false;
+        if(holdTimer) clearTimeout(holdTimer);
+        holdTimer = null;
+      }
+
+      headerLogoLink.addEventListener("touchstart", startHold, {passive:false});
+      headerLogoLink.addEventListener("touchend", cancelHold);
+      headerLogoLink.addEventListener("touchcancel", cancelHold);
+      headerLogoLink.addEventListener("mousedown", startHold);
+      headerLogoLink.addEventListener("mouseup", cancelHold);
+      headerLogoLink.addEventListener("mouseleave", cancelHold);
+
+      headerLogoLink.addEventListener("click", (e)=>{
+        if(holding || holdTimer){
+          e.preventDefault();
+        }
+      });
+
+      if(closeBtn) closeBtn.addEventListener("click", closeModal);
+      if(modal) modal.addEventListener("click", (e)=>{ if(e.target === modal) closeModal(); });
+      window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeModal(); });
+
+      function renderAdminList(unlocked){
+        if(!listEl) return;
+        listEl.innerHTML = "";
+
+        const state = CerberusInv.get();
+        TRACKED.forEach(it=>{
+          const st = state.items[it.id];
+          const status = statusFor(st, it.warnAt);
+
+          const row = document.createElement("div");
+          row.className = "admin-item";
+
+          const leftCol = document.createElement("div");
+          leftCol.innerHTML = `
+            <h4>${it.name}</h4>
+            <div class="admin-sub">${status === "SOLD OUT" ? "SOLD OUT" : `${st.left} left`} • warn at ${it.warnAt}</div>
+          `;
+
+          const rightCol = document.createElement("div");
+          rightCol.className = "admin-controls";
+
+          const minus = document.createElement("button");
+          minus.className = "admin-step";
+          minus.type = "button";
+          minus.textContent = "−";
+          minus.disabled = !unlocked;
+
+          const pill = document.createElement("div");
+          pill.className = "admin-pill";
+          pill.textContent = String(st.left);
+
+          const plus = document.createElement("button");
+          plus.className = "admin-step";
+          plus.type = "button";
+          plus.textContent = "+";
+          plus.disabled = !unlocked;
+
+          minus.addEventListener("click", ()=>{
+            CerberusInv.dec(it.id, 1);
+            renderAdminList(true);
+            renderInventory();
+          });
+          plus.addEventListener("click", ()=>{
+            CerberusInv.inc(it.id, 1);
+            renderAdminList(true);
+            renderInventory();
+          });
+
+          rightCol.appendChild(minus);
+          rightCol.appendChild(pill);
+          rightCol.appendChild(plus);
+
+          row.appendChild(leftCol);
+          row.appendChild(rightCol);
+          listEl.appendChild(row);
+        });
+      }
+
+      function unlock(){
+        const pin = pinInput ? pinInput.value : "";
+        if(CerberusAdmin.check(pin)){
+          if(warn) warn.style.display = "none";
+          if(controlsWrap) controlsWrap.style.display = "block";
+          renderAdminList(true);
+          renderInventory();
+        } else {
+          if(warn) warn.style.display = "block";
+          if(controlsWrap) controlsWrap.style.display = "none";
+        }
+      }
+
+      if(unlockBtn) unlockBtn.addEventListener("click", unlock);
+      if(pinInput) pinInput.addEventListener("keydown", (e)=>{ if(e.key === "Enter") unlock(); });
+
+      if(lockBtn) lockBtn.addEventListener("click", ()=>{
+        if(controlsWrap) controlsWrap.style.display = "none";
+        if(pinInput) pinInput.value = "";
+        if(warn) warn.style.display = "none";
+        renderAdminList(false);
+      });
+
+      if(resetBtn) resetBtn.addEventListener("click", ()=>{
+        CerberusInv.reset();
+        renderAdminList(true);
+        renderInventory();
+      });
+    }
+
     /* Loader + header reveal */
     function hideLoader(){
       document.body.classList.add("loaded");
@@ -1157,7 +1455,8 @@
       setHolidayTheme();
       setSeasonCallout();
       initSecretMenu();
-      initAccidentalReveal();
+      initHiddenAdminOnLogo();
+
       window.addEventListener("storage", renderInventory);
       window.addEventListener("load", renderInventory);
       setInterval(renderInventory, 1500);
