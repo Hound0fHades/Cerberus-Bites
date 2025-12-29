@@ -180,6 +180,14 @@
       100%{transform:translateY(-1px) scale(1.03);filter:drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 100%, transparent))}
     }
 
+    /* Helps long-press / pointer events work on mobile */
+    .nav-logo-link{
+      -webkit-touch-callout:none;
+      -webkit-user-select:none;
+      user-select:none;
+      touch-action:manipulation;
+    }
+
     .nav-brand-text .brand-name{
       font-family:"Georgia","Times New Roman",serif;
       font-size:1.05rem;
@@ -520,6 +528,171 @@
     .footer-row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between}
     .footer-links{display:flex;flex-wrap:wrap;gap:.8rem}
 
+    /* =========================
+       Admin Modal (Hidden)
+       ========================= */
+    .admin-modal{
+      position:fixed; inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,.65);
+      backdrop-filter: blur(8px);
+      z-index:99999;
+      padding:1rem;
+    }
+    .admin-modal.open{display:flex}
+    .admin-panel{
+      width:min(720px, 96vw);
+      border-radius:20px;
+      border:1px solid rgba(245,201,122,.28);
+      background:radial-gradient(circle at top, rgba(15,3,10,.98), rgba(5,3,8,.98));
+      box-shadow:0 0 40px rgba(0,0,0,.9), 0 0 24px color-mix(in srgb, var(--accent) 35%, transparent);
+      padding:1rem 1rem 1.1rem;
+    }
+    .admin-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:.75rem;
+      padding:.2rem .1rem .85rem;
+      border-bottom:1px solid rgba(245,201,122,.14);
+      margin-bottom:.9rem;
+    }
+    .admin-title{
+      font-family:"Georgia","Times New Roman",serif;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--gold);
+      font-size:.9rem;
+    }
+    .admin-close{
+      border-radius:999px;
+      border:1px solid rgba(245,201,122,.25);
+      background:rgba(5,3,8,.45);
+      color:var(--gold);
+      padding:.35rem .8rem;
+      cursor:pointer;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-size:.72rem;
+    }
+    .admin-grid{
+      display:grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap:1rem;
+    }
+    .admin-pin-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.6rem;
+      align-items:center;
+    }
+    .admin-pin-row input{
+      flex:1;
+      min-width:180px;
+      border-radius:12px;
+      border:1px solid rgba(245,201,122,.22);
+      background:rgba(0,0,0,.25);
+      color:var(--text);
+      padding:.6rem .75rem;
+      outline:none;
+      letter-spacing:.18em;
+    }
+    .admin-btn{
+      border-radius:999px;
+      border:1px solid rgba(245,201,122,.25);
+      background:radial-gradient(circle at top left, rgba(202,52,0,.28), rgba(5,3,8,.55));
+      color:#fff;
+      padding:.45rem 1.05rem;
+      cursor:pointer;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-size:.72rem;
+      box-shadow:0 0 14px color-mix(in srgb, var(--accent) 45%, transparent);
+    }
+    .admin-btn.ghost{
+      background:rgba(5,3,8,.45);
+      color:var(--gold);
+      box-shadow:none;
+    }
+    .admin-warn{
+      display:none;
+      color:#ffd1d1;
+      font-size:.78rem;
+      letter-spacing:.08em;
+      margin-top:.25rem;
+    }
+    .admin-controls-wrap{
+      display:none;
+      margin-top:.6rem;
+      padding-top:.8rem;
+      border-top:1px solid rgba(245,201,122,.12);
+    }
+    .admin-list{
+      display:grid;
+      gap:.65rem;
+      margin-top:.75rem;
+    }
+    .admin-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:.9rem;
+      padding:.65rem .7rem;
+      border-radius:16px;
+      border:1px solid rgba(245,201,122,.18);
+      background:rgba(0,0,0,.18);
+    }
+    .admin-item h4{
+      font-size:.85rem;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:.1rem;
+    }
+    .admin-sub{
+      color:var(--muted);
+      font-size:.78rem;
+    }
+    .admin-controls{
+      display:flex;
+      align-items:center;
+      gap:.4rem;
+      flex-shrink:0;
+    }
+    .admin-step{
+      width:36px;height:36px;
+      border-radius:999px;
+      border:1px solid rgba(245,201,122,.22);
+      background:rgba(5,3,8,.55);
+      color:var(--gold);
+      cursor:pointer;
+      font-size:1.1rem;
+      line-height:1;
+    }
+    .admin-step:disabled{
+      opacity:.35;
+      cursor:not-allowed;
+    }
+    .admin-pill{
+      min-width:52px;
+      text-align:center;
+      padding:.35rem .6rem;
+      border-radius:999px;
+      border:1px solid rgba(245,201,122,.18);
+      background:rgba(5,3,8,.35);
+      color:#fff;
+      letter-spacing:.08em;
+      font-size:.82rem;
+    }
+    .admin-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.5rem;
+      margin-top:.8rem;
+    }
+
     @media (max-width:840px){
       .hero-grid,.menu-grid,.about-grid,.summon-grid{grid-template-columns:minmax(0,1fr)}
       .nav-links-left{display:none}
@@ -527,171 +700,6 @@
       .logo-img{height:80px}
       .hb-header.scrolled .logo-img{height:62px}
       .calendar-wrap{height:380px}
-    }
-
-    /* ===== Hidden Admin Modal ===== */
-    .admin-modal{
-      position:fixed; inset:0;
-      display:none;
-      align-items:center; justify-content:center;
-      background:rgba(0,0,0,.62);
-      z-index:10000;
-      padding:1rem;
-    }
-    .admin-modal.open{ display:flex; }
-
-    .admin-card{
-      width:min(560px, 100%);
-      border-radius:18px;
-      border:1px solid rgba(245,201,122,.28);
-      background:radial-gradient(circle at top, rgba(15,3,10,.98), rgba(5,3,8,.98));
-      box-shadow:0 0 30px rgba(0,0,0,.9), 0 0 18px color-mix(in srgb, var(--accent) 35%, transparent);
-      padding:1rem 1.05rem 1.05rem;
-      color:var(--text);
-    }
-
-    .admin-head{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:1rem;
-      margin-bottom:.8rem;
-    }
-    .admin-kicker{
-      font-size:.72rem;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      color:var(--gold);
-      opacity:.9;
-    }
-    .admin-title{
-      font-family:"Georgia","Times New Roman",serif;
-      font-size:1.05rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-    }
-    .admin-close{
-      border:1px solid rgba(245,201,122,.25);
-      background:rgba(5,3,8,.55);
-      color:var(--gold);
-      border-radius:12px;
-      padding:.35rem .55rem;
-      cursor:pointer;
-    }
-
-    .admin-row{
-      display:grid;
-      grid-template-columns: 64px 1fr auto;
-      gap:.6rem;
-      align-items:center;
-      margin-bottom:.5rem;
-    }
-    .admin-label{
-      font-size:.78rem;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      color:var(--muted);
-    }
-    .admin-input{
-      width:100%;
-      border-radius:12px;
-      border:1px solid rgba(245,201,122,.25);
-      background:rgba(5,3,8,.55);
-      padding:.55rem .7rem;
-      color:var(--text);
-      outline:none;
-    }
-    .admin-input:focus{
-      border-color:rgba(245,201,122,.45);
-      box-shadow:0 0 0 3px rgba(202,52,0,.18);
-    }
-    .admin-btn{
-      border-radius:999px;
-      border:1px solid rgba(245,201,122,.28);
-      background:rgba(5,3,8,.55);
-      color:var(--gold);
-      padding:.5rem .9rem;
-      font-size:.75rem;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      cursor:pointer;
-      white-space:nowrap;
-    }
-    .admin-btn-primary{
-      background:linear-gradient(135deg, var(--accent), var(--accent-soft));
-      border-color:transparent;
-      color:#fff;
-      box-shadow:0 0 16px color-mix(in srgb, var(--accent) 55%, transparent);
-    }
-    .admin-btn-ghost{ background:rgba(245,201,122,.06); }
-
-    .admin-warn{
-      margin:.35rem 0 .6rem;
-      color:#ffd6d6;
-      font-size:.82rem;
-    }
-
-    .admin-mini{
-      color:var(--muted);
-      font-size:.82rem;
-      margin:.25rem 0 .75rem;
-    }
-
-    .admin-list{
-      display:flex;
-      flex-direction:column;
-      gap:.55rem;
-    }
-
-    .admin-item{
-      display:grid;
-      grid-template-columns: 1fr auto;
-      gap:.6rem;
-      padding:.6rem .7rem;
-      border-radius:14px;
-      border:1px solid rgba(245,201,122,.18);
-      background:rgba(5,3,8,.45);
-    }
-    .admin-item h4{
-      margin:0;
-      font-size:.9rem;
-      color:var(--text);
-      font-weight:600;
-    }
-    .admin-item .admin-sub{
-      font-size:.75rem;
-      color:var(--muted);
-      margin-top:.1rem;
-    }
-    .admin-controls{
-      display:flex;
-      align-items:center;
-      gap:.35rem;
-    }
-    .admin-pill{
-      min-width:44px;
-      text-align:center;
-      padding:.35rem .55rem;
-      border-radius:999px;
-      border:1px solid rgba(245,201,122,.22);
-      color:var(--gold);
-      font-size:.8rem;
-      letter-spacing:.12em;
-      background:rgba(0,0,0,.25);
-    }
-    .admin-step{
-      width:38px; height:34px;
-      display:inline-flex; align-items:center; justify-content:center;
-      border-radius:12px;
-      border:1px solid rgba(245,201,122,.22);
-      background:rgba(5,3,8,.55);
-      color:var(--gold);
-      cursor:pointer;
-    }
-
-    .admin-footer{
-      display:flex;
-      justify-content:space-between;
-      gap:.6rem;
-      margin-top:.8rem;
-      flex-wrap:wrap;
     }
   </style>
 </head>
@@ -723,7 +731,7 @@
         </nav>
 
         <div class="nav-center">
-          <a href="#top" class="nav-logo-link">
+          <a href="#top" class="nav-logo-link" aria-label="Cerberus Bites Home">
             <img src="CerberusLogo2.png" alt="Cerberus Bites Logo" class="logo-img">
           </a>
           <div class="nav-brand-text">
@@ -866,7 +874,7 @@
             </div>
           </div>
 
-          <!-- Spellbook (no off-menu mention) -->
+          <!-- Spellbook copy (no giveaway text) -->
           <aside class="menu-art">
             <h4>The Spellbook of Sourdough</h4>
             <p>
@@ -881,7 +889,7 @@
           </aside>
         </div>
 
-        <!-- SECRET MENU (only discoverable via ✶ button) -->
+        <!-- SECRET MENU (no hints elsewhere; only star reveals) -->
         <div id="secretMenu" class="secret-menu" aria-hidden="true">
           <div class="secret-menu-inner">
             <div class="secret-menu-label">—</div>
@@ -992,32 +1000,30 @@
     </div>
   </footer>
 
-  <!-- Hidden Admin Modal (appears only after holding the header logo ~3s) -->
+  <!-- Hidden Admin Modal (opens ONLY by holding logo ~3s) -->
   <div class="admin-modal" id="adminModal" aria-hidden="true">
-    <div class="admin-card" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
-      <div class="admin-head">
+    <div class="admin-panel" role="dialog" aria-modal="true" aria-label="Cerberus Admin">
+      <div class="admin-top">
+        <div class="admin-title">Cerberus Admin</div>
+        <button class="admin-close" id="adminClose" type="button">Close</button>
+      </div>
+
+      <div class="admin-grid">
         <div>
-          <div class="admin-kicker">Manager</div>
-          <div class="admin-title" id="adminTitle">Cerberus Inventory</div>
-        </div>
-        <button class="admin-close" id="adminClose" aria-label="Close">✕</button>
-      </div>
+          <div class="admin-pin-row">
+            <input id="adminPin" type="password" inputmode="numeric" autocomplete="off" placeholder="PIN" aria-label="Enter PIN" />
+            <button class="admin-btn" id="adminUnlock" type="button">Unlock</button>
+            <button class="admin-btn ghost" id="adminLock" type="button">Lock</button>
+          </div>
+          <div class="admin-warn" id="adminWarn">Wrong PIN.</div>
 
-      <div class="admin-row">
-        <label class="admin-label" for="adminPin">PIN</label>
-        <input class="admin-input" id="adminPin" type="password" inputmode="numeric" placeholder="Enter PIN" />
-        <button class="admin-btn admin-btn-primary" id="adminUnlock">Unlock</button>
-      </div>
+          <div class="admin-controls-wrap" id="adminControls">
+            <div class="admin-actions">
+              <button class="admin-btn ghost" id="adminReset" type="button">Reset counts</button>
+            </div>
+          </div>
 
-      <div class="admin-warn" id="adminWarn" style="display:none;">Wrong PIN.</div>
-
-      <div id="adminControls" style="display:none;">
-        <div class="admin-mini">Tap + / − to adjust. “0” marks SOLD OUT automatically.</div>
-        <div class="admin-list" id="adminList"></div>
-
-        <div class="admin-footer">
-          <button class="admin-btn" id="adminReset">Reset Defaults</button>
-          <button class="admin-btn admin-btn-ghost" id="adminLock">Lock</button>
+          <div class="admin-list" id="adminList"></div>
         </div>
       </div>
     </div>
@@ -1130,37 +1136,55 @@
       seasonMessage.innerHTML=msg;
     }
 
-    /* Secret menu hover/tap */
+    /* Secret menu (tap to toggle; tap outside to close; hover works on desktop) */
     function initSecretMenu(){
       const star=document.getElementById("secretStar");
       const secret=document.getElementById("secretMenu");
       if(!star||!secret) return;
 
-      let hideTimeout;
-      function showSecret(){
-        clearTimeout(hideTimeout);
+      let autoHideTimer=null;
+
+      function show(){
+        clearTimeout(autoHideTimer);
         secret.classList.add("visible");
         star.classList.add("active");
         secret.setAttribute("aria-hidden","false");
-      }
-      function scheduleHide(){
-        hideTimeout=setTimeout(()=>{
-          secret.classList.remove("visible");
-          star.classList.remove("active");
-          secret.setAttribute("aria-hidden","true");
-        },200);
-      }
-      star.addEventListener("mouseenter",showSecret);
-      star.addEventListener("mouseleave",scheduleHide);
-      secret.addEventListener("mouseenter",showSecret);
-      secret.addEventListener("mouseleave",scheduleHide);
 
-      star.addEventListener("click",(e)=>{
+        // Optional auto-hide (keeps it from "sticking" on touch devices)
+        autoHideTimer=setTimeout(hide, 6000);
+      }
+      function hide(){
+        clearTimeout(autoHideTimer);
+        secret.classList.remove("visible");
+        star.classList.remove("active");
+        secret.setAttribute("aria-hidden","true");
+      }
+      function toggle(e){
         e.preventDefault();
-        const visible=secret.classList.toggle("visible");
-        star.classList.toggle("active",visible);
-        secret.setAttribute("aria-hidden",String(!visible));
+        e.stopPropagation();
+        const isOpen = secret.classList.contains("visible");
+        if(isOpen) hide();
+        else show();
+      }
+
+      star.addEventListener("click", toggle);
+
+      // Tap/click outside closes (fixes "won't hide" on mobile)
+      document.addEventListener("click", (e)=>{
+        if(!secret.classList.contains("visible")) return;
+        const clickedInside = secret.contains(e.target) || star.contains(e.target);
+        if(!clickedInside) hide();
       });
+
+      // Desktop hover behavior
+      star.addEventListener("mouseenter", show);
+      star.addEventListener("mouseleave", ()=>setTimeout(()=>{
+        if(!secret.matches(":hover") && !star.matches(":hover")) hide();
+      }, 180));
+      secret.addEventListener("mouseenter", show);
+      secret.addEventListener("mouseleave", ()=>setTimeout(()=>{
+        if(!secret.matches(":hover") && !star.matches(":hover")) hide();
+      }, 180));
     }
 
     /* ==========================================================
@@ -1229,6 +1253,7 @@
         return { it, st, status };
       });
 
+      // Mark SOLD OUT on menu items
       list.forEach(x=>{
         const el=document.querySelector(`[data-id="${x.it.id}"]`);
         if(el) el.classList.toggle("is-soldout", x.status==="SOLD OUT");
@@ -1272,7 +1297,7 @@
     }
 
     /* ==========================================================
-       Hidden Admin Panel — hold HEADER logo ~3 seconds
+       Hidden Admin: Hold logo ~3 seconds to open PIN modal
        ========================================================== */
     function initHiddenAdminOnLogo(){
       const headerLogoLink = document.querySelector('.hb-header .nav-logo-link');
@@ -1288,9 +1313,9 @@
       const controlsWrap = document.getElementById("adminControls");
       const listEl = document.getElementById("adminList");
 
-      const HOLD_MS = 3000;
+      const HOLD_MS = 3200; // ~3 seconds
       let holdTimer = null;
-      let holding = false;
+      let isHolding = false;
 
       function openModal(){
         if(!modal) return;
@@ -1300,7 +1325,7 @@
         if(controlsWrap) controlsWrap.style.display = "none";
         if(pinInput){
           pinInput.value = "";
-          setTimeout(()=>pinInput.focus(), 50);
+          setTimeout(()=>pinInput.focus(), 60);
         }
         renderAdminList(false);
       }
@@ -1313,31 +1338,37 @@
         if(controlsWrap) controlsWrap.style.display = "none";
       }
 
-      function startHold(e){
-        e.preventDefault();
-        if(holdTimer) clearTimeout(holdTimer);
-        holding = true;
-        holdTimer = setTimeout(()=>{
-          holding = false;
-          openModal();
-        }, HOLD_MS);
-      }
       function cancelHold(){
-        holding = false;
+        isHolding = false;
         if(holdTimer) clearTimeout(holdTimer);
         holdTimer = null;
       }
 
-      headerLogoLink.addEventListener("touchstart", startHold, {passive:false});
-      headerLogoLink.addEventListener("touchend", cancelHold);
-      headerLogoLink.addEventListener("touchcancel", cancelHold);
-      headerLogoLink.addEventListener("mousedown", startHold);
-      headerLogoLink.addEventListener("mouseup", cancelHold);
-      headerLogoLink.addEventListener("mouseleave", cancelHold);
+      function startHold(e){
+        // prevent link jump while holding
+        e.preventDefault();
+        e.stopPropagation();
 
+        cancelHold();
+        isHolding = true;
+
+        holdTimer = setTimeout(()=>{
+          isHolding = false;
+          openModal();
+        }, HOLD_MS);
+      }
+
+      // Pointer events = best on mobile + desktop
+      headerLogoLink.addEventListener("pointerdown", startHold);
+      headerLogoLink.addEventListener("pointerup", cancelHold);
+      headerLogoLink.addEventListener("pointercancel", cancelHold);
+      headerLogoLink.addEventListener("pointerleave", cancelHold);
+
+      // If they tap quickly, allow normal jump to top
       headerLogoLink.addEventListener("click", (e)=>{
-        if(holding || holdTimer){
+        if(holdTimer || isHolding){
           e.preventDefault();
+          e.stopPropagation();
         }
       });
 
