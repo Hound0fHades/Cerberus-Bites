@@ -18,7 +18,10 @@
       --muted: #b3a9c0;
       --border: #312033;
 
-      /* optional helper vars derived by JS */
+      /* helper vars derived by JS (keeps glow consistent during theme shifts) */
+      --glow: rgba(202,52,0,0.55);
+      --glow-strong: rgba(202,52,0,0.85);
+
       --theme-name: "Base";
       --theme-window: "Between sabbats";
     }
@@ -72,7 +75,7 @@
       text-transform: uppercase;
       background: radial-gradient(circle, var(--accent) 0, var(--bg) 68%);
       color: #fdf3e0;
-      box-shadow: 0 0 22px color-mix(in srgb, var(--accent) 80%, transparent);
+      box-shadow: 0 0 22px var(--glow-strong);
       animation: loaderPulse 1.6s ease-in-out infinite;
     }
     .loader-text-main {
@@ -95,9 +98,9 @@
       pointer-events: none;
     }
     @keyframes loaderPulse {
-      0% { transform: scale(1); box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 40%, transparent); }
-      50% { transform: scale(1.05); box-shadow: 0 0 26px color-mix(in srgb, var(--accent) 85%, transparent); }
-      100% { transform: scale(1); box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 40%, transparent); }
+      0% { transform: scale(1); box-shadow: 0 0 10px var(--glow); }
+      50% { transform: scale(1.05); box-shadow: 0 0 26px var(--glow-strong); }
+      100% { transform: scale(1); box-shadow: 0 0 10px var(--glow); }
     }
 
     /* Coming Soon Banner */
@@ -110,7 +113,7 @@
       font-size: 0.9rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 70%, transparent);
+      box-shadow: 0 0 18px var(--glow);
       position: relative;
       overflow: hidden;
       animation: flameFlicker 2.4s ease-in-out infinite alternate;
@@ -129,14 +132,14 @@
       background: linear-gradient(to right, rgba(5, 3, 8, 0.96), rgba(7, 1, 1, 0.96));
       border-bottom: 1px solid rgba(245,201,122,0.22);
       backdrop-filter: blur(10px);
-      box-shadow: 0 0 18px rgba(0,0,0,0.9), inset 0 -1px 0 color-mix(in srgb, var(--accent) 30%, transparent);
+      box-shadow: 0 0 18px rgba(0,0,0,0.9), inset 0 -1px 0 var(--glow);
       transform: translateY(-18px);
       opacity: 0;
       transition: transform 0.55s cubic-bezier(0.22,0.9,0.35,1.1), opacity 0.55s ease;
     }
     .hb-header.revealed { transform: translateY(0); opacity: 1; }
     .hb-header.scrolled {
-      box-shadow: 0 0 26px rgba(0,0,0,1), 0 0 30px color-mix(in srgb, var(--accent) 55%, transparent);
+      box-shadow: 0 0 26px rgba(0,0,0,1), 0 0 30px var(--glow);
     }
 
     .nav { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; padding: 0.4rem 0; font-size: 0.95rem; }
@@ -156,7 +159,7 @@
       height: 2px; width: 0;
       border-radius: 999px;
       background: linear-gradient(to right, var(--gold), var(--accent), var(--accent-soft));
-      box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 80%, transparent);
+      box-shadow: 0 0 10px var(--glow-strong);
       opacity: 0;
       transition: width 0.22s ease, opacity 0.22s ease;
     }
@@ -167,14 +170,14 @@
     .nav-logo-link { display: flex; align-items: center; justify-content: center; }
     .logo-img {
       height: 90px; width: auto; display: block;
-      filter: drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 80%, transparent));
+      filter: drop-shadow(0 0 12px var(--glow-strong));
       transition: height 0.25s ease, transform 0.25s ease, filter 0.25s ease;
     }
-    .hb-header.scrolled .logo-img { height: 68px; filter: drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 70%, transparent)); }
+    .hb-header.scrolled .logo-img { height: 68px; filter: drop-shadow(0 0 8px var(--glow)); }
     .logo-img:hover { animation: logoFlame 1s ease-in-out infinite alternate; }
     @keyframes logoFlame {
-      0% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 10px color-mix(in srgb, var(--accent) 80%, transparent)); }
-      100% { transform: translateY(-1px) scale(1.03); filter: drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 100%, transparent)); }
+      0% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 10px var(--glow-strong)); }
+      100% { transform: translateY(-1px) scale(1.03); filter: drop-shadow(0 0 18px var(--glow-strong)); }
     }
 
     .nav-brand-text .brand-name {
@@ -202,7 +205,7 @@
         radial-gradient(circle at top left, color-mix(in srgb, var(--accent) 90%, transparent), transparent),
         radial-gradient(circle at bottom right, color-mix(in srgb, var(--accent-soft) 90%, transparent), rgba(5,3,8,0.95));
       color: #fff;
-      box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 90%, transparent), 0 0 4px color-mix(in srgb, var(--gold) 80%, transparent);
+      box-shadow: 0 0 16px var(--glow-strong), 0 0 4px color-mix(in srgb, var(--gold) 80%, transparent);
       cursor: pointer;
       position: relative;
       overflow: hidden;
@@ -219,7 +222,7 @@
     }
     .nav-cta:hover::after { transform: translateX(120%); }
     .nav-cta:hover {
-      box-shadow: 0 0 22px color-mix(in srgb, var(--accent) 100%, transparent), 0 0 10px color-mix(in srgb, var(--gold) 90%, transparent);
+      box-shadow: 0 0 22px var(--glow-strong), 0 0 10px color-mix(in srgb, var(--gold) 90%, transparent);
     }
 
     main { padding-bottom: 4rem; }
@@ -250,17 +253,6 @@
     .hero-title span { color: var(--accent); }
     .hero-subtitle { color: var(--muted); font-size: 0.95rem; max-width: 34rem; margin-bottom: 1.4rem; }
 
-    .hero-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.6rem; }
-    .tag {
-      border-radius: 999px;
-      border: 1px solid rgba(245,201,122,0.3);
-      padding: 0.2rem 0.6rem;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--gold);
-      background: rgba(5,3,8,0.35);
-    }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
@@ -276,7 +268,7 @@
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), var(--accent-soft));
       color: #fff;
-      box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 70%, transparent);
+      box-shadow: 0 0 18px var(--glow);
     }
     .btn-primary:hover { filter: brightness(1.05); }
     .btn-ghost {
@@ -292,7 +284,7 @@
       border: 1px solid rgba(245,201,122,0.3);
       padding: 1px;
       background: radial-gradient(circle at top, color-mix(in srgb, var(--accent) 75%, transparent), var(--bg));
-      box-shadow: 0 0 32px color-mix(in srgb, var(--accent) 45%, transparent), 0 0 80px rgba(0,0,0,0.9);
+      box-shadow: 0 0 32px var(--glow), 0 0 80px rgba(0,0,0,0.9);
     }
     .hero-art-inner {
       border-radius: 22px;
@@ -314,6 +306,8 @@
       border: 1px solid rgba(245,201,122,0.25);
       padding: 0.6rem 0.7rem;
       background: radial-gradient(circle at top left, color-mix(in srgb, var(--accent-soft) 55%, transparent), rgba(5,3,8,0.9));
+      position: relative;
+      overflow: hidden;
     }
     .hero-card h4 {
       font-size: 0.78rem;
@@ -430,7 +424,11 @@
       color: var(--gold);
       margin-bottom: 0.4rem;
     }
-    .menu-item { padding: 0.55rem 0; border-bottom: 1px dashed rgba(245,201,122,0.25); }
+    .menu-item {
+      padding: 0.55rem 0;
+      border-bottom: 1px dashed rgba(245,201,122,0.25);
+      position: relative;
+    }
     .menu-item:last-child { border-bottom: none; }
     .menu-item-name { font-size: 0.92rem; display: flex; justify-content: space-between; gap: 0.4rem; }
     .menu-item-name span { color: var(--gold); font-size: 0.85rem; opacity: 0.95; }
@@ -443,6 +441,45 @@
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: var(--muted);
+    }
+
+    /* Sold Out stamp + states */
+    .hype-stamp{
+      position:absolute;
+      top: 10px;
+      right: 0px;
+      transform: rotate(-10deg);
+      border: 2px solid color-mix(in srgb, var(--gold) 85%, transparent);
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+      box-shadow: 0 0 16px var(--glow-strong);
+      padding: 0.2rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .menu-item.soldout .hype-stamp { opacity: 1; }
+    .menu-item.soldout .menu-item-name,
+    .menu-item.soldout .menu-item-desc,
+    .menu-item.soldout .menu-badges { opacity: 0.45; }
+
+    .menu-item.almost::before{
+      content:"Almost Gone";
+      position:absolute;
+      left:0;
+      top:-10px;
+      font-size:0.62rem;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:var(--gold);
+      padding:0.08rem 0.45rem;
+      border-radius:999px;
+      border:1px solid rgba(245,201,122,0.35);
+      background:rgba(5,3,8,0.72);
+      box-shadow:0 0 10px rgba(245,201,122,0.12);
     }
 
     .menu-art {
@@ -483,7 +520,7 @@
       height: auto;
       display: block;
       margin: 0 auto 0.8rem;
-      filter: drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 85%, transparent));
+      filter: drop-shadow(0 0 18px var(--glow-strong));
     }
     .about-crest-title {
       text-transform: uppercase;
@@ -676,18 +713,10 @@
               If the hound doesn’t approve it, it doesn’t leave the kitchen.
             </p>
 
-            <div class="hero-tags">
-              <div class="tag">All melts on sourdough</div>
-              <div class="tag">Fast + profitable</div>
-              <div class="tag">Vegan option</div>
-              <div class="tag">Secret menu sigil</div>
-              <div class="tag">Seasonal shout-outs</div>
-            </div>
-
             <div class="hero-actions">
               <a href="#menu" class="btn btn-primary">View the Menu</a>
               <a href="#contact" class="btn btn-ghost">Book the Hound</a>
-              <div class="hero-note">Ask about allergies at the window — we’ll guide your path.</div>
+              <div class="hero-note">Limited batches. Sold Out = Hype.</div>
             </div>
 
             <!-- tiny debug line -->
@@ -697,25 +726,26 @@
             </div>
           </div>
 
+          <!-- OPS BOXES -->
           <div class="hero-art">
             <div class="hero-art-inner">
               <div class="hero-art-title">Tonight in the Underworld</div>
               <div class="hero-art-grid">
-                <div class="hero-card">
-                  <h4>Signature Melt</h4>
-                  <p>Cerberus Melt — triple cheese, butter-crisped sourdough.</p>
+                <div class="hero-card" id="opsAlmostGone">
+                  <h4>What’s Almost Gone</h4>
+                  <p>Loading…</p>
                 </div>
-                <div class="hero-card">
-                  <h4>Gatekeeper</h4>
-                  <p>Smoked turkey, sharp cheddar, black garlic aioli.</p>
+                <div class="hero-card" id="opsSoldOut">
+                  <h4>Sold Out = Hype</h4>
+                  <p>Loading…</p>
                 </div>
-                <div class="hero-card">
-                  <h4>Hellfire</h4>
-                  <p>Blackened chicken, pepper jack, ember mayo.</p>
+                <div class="hero-card" id="opsBatchCounter">
+                  <h4>Batch Counter</h4>
+                  <p>Loading…</p>
                 </div>
-                <div class="hero-card">
-                  <h4>Hidden Sigil</h4>
-                  <p>Find the ✶ — ask for what the gate keeps.</p>
+                <div class="hero-card" id="opsNextDrop">
+                  <h4>Next Drop</h4>
+                  <p>Loading…</p>
                 </div>
               </div>
             </div>
@@ -752,7 +782,8 @@
               <div>
                 <div class="menu-group-title">🥪 Melts</div>
 
-                <div class="menu-item">
+                <div class="menu-item" data-id="cerberus_melt">
+                  <div class="hype-stamp">Sold Out = Hype</div>
                   <div class="menu-item-name">Cerberus Melt <span>$9</span></div>
                   <div class="menu-item-desc">Triple cheese on butter-crisped sourdough.</div>
                   <div class="menu-badges">
@@ -760,7 +791,8 @@
                   </div>
                 </div>
 
-                <div class="menu-item">
+                <div class="menu-item" data-id="gatekeeper_turkey">
+                  <div class="hype-stamp">Sold Out = Hype</div>
                   <div class="menu-item-name">Gatekeeper Turkey Melt <span>$11</span></div>
                   <div class="menu-item-desc">Smoked turkey, sharp cheddar, black garlic aioli.</div>
                   <div class="menu-badges">
@@ -768,7 +800,8 @@
                   </div>
                 </div>
 
-                <div class="menu-item">
+                <div class="menu-item" data-id="hellfire_chicken">
+                  <div class="hype-stamp">Sold Out = Hype</div>
                   <div class="menu-item-name">Hellfire Chicken Melt <span>$11</span></div>
                   <div class="menu-item-desc">Blackened chicken, pepper jack, ember mayo.</div>
                   <div class="menu-badges">
@@ -776,7 +809,8 @@
                   </div>
                 </div>
 
-                <div class="menu-item">
+                <div class="menu-item" data-id="persephone_garden">
+                  <div class="hype-stamp">Sold Out = Hype</div>
                   <div class="menu-item-name">Persephone’s Garden (Vegan) 🌿 <span>$10</span></div>
                   <div class="menu-item-desc">Roasted mushrooms, caramelized onion, herb oil.</div>
                   <div class="menu-badges">
@@ -789,7 +823,8 @@
               <div>
                 <div class="menu-group-title">🥣 Sides</div>
 
-                <div class="menu-item">
+                <div class="menu-item" data-id="tomato_soup">
+                  <div class="hype-stamp">Sold Out = Hype</div>
                   <div class="menu-item-name">Charred Tomato Soup (Cup) <span>$4</span></div>
                   <div class="menu-item-desc">Rich, smoky, perfect for dipping.</div>
                   <div class="menu-badges">
@@ -799,9 +834,9 @@
 
                 <div class="menu-group-title" style="margin-top:1rem;">Notes</div>
                 <div class="menu-item">
-                  <div class="menu-item-name">All melts served on sourdough <span>—</span></div>
+                  <div class="menu-item-name">Add to any melt <span>+$3</span></div>
                   <div class="menu-item-desc">
-                    House-fermented. Butter-crisped. Built for fast service + high return.
+                    Upgrade with soup — quick dip, big win.
                   </div>
                 </div>
               </div>
@@ -820,10 +855,7 @@
               “Three heads. One rule: the bread must crackle.”
             </p>
             <p style="margin-top:0.7rem;">
-              Look for the sigils:<br>
-              ✶ Vegan paths available<br>
-              ✶ Add soup to any melt +$3<br>
-              ✶ The hidden sigil reveals what the gate keeps
+              Tip: mark sold-outs + low stock in the tracker and the site updates automatically.
             </p>
           </aside>
         </div>
@@ -946,6 +978,18 @@
 
   <script>
     /* ==========================================================
+       0) Helpers for consistent glow (prevents “colors went crazy”)
+       ========================================================== */
+    function hexToRgba(hex, a){
+      const h = hex.replace("#","").trim();
+      const full = (h.length === 3) ? h.split("").map(c=>c+c).join("") : h;
+      const r = parseInt(full.slice(0,2),16);
+      const g = parseInt(full.slice(2,4),16);
+      const b = parseInt(full.slice(4,6),16);
+      return `rgba(${r},${g},${b},${a})`;
+    }
+
+    /* ==========================================================
        1) Pagan Sabbat Color Shifting (with "between sabbats = base")
        ========================================================== */
 
@@ -955,9 +999,6 @@
       return `${m}/${day}`;
     }
 
-    // Approx sabbat dates (common modern practice).
-    // We apply theme only inside an "active window" around each sabbat.
-    // Outside those windows: keep your BASE palette.
     const sabbats = [
       { key:"yule",       name:"Yule",       month:11, day:21, windowDays:12,
         palette:{ bg:"#050308", bgAlt:"#0c050b", accent:"#2aa1ff", accentSoft:"#1b3a6a", gold:"#f5c97a", text:"#f4f2f6", muted:"#b3a9c0", border:"#2a2a44" } },
@@ -989,7 +1030,7 @@
     };
 
     function clampDateToYear(now, month, day) {
-      return new Date(now.getFullYear(), month, day, 12, 0, 0); // noon local avoids DST weirdness
+      return new Date(now.getFullYear(), month, day, 12, 0, 0);
     }
 
     function dayDiff(a, b) {
@@ -1009,6 +1050,11 @@
       r.setProperty("--text", p.text);
       r.setProperty("--muted", p.muted);
       r.setProperty("--border", p.border);
+
+      // keep glow stable across themes
+      r.setProperty("--glow", hexToRgba(p.accent, 0.55));
+      r.setProperty("--glow-strong", hexToRgba(p.accent, 0.85));
+
       r.setProperty("--theme-name", `"${themeName}"`);
       r.setProperty("--theme-window", `"${windowLabel}"`);
     }
@@ -1017,23 +1063,16 @@
       const now = new Date();
       let active = null;
 
-      // Find the closest sabbat window (including edge cases near year boundaries for Yule/Imbolc)
       for (const s of sabbats) {
         const targetThisYear = clampDateToYear(now, s.month, s.day);
-
-        // Also check adjacent year occurrence for edge windows (ex: early Jan near Yule, late Dec near Imbolc next year)
         const targetPrevYear = new Date(now.getFullYear() - 1, s.month, s.day, 12, 0, 0);
         const targetNextYear = new Date(now.getFullYear() + 1, s.month, s.day, 12, 0, 0);
-
         const candidates = [targetPrevYear, targetThisYear, targetNextYear];
 
         for (const t of candidates) {
           const d = Math.abs(dayDiff(now, t));
           if (d <= s.windowDays) {
-            // choose the closest in days
-            if (!active || d < active.distance) {
-              active = { sabbat: s, target: t, distance: d };
-            }
+            if (!active || d < active.distance) active = { sabbat: s, target: t, distance: d };
           }
         }
       }
@@ -1046,13 +1085,12 @@
         return { name: s.name, window: `${fmt(start)}–${fmt(end)}` };
       }
 
-      // Between sabbats: keep base palette
       applyPalette(BASE, "Between Sabbats", "Base palette");
       return { name: "Between Sabbats", window: "Base palette" };
     }
 
     /* ==========================================================
-       2) Seasonal Shout-Out (keeps “seasonal callout” feel)
+       2) Seasonal Shout-Out
        ========================================================== */
     function setSeasonCallout() {
       const seasonCallout = document.getElementById("seasonCallout");
@@ -1063,14 +1101,9 @@
       const now = new Date();
       const m = now.getMonth();
 
-      const titles = [
-        "🔥 Seasonal Shout-Out 🔥",
-        "The Season Hungers…",
-        "A Sign from the Gate"
-      ];
+      const titles = ["🔥 Seasonal Shout-Out 🔥", "The Season Hungers…", "A Sign from the Gate"];
       seasonTitleEl.textContent = titles[Math.floor(Math.random() * titles.length)];
 
-      // simple seasonal copy that fits melts/soup (no old menu references)
       let msg = "";
       if (m === 11 || m === 0 || m === 1) {
         msg = `❄️ <strong>Cold nights at the gate</strong><br>
@@ -1090,7 +1123,7 @@
     }
 
     /* ==========================================================
-       3) Secret menu hover/tap logic (like your original)
+       3) Secret menu hover/tap logic
        ========================================================== */
     function initSecretMenu() {
       const star = document.getElementById('secretStar');
@@ -1114,13 +1147,11 @@
         }, 200);
       }
 
-      // Hover support
       star.addEventListener('mouseenter', showSecret);
       star.addEventListener('mouseleave', scheduleHide);
       secret.addEventListener('mouseenter', showSecret);
       secret.addEventListener('mouseleave', scheduleHide);
 
-      // Tap/click support
       star.addEventListener('click', function (e) {
         e.preventDefault();
         const visible = secret.classList.toggle('visible');
@@ -1130,7 +1161,180 @@
     }
 
     /* ==========================================================
-       4) Loader + header reveal + fail-safe (fix “stuck summoning”)
+       4) Sold Out Tracker + Ops Boxes + Auto “Almost Gone” on top
+       ========================================================== */
+    const TRACKED = [
+      { id:"cerberus_melt", name:"Cerberus Melt" },
+      { id:"gatekeeper_turkey", name:"Gatekeeper Turkey Melt" },
+      { id:"hellfire_chicken", name:"Hellfire Chicken Melt" },
+      { id:"persephone_garden", name:"Persephone’s Garden (Vegan)" },
+      { id:"tomato_soup", name:"Charred Tomato Soup (Cup)" },
+      { id:"black_gate", name:"The Black Gate" }
+    ];
+
+    const STORAGE_KEY = "cb_soldout_state_v2";
+    const OPS_KEY = "cb_ops_settings_v1";
+
+    function getState(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if(raw) return JSON.parse(raw);
+      }catch(e){}
+
+      // defaults: 3 batches each (edit any time)
+      const items = {};
+      TRACKED.forEach(it=> items[it.id] = { left: 3, soldOut: false });
+      return { items };
+    }
+
+    function setState(next){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    }
+
+    function statusFor(st){
+      if(!st) return "LIVE";
+      if(st.soldOut || st.left <= 0) return "SOLD OUT";
+      if(st.left <= 1) return "ALMOST GONE";
+      return "LIVE";
+    }
+
+    // Tiny helper: use in console
+    window.CerberusTracker = {
+      state: ()=>getState(),
+      setLeft: (id, n)=>{
+        const s = getState();
+        if(s.items[id]){
+          s.items[id].left = Math.max(0, n);
+          s.items[id].soldOut = (s.items[id].left <= 0);
+          setState(s);
+        }
+      },
+      sellOne: (id)=>{
+        const s = getState();
+        if(s.items[id]){
+          s.items[id].left = Math.max(0, (s.items[id].left||0) - 1);
+          if(s.items[id].left <= 0) s.items[id].soldOut = true;
+          setState(s);
+        }
+      },
+      reset: ()=> localStorage.removeItem(STORAGE_KEY)
+    };
+
+    const OPS_DEFAULTS = { nextDrop: "Next batch in ~20 min", nextDropTime: "" };
+
+    function getOps(){
+      try{ return JSON.parse(localStorage.getItem(OPS_KEY)) || {}; }
+      catch(e){ return {}; }
+    }
+    function setOps(next){ localStorage.setItem(OPS_KEY, JSON.stringify(next)); }
+    window.CerberusOps = {
+      get: ()=>Object.assign({}, OPS_DEFAULTS, getOps()),
+      set: (obj)=>setOps(Object.assign({}, getOps(), obj))
+    };
+
+    function plural(n, word){ return n === 1 ? `${n} ${word}` : `${n} ${word}s`; }
+
+    function renderMenuStates(){
+      const state = getState();
+      const nodes = Array.from(document.querySelectorAll('.menu-item[data-id]'));
+      nodes.forEach(el=>{
+        const id = el.getAttribute("data-id");
+        const st = state.items[id];
+        const status = statusFor(st);
+        el.classList.remove("soldout","almost");
+        if(status === "SOLD OUT") el.classList.add("soldout");
+        if(status === "ALMOST GONE") el.classList.add("almost");
+      });
+    }
+
+    // Bubble ALMOST GONE melts to top (within the Melts column only)
+    function bubbleAlmostGoneMelts(){
+      const meltsCol = document.getElementById("meltsColumn");
+      if(!meltsCol) return;
+
+      const state = getState();
+      const items = Array.from(meltsCol.querySelectorAll('.menu-item[data-id]'));
+
+      // Only sort tracked melt items (don’t touch other sections)
+      const trackedIds = new Set(["cerberus_melt","gatekeeper_turkey","hellfire_chicken","persephone_garden"]);
+      const meltItems = items.filter(el => trackedIds.has(el.getAttribute("data-id")));
+
+      meltItems.sort((a,b)=>{
+        const sa = statusFor(state.items[a.getAttribute("data-id")]);
+        const sb = statusFor(state.items[b.getAttribute("data-id")]);
+        const rank = (s)=> s==="ALMOST GONE" ? 0 : (s==="LIVE" ? 1 : 2);
+        // almost gone first, live next, sold out last
+        const ra = rank(sa), rb = rank(sb);
+        if(ra !== rb) return ra - rb;
+
+        // then least left first
+        const la = state.items[a.getAttribute("data-id")]?.left ?? 999;
+        const lb = state.items[b.getAttribute("data-id")]?.left ?? 999;
+        return la - lb;
+      });
+
+      // Re-insert in sorted order under the Melts title
+      meltItems.forEach(el=> meltsCol.appendChild(el));
+    }
+
+    function renderOps(){
+      const state = getState();
+      if(!state || !state.items) return;
+
+      const ops = Object.assign({}, OPS_DEFAULTS, getOps());
+
+      const list = TRACKED.map(it=>{
+        const st = state.items[it.id];
+        const status = statusFor(st);
+        return { it, st, status };
+      });
+
+      const soldout = list.filter(x=>x.status === "SOLD OUT");
+      const almost = list.filter(x=>x.status === "ALMOST GONE");
+      const live = list.filter(x=>x.status === "LIVE");
+
+      const elAlmost = document.getElementById("opsAlmostGone");
+      if(elAlmost){
+        if(almost.length === 0){
+          elAlmost.querySelector("p").textContent = "Nothing in the danger zone (yet).";
+        } else {
+          const top = almost
+            .slice()
+            .sort((a,b)=>(a.st?.left ?? 999) - (b.st?.left ?? 999))
+            .slice(0,3)
+            .map(x=>`${x.it.name} — ${plural(x.st.left, "batch")} left`)
+            .join(" • ");
+          elAlmost.querySelector("p").textContent = top;
+        }
+      }
+
+      const elSold = document.getElementById("opsSoldOut");
+      if(elSold){
+        if(soldout.length === 0){
+          elSold.querySelector("p").textContent = "No sell-outs yet. (For now.)";
+        } else {
+          const names = soldout.slice(0,3).map(x=>x.it.name).join(" • ");
+          const extra = soldout.length > 3 ? ` +${soldout.length - 3} more` : "";
+          elSold.querySelector("p").textContent = names + extra;
+        }
+      }
+
+      const elBatch = document.getElementById("opsBatchCounter");
+      if(elBatch){
+        const totalLeft = [...live, ...almost].reduce((sum,x)=>sum + Math.max(0, x.st.left), 0);
+        elBatch.querySelector("p").textContent =
+          `${plural(totalLeft, "batch")} left • ${plural(almost.length, "item")} low • ${plural(live.length + almost.length, "item")} live`;
+      }
+
+      const elDrop = document.getElementById("opsNextDrop");
+      if(elDrop){
+        const text = ops.nextDropTime ? `Next batch drop: ${ops.nextDropTime}` : ops.nextDrop;
+        elDrop.querySelector("p").textContent = text;
+      }
+    }
+
+    /* ==========================================================
+       5) Loader + header reveal + fail-safe
        ========================================================== */
     function hideLoader() {
       document.body.classList.add('loaded');
@@ -1142,8 +1346,6 @@
       document.getElementById('year').textContent = new Date().getFullYear();
       hideLoader();
     });
-
-    // Fail-safe: if load event doesn’t fire (rare iframe/caching issues), force hide after 2.5s
     setTimeout(hideLoader, 2500);
 
     window.addEventListener('scroll', function () {
@@ -1153,7 +1355,7 @@
     });
 
     /* ==========================================================
-       5) Boot
+       6) Boot
        ========================================================== */
     (function boot() {
       const t = setHolidayTheme();
@@ -1165,6 +1367,20 @@
       const dbgWindow = document.getElementById("debugWindow");
       if (dbgTheme) dbgTheme.textContent = t.name;
       if (dbgWindow) dbgWindow.textContent = t.window;
+
+      // Mark the melts column so bubble logic is safe
+      const meltsColumn = document.querySelector('#menu .menu-columns > div:first-child');
+      if(meltsColumn) meltsColumn.id = "meltsColumn";
+
+      // Initial render + ongoing refresh
+      function tick(){
+        renderMenuStates();
+        bubbleAlmostGoneMelts();
+        renderOps();
+      }
+      tick();
+      window.addEventListener("storage", tick);
+      setInterval(tick, 2000);
     })();
   </script>
 </body>
