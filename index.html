@@ -360,6 +360,7 @@
     .season-message{font-size:.82rem;color:var(--muted);margin-top:.25rem}
     @keyframes calloutFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
+    /* Secret star (base) */
     .secret-star{
       width:18px;height:18px;border-radius:999px;
       border:1px solid rgba(245,201,122,.55);
@@ -367,12 +368,31 @@
       font-size:.7rem;color:#f5e6dc;cursor:pointer;
       opacity:.45;
       box-shadow:0 0 6px rgba(245,201,122,.4);
-      transition:opacity .25s ease, transform .25s ease, box-shadow .25s ease;
+      transition:opacity .25s ease, transform .25s ease, box-shadow .25s ease, filter .25s ease;
       background:radial-gradient(circle at top, rgba(245,201,122,.2), transparent 60%);
     }
     .secret-star span{transform:translateY(-.5px)}
     .secret-star:hover{opacity:.9;transform:scale(1.05);box-shadow:0 0 10px rgba(245,201,122,.8)}
     .secret-star.active{opacity:1;box-shadow:0 0 12px rgba(245,201,122,1),0 0 20px rgba(202,52,0,.9)}
+
+    /* ✅ Option A: accidental reveal only */
+    .secret-star.is-hidden{
+      opacity:0;
+      transform:scale(.92);
+      pointer-events:none;
+      filter:blur(.4px);
+    }
+    .secret-star.is-revealed{
+      opacity:.55;
+      transform:scale(1);
+      pointer-events:auto;
+      filter:none;
+    }
+    .secret-hotspot{
+      position:relative;
+      user-select:none;
+      cursor:default;
+    }
 
     .secret-menu{
       margin-top:1.4rem;
@@ -625,7 +645,6 @@
                   <p>Loading timing…</p>
                 </div>
               </div>
-              <!-- Staff PIN removed from visible UI -->
             </div>
           </div>
 
@@ -638,10 +657,13 @@
       <div class="container">
         <div class="section-header">
           <div class="section-eyebrow">The Wicked Feast</div>
-          <div class="section-title-row">
+
+          <!-- ✅ Hotspot wraps title row; star is hidden by default -->
+          <div class="section-title-row secret-hotspot" id="secretHotspot">
             <h2 class="section-title">Cerberus Bites Menu</h2>
-            <button class="secret-star" id="secretStar" aria-label="Secret menu"><span>✶</span></button>
+            <button class="secret-star is-hidden" id="secretStar" aria-label="Extra details"><span>✶</span></button>
           </div>
+
           <p class="section-subtitle">
             All melts served on house-fermented sourdough.
           </p>
@@ -702,7 +724,7 @@
             </div>
           </div>
 
-          <!-- Spellbook copy (no “hidden sigil” anywhere) -->
+          <!-- Spellbook copy (no secret/menu spoilers) -->
           <aside class="menu-art">
             <h4>The Spellbook of Sourdough</h4>
             <p>
@@ -712,24 +734,23 @@
             <p class="menu-spell">“Three heads. One rule: the bread must crackle.”</p>
             <p style="margin-top:.75rem;line-height:1.8;">
               ✶ Vegan path: <strong>Persephone’s Garden</strong><br>
-              ✶ Dip rite: <strong>Charred Tomato Soup</strong> (+$3 with any melt)<br>
-              ✶ Off-menu: <strong>The Black Gate</strong> (ask if available)
+              ✶ Dip rite: <strong>Charred Tomato Soup</strong> (+$3 with any melt)
             </p>
           </aside>
         </div>
 
-        <!-- SECRET MENU (Off-menu) -->
+        <!-- SECRET MENU (The Black Gate) — no hints in copy above -->
         <div id="secretMenu" class="secret-menu" aria-hidden="true">
           <div class="secret-menu-inner">
-            <div class="secret-menu-label">🔥 Off-Menu</div>
+            <div class="secret-menu-label">🔥</div>
             <div class="secret-menu-title">The Black Gate</div>
             <p class="secret-menu-desc">
-              Extra-butter sourdough, triple cheese, black garlic aioli — charred dark.
-              <br><em>Ask if available.</em>
+              Extra-butter sourdough, triple cheese, black garlic aioli, charred dark.
+              <br><em>When it’s gone, it’s gone.</em>
             </p>
             <p class="secret-menu-meta">
               <span class="secret-price">$12</span>
-              <span class="secret-badge">Off-menu</span>
+              <span class="secret-badge">Limited</span>
             </p>
           </div>
         </div>
@@ -948,6 +969,9 @@
         secret.classList.add("visible");
         star.classList.add("active");
         secret.setAttribute("aria-hidden","false");
+        // keep star visible once discovered
+        star.classList.add("is-revealed");
+        star.classList.remove("is-hidden");
       }
       function scheduleHide(){
         hideTimeout=setTimeout(()=>{
@@ -966,7 +990,40 @@
         const visible=secret.classList.toggle("visible");
         star.classList.toggle("active",visible);
         secret.setAttribute("aria-hidden",String(!visible));
+        if(visible){
+          star.classList.add("is-revealed");
+          star.classList.remove("is-hidden");
+        }
       });
+    }
+
+    /* ✅ Option A: accidental reveal hotspot */
+    function initAccidentalReveal(){
+      const hotspot=document.getElementById("secretHotspot");
+      const star=document.getElementById("secretStar");
+      const secret=document.getElementById("secretMenu");
+      if(!hotspot || !star) return;
+
+      let hideTimer;
+
+      function revealBriefly(){
+        clearTimeout(hideTimer);
+        star.classList.remove("is-hidden");
+        star.classList.add("is-revealed");
+
+        hideTimer=setTimeout(()=>{
+          if(!secret || !secret.classList.contains("visible")){
+            star.classList.add("is-hidden");
+            star.classList.remove("is-revealed");
+          }
+        },4500);
+      }
+
+      hotspot.addEventListener("click",(e)=>{
+        if(e.target.closest("#secretStar")) return;
+        revealBriefly();
+      });
+      hotspot.addEventListener("mouseenter",revealBriefly);
     }
 
     /* ==========================================================
@@ -1001,8 +1058,8 @@
     }
 
     /* Staff PIN kept only in JS (not displayed) */
-    const STAFF_PIN = "1395";
-    window.CerberusAdmin = {
+    const STAFF_PIN="1395";
+    window.CerberusAdmin={
       pin: STAFF_PIN,
       check: (pin)=>String(pin)===STAFF_PIN
     };
@@ -1100,6 +1157,7 @@
       setHolidayTheme();
       setSeasonCallout();
       initSecretMenu();
+      initAccidentalReveal();
       window.addEventListener("storage", renderInventory);
       window.addEventListener("load", renderInventory);
       setInterval(renderInventory, 1500);
