@@ -8,7 +8,7 @@
 
   <style>
     :root{
-      /* BASE (between sabbats) — original vibe */
+      /* BASE (between sabbats) */
       --bg:#050308;
       --bg-alt:#0c050b;
       --accent:#ca3400;
@@ -18,7 +18,6 @@
       --muted:#b3a9c0;
       --border:#312033;
 
-      /* helper vars set by JS */
       --theme-name:"Base";
       --theme-window:"Between sabbats";
     }
@@ -100,7 +99,7 @@
       100%{transform:scale(1);box-shadow:0 0 10px color-mix(in srgb, var(--accent) 40%, transparent)}
     }
 
-    /* Banner: Coming Soon then Cerberus Bites then Feast */
+    /* Banner */
     .coming-soon-banner{
       background:linear-gradient(to right, var(--accent-soft), var(--accent), var(--accent-soft));
       padding:.65rem 1rem;
@@ -187,7 +186,7 @@
       letter-spacing:.1em;
       text-transform:uppercase;
     }
-    /* remove "Sourdough from the Underworld" from header area */
+    /* remove subtitle from header area */
     .nav-brand-text .brand-subtitle{display:none}
 
     .nav-right{display:flex;align-items:center}
@@ -239,8 +238,6 @@
       opacity:.92;
       margin-bottom:.75rem;
     }
-
-    /* Big Cerberus Bites (bigger), subtitle smaller */
     .hero-title{
       font-family:"Georgia","Times New Roman",serif;
       line-height:1.05;
@@ -261,15 +258,12 @@
       text-transform:uppercase;
       opacity:.95;
     }
-
     .hero-subtitle{
       color:var(--muted);
       font-size:.95rem;
       max-width:38rem;
       margin-bottom:1.25rem;
     }
-
-    /* removed hero tags per request */
     .hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
     .btn{
       display:inline-flex;align-items:center;justify-content:center;
@@ -327,7 +321,6 @@
     }
     .hero-card p{font-size:.78rem;color:var(--muted)}
 
-    /* SOLD OUT overlay stamp for ops/menu items */
     .soldout-stamp{
       position:absolute;
       top:.6rem;right:.6rem;
@@ -354,7 +347,6 @@
     .section-title{font-family:"Georgia","Times New Roman",serif;font-size:1.4rem;margin-bottom:.3rem}
     .section-subtitle{font-size:.88rem;color:var(--muted);max-width:40rem}
 
-    /* Seasonal callout */
     .season-callout{
       border:1px solid rgba(245,201,122,.35);
       border-radius:14px;
@@ -369,7 +361,6 @@
     .season-message{font-size:.82rem;color:var(--muted);margin-top:.25rem}
     @keyframes calloutFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-    /* Secret star */
     .secret-star{
       width:18px;height:18px;border-radius:999px;
       border:1px solid rgba(245,201,122,.55);
@@ -384,7 +375,6 @@
     .secret-star:hover{opacity:.9;transform:scale(1.05);box-shadow:0 0 10px rgba(245,201,122,.8)}
     .secret-star.active{opacity:1;box-shadow:0 0 12px rgba(245,201,122,1),0 0 20px rgba(202,52,0,.9)}
 
-    /* Secret menu panel */
     .secret-menu{
       margin-top:1.4rem;
       border-radius:18px;
@@ -423,7 +413,6 @@
     }
     @keyframes fadeInUp{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
 
-    /* Menu */
     .menu-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:2rem}
     .menu-columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
     .menu-group-title{text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;color:var(--gold);margin-bottom:.4rem}
@@ -488,7 +477,6 @@
       background:radial-gradient(circle at bottom right, color-mix(in srgb, var(--accent-soft) 40%, transparent), rgba(5,3,8,.96));
     }
 
-    /* Contact */
     .contact{background:radial-gradient(circle at top, rgba(21,2,11,1), var(--bg))}
     .summon-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:2rem}
 
@@ -600,7 +588,7 @@
               <span class="hero-subbrand">Sourdough from the Underworld</span>
             </h1>
 
-            <p class="hero-subtitle" id="heroCopy">
+            <p class="hero-subtitle">
               All melts are served on house-fermented sourdough.
               <br>
               “The Hound tends the flame; Cerberus stands watch. If they don’t agree, it doesn’t leave the kitchen.”
@@ -718,7 +706,6 @@
             </div>
           </div>
 
-          <!-- Spellbook-style panel -->
           <aside class="menu-art">
             <h4>The Spellbook of Sourdough</h4>
             <p>
@@ -734,7 +721,7 @@
           </aside>
         </div>
 
-        <!-- SECRET MENU (The Black Gate) -->
+        <!-- SECRET MENU -->
         <div id="secretMenu" class="secret-menu" aria-hidden="true">
           <div class="secret-menu-inner">
             <div class="secret-menu-label">🔥 Off-Menu — Ask if Available</div>
@@ -763,13 +750,16 @@
         </div>
 
         <div class="about-grid">
+          <!-- ✅ Crest restored to original wording/format -->
           <div class="about-crest">
             <img src="CerberusLogo2.png" alt="Cerberus Bites Crest Logo" class="about-crest-logo">
             <div class="about-crest-title">Official Crest of Cerberus Bites</div>
             <p class="about-crest-text">
               <strong>We are the guardians of souls who enter this realm.</strong><br>
-              The Hound tends the flame; Cerberus stands watch.<br>
-              If they don’t agree, it doesn’t leave the kitchen.
+              I watch the flames.<br>
+              I guard the bites.<br>
+              I guide the hungry.<br>
+              We are the eternal watchdog of hunger and flame — and if we don’t approve it, it doesn’t leave the kitchen.
             </p>
           </div>
 
@@ -794,7 +784,7 @@
       </div>
     </section>
 
-    <!-- Contact / Summon -->
+    <!-- Contact -->
     <section id="contact" class="contact">
       <div class="container">
         <div class="section-header">
@@ -874,9 +864,7 @@
 
     const BASE={ bg:"#050308", bgAlt:"#0c050b", accent:"#ca3400", accentSoft:"#7e0f1d", gold:"#f5c97a", text:"#f4f2f6", muted:"#b3a9c0", border:"#312033" };
 
-    function clampDateToYear(now,month,day){
-      return new Date(now.getFullYear(),month,day,12,0,0);
-    }
+    function clampDateToYear(now,month,day){ return new Date(now.getFullYear(),month,day,12,0,0); }
     function dayDiff(a,b){
       const ms=24*60*60*1000;
       const ua=Date.UTC(a.getFullYear(),a.getMonth(),a.getDate());
@@ -918,16 +906,12 @@
         const start=new Date(active.target); start.setDate(start.getDate()-s.windowDays);
         const end=new Date(active.target); end.setDate(end.getDate()+s.windowDays);
         applyPalette(s.palette,s.name,`${fmt(start)}–${fmt(end)}`);
-        return {name:s.name, window:`${fmt(start)}–${fmt(end)}`};
+        return;
       }
-
       applyPalette(BASE,"Between Sabbats","Base palette");
-      return {name:"Between Sabbats", window:"Base palette"};
     }
 
-    /* ==========================================================
-       2) Seasonal Shout-Out (melt/soup friendly)
-       ========================================================== */
+    /* Seasonal Shout-Out */
     function setSeasonCallout(){
       const seasonCallout=document.getElementById("seasonCallout");
       const seasonMessage=seasonCallout?seasonCallout.querySelector(".season-message"):null;
@@ -956,9 +940,7 @@
       seasonMessage.innerHTML=msg;
     }
 
-    /* ==========================================================
-       3) Secret menu hover/tap
-       ========================================================== */
+    /* Secret menu hover/tap */
     function initSecretMenu(){
       const star=document.getElementById("secretStar");
       const secret=document.getElementById("secretMenu");
@@ -992,9 +974,9 @@
     }
 
     /* ==========================================================
-       4) Sold Out / Almost Gone Tracker (local-only)
+       Sold Out / Almost Gone Tracker (local-only)
        ========================================================== */
-    const TRACKED = [
+    const TRACKED=[
       { id:"cerberus_melt", name:"Cerberus Melt", warnAt:2, defaultLeft:6 },
       { id:"gatekeeper_turkey", name:"Gatekeeper Turkey", warnAt:2, defaultLeft:6 },
       { id:"hellfire_chicken", name:"Hellfire Chicken", warnAt:2, defaultLeft:6 },
@@ -1008,18 +990,13 @@
         const raw=JSON.parse(localStorage.getItem(INV_KEY));
         if(raw && raw.items) return raw;
       }catch(e){}
-      // init
       const items={};
-      TRACKED.forEach(it=>{
-        items[it.id]={ left: it.defaultLeft, sold:false };
-      });
+      TRACKED.forEach(it=>{ items[it.id]={ left: it.defaultLeft, sold:false }; });
       const init={ items };
       localStorage.setItem(INV_KEY, JSON.stringify(init));
       return init;
     }
-    function setState(next){
-      localStorage.setItem(INV_KEY, JSON.stringify(next));
-    }
+    function setState(next){ localStorage.setItem(INV_KEY, JSON.stringify(next)); }
     function statusFor(st, warnAt){
       if(!st) return "OK";
       if(st.sold || st.left<=0) return "SOLD OUT";
@@ -1027,9 +1004,7 @@
       return "OK";
     }
 
-    // Staff helpers: run in DevTools console:
-    // CerberusInv.dec("cerberus_melt")  CerberusInv.sold("tomato_soup", true)  CerberusInv.reset()
-    window.CerberusInv = {
+    window.CerberusInv={
       get: ()=>getState(),
       set: (id,left)=>{ const s=getState(); if(s.items[id]){ s.items[id].left=Math.max(0,Number(left)||0); s.items[id].sold=(s.items[id].left<=0); setState(s);} },
       dec: (id,n=1)=>{ const s=getState(); if(s.items[id]){ s.items[id].left=Math.max(0,s.items[id].left-(Number(n)||1)); s.items[id].sold=(s.items[id].left<=0); setState(s);} },
@@ -1037,6 +1012,18 @@
       sold: (id,on=true)=>{ const s=getState(); if(s.items[id]){ s.items[id].sold=!!on; if(on) s.items[id].left=0; setState(s);} },
       reset: ()=>{ localStorage.removeItem(INV_KEY); getState(); }
     };
+
+    /* Ops settings for Next Drop */
+    (function(){
+      const OPS_KEY="cb_ops_settings_v1";
+      const defaults={ nextDrop:"Next batch in ~20 min", nextDropTime:"" };
+      function getOps(){
+        try{ return Object.assign({}, defaults, JSON.parse(localStorage.getItem(OPS_KEY))||{}); }
+        catch(e){ return Object.assign({}, defaults); }
+      }
+      function setOps(next){ localStorage.setItem(OPS_KEY, JSON.stringify(next)); }
+      window.CerberusOps={ get: ()=>getOps(), set: (obj)=>setOps(Object.assign({}, getOps(), obj)) };
+    })();
 
     function renderInventory(){
       const state=getState();
@@ -1046,87 +1033,54 @@
         return { it, st, status };
       });
 
-      // Apply classes + SOLD OUT stamps to menu items
       list.forEach(x=>{
         const el=document.querySelector(`[data-id="${x.it.id}"]`);
-        if(!el) return;
-        el.classList.toggle("is-soldout", x.status==="SOLD OUT");
+        if(el) el.classList.toggle("is-soldout", x.status==="SOLD OUT");
       });
 
-      // Ops cards
-      const almost = list.filter(x=>x.status==="ALMOST GONE").sort((a,b)=>a.st.left-b.st.left);
-      const sold   = list.filter(x=>x.status==="SOLD OUT");
-      const ok     = list.filter(x=>x.status!=="SOLD OUT").sort((a,b)=>a.st.left-b.st.left);
+      const almost=list.filter(x=>x.status==="ALMOST GONE").sort((a,b)=>a.st.left-b.st.left);
+      const sold=list.filter(x=>x.status==="SOLD OUT");
+      const ok=list.filter(x=>x.status!=="SOLD OUT").sort((a,b)=>a.st.left-b.st.left);
 
-      // 1) Almost Gone
       const elAlmost=document.getElementById("opsAlmostGone");
       if(elAlmost){
         elAlmost.classList.toggle("is-soldout", false);
-        if(almost.length===0){
-          elAlmost.querySelector("p").textContent="Nothing in the danger zone (yet).";
-        }else{
-          elAlmost.querySelector("p").textContent = almost.slice(0,3)
-            .map(x=>`${x.it.name} — ${x.st.left} left`).join(" • ");
-        }
+        elAlmost.querySelector("p").textContent = almost.length
+          ? almost.slice(0,3).map(x=>`${x.it.name} — ${x.st.left} left`).join(" • ")
+          : "Nothing in the danger zone (yet).";
       }
 
-      // 2) Sold Out
       const elSold=document.getElementById("opsSoldOut");
       if(elSold){
-        if(sold.length===0){
-          elSold.classList.toggle("is-soldout", false);
-          elSold.querySelector("p").textContent="No sell-outs yet.";
-        }else{
-          elSold.classList.toggle("is-soldout", true);
-          elSold.querySelector("p").textContent = sold.slice(0,3).map(x=>x.it.name).join(" • ") + (sold.length>3?` +${sold.length-3} more`:"");
-        }
+        const has = sold.length>0;
+        elSold.classList.toggle("is-soldout", has);
+        elSold.querySelector("p").textContent = has
+          ? sold.slice(0,3).map(x=>x.it.name).join(" • ") + (sold.length>3?` +${sold.length-3} more`:"")
+          : "No sell-outs yet.";
       }
 
-      // 3) Batch Counter (no “limited batches” wording; just counts)
       const elBatch=document.getElementById("opsBatchCounter");
       if(elBatch){
-        const totalLeft = ok.reduce((sum,x)=>sum + Math.max(0,x.st.left),0);
+        const totalLeft=ok.reduce((sum,x)=>sum + Math.max(0,x.st.left),0);
         elBatch.classList.toggle("is-soldout", totalLeft===0);
         elBatch.querySelector("p").textContent = `${totalLeft} total left • ${almost.length} low • ${ok.length} live`;
       }
 
-      // 4) Next Drop (editable via CerberusOps)
       const elDrop=document.getElementById("opsNextDrop");
       if(elDrop){
-        const ops = window.CerberusOps ? window.CerberusOps.get() : { nextDrop:"Next batch in ~20 min", nextDropTime:"" };
-        const text = ops.nextDropTime ? `Next drop: ${ops.nextDropTime}` : (ops.nextDrop || "Next drop soon");
+        const ops=window.CerberusOps.get();
+        const text=ops.nextDropTime ? `Next drop: ${ops.nextDropTime}` : (ops.nextDrop || "Next drop soon");
         elDrop.classList.toggle("is-soldout", false);
         elDrop.querySelector("p").textContent=text;
       }
-
-      // Show SOLD OUT stamp in cards when appropriate (only on sold-out cards)
-      // Cards already toggle .is-soldout; stamp text is exactly "SOLD OUT" per request.
     }
 
-    /* Ops settings (for Next Drop text/time) */
-    (function(){
-      const OPS_KEY="cb_ops_settings_v1";
-      const defaults={ nextDrop:"Next batch in ~20 min", nextDropTime:"" };
-      function getOps(){
-        try{ return Object.assign({}, defaults, JSON.parse(localStorage.getItem(OPS_KEY))||{}); }
-        catch(e){ return Object.assign({}, defaults); }
-      }
-      function setOps(next){ localStorage.setItem(OPS_KEY, JSON.stringify(next)); }
-      window.CerberusOps = {
-        get: ()=>getOps(),
-        set: (obj)=>setOps(Object.assign({}, getOps(), obj))
-      };
-    })();
-
-    /* ==========================================================
-       5) Loader + header reveal + fail-safe
-       ========================================================== */
+    /* Loader + header reveal */
     function hideLoader(){
       document.body.classList.add("loaded");
       const header=document.querySelector(".hb-header");
       if(header) header.classList.add("revealed");
     }
-
     window.addEventListener("load",()=>{
       document.getElementById("year").textContent=new Date().getFullYear();
       hideLoader();
@@ -1135,19 +1089,14 @@
 
     window.addEventListener("scroll",()=>{
       const header=document.querySelector(".hb-header");
-      if(!header) return;
-      header.classList.toggle("scrolled", window.scrollY>20);
+      if(header) header.classList.toggle("scrolled", window.scrollY>20);
     });
 
-    /* ==========================================================
-       6) Boot
-       ========================================================== */
+    /* Boot */
     (function boot(){
       setHolidayTheme();
       setSeasonCallout();
       initSecretMenu();
-
-      // inventory render loop
       window.addEventListener("storage", renderInventory);
       window.addEventListener("load", renderInventory);
       setInterval(renderInventory, 1500);
