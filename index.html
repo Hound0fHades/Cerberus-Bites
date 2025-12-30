@@ -138,10 +138,15 @@
 
     .nav-center{display:flex;align-items:center;gap:.6rem;text-align:center;}
     .nav-logo-link{display:flex;align-items:center;justify-content:center;}
+
     .logo-img{
       height:90px;width:auto;display:block;
       filter:drop-shadow(0 0 12px color-mix(in srgb,var(--accent) 80%,transparent));
       transition:height .25s ease,transform .25s ease,filter .25s ease;
+      -webkit-touch-callout:none;
+      -webkit-user-select:none;
+      user-select:none;
+      touch-action:manipulation;
     }
     .hb-header.scrolled .logo-img{height:68px;filter:drop-shadow(0 0 8px color-mix(in srgb,var(--accent) 70%,transparent));}
     .logo-img:hover{animation:logoFlame 1s ease-in-out infinite alternate;}
@@ -633,7 +638,7 @@
 
         <div class="nav-center">
           <a href="#top" class="nav-logo-link" id="logoGate" aria-label="Cerberus Crest">
-            <img src="CerberusLogo2.png" alt="Cerberus Bites Logo" class="logo-img">
+            <img src="CerberusLogo2.png" alt="Cerberus Bites Logo" class="logo-img" id="logoImg">
           </a>
           <div class="nav-brand-text">
             <div class="brand-name">Cerberus Bites</div>
@@ -789,17 +794,17 @@
           </aside>
         </div>
 
-        <!-- SECRET MENU (The Black Gate) -->
+        <!-- SECRET MENU (The Black Gate) — no hints, no labels -->
         <div id="secretMenu" class="secret-menu" aria-hidden="true">
           <div class="secret-menu-inner">
-            <div class="secret-menu-label">🔥 Off-Menu — Ask if Available</div>
+            <div class="secret-menu-label">—</div>
             <div class="secret-menu-title">The Black Gate</div>
             <p class="secret-menu-desc">
               Extra-butter sourdough, triple cheese, black garlic aioli, charred dark.
             </p>
             <p class="secret-menu-meta">
               <span class="secret-price">$12</span>
-              <span class="secret-badge">Off-menu</span>
+              <span class="secret-badge">—</span>
             </p>
           </div>
         </div>
@@ -923,7 +928,7 @@
 
   <script>
     /* ==========================================================
-       0) Staff PIN (requested)
+       0) Staff PIN
        ========================================================== */
     const STAFF_PIN = "1395";
 
@@ -1044,46 +1049,62 @@
         msg=`☀️ <strong>Summer heat</strong><br>
              Hellfire Chicken brings the ember — ask for extra char if you’re brave.`;
       } else {
-        msg=`🍂 <strong>Autumn at the Black Gate</strong><br>
+        msg=`🍂 <strong>Autumn at the gate</strong><br>
              Gatekeeper Turkey + soup is the cleanest combo when the air turns sharp.`;
       }
       seasonMessage.innerHTML=msg;
     }
 
     /* ==========================================================
-       3) Secret menu hover/tap logic
+       3) Secret menu: toggle + click-outside close (mobile-safe)
        ========================================================== */
     function initSecretMenu(){
       const star=document.getElementById("secretStar");
       const secret=document.getElementById("secretMenu");
       if(!star || !secret) return;
 
-      let hideTimeout;
+      let hideTimeout=null;
 
-      function showSecret(){
-        clearTimeout(hideTimeout);
+      function show(){
+        if(hideTimeout) clearTimeout(hideTimeout);
         secret.classList.add("visible");
         star.classList.add("active");
         secret.setAttribute("aria-hidden","false");
       }
-      function scheduleHide(){
-        hideTimeout=setTimeout(function(){
-          secret.classList.remove("visible");
-          star.classList.remove("active");
-          secret.setAttribute("aria-hidden","true");
-        },200);
+      function hide(){
+        if(hideTimeout) clearTimeout(hideTimeout);
+        secret.classList.remove("visible");
+        star.classList.remove("active");
+        secret.setAttribute("aria-hidden","true");
+      }
+      function toggle(e){
+        e.preventDefault();
+        e.stopPropagation();
+        secret.classList.contains("visible") ? hide() : show();
       }
 
-      star.addEventListener("mouseenter",showSecret);
-      star.addEventListener("mouseleave",scheduleHide);
-      secret.addEventListener("mouseenter",showSecret);
-      secret.addEventListener("mouseleave",scheduleHide);
+      // Tap/click star toggles
+      star.addEventListener("click", toggle);
 
-      star.addEventListener("click",function(e){
-        e.preventDefault();
-        const visible=secret.classList.toggle("visible");
-        star.classList.toggle("active",visible);
-        secret.setAttribute("aria-hidden",String(!visible));
+      // Desktop hover can reveal, but won’t get “stuck”
+      star.addEventListener("mouseenter", show);
+      star.addEventListener("mouseleave", ()=>{
+        hideTimeout=setTimeout(()=>{
+          if(!secret.matches(":hover") && !star.matches(":hover")) hide();
+        }, 160);
+      });
+      secret.addEventListener("mouseenter", show);
+      secret.addEventListener("mouseleave", ()=>{
+        hideTimeout=setTimeout(()=>{
+          if(!secret.matches(":hover") && !star.matches(":hover")) hide();
+        }, 160);
+      });
+
+      // **Key fix:** clicking/tapping anywhere else closes (mobile)
+      document.addEventListener("pointerdown", (e)=>{
+        if(!secret.classList.contains("visible")) return;
+        if(secret.contains(e.target) || star.contains(e.target)) return;
+        hide();
       });
     }
 
@@ -1123,9 +1144,8 @@
     function defaultState(){
       const items={};
       TRACKED.forEach(it=>{
-        items[it.id]={ left: 6 }; // default “batches” (you can change in staff gate)
+        items[it.id]={ left: 6 };
       });
-      // make soup a little higher by default
       if(items["tomato-soup"]) items["tomato-soup"].left = 10;
 
       return {
@@ -1295,7 +1315,6 @@
 
       grid.innerHTML="";
 
-      // 1) Stock inputs
       TRACKED.forEach(it=>{
         const st=state.items[it.id] || {left:0};
 
@@ -1317,7 +1336,6 @@
         grid.appendChild(box);
       });
 
-      // 2) Next drop
       const boxDrop=document.createElement("div");
       boxDrop.className="staff-box";
       boxDrop.innerHTML = `
@@ -1334,11 +1352,6 @@
       grid.appendChild(boxDrop);
     }
 
-    function syncOpsInputs(){
-      // currently handled via state fields (nextDrop, nextDropTime)
-      // left as a stub for future extensions
-    }
-
     function openGate(){
       const entered = prompt("Enter Staff PIN:");
       if(entered !== STAFF_PIN){
@@ -1350,7 +1363,6 @@
       gate.classList.add("open");
       gate.setAttribute("aria-hidden","false");
       buildStaffUI();
-      syncOpsInputs();
     }
 
     function closeGate(){
@@ -1376,7 +1388,6 @@
 
       setState(state);
 
-      // Immediately refresh UI
       renderMenuStatuses();
       renderAlmostGoneTop();
     }
@@ -1388,15 +1399,16 @@
       renderAlmostGoneTop();
     }
 
-    // Secret gesture: triple-click or long-press logo to open Staff Gate
+    // Secret gesture: triple-click OR long-hold logo image (~3.2s)
     function initStaffGateGesture(){
-      const logo=document.getElementById("logoGate");
-      if(!logo) return;
+      const logoLink=document.getElementById("logoGate");
+      const logoImg=document.getElementById("logoImg");
+      if(!logoLink || !logoImg) return;
 
-      // Triple click
+      // Triple click (backup)
       let clicks=0;
       let clickTimer=null;
-      logo.addEventListener("click",(e)=>{
+      logoLink.addEventListener("click",(e)=>{
         clicks++;
         clearTimeout(clickTimer);
         clickTimer=setTimeout(()=>{ clicks=0; }, 500);
@@ -1406,20 +1418,63 @@
         }
       });
 
-      // Long press (mobile)
+      // Long press / hold (mobile + desktop, reliable)
+      const HOLD_MS = 3200;
       let pressTimer=null;
-      logo.addEventListener("touchstart",()=>{
-        pressTimer=setTimeout(()=>openGate(), 650);
-      }, {passive:true});
-      logo.addEventListener("touchend",()=>{ clearTimeout(pressTimer); }, {passive:true});
-      logo.addEventListener("touchcancel",()=>{ clearTimeout(pressTimer); }, {passive:true});
+      let openedByHold=false;
+      let startX=0, startY=0;
 
-      // Desktop long press
-      logo.addEventListener("mousedown",()=>{
-        pressTimer=setTimeout(()=>openGate(), 650);
-      });
-      logo.addEventListener("mouseup",()=>{ clearTimeout(pressTimer); });
-      logo.addEventListener("mouseleave",()=>{ clearTimeout(pressTimer); });
+      function cancelHold(){
+        if(pressTimer) clearTimeout(pressTimer);
+        pressTimer=null;
+      }
+
+      function startHold(e){
+        openedByHold=false;
+        cancelHold();
+
+        const p = (e.touches && e.touches[0]) ? e.touches[0] : e;
+        startX = p.clientX || 0;
+        startY = p.clientY || 0;
+
+        pressTimer=setTimeout(()=>{
+          openedByHold=true;
+          openGate();
+        }, HOLD_MS);
+      }
+
+      function moveHold(e){
+        const p = (e.touches && e.touches[0]) ? e.touches[0] : e;
+        const dx=Math.abs((p.clientX||0) - startX);
+        const dy=Math.abs((p.clientY||0) - startY);
+        if(dx>10 || dy>10) cancelHold(); // scrolling/drag cancels
+      }
+
+      // Listen on the IMG so tap still scrolls normally unless hold fires
+      logoImg.addEventListener("pointerdown", startHold);
+      logoImg.addEventListener("pointerup", cancelHold);
+      logoImg.addEventListener("pointercancel", cancelHold);
+      logoImg.addEventListener("pointermove", moveHold);
+      logoImg.addEventListener("pointerleave", cancelHold);
+
+      logoImg.addEventListener("touchstart", startHold, {passive:true});
+      logoImg.addEventListener("touchmove", moveHold, {passive:true});
+      logoImg.addEventListener("touchend", cancelHold, {passive:true});
+      logoImg.addEventListener("touchcancel", cancelHold, {passive:true});
+
+      logoImg.addEventListener("mousedown", startHold);
+      logoImg.addEventListener("mousemove", moveHold);
+      logoImg.addEventListener("mouseup", cancelHold);
+      logoImg.addEventListener("mouseleave", cancelHold);
+
+      // If hold opened gate, block the link jump once
+      logoLink.addEventListener("click",(e)=>{
+        if(openedByHold){
+          e.preventDefault();
+          e.stopPropagation();
+          openedByHold=false;
+        }
+      }, true);
 
       // Close/save/reset buttons
       const closeBtn=document.getElementById("staffClose");
@@ -1444,7 +1499,6 @@
       initSecretMenu();
       initStaffGateGesture();
 
-      // Initial renders
       renderMenuStatuses();
       renderAlmostGoneTop();
     })();
