@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Cerberus Bites | Sourdough from the Underworld</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Cerberus Bites — Sourdough melts forged in flame. If the hound doesn’t approve it, it doesn’t leave the kitchen." />
+  <meta name="description" content="Cerberus Bites — Sourdough melts forged in flame. The Hound tends the flame; Cerberus stands watch. If they don’t agree, it doesn’t leave the kitchen." />
 
   <style>
     :root{
@@ -16,50 +16,60 @@
       --text:#f4f2f6;
       --muted:#b3a9c0;
       --border:#312033;
+
       --theme-name:"Base";
       --theme-window:"Between sabbats";
     }
 
-    *{box-sizing:border-box;margin:0;padding:0;}
+    *{box-sizing:border-box;margin:0;padding:0}
 
     body{
       font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background:radial-gradient(circle at top,color-mix(in srgb,var(--accent-soft) 22%,#000 78%) 0,var(--bg) 60%,#020107 100%);
+      background:radial-gradient(circle at top,
+        color-mix(in srgb, var(--accent-soft) 22%, #000 78%) 0,
+        var(--bg) 60%,
+        #020107 100%);
       color:var(--text);
       line-height:1.6;
       transition:background .45s ease,color .45s ease;
     }
-
-    a{color:var(--gold);text-decoration:none;}
-    a:hover{text-decoration:underline;}
-    .container{max-width:1100px;margin:0 auto;padding:0 1.25rem;}
+    a{color:var(--gold);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1100px;margin:0 auto;padding:0 1.25rem}
 
     /* Loading Overlay */
     .loader-overlay{
       position:fixed;inset:0;
-      background:radial-gradient(circle at top,color-mix(in srgb,var(--accent-soft) 28%,#000 72%) 0,var(--bg) 60%,#020107 100%);
+      background:radial-gradient(circle at top,
+        color-mix(in srgb, var(--accent-soft) 28%, #000 72%) 0,
+        var(--bg) 60%,
+        #020107 100%);
       display:flex;align-items:center;justify-content:center;
       z-index:9999;
-      transition:opacity .6s ease,transform .6s ease;
+      transition:opacity .6s ease, transform .6s ease;
     }
     .loader-inner{
       text-align:center;
       padding:1.5rem 2rem;
       border-radius:20px;
-      border:1px solid color-mix(in srgb,var(--gold) 55%,transparent);
-      background:radial-gradient(circle at top,color-mix(in srgb,var(--accent-soft) 68%,transparent),rgba(5,3,8,.98));
+      border:1px solid color-mix(in srgb, var(--gold) 55%, transparent);
+      background:radial-gradient(circle at top,
+        color-mix(in srgb, var(--accent-soft) 68%, transparent),
+        rgba(5,3,8,.98));
       box-shadow:0 0 30px rgba(0,0,0,.9);
     }
     .loader-symbol{
       width:56px;height:56px;margin:0 auto .9rem;
       border-radius:999px;
-      border:1px solid color-mix(in srgb,var(--gold) 70%,transparent);
+      border:1px solid color-mix(in srgb, var(--gold) 70%, transparent);
       display:flex;align-items:center;justify-content:center;
       font-family:"Georgia","Times New Roman",serif;
-      font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;
-      background:radial-gradient(circle,var(--accent) 0,var(--bg) 68%);
+      font-size:1.05rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      background:radial-gradient(circle, var(--accent) 0, var(--bg) 68%);
       color:#fdf3e0;
-      box-shadow:0 0 22px color-mix(in srgb,var(--accent) 80%,transparent);
+      box-shadow:0 0 22px color-mix(in srgb, var(--accent) 80%, transparent);
       animation:loaderPulse 1.6s ease-in-out infinite;
     }
     .loader-text-main{
@@ -67,55 +77,69 @@
       font-size:1rem;
       letter-spacing:.16em;
       text-transform:uppercase;
-      color:color-mix(in srgb,var(--gold) 70%,#fff 30%);
+      color:color-mix(in srgb, var(--gold) 70%, #fff 30%);
       margin-bottom:.35rem;
     }
     .loader-text-sub{
-      font-size:.8rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;
+      font-size:.8rem;
+      color:var(--muted);
+      letter-spacing:.08em;
+      text-transform:uppercase;
     }
-    body.loaded .loader-overlay{opacity:0;transform:translateY(-12px);pointer-events:none;}
+    body.loaded .loader-overlay{opacity:0;transform:translateY(-12px);pointer-events:none}
     @keyframes loaderPulse{
-      0%{transform:scale(1);box-shadow:0 0 10px color-mix(in srgb,var(--accent) 40%,transparent);}
-      50%{transform:scale(1.05);box-shadow:0 0 26px color-mix(in srgb,var(--accent) 85%,transparent);}
-      100%{transform:scale(1);box-shadow:0 0 10px color-mix(in srgb,var(--accent) 40%,transparent);}
+      0%{transform:scale(1);box-shadow:0 0 10px color-mix(in srgb, var(--accent) 40%, transparent)}
+      50%{transform:scale(1.05);box-shadow:0 0 26px color-mix(in srgb, var(--accent) 85%, transparent)}
+      100%{transform:scale(1);box-shadow:0 0 10px color-mix(in srgb, var(--accent) 40%, transparent)}
     }
 
     /* Banner */
     .coming-soon-banner{
-      background:linear-gradient(to right,var(--accent-soft),var(--accent),var(--accent-soft));
-      padding:.6rem 1rem;
+      background:linear-gradient(to right, var(--accent-soft), var(--accent), var(--accent-soft));
+      padding:.65rem 1rem;
       text-align:center;
       color:#f5e6dc;
       font-family:"Georgia","Times New Roman",serif;
       font-size:.9rem;
       letter-spacing:.15em;
       text-transform:uppercase;
-      box-shadow:0 0 18px color-mix(in srgb,var(--accent) 70%,transparent);
-      position:relative;overflow:hidden;
+      box-shadow:0 0 18px color-mix(in srgb, var(--accent) 70%, transparent);
+      position:relative;
+      overflow:hidden;
       animation:flameFlicker 2.4s ease-in-out infinite alternate;
     }
+    .banner-coming{
+      display:inline-block;
+      padding:.12rem .55rem;
+      border-radius:999px;
+      border:1px solid color-mix(in srgb, var(--gold) 60%, transparent);
+      box-shadow:0 0 18px color-mix(in srgb, var(--accent) 75%, transparent);
+      margin-right:.5rem;
+    }
     @keyframes flameFlicker{
-      0%{opacity:.9;text-shadow:0 0 6px rgba(0,0,0,.8),0 0 14px color-mix(in srgb,var(--gold) 60%,transparent);transform:translateY(0);}
-      55%{opacity:1;text-shadow:0 0 9px rgba(0,0,0,.9),0 0 18px color-mix(in srgb,var(--gold) 85%,transparent);transform:translateY(-.6px);}
-      100%{opacity:1;text-shadow:0 0 11px rgba(0,0,0,.95),0 0 22px color-mix(in srgb,var(--gold) 95%,transparent);transform:translateY(-.4px);}
+      0%{opacity:.9;text-shadow:0 0 6px rgba(0,0,0,.8),0 0 14px color-mix(in srgb, var(--gold) 60%, transparent);transform:translateY(0)}
+      55%{opacity:1;text-shadow:0 0 9px rgba(0,0,0,.9),0 0 18px color-mix(in srgb, var(--gold) 85%, transparent);transform:translateY(-.6px)}
+      100%{opacity:1;text-shadow:0 0 11px rgba(0,0,0,.95),0 0 22px color-mix(in srgb, var(--gold) 95%, transparent);transform:translateY(-.4px)}
     }
 
-    /* Header */
+    /* Sticky header */
     .hb-header{
       position:sticky;top:0;z-index:50;
-      background:linear-gradient(to right,rgba(5,3,8,.96),rgba(7,1,1,.96));
+      background:linear-gradient(to right, rgba(5,3,8,.96), rgba(7,1,1,.96));
       border-bottom:1px solid rgba(245,201,122,.22);
       backdrop-filter:blur(10px);
-      box-shadow:0 0 18px rgba(0,0,0,.9),inset 0 -1px 0 color-mix(in srgb,var(--accent) 30%,transparent);
+      box-shadow:0 0 18px rgba(0,0,0,.9), inset 0 -1px 0 color-mix(in srgb, var(--accent) 30%, transparent);
       transform:translateY(-18px);
       opacity:0;
-      transition:transform .55s cubic-bezier(.22,.9,.35,1.1),opacity .55s ease;
+      transition:transform .55s cubic-bezier(.22,.9,.35,1.1), opacity .55s ease;
     }
-    .hb-header.revealed{transform:translateY(0);opacity:1;}
-    .hb-header.scrolled{box-shadow:0 0 26px rgba(0,0,0,1),0 0 30px color-mix(in srgb,var(--accent) 55%,transparent);}
+    .hb-header.revealed{transform:translateY(0);opacity:1}
+    .hb-header.scrolled{
+      box-shadow:0 0 26px rgba(0,0,0,1), 0 0 30px color-mix(in srgb, var(--accent) 55%, transparent);
+    }
 
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:1.25rem;padding:.4rem 0;font-size:.95rem;}
-    .nav-links-left{display:flex;gap:1.4rem;font-size:.85rem;}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:1.25rem;padding:.4rem 0;font-size:.95rem}
+    .nav-links-left{display:flex;gap:1.4rem;font-size:.85rem}
     .nav-links-left a{
       position:relative;
       text-transform:uppercase;
@@ -126,28 +150,31 @@
     }
     .nav-links-left a::after{
       content:"";
-      position:absolute;left:0;bottom:-.2rem;height:2px;width:0;border-radius:999px;
-      background:linear-gradient(to right,var(--gold),var(--accent),var(--accent-soft));
-      box-shadow:0 0 10px color-mix(in srgb,var(--accent) 80%,transparent);
+      position:absolute;left:0;bottom:-.2rem;
+      height:2px;width:0;border-radius:999px;
+      background:linear-gradient(to right, var(--gold), var(--accent), var(--accent-soft));
+      box-shadow:0 0 10px color-mix(in srgb, var(--accent) 80%, transparent);
       opacity:0;
-      transition:width .22s ease,opacity .22s ease;
+      transition:width .22s ease, opacity .22s ease;
     }
-    .nav-links-left a:hover{color:var(--gold);}
-    .nav-links-left a:hover::after{width:100%;opacity:1;}
+    .nav-links-left a:hover{color:var(--gold)}
+    .nav-links-left a:hover::after{width:100%;opacity:1}
 
-    .nav-center{display:flex;align-items:center;gap:.6rem;text-align:center;}
-    .nav-logo-link{display:flex;align-items:center;justify-content:center;}
+    .nav-center{display:flex;align-items:center;gap:.6rem;text-align:center}
+    .nav-logo-link{display:flex;align-items:center;justify-content:center;cursor:pointer}
+    .nav-logo-link:active{transform:scale(.995)}
     .logo-img{
       height:90px;width:auto;display:block;
-      filter:drop-shadow(0 0 12px color-mix(in srgb,var(--accent) 80%,transparent));
-      transition:height .25s ease,transform .25s ease,filter .25s ease;
-      user-select:none;-webkit-user-drag:none;
+      filter:drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 80%, transparent));
+      transition:height .25s ease, transform .25s ease, filter .25s ease;
+      user-select:none;
+      -webkit-user-drag:none;
     }
-    .hb-header.scrolled .logo-img{height:68px;filter:drop-shadow(0 0 8px color-mix(in srgb,var(--accent) 70%,transparent));}
-    .logo-img:hover{animation:logoFlame 1s ease-in-out infinite alternate;}
+    .hb-header.scrolled .logo-img{height:68px;filter:drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 70%, transparent))}
+    .logo-img:hover{animation:logoFlame 1s ease-in-out infinite alternate}
     @keyframes logoFlame{
-      0%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 10px color-mix(in srgb,var(--accent) 80%,transparent));}
-      100%{transform:translateY(-1px) scale(1.03);filter:drop-shadow(0 0 18px color-mix(in srgb,var(--accent) 100%,transparent));}
+      0%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 10px color-mix(in srgb, var(--accent) 80%, transparent))}
+      100%{transform:translateY(-1px) scale(1.03);filter:drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 100%, transparent))}
     }
 
     .nav-brand-text .brand-name{
@@ -163,19 +190,19 @@
       color:var(--muted);
     }
 
-    .nav-right{display:flex;align-items:center;}
+    .nav-right{display:flex;align-items:center}
     .nav-cta{
       border-radius:999px;
-      border:1px solid color-mix(in srgb,var(--gold) 85%,transparent);
+      border:1px solid color-mix(in srgb, var(--gold) 85%, transparent);
       padding:.45rem 1.2rem;
       font-size:.8rem;
       letter-spacing:.16em;
       text-transform:uppercase;
       background:
-        radial-gradient(circle at top left,color-mix(in srgb,var(--accent) 90%,transparent),transparent),
-        radial-gradient(circle at bottom right,color-mix(in srgb,var(--accent-soft) 90%,transparent),rgba(5,3,8,.95));
+        radial-gradient(circle at top left, color-mix(in srgb, var(--accent) 90%, transparent), transparent),
+        radial-gradient(circle at bottom right, color-mix(in srgb, var(--accent-soft) 90%, transparent), rgba(5,3,8,.95));
       color:#fff;
-      box-shadow:0 0 16px color-mix(in srgb,var(--accent) 90%,transparent),0 0 4px color-mix(in srgb,var(--gold) 80%,transparent);
+      box-shadow:0 0 16px color-mix(in srgb, var(--accent) 90%, transparent), 0 0 4px color-mix(in srgb, var(--gold) 80%, transparent);
       cursor:pointer;
       position:relative;
       overflow:hidden;
@@ -184,21 +211,26 @@
     .nav-cta::after{
       content:"";
       position:absolute;inset:0;
-      background:radial-gradient(circle at 0% 50%,color-mix(in srgb,var(--gold) 35%,transparent),transparent 55%);
+      background:radial-gradient(circle at 0% 50%, color-mix(in srgb, var(--gold) 35%, transparent), transparent 55%);
       transform:translateX(-120%);
       transition:transform .35s ease-out;
       pointer-events:none;
     }
-    .nav-cta:hover::after{transform:translateX(120%);}
+    .nav-cta:hover::after{transform:translateX(120%)}
     .nav-cta:hover{
-      box-shadow:0 0 22px color-mix(in srgb,var(--accent) 100%,transparent),0 0 10px color-mix(in srgb,var(--gold) 90%,transparent);
+      box-shadow:0 0 22px color-mix(in srgb, var(--accent) 100%, transparent), 0 0 10px color-mix(in srgb, var(--gold) 90%, transparent);
     }
 
-    main{padding-bottom:4rem;}
+    main{padding-bottom:4rem}
 
     /* Hero */
-    .hero{padding:3.2rem 0 2.8rem;}
-    .hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:2.5rem;align-items:center;}
+    .hero{padding:3.2rem 0 2.8rem}
+    .hero-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+      gap:2.5rem;
+      align-items:center;
+    }
     .hero-eyebrow{
       text-transform:uppercase;
       letter-spacing:.3em;
@@ -209,60 +241,63 @@
     }
     .hero-title{
       font-family:"Georgia","Times New Roman",serif;
-      line-height:1.1;
+      line-height:1.05;
       margin-bottom:1rem;
       text-shadow:0 0 18px rgba(0,0,0,.8);
     }
     .hero-title .hero-brand{
-      font-size:clamp(2.6rem,5vw,3.5rem);
-      display:inline-block;
+      display:block;
+      font-size:clamp(2.6rem, 5vw, 3.5rem);
       color:var(--text);
     }
     .hero-title .hero-subbrand{
       display:block;
       margin-top:.25rem;
-      font-size:clamp(1.05rem,2vw,1.35rem);
+      font-size:clamp(1.05rem, 2vw, 1.35rem);
       letter-spacing:.08em;
       color:var(--gold);
       text-transform:uppercase;
       opacity:.95;
     }
-    .hero-subtitle{color:var(--muted);font-size:.95rem;max-width:38rem;margin-bottom:1.25rem;}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;}
+    .hero-subtitle{
+      color:var(--muted);
+      font-size:.95rem;
+      max-width:38rem;
+      margin-bottom:1.25rem;
+    }
+    .hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
     .btn{
       display:inline-flex;align-items:center;justify-content:center;
       border-radius:999px;border:1px solid transparent;
-      padding:.55rem 1.3rem;font-size:.85rem;text-transform:uppercase;letter-spacing:.16em;
+      padding:.55rem 1.3rem;font-size:.85rem;
+      text-transform:uppercase;letter-spacing:.16em;
       cursor:pointer;text-decoration:none;
     }
     .btn-primary{
-      background:linear-gradient(135deg,var(--accent),var(--accent-soft));
+      background:linear-gradient(135deg, var(--accent), var(--accent-soft));
       color:#fff;
-      box-shadow:0 0 18px color-mix(in srgb,var(--accent) 70%,transparent);
+      box-shadow:0 0 18px color-mix(in srgb, var(--accent) 70%, transparent);
     }
-    .btn-primary:hover{filter:brightness(1.05);}
+    .btn-primary:hover{filter:brightness(1.05)}
     .btn-ghost{
       border-color:rgba(245,201,122,.5);
       color:var(--gold);
       background:rgba(5,3,8,.6);
     }
-    .btn-ghost:hover{background:rgba(245,201,122,.08);}
-    .hero-note{font-size:.8rem;color:var(--muted);}
+    .btn-ghost:hover{background:rgba(245,201,122,.08)}
+    .hero-note{font-size:.8rem;color:var(--muted)}
 
     .hero-art{
-      border-radius:24px;
-      border:1px solid rgba(245,201,122,.3);
+      border-radius:24px;border:1px solid rgba(245,201,122,.3);
       padding:1px;
-      background:radial-gradient(circle at top,color-mix(in srgb,var(--accent) 75%,transparent),var(--bg));
-      box-shadow:0 0 32px color-mix(in srgb,var(--accent) 45%,transparent),0 0 80px rgba(0,0,0,.9);
+      background:radial-gradient(circle at top, color-mix(in srgb, var(--accent) 75%, transparent), var(--bg));
+      box-shadow:0 0 32px color-mix(in srgb, var(--accent) 45%, transparent), 0 0 80px rgba(0,0,0,.9);
     }
     .hero-art-inner{
       border-radius:22px;
-      background:radial-gradient(circle at bottom,var(--bg) 0,color-mix(in srgb,var(--accent-soft) 18%,var(--bg) 82%) 45%,var(--bg) 100%);
+      background:radial-gradient(circle at bottom, var(--bg) 0, color-mix(in srgb, var(--accent-soft) 18%, var(--bg) 82%) 45%, var(--bg) 100%);
       padding:1.3rem;
-      display:flex;
-      flex-direction:column;
-      gap:1rem;
+      display:flex;flex-direction:column;gap:1rem;
     }
     .hero-art-title{
       font-family:"Georgia","Times New Roman",serif;
@@ -270,68 +305,87 @@
       letter-spacing:.15em;
       text-transform:uppercase;
     }
-    .hero-art-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;font-size:.8rem;}
+    .hero-art-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;font-size:.8rem}
     .hero-card{
-      border-radius:16px;
-      border:1px solid rgba(245,201,122,.25);
-      padding:.6rem .7rem;
-      background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent-soft) 55%,transparent),rgba(5,3,8,.9));
+      border-radius:16px;border:1px solid rgba(245,201,122,.25);
+      padding:.7rem .75rem;
+      background:radial-gradient(circle at top left, color-mix(in srgb, var(--accent-soft) 55%, transparent), rgba(5,3,8,.9));
       position:relative;
       overflow:hidden;
+      min-height:74px;
     }
     .hero-card h4{
       font-size:.78rem;
       text-transform:uppercase;
       letter-spacing:.16em;
       color:var(--gold);
-      margin-bottom:.2rem;
+      margin-bottom:.25rem;
     }
-    .hero-card p{font-size:.78rem;color:var(--muted);}
+    .hero-card p{font-size:.78rem;color:var(--muted)}
 
-    section{padding:2.5rem 0;border-top:1px solid rgba(245,201,122,.12);}
-    .section-header{margin-bottom:1.5rem;text-align:left;}
-    .section-eyebrow{text-transform:uppercase;letter-spacing:.28em;font-size:.7rem;color:var(--gold);margin-bottom:.2rem;}
-    .section-title-row{display:flex;align-items:center;gap:.6rem;}
-    .section-title{font-family:"Georgia","Times New Roman",serif;font-size:1.4rem;margin-bottom:.3rem;}
-    .section-subtitle{font-size:.88rem;color:var(--muted);max-width:40rem;}
+    /* Ember shimmer for “favored by hungry souls” */
+    .hottest-line{
+      display:inline-block;
+      font-weight:600;
+      letter-spacing:.04em;
+      background:linear-gradient(90deg,
+        rgba(245,201,122,.55),
+        rgba(202,52,0,.92),
+        rgba(245,201,122,.62));
+      background-size:220% 100%;
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      filter:drop-shadow(0 0 10px rgba(202,52,0,.25));
+      animation:emberShimmer 4.2s ease-in-out infinite;
+    }
+    @keyframes emberShimmer{
+      0%{background-position:0% 50%;opacity:.85}
+      50%{background-position:100% 50%;opacity:1}
+      100%{background-position:0% 50%;opacity:.88}
+    }
 
-    /* Seasonal callout */
+    section{padding:2.5rem 0;border-top:1px solid rgba(245,201,122,.12)}
+    .section-header{margin-bottom:1.5rem;text-align:left}
+    .section-eyebrow{text-transform:uppercase;letter-spacing:.28em;font-size:.7rem;color:var(--gold);margin-bottom:.2rem}
+    .section-title-row{display:flex;align-items:center;gap:.6rem}
+    .section-title{font-family:"Georgia","Times New Roman",serif;font-size:1.4rem;margin-bottom:.3rem}
+    .section-subtitle{font-size:.88rem;color:var(--muted);max-width:40rem}
+
     .season-callout{
       border:1px solid rgba(245,201,122,.35);
       border-radius:14px;
       padding:.9rem 1.2rem;
       margin:1rem 0 1.5rem;
-      background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent) 16%,transparent),rgba(5,3,8,.9));
+      background:radial-gradient(circle at top left, color-mix(in srgb, var(--accent) 16%, transparent), rgba(5,3,8,.9));
       backdrop-filter:blur(4px);
       box-shadow:0 0 18px rgba(0,0,0,.6);
       animation:calloutFade .7s ease-out both;
     }
-    .season-title{color:var(--gold);text-transform:uppercase;font-size:.88rem;letter-spacing:.16em;}
-    .season-message{font-size:.82rem;color:var(--muted);margin-top:.25rem;}
-    @keyframes calloutFade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);} }
+    .season-title{color:var(--gold);text-transform:uppercase;font-size:.88rem;letter-spacing:.16em}
+    .season-message{font-size:.82rem;color:var(--muted);margin-top:.25rem}
+    @keyframes calloutFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-    /* Secret star */
     .secret-star{
       width:18px;height:18px;border-radius:999px;
       border:1px solid rgba(245,201,122,.55);
       display:inline-flex;align-items:center;justify-content:center;
-      font-size:.7rem;color:#f5e6dc;
-      cursor:pointer;opacity:.35;
-      box-shadow:0 0 6px rgba(245,201,122,.35);
-      transition:opacity .25s ease,transform .25s ease,box-shadow .25s ease;
-      background:radial-gradient(circle at top,rgba(245,201,122,.2),transparent 60%);
+      font-size:.7rem;color:#f5e6dc;cursor:pointer;
+      opacity:.45;
+      box-shadow:0 0 6px rgba(245,201,122,.4);
+      transition:opacity .25s ease, transform .25s ease, box-shadow .25s ease;
+      background:radial-gradient(circle at top, rgba(245,201,122,.2), transparent 60%);
     }
-    .secret-star span{transform:translateY(-.5px);}
-    .secret-star:hover{opacity:.75;transform:scale(1.05);box-shadow:0 0 10px rgba(245,201,122,.75);}
-    .secret-star.active{opacity:1;box-shadow:0 0 12px rgba(245,201,122,1),0 0 20px rgba(202,52,0,.9);}
+    .secret-star span{transform:translateY(-.5px)}
+    .secret-star:hover{opacity:.9;transform:scale(1.05);box-shadow:0 0 10px rgba(245,201,122,.8)}
+    .secret-star.active{opacity:1;box-shadow:0 0 12px rgba(245,201,122,1),0 0 20px rgba(202,52,0,.9)}
 
-    /* Secret menu panel */
     .secret-menu{
-      margin-top:1.4rem;
-      border-radius:18px;
+      margin-top:.9rem;
+      border-radius:16px;
       border:1px dashed rgba(245,201,122,.4);
-      background:radial-gradient(circle at top left,rgba(15,3,10,.97),rgba(5,3,8,.98));
-      padding:1.1rem 1.2rem;
+      background:radial-gradient(circle at top left, rgba(15,3,10,.97), rgba(5,3,8,.98));
+      padding:1rem 1.05rem;
       font-size:.85rem;
       display:none;
       position:relative;
@@ -343,261 +397,458 @@
       content:"";
       position:absolute;inset:0;
       background:
-        radial-gradient(circle at 10% 0%,rgba(245,201,122,.18),transparent 55%),
-        radial-gradient(circle at 90% 100%,rgba(202,52,0,.25),transparent 60%);
+        radial-gradient(circle at 10% 0%, rgba(245,201,122,.18), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(202,52,0,.25), transparent 60%);
       opacity:.7;
       pointer-events:none;
     }
-    .secret-menu-inner{position:relative;z-index:1;}
-    .secret-menu.visible{display:block;animation:fadeInUp .38s ease forwards;}
-    .secret-menu-title{font-family:"Georgia","Times New Roman",serif;font-size:1rem;margin-bottom:.25rem;}
-    .secret-menu-desc{color:var(--muted);margin-bottom:.5rem;}
-    .secret-menu-meta{font-size:.78rem;color:var(--muted);}
-    .secret-price{color:var(--gold);font-weight:600;}
-    .secret-badge{
-      display:inline-block;margin-left:.4rem;padding:.05rem .45rem;
-      border-radius:999px;border:1px solid rgba(202,52,0,.7);
-      font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:#f5e6dc;
+    .secret-menu-inner{position:relative;z-index:1}
+    .secret-menu.visible{display:block;animation:fadeInUp .38s ease forwards}
+    .secret-menu-title{font-family:"Georgia","Times New Roman",serif;font-size:1rem;margin-bottom:.25rem;color:var(--gold);letter-spacing:.06em}
+    .secret-menu-desc{color:var(--muted);margin-bottom:.4rem}
+    .secret-menu-meta{font-size:.78rem;color:var(--muted)}
+    .secret-price{color:var(--gold);font-weight:700}
+    @keyframes fadeInUp{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+
+    .menu-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:2rem}
+    .menu-columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+    .menu-group-title{text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;color:var(--gold);margin-bottom:.4rem}
+    .menu-item{padding:.55rem 0;border-bottom:1px dashed rgba(245,201,122,.25);position:relative}
+    .menu-item:last-child{border-bottom:none}
+    .menu-item-name{font-size:.92rem;display:flex;justify-content:space-between;gap:.4rem}
+    .menu-item-name span{color:var(--gold);font-size:.85rem;opacity:.95}
+    .menu-item-desc{font-size:.82rem;color:var(--muted);margin-top:.1rem}
+    .menu-badges{margin-top:.25rem;display:flex;flex-wrap:wrap;gap:.25rem;font-size:.7rem}
+    .badge{
+      border-radius:999px;border:1px solid rgba(255,255,255,.12);
+      padding:.05rem .45rem;text-transform:uppercase;letter-spacing:.12em;
+      color:var(--muted);
     }
-    @keyframes fadeInUp{0%{opacity:0;transform:translateY(8px);}100%{opacity:1;transform:translateY(0);} }
 
-    /* Menu */
-    .menu-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:2rem;}
-    .menu-columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;}
-    .menu-group-title{text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;color:var(--gold);margin-bottom:.4rem;}
-    .menu-item{padding:.55rem 0;border-bottom:1px dashed rgba(245,201,122,.25);position:relative;}
-    .menu-item:last-child{border-bottom:none;}
-    .menu-item-name{font-size:.92rem;display:flex;justify-content:space-between;gap:.4rem;}
-    .menu-item-name span{color:var(--gold);font-size:.85rem;opacity:.95;}
-    .menu-item-desc{font-size:.82rem;color:var(--muted);margin-top:.1rem;}
-    .menu-badges{margin-top:.25rem;display:flex;flex-wrap:wrap;gap:.25rem;font-size:.7rem;}
-    .badge{border-radius:999px;border:1px solid rgba(255,255,255,.12);padding:.05rem .45rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);}
-
-    /* Sold Out stamp (ONLY “SOLD OUT”) */
-    .hype-stamp{
+    /* SOLD OUT stamp (no "= hype") */
+    .soldout-stamp{
       position:absolute;
-      top:.5rem;
-      right:.2rem;
-      transform:rotate(12deg);
-      border:2px solid color-mix(in srgb,var(--gold) 70%,transparent);
-      color:color-mix(in srgb,var(--gold) 85%,#fff 15%);
+      top:.55rem;right:.2rem;
+      transform:rotate(10deg);
+      border:2px solid color-mix(in srgb, var(--gold) 70%, transparent);
+      color:color-mix(in srgb, var(--gold) 85%, #fff 15%);
       padding:.15rem .55rem;
       border-radius:10px;
       text-transform:uppercase;
       letter-spacing:.18em;
       font-size:.62rem;
       background:rgba(5,3,8,.6);
-      box-shadow:0 0 14px rgba(0,0,0,.8),0 0 18px color-mix(in srgb,var(--accent) 55%,transparent);
+      box-shadow:0 0 14px rgba(0,0,0,.8),0 0 18px color-mix(in srgb, var(--accent) 55%, transparent);
       display:none;
       pointer-events:none;
     }
-    .menu-item.is-soldout .hype-stamp{display:inline-block;}
-    .menu-item.is-soldout{opacity:.72;}
-    .menu-item.is-soldout .menu-item-desc{filter:saturate(.9);}
-
-    /* Almost Gone list panel */
-    .almost-gone-panel{
-      border:1px solid rgba(245,201,122,.25);
-      border-radius:14px;
-      padding:.9rem 1.1rem;
-      margin:.9rem 0 1.2rem;
-      background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent-soft) 22%,transparent),rgba(5,3,8,.92));
-      box-shadow:0 0 18px rgba(0,0,0,.65);
-    }
-    .almost-gone-title{
-      text-transform:uppercase;
-      letter-spacing:.22em;
-      font-size:.72rem;
-      color:var(--gold);
-      margin-bottom:.35rem;
-    }
-    .almost-gone-list{font-size:.82rem;color:var(--muted);}
-    .almost-gone-list strong{color:var(--gold);}
+    .menu-item.is-soldout .soldout-stamp{display:inline-block}
+    .menu-item.is-soldout{opacity:.72}
 
     .menu-art{
-      border-radius:20px;
-      border:1px solid rgba(245,201,122,.25);
+      border-radius:20px;border:1px solid rgba(245,201,122,.25);
       padding:1rem;
-      background:radial-gradient(circle at top,color-mix(in srgb,var(--accent) 60%,transparent),var(--bg));
+      background:radial-gradient(circle at top, color-mix(in srgb, var(--accent) 60%, transparent), var(--bg));
       font-size:.82rem;
     }
-    .menu-art h4{
-      font-size:.9rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);
-      margin-bottom:.5rem;
-    }
-    .menu-art p{color:var(--muted);}
-    .menu-spell{font-family:"Georgia","Times New Roman",serif;font-style:italic;margin-top:.5rem;color:#f8e8c4;}
+    .menu-art h4{font-size:.9rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:.5rem}
+    .menu-art p{color:var(--muted)}
+    .menu-spell{font-family:"Georgia","Times New Roman",serif;font-style:italic;margin-top:.6rem;color:#f8e8c4}
 
-    /* About */
-    .about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:2rem;align-items:flex-start;}
+    /* About/Lore */
+    .about-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);
+      gap:2rem;
+      align-items:flex-start;
+    }
     .about-crest{
       border-radius:18px;border:1px solid rgba(245,201,122,.25);
       padding:1.2rem 1.3rem;
-      background:radial-gradient(circle at top,rgba(10,6,18,.95),rgba(5,3,8,.98));
+      background:radial-gradient(circle at top, rgba(10,6,18,.95), rgba(5,3,8,.98));
       text-align:center;
       box-shadow:0 0 22px rgba(0,0,0,.9);
     }
     .about-crest-logo{
       max-width:260px;width:100%;height:auto;display:block;margin:0 auto .8rem;
-      filter:drop-shadow(0 0 18px color-mix(in srgb,var(--accent) 85%,transparent));
+      filter:drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 85%, transparent));
     }
-    .about-crest-title{text-transform:uppercase;letter-spacing:.2em;font-size:.75rem;color:var(--gold);margin-bottom:.6rem;}
-    .about-crest-text{font-size:.82rem;color:var(--muted);line-height:1.7;font-family:"Georgia","Times New Roman",serif;}
-    .about-content{display:flex;flex-direction:column;gap:1.2rem;}
+    .about-crest-title{text-transform:uppercase;letter-spacing:.2em;font-size:.75rem;color:var(--gold);margin-bottom:.6rem}
+    .about-crest-text{
+      font-size:.82rem;color:var(--muted);line-height:1.7;
+      font-family:"Georgia","Times New Roman",serif;
+    }
+    .about-content{display:flex;flex-direction:column;gap:1.2rem}
     .about-box{
       border-radius:18px;border:1px solid rgba(245,201,122,.25);
       padding:1.1rem 1.2rem;
-      background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent-soft) 60%,transparent),rgba(5,3,8,.95));
+      background:radial-gradient(circle at top left, color-mix(in srgb, var(--accent-soft) 60%, transparent), rgba(5,3,8,.95));
       font-size:.9rem;color:var(--muted);
     }
-    .about-box strong{color:var(--gold);}
-    .about-label{text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;color:var(--gold);margin-bottom:.4rem;display:block;}
-    .about-quote{font-family:"Georgia","Times New Roman",serif;font-style:italic;margin-top:.7rem;color:#f8e8c4;}
+    .about-box strong{color:var(--gold)}
+    .about-label{text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;color:var(--gold);margin-bottom:.4rem;display:block}
+    .about-quote{font-family:"Georgia","Times New Roman",serif;font-style:italic;margin-top:.7rem;color:#f8e8c4}
     .about-highlight{
       border-radius:16px;border:1px dashed rgba(245,201,122,.4);
       padding:.9rem 1rem;font-size:.82rem;color:var(--muted);
-      background:radial-gradient(circle at bottom right,color-mix(in srgb,var(--accent-soft) 40%,transparent),rgba(5,3,8,.96));
+      background:radial-gradient(circle at bottom right, color-mix(in srgb, var(--accent-soft) 40%, transparent), rgba(5,3,8,.96));
     }
 
-    /* Contact */
-    .contact{background:radial-gradient(circle at top,rgba(21,2,11,1),var(--bg));}
-    .summon-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:2rem;}
+    .contact{background:radial-gradient(circle at top, rgba(21,2,11,1), var(--bg))}
+    .summon-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:2rem}
+
     .summon-calendar{
       border-radius:20px;border:1px solid rgba(245,201,122,.25);
       padding:1.3rem 1.4rem;
-      background:radial-gradient(circle at top,color-mix(in srgb,var(--accent) 65%,transparent),var(--bg));
+      background:radial-gradient(circle at top, color-mix(in srgb, var(--accent) 65%, transparent), var(--bg));
       box-shadow:0 0 24px rgba(0,0,0,.9);
       font-size:.85rem;color:var(--muted);
     }
     .summon-calendar h4{
-      font-size:.9rem;text-transform:uppercase;letter-spacing:.16em;color:var(--gold);
-      margin-bottom:.4rem;
+      font-size:.9rem;text-transform:uppercase;letter-spacing:.16em;
+      color:var(--gold);margin-bottom:.4rem;
     }
     .calendar-wrap{
-      margin-top:.6rem;border-radius:14px;overflow:hidden;background:#050308;
-      border:1px solid rgba(245,201,122,.3);height:560px;
+      margin-top:.6rem;border-radius:14px;overflow:hidden;
+      background:#050308;border:1px solid rgba(245,201,122,.3);
+      height:460px;
     }
-    .calendar-wrap iframe{width:100%;height:100%;border:0;background:transparent;}
+    .calendar-wrap iframe{width:100%;height:100%;border:0}
 
     .contact-card{
       border-radius:20px;border:1px solid rgba(245,201,122,.25);
       padding:1.3rem 1.4rem;
-      background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent-soft) 70%,transparent),rgba(5,3,8,.96));
+      background:radial-gradient(circle at top left, color-mix(in srgb, var(--accent-soft) 70%, transparent), rgba(5,3,8,.96));
       box-shadow:0 0 24px rgba(0,0,0,.9);
       font-size:.85rem;color:var(--muted);
     }
     .contact-card-title{
-      font-size:.95rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);
-      margin-bottom:.4rem;
+      font-size:.95rem;text-transform:uppercase;letter-spacing:.18em;
+      color:var(--gold);margin-bottom:.4rem;
     }
-    .contact-card-list{list-style:none;padding-left:0;margin:.3rem 0 .6rem;}
-    .contact-card-list li{margin-bottom:.25rem;}
-    .contact-card-list li::before{content:"✶";color:var(--accent);margin-right:.35rem;}
+    .contact-card-list{list-style:none;padding-left:0;margin:.3rem 0 .6rem}
+    .contact-card-list li{margin-bottom:.25rem}
+    .contact-card-list li::before{content:"✶";color:var(--accent);margin-right:.35rem}
 
     footer{
       border-top:1px solid rgba(245,201,122,.18);
       padding:1rem 0 1.6rem;
       font-size:.75rem;color:var(--muted);
     }
-    .footer-row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between;}
-    .footer-links{display:flex;flex-wrap:wrap;gap:.8rem;}
+    .footer-row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between}
+    .footer-links{display:flex;flex-wrap:wrap;gap:.8rem}
 
-    /* Staff Gate (admin drawer) */
-    .staff-gate{
-      position:fixed;
-      inset:auto 18px 18px auto;
-      width:min(420px,calc(100vw - 36px));
-      border-radius:18px;
-      border:1px solid rgba(245,201,122,.28);
-      background:radial-gradient(circle at top left,rgba(15,3,10,.96),rgba(5,3,8,.98));
-      box-shadow:0 0 26px rgba(0,0,0,.9),0 0 24px color-mix(in srgb,var(--accent) 30%,transparent);
-      padding:1rem 1.05rem;
-      transform:translateY(18px);
+    /* =========================
+       Staff Gate: bottom sheet
+       ========================= */
+    .sheet-backdrop{
+      position:fixed;inset:0;
+      background:rgba(0,0,0,.55);
+      backdrop-filter:blur(4px);
       opacity:0;
       pointer-events:none;
-      transition:opacity .25s ease,transform .25s ease;
+      transition:opacity .18s ease;
+      z-index:9997;
+    }
+    .sheet-backdrop.open{opacity:1;pointer-events:auto}
+
+    .staff-gate{
+      position:fixed;
+      left:50%;
+      bottom:10px;
+      transform:translateX(-50%) translateY(120%);
+      width:min(760px, calc(100vw - 20px));
+      max-height:min(78vh, 760px);
+      border-radius:22px;
+      border:1px solid rgba(245,201,122,.28);
+      background:radial-gradient(circle at top left, rgba(15,3,10,.96), rgba(5,3,8,.98));
+      box-shadow:0 0 26px rgba(0,0,0,.9), 0 0 24px color-mix(in srgb, var(--accent) 30%, transparent);
+      padding:0;
+      opacity:0;
+      pointer-events:none;
+      transition:transform .22s ease, opacity .22s ease;
       z-index:9998;
+      overflow:hidden;
     }
     .staff-gate.open{
+      transform:translateX(-50%) translateY(0);
       opacity:1;
-      transform:translateY(0);
       pointer-events:auto;
     }
+    .staff-topbar{
+      padding:.8rem 1rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:.75rem;
+      border-bottom:1px solid rgba(245,201,122,.16);
+      background:linear-gradient(to right, rgba(0,0,0,.22), rgba(0,0,0,.05));
+    }
+    .staff-handle{
+      width:46px;height:5px;border-radius:999px;
+      background:rgba(245,201,122,.28);
+      margin:10px auto 0;
+      box-shadow:0 0 14px rgba(0,0,0,.65);
+    }
     .staff-title{
-      display:flex;align-items:center;justify-content:space-between;gap:.75rem;
-      margin-bottom:.65rem;
+      display:flex;flex-direction:column;gap:.1rem;
     }
     .staff-title h4{
       font-family:"Georgia","Times New Roman",serif;
       text-transform:uppercase;
       letter-spacing:.14em;
-      font-size:.9rem;
+      font-size:.92rem;
       color:var(--gold);
+    }
+    .staff-sub{
+      font-size:.72rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--muted);
     }
     .staff-close{
       border:1px solid rgba(245,201,122,.35);
       border-radius:999px;
       background:rgba(5,3,8,.55);
       color:var(--gold);
-      padding:.25rem .6rem;
+      padding:.35rem .75rem;
       cursor:pointer;
       letter-spacing:.14em;
       text-transform:uppercase;
       font-size:.68rem;
     }
+
+    .staff-body{
+      padding:0 1rem .9rem;
+      overflow:auto;
+      max-height:min(78vh, 760px);
+    }
+
     .staff-grid{
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
       gap:.75rem;
-      margin-top:.6rem;
+      margin-top:.85rem;
     }
     .staff-box{
       border:1px solid rgba(245,201,122,.22);
-      border-radius:14px;
-      padding:.7rem .75rem;
-      background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent-soft) 18%,transparent),rgba(5,3,8,.92));
+      border-radius:16px;
+      padding:.85rem .85rem;
+      background:radial-gradient(circle at top left, color-mix(in srgb, var(--accent-soft) 18%, transparent), rgba(5,3,8,.92));
       font-size:.78rem;
       color:var(--muted);
     }
-    .staff-box strong{color:var(--gold);letter-spacing:.12em;text-transform:uppercase;font-size:.7rem;display:block;margin-bottom:.3rem;}
-    .staff-row{display:flex;gap:.5rem;align-items:center;justify-content:space-between;margin-top:.35rem;}
-    .staff-row label{font-size:.74rem;color:var(--muted);}
-    .staff-row input{
-      width:88px;
-      border-radius:10px;
+    .staff-box strong{
+      color:var(--gold);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:.7rem;
+      display:block;
+      margin-bottom:.55rem;
+      line-height:1.35;
+    }
+
+    .qty-row{
+      display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+    }
+    .qty-controls{
+      display:flex;align-items:center;gap:.45rem;
+    }
+    .qty-btn{
+      width:40px;height:40px;
+      border-radius:14px;
+      border:1px solid rgba(245,201,122,.28);
+      background:rgba(0,0,0,.18);
+      color:var(--gold);
+      font-size:1.2rem;
+      cursor:pointer;
+      display:inline-flex;align-items:center;justify-content:center;
+      box-shadow:0 0 14px rgba(0,0,0,.35);
+      user-select:none;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .qty-btn:active{transform:scale(.98)}
+    .qty-val{
+      min-width:64px;
+      height:40px;
+      border-radius:14px;
       border:1px solid rgba(245,201,122,.22);
-      background:rgba(0,0,0,.25);
+      background:rgba(0,0,0,.22);
       color:var(--text);
-      padding:.35rem .45rem;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;
+      letter-spacing:.08em;
+    }
+    .qty-meta{
+      font-size:.72rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--muted);
+      text-align:right;
+      min-width:110px;
+    }
+    .qty-meta .live{color:color-mix(in srgb, var(--gold) 85%, #fff 15%)}
+    .qty-meta .low{color:color-mix(in srgb, var(--accent) 55%, var(--gold) 45%)}
+    .qty-meta .out{color:color-mix(in srgb, var(--accent) 80%, #fff 20%)}
+
+    .staff-wide{
+      grid-column:1/-1;
+    }
+    .staff-field{
+      display:flex;flex-direction:column;gap:.35rem;
+      margin-top:.45rem;
+    }
+    .staff-field label{
+      font-size:.7rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+    .staff-field input{
+      height:42px;
+      border-radius:14px;
+      border:1px solid rgba(245,201,122,.22);
+      background:rgba(0,0,0,.22);
+      color:var(--text);
+      padding:.5rem .7rem;
       outline:none;
     }
-    .staff-actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.75rem;}
+
+    /* Sticky action bar (one-hand) */
+    .staff-actions{
+      position:sticky;
+      bottom:0;
+      margin-top:.85rem;
+      padding:.7rem 0 .25rem;
+      background:linear-gradient(to top, rgba(5,3,8,.98), rgba(5,3,8,.65), rgba(5,3,8,0));
+      display:flex;
+      gap:.5rem;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .staff-actions .left,
+    .staff-actions .right{
+      display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;
+    }
     .staff-btn{
       border-radius:999px;
       border:1px solid rgba(245,201,122,.35);
       background:rgba(5,3,8,.55);
       color:var(--gold);
-      padding:.4rem .85rem;
+      padding:.55rem 1rem;
       font-size:.72rem;
       letter-spacing:.14em;
       text-transform:uppercase;
       cursor:pointer;
+      min-height:44px;
+      -webkit-tap-highlight-color:transparent;
     }
     .staff-btn.primary{
-      border-color:color-mix(in srgb,var(--gold) 70%,transparent);
-      background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 85%,transparent),color-mix(in srgb,var(--accent-soft) 85%,transparent));
+      border-color:color-mix(in srgb, var(--gold) 70%, transparent);
+      background:linear-gradient(135deg,
+        color-mix(in srgb, var(--accent) 85%, transparent),
+        color-mix(in srgb, var(--accent-soft) 85%, transparent));
       color:#fff;
-      box-shadow:0 0 14px color-mix(in srgb,var(--accent) 55%,transparent);
+      box-shadow:0 0 14px color-mix(in srgb, var(--accent) 55%, transparent);
+    }
+    .staff-btn:active{transform:scale(.99)}
+
+    /* PIN modal */
+    .pin-modal{
+      position:fixed;inset:0;
+      display:flex;align-items:flex-end;justify-content:center;
+      padding:12px;
+      z-index:9999;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .18s ease;
+    }
+    .pin-modal.open{opacity:1;pointer-events:auto}
+    .pin-card{
+      width:min(520px, calc(100vw - 24px));
+      border-radius:22px;
+      border:1px solid rgba(245,201,122,.28);
+      background:radial-gradient(circle at top left, rgba(15,3,10,.96), rgba(5,3,8,.98));
+      box-shadow:0 0 28px rgba(0,0,0,.95);
+      padding:1rem 1rem 1.1rem;
+      overflow:hidden;
+    }
+    .pin-head{
+      display:flex;align-items:center;justify-content:space-between;gap:.75rem;
+      margin-bottom:.85rem;
+    }
+    .pin-head h4{
+      font-family:"Georgia","Times New Roman",serif;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-size:.92rem;
+      color:var(--gold);
+    }
+    .pin-close{
+      border:1px solid rgba(245,201,122,.35);
+      border-radius:999px;
+      background:rgba(0,0,0,.22);
+      color:var(--gold);
+      padding:.35rem .75rem;
+      cursor:pointer;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:.68rem;
+    }
+    .pin-display{
+      width:100%;
+      height:50px;
+      border-radius:16px;
+      border:1px solid rgba(245,201,122,.22);
+      background:rgba(0,0,0,.22);
+      color:var(--text);
+      display:flex;align-items:center;justify-content:center;
+      letter-spacing:.45em;
+      font-weight:800;
+      margin-bottom:.85rem;
+    }
+    .pin-pad{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:.55rem;
+    }
+    .pin-key{
+      height:54px;
+      border-radius:18px;
+      border:1px solid rgba(245,201,122,.22);
+      background:rgba(0,0,0,.20);
+      color:var(--gold);
+      font-size:1.05rem;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 0 14px rgba(0,0,0,.35);
+      -webkit-tap-highlight-color:transparent;
+    }
+    .pin-key:active{transform:scale(.99)}
+    .pin-key.alt{
+      color:var(--text);
+      background:radial-gradient(circle at top left, rgba(202,52,0,.28), rgba(0,0,0,.22));
+      border-color:rgba(202,52,0,.55);
+    }
+    .pin-note{
+      margin-top:.7rem;
+      font-size:.75rem;
+      color:var(--muted);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      text-align:center;
     }
 
     @media (max-width:840px){
-      .hero-grid,.menu-grid,.about-grid,.summon-grid{grid-template-columns:minmax(0,1fr);}
-      .nav-links-left{display:none;}
-      .nav{justify-content:space-between;}
-      .logo-img{height:80px;}
-      .hb-header.scrolled .logo-img{height:62px;}
-      .calendar-wrap{height:440px;}
-      .staff-grid{grid-template-columns:minmax(0,1fr);}
+      .hero-grid,.menu-grid,.about-grid,.summon-grid{grid-template-columns:minmax(0,1fr)}
+      .nav-links-left{display:none}
+      .nav{justify-content:space-between}
+      .logo-img{height:80px}
+      .hb-header.scrolled .logo-img{height:62px}
+      .calendar-wrap{height:380px}
+      .staff-grid{grid-template-columns:minmax(0,1fr)}
+      .qty-meta{min-width:90px}
     }
   </style>
 </head>
@@ -614,7 +865,8 @@
 
   <!-- Banner -->
   <div class="coming-soon-banner">
-    Cerberus Bites • Sourdough from the Underworld • Feast in the Underworld
+    <span class="banner-coming">🔥 COMING SOON 🔥</span>
+    Cerberus Bites • Feast in the Underworld
   </div>
 
   <!-- Header -->
@@ -624,10 +876,11 @@
         <nav class="nav-links-left">
           <a href="#menu">Menu</a>
           <a href="#about">Lore</a>
+          <a href="#contact">Bookings</a>
         </nav>
 
         <div class="nav-center">
-          <!-- keep as link; JS prevents navigation during press/gesture -->
+          <!-- LOGO = hidden staff portal (hold ~3s) -->
           <a href="#top" class="nav-logo-link" id="logoGate" aria-label="Cerberus Crest">
             <img src="CerberusLogo2.png" alt="Cerberus Bites Logo" class="logo-img">
           </a>
@@ -650,7 +903,7 @@
       <div class="container">
         <div class="hero-grid">
           <div>
-            <div class="hero-eyebrow">house-fermented sourdough • butter-crisped • guarded by the hound</div>
+            <div class="hero-eyebrow">house-fermented sourdough • guarded by the hound</div>
 
             <h1 class="hero-title">
               <span class="hero-brand">Cerberus Bites</span>
@@ -658,8 +911,9 @@
             </h1>
 
             <p class="hero-subtitle">
-              Butter-crisped melts on house-fermented sourdough — pulled hot and watched closely.
-              If the hound doesn’t approve it, it doesn’t leave the kitchen.
+              All melts are served on house-fermented sourdough.
+              <br>
+              “The Hound tends the flame; Cerberus stands watch. If they don’t agree, it doesn’t leave the kitchen.”
             </p>
 
             <div class="hero-actions">
@@ -669,6 +923,7 @@
             </div>
           </div>
 
+          <!-- Ops Boxes -->
           <div class="hero-art">
             <div class="hero-art-inner">
               <div class="hero-art-title">Tonight in the Underworld</div>
@@ -681,9 +936,9 @@
                   <h4>Sold Out</h4>
                   <p>Loading…</p>
                 </div>
-                <div class="hero-card" id="opsBatchCounter">
-                  <h4>Batch Counter</h4>
-                  <p>Loading…</p>
+                <div class="hero-card" id="opsHottest">
+                  <h4>Hottest</h4>
+                  <p>Listening at the gate…</p>
                 </div>
                 <div class="hero-card" id="opsNextDrop">
                   <h4>Next Drop</h4>
@@ -703,98 +958,96 @@
         <div class="section-header">
           <div class="section-eyebrow">The Wicked Feast</div>
           <div class="section-title-row">
-            <h2 class="section-title">CERBERUS BITES Menu</h2>
-            <button class="secret-star" id="secretStar" aria-label=" " type="button"><span>✶</span></button>
+            <h2 class="section-title">Cerberus Bites Menu</h2>
+            <button class="secret-star" id="secretStar" aria-label="✶"><span>✶</span></button>
           </div>
-          <p class="section-subtitle">
-            All melts served on house-fermented sourdough.
-          </p>
+          <p class="section-subtitle">All melts served on house-fermented sourdough.</p>
 
           <div id="seasonCallout" class="season-callout">
             <strong class="season-title">Seasonal Shout-Out</strong>
             <p class="season-message">Loading the season’s omen…</p>
-          </div>
-
-          <div class="almost-gone-panel" id="almostGonePanel" style="display:none;">
-            <div class="almost-gone-title">What’s Almost Gone</div>
-            <div class="almost-gone-list" id="almostGoneList">—</div>
           </div>
         </div>
 
         <div class="menu-grid">
           <div>
             <div class="menu-columns">
+
+              <!-- LEFT COLUMN -->
               <div>
                 <div class="menu-group-title">🥪 Melts</div>
 
-                <div class="menu-item" data-item-id="cerberus-melt">
-                  <div class="hype-stamp">SOLD OUT</div>
+                <div class="menu-item" data-id="cerberus_melt">
+                  <div class="soldout-stamp">SOLD OUT</div>
                   <div class="menu-item-name">Cerberus Melt <span>$9</span></div>
                   <div class="menu-item-desc">Triple cheese on butter-crisped sourdough.</div>
                 </div>
 
-                <div class="menu-item" data-item-id="gatekeeper-turkey">
-                  <div class="hype-stamp">SOLD OUT</div>
+                <div class="menu-item" data-id="gatekeeper_turkey">
+                  <div class="soldout-stamp">SOLD OUT</div>
                   <div class="menu-item-name">Gatekeeper Turkey Melt <span>$11</span></div>
                   <div class="menu-item-desc">Smoked turkey, sharp cheddar, black garlic aioli.</div>
                 </div>
 
-                <div class="menu-item" data-item-id="hellfire-chicken">
-                  <div class="hype-stamp">SOLD OUT</div>
+                <div class="menu-item" data-id="hellfire_chicken">
+                  <div class="soldout-stamp">SOLD OUT</div>
                   <div class="menu-item-name">Hellfire Chicken Melt <span>$11</span></div>
                   <div class="menu-item-desc">Blackened chicken, pepper jack, ember mayo.</div>
                 </div>
 
-                <div class="menu-item" data-item-id="persephone-garden">
-                  <div class="hype-stamp">SOLD OUT</div>
+                <div class="menu-item" data-id="persephone_garden">
+                  <div class="soldout-stamp">SOLD OUT</div>
                   <div class="menu-item-name">Persephone’s Garden (Vegan) 🌿 <span>$10</span></div>
                   <div class="menu-item-desc">Roasted mushrooms, caramelized onion, herb oil.</div>
                 </div>
               </div>
 
+              <!-- RIGHT COLUMN -->
               <div>
                 <div class="menu-group-title">🥣 Sides</div>
 
-                <div class="menu-item" data-item-id="tomato-soup">
-                  <div class="hype-stamp">SOLD OUT</div>
+                <div class="menu-item" data-id="tomato_soup">
+                  <div class="soldout-stamp">SOLD OUT</div>
                   <div class="menu-item-name">Charred Tomato Soup (Cup) <span>$4</span></div>
                   <div class="menu-item-desc">Rich, smoky, perfect for dipping.</div>
                   <div class="menu-badges">
-                    <div class="badge">Add to any melt +$3</div>
+                    <div class="badge">Add soup to any melt +$3</div>
                   </div>
                 </div>
+
+                <!-- SECRET MENU lives directly under the soup (only discoverable via the star) -->
+                <div id="secretMenu" class="secret-menu" aria-hidden="true">
+                  <div class="secret-menu-inner">
+                    <div class="secret-menu-title">The Black Gate</div>
+                    <p class="secret-menu-desc">
+                      Extra-butter sourdough, triple cheese, black garlic aioli — charred dark.
+                      <br><em>When it’s gone, it’s gone.</em>
+                    </p>
+                    <p class="secret-menu-meta">
+                      <span class="secret-price">$12</span>
+                    </p>
+                  </div>
+                </div>
+
               </div>
 
             </div>
           </div>
 
+          <!-- Spellbook panel (no hints that a secret menu exists) -->
           <aside class="menu-art">
             <h4>The Spellbook of Sourdough</h4>
             <p>
-              House-fermented loaves. Butter-crisped edges. Cheese pulls that don’t lie.
-              The hound keeps the gate — and the standard.
+              House-fermented loaves, butter-crisped edges, and cheese pulls forged in flame.
+              The Hound tends the heat — Cerberus keeps the gate.
             </p>
-            <p class="menu-spell">
-              “Three heads. One rule: the bread must crackle.”
+            <p class="menu-spell">“Three heads. One rule: the bread must crackle.”</p>
+            <p style="margin-top:.75rem;line-height:1.8;">
+              ✶ Vegan path: <strong>Persephone’s Garden</strong><br>
+              ✶ Dip rite: <strong>Charred Tomato Soup</strong> (+$3 with any melt)
             </p>
           </aside>
         </div>
-
-        <!-- SECRET MENU -->
-        <div id="secretMenu" class="secret-menu" aria-hidden="true">
-          <div class="secret-menu-inner">
-            <div class="secret-menu-title">The Black Gate</div>
-            <p class="secret-menu-desc">
-              Extra-butter sourdough, triple cheese, black garlic aioli, charred dark.
-              <br><em>When it’s gone, it’s gone.</em>
-            </p>
-            <p class="secret-menu-meta">
-              <span class="secret-price">$12</span>
-              <span class="secret-badge">Hidden</span>
-            </p>
-          </div>
-        </div>
-
       </div>
     </section>
 
@@ -804,9 +1057,7 @@
         <div class="section-header">
           <div class="section-eyebrow">Lore of the Underworld Kitchen</div>
           <h2 class="section-title">The Crest & The Creed</h2>
-          <p class="section-subtitle">
-            The gate is watched. The flames are measured. The sourdough is sacred.
-          </p>
+          <p class="section-subtitle">The gate is watched. The flames are measured. The sourdough is sacred.</p>
         </div>
 
         <div class="about-grid">
@@ -815,10 +1066,9 @@
             <div class="about-crest-title">Official Crest of Cerberus Bites</div>
             <p class="about-crest-text">
               <strong>We are the guardians of souls who enter this realm.</strong><br>
-              I watch the flames.<br>
-              I guard the bites.<br>
-              I guide the hungry.<br>
-              We are the eternal watchdog of hunger and flame — and if we don’t approve it, it doesn’t leave the kitchen.
+              The Hound tends the flame.<br>
+              Cerberus keeps the gate.<br>
+              If they don’t agree, it doesn’t leave the kitchen.
             </p>
           </div>
 
@@ -835,23 +1085,21 @@
             <div class="about-highlight">
               <span class="about-label">What We Stand For</span>
               <p>✶ <strong>Quality first.</strong> Sourdough is the star — everything else serves it.</p>
-              <p style="margin-top:0.4rem;">✶ <strong>Fast service.</strong> A tight menu that moves.</p>
-              <p style="margin-top:0.4rem;">✶ <strong>Mythic experience.</strong> The gatekeeper vibe is part of the meal.</p>
+              <p style="margin-top:.4rem;">✶ <strong>Fast service.</strong> A tight menu that moves.</p>
+              <p style="margin-top:.4rem;">✶ <strong>Mythic experience.</strong> The gatekeeper vibe is part of the meal.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact / Summon -->
+    <!-- Contact -->
     <section id="contact" class="contact">
       <div class="container">
         <div class="section-header">
           <div class="section-eyebrow">Summon the Underworld Kitchen</div>
           <h2 class="section-title">Bookings & General Inquiries</h2>
-          <p class="section-subtitle">
-            Use the calendar to claim your date. For everything else, message the gates below.
-          </p>
+          <p class="section-subtitle">Use the calendar to claim your date. For everything else, message the gates below.</p>
         </div>
 
         <div class="summon-grid">
@@ -860,18 +1108,11 @@
             <p>Choose your time directly on the calendar.</p>
             <div class="calendar-wrap">
               <iframe
-                src="https://cerberusbites.setmore.com"
+                src="https://CerberusBites.setmore.com"
                 loading="lazy"
                 scrolling="yes"
-                frameborder="0"
-                allow="web-share; payment"
-                referrerpolicy="no-referrer-when-downgrade"
                 title="Cerberus Bites booking calendar"></iframe>
             </div>
-            <p style="margin-top:.75rem;">
-              Trouble seeing the calendar?
-              <a href="https://cerberusbites.setmore.com" target="_blank" rel="noopener">Open booking in a new tab</a>
-            </p>
           </div>
 
           <aside class="contact-card">
@@ -894,36 +1135,65 @@
       <div class="footer-row">
         <div>© <span id="year"></span> Cerberus Bites. All rights reserved.</div>
         <div class="footer-links">
-          <span>Sourdough from the Underworld.</span>
           <span>Feast in the Underworld.</span>
+          <span>Guarded by Cerberus.</span>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- Staff Gate (hidden admin panel) -->
+  <!-- Backdrop for staff gate + PIN -->
+  <div class="sheet-backdrop" id="sheetBackdrop" aria-hidden="true"></div>
+
+  <!-- PIN Modal -->
+  <div class="pin-modal" id="pinModal" aria-hidden="true">
+    <div class="pin-card" role="dialog" aria-modal="true" aria-label="Staff PIN">
+      <div class="pin-head">
+        <h4>Staff Gate</h4>
+        <button class="pin-close" id="pinClose" type="button">Close</button>
+      </div>
+      <div class="pin-display" id="pinDisplay">••••</div>
+      <div class="pin-pad" id="pinPad">
+        <!-- keys injected by JS -->
+      </div>
+      <div class="pin-note">Hold the crest ~3 seconds</div>
+    </div>
+  </div>
+
+  <!-- Staff Gate Bottom Sheet -->
   <div class="staff-gate" id="staffGate" aria-hidden="true">
-    <div class="staff-title">
-      <h4>Staff Gate</h4>
+    <div class="staff-handle"></div>
+    <div class="staff-topbar">
+      <div class="staff-title">
+        <h4>Staff Gate</h4>
+        <div class="staff-sub">Quick counts • one-hand mode</div>
+      </div>
       <button class="staff-close" id="staffClose" type="button">Close</button>
     </div>
 
-    <div class="staff-grid" id="staffGrid"></div>
+    <div class="staff-body">
+      <div class="staff-grid" id="staffGrid"><!-- injected --></div>
 
-    <div class="staff-actions">
-      <button class="staff-btn primary" id="staffSave" type="button">Save</button>
-      <button class="staff-btn" id="staffReset" type="button">Reset</button>
+      <div class="staff-actions">
+        <div class="left">
+          <button class="staff-btn" id="staffResetNight" type="button">Reset Night</button>
+          <button class="staff-btn" id="staffRestockAll" type="button">Restock +6</button>
+        </div>
+        <div class="right">
+          <button class="staff-btn primary" id="staffSave" type="button">Save</button>
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
     /* ==========================================================
-       0) Staff PIN
+       Staff PIN (still 1395)
        ========================================================== */
     const STAFF_PIN = "1395";
 
     /* ==========================================================
-       1) Sabbat Color Shifting
+       Pagan Sabbat Color Shifting (between sabbats = base)
        ========================================================== */
     function fmt(d){
       const m=String(d.getMonth()+1).padStart(2,"0");
@@ -950,16 +1220,9 @@
         palette:{ bg:"#040207", bgAlt:"#0b0410", accent:"#8f2cff", accentSoft:"#3b0f6d", gold:"#f5c97a", text:"#f4f2f6", muted:"#c0b4d1", border:"#2f1b3a" } },
     ];
 
-    const BASE={
-      bg:"#050308", bgAlt:"#0c050b",
-      accent:"#ca3400", accentSoft:"#7e0f1d",
-      gold:"#f5c97a", text:"#f4f2f6",
-      muted:"#b3a9c0", border:"#312033"
-    };
+    const BASE={ bg:"#050308", bgAlt:"#0c050b", accent:"#ca3400", accentSoft:"#7e0f1d", gold:"#f5c97a", text:"#f4f2f6", muted:"#b3a9c0", border:"#312033" };
 
-    function clampDateToYear(now,month,day){
-      return new Date(now.getFullYear(),month,day,12,0,0);
-    }
+    function clampDateToYear(now,month,day){ return new Date(now.getFullYear(),month,day,12,0,0); }
     function dayDiff(a,b){
       const ms=24*60*60*1000;
       const ua=Date.UTC(a.getFullYear(),a.getMonth(),a.getDate());
@@ -984,15 +1247,13 @@
       let active=null;
 
       for(const s of sabbats){
-        const targetThis=clampDateToYear(now,s.month,s.day);
-        const targetPrev=new Date(now.getFullYear()-1,s.month,s.day,12,0,0);
-        const targetNext=new Date(now.getFullYear()+1,s.month,s.day,12,0,0);
-        for(const t of [targetPrev,targetThis,targetNext]){
+        const tThis=clampDateToYear(now,s.month,s.day);
+        const tPrev=new Date(now.getFullYear()-1,s.month,s.day,12,0,0);
+        const tNext=new Date(now.getFullYear()+1,s.month,s.day,12,0,0);
+        for(const t of [tPrev,tThis,tNext]){
           const d=Math.abs(dayDiff(now,t));
           if(d<=s.windowDays){
-            if(!active || d<active.distance){
-              active={ sabbat:s, target:t, distance:d };
-            }
+            if(!active || d<active.distance) active={sabbat:s,target:t,distance:d};
           }
         }
       }
@@ -1004,27 +1265,23 @@
         applyPalette(s.palette,s.name,`${fmt(start)}–${fmt(end)}`);
         return;
       }
-
       applyPalette(BASE,"Between Sabbats","Base palette");
     }
 
-    /* ==========================================================
-       2) Seasonal Shout-Out
-       ========================================================== */
+    /* Seasonal Shout-Out */
     function setSeasonCallout(){
       const seasonCallout=document.getElementById("seasonCallout");
-      const seasonMessage=seasonCallout ? seasonCallout.querySelector(".season-message") : null;
-      const seasonTitleEl=seasonCallout ? seasonCallout.querySelector(".season-title") : null;
-      if(!seasonCallout || !seasonMessage || !seasonTitleEl) return;
+      const seasonMessage=seasonCallout?seasonCallout.querySelector(".season-message"):null;
+      const seasonTitleEl=seasonCallout?seasonCallout.querySelector(".season-title"):null;
+      if(!seasonCallout||!seasonMessage||!seasonTitleEl) return;
 
       const now=new Date();
       const m=now.getMonth();
-
       const titles=["🔥 Seasonal Shout-Out 🔥","The Season Hungers…","A Sign from the Gate"];
       seasonTitleEl.textContent=titles[Math.floor(Math.random()*titles.length)];
 
       let msg="";
-      if(m===11 || m===0 || m===1){
+      if(m===11||m===0||m===1){
         msg=`❄️ <strong>Cold nights at the gate</strong><br>
              Soup hits harder in winter — add Charred Tomato Soup to any melt for +$3.`;
       } else if(m>=2 && m<=4){
@@ -1041,360 +1298,474 @@
     }
 
     /* ==========================================================
-       3) Secret menu — FIXED
-       - click star => show
-       - auto-hide after 6s
-       - does NOT instantly close (stopPropagation)
-       - click outside => hide
+       Secret menu (star toggles; auto-hides if “accidentally poked”)
        ========================================================== */
     function initSecretMenu(){
       const star=document.getElementById("secretStar");
       const secret=document.getElementById("secretMenu");
-      if(!star || !secret) return;
+      if(!star||!secret) return;
 
-      let hideTimer=null;
+      let autoHide=null;
 
+      function show(){
+        clearTimeout(autoHide);
+        secret.classList.add("visible");
+        star.classList.add("active");
+        secret.setAttribute("aria-hidden","false");
+        // auto-hide after 6 seconds unless they interact again
+        autoHide=setTimeout(hide, 6000);
+      }
       function hide(){
-        clearTimeout(hideTimer);
+        clearTimeout(autoHide);
         secret.classList.remove("visible");
         star.classList.remove("active");
         secret.setAttribute("aria-hidden","true");
       }
-      function show(){
-        clearTimeout(hideTimer);
-        secret.classList.add("visible");
-        star.classList.add("active");
-        secret.setAttribute("aria-hidden","false");
-        hideTimer=setTimeout(hide, 6000);
-      }
 
       star.addEventListener("click",(e)=>{
         e.preventDefault();
-        e.stopPropagation();            // ✅ prevents the document handler from immediately hiding it
-        const open = secret.classList.contains("visible");
-        open ? hide() : show();
+        const isOpen=secret.classList.contains("visible");
+        if(isOpen) hide(); else show();
       });
 
-      secret.addEventListener("click",(e)=>{
-        e.stopPropagation();            // ✅ clicking inside panel won’t close it
+      // If they click anywhere else, close it
+      document.addEventListener("click",(e)=>{
+        if(!secret.classList.contains("visible")) return;
+        const within = secret.contains(e.target) || star.contains(e.target);
+        if(!within) hide();
       });
 
-      document.addEventListener("click",()=>{
-        if(secret.classList.contains("visible")) hide();
+      // Hover support (desktop)
+      star.addEventListener("mouseenter", show);
+      secret.addEventListener("mouseenter", ()=>clearTimeout(autoHide));
+      star.addEventListener("mouseleave", ()=>autoHide=setTimeout(hide, 250));
+      secret.addEventListener("mouseleave", ()=>autoHide=setTimeout(hide, 250));
+    }
+
+    /* ==========================================================
+       Inventory + “Hottest” tracking
+       ========================================================== */
+    const TRACKED=[
+      { id:"cerberus_melt", name:"Cerberus Melt", warnAt:2, defaultLeft:6 },
+      { id:"gatekeeper_turkey", name:"Gatekeeper Turkey Melt", warnAt:2, defaultLeft:6 },
+      { id:"hellfire_chicken", name:"Hellfire Chicken Melt", warnAt:2, defaultLeft:6 },
+      { id:"persephone_garden", name:"Persephone’s Garden", warnAt:2, defaultLeft:4 },
+      { id:"tomato_soup", name:"Charred Tomato Soup", warnAt:2, defaultLeft:10 },
+    ];
+    const INV_KEY="cb_inventory_v2"; // bump version for clean state
+
+    function defaultState(){
+      const items={}, sales={};
+      TRACKED.forEach(it=>{
+        items[it.id]={ left: it.defaultLeft, sold:false };
+        sales[it.id]=0;
+      });
+      return {
+        items,
+        sales,
+        nextDrop:"Next batch in ~20 min",
+        nextDropTime:""
+      };
+    }
+
+    function getState(){
+      try{
+        const raw=JSON.parse(localStorage.getItem(INV_KEY));
+        if(raw && raw.items && raw.sales) return raw;
+      }catch(e){}
+      const init=defaultState();
+      localStorage.setItem(INV_KEY, JSON.stringify(init));
+      return init;
+    }
+    function setState(next){ localStorage.setItem(INV_KEY, JSON.stringify(next)); }
+
+    function statusFor(st, warnAt){
+      if(!st) return "OK";
+      if(st.sold || st.left<=0) return "SOLD OUT";
+      if(st.left<=warnAt) return "ALMOST GONE";
+      return "OK";
+    }
+
+    function renderInventory(){
+      const state=getState();
+
+      // apply SOLD OUT stamps on menu
+      TRACKED.forEach(it=>{
+        const st=state.items[it.id];
+        const status=statusFor(st,it.warnAt);
+        const el=document.querySelector(`[data-id="${it.id}"]`);
+        if(el) el.classList.toggle("is-soldout", status==="SOLD OUT");
       });
 
-      window.addEventListener("keydown",(e)=>{
-        if(e.key==="Escape") hide();
+      // ops cards
+      const list=TRACKED.map(it=>{
+        const st=state.items[it.id];
+        const status=statusFor(st,it.warnAt);
+        return { it, st, status };
+      });
+
+      const almost=list.filter(x=>x.status==="ALMOST GONE").sort((a,b)=>a.st.left-b.st.left);
+      const sold=list.filter(x=>x.status==="SOLD OUT");
+
+      const elAlmost=document.getElementById("opsAlmostGone");
+      if(elAlmost){
+        elAlmost.querySelector("p").textContent = almost.length
+          ? almost.slice(0,3).map(x=>`${x.it.name} — ${x.st.left} left`).join(" • ")
+          : "Nothing in the danger zone (yet).";
+      }
+
+      const elSold=document.getElementById("opsSoldOut");
+      if(elSold){
+        elSold.querySelector("p").textContent = sold.length
+          ? sold.slice(0,3).map(x=>x.it.name).join(" • ") + (sold.length>3?` +${sold.length-3} more`:"")
+          : "No sell-outs yet.";
+      }
+
+      const elHot=document.getElementById("opsHottest");
+      if(elHot){
+        const sales=state.sales || {};
+        let top=null;
+        TRACKED.forEach(it=>{
+          const v=Number(sales[it.id]||0);
+          if(!top || v>top.v) top={it, v};
+        });
+
+        // if no sales recorded yet, choose a default “house favorite”
+        const chosen = (top && top.v>0) ? top.it : TRACKED[0];
+        elHot.querySelector("p").innerHTML =
+          `${chosen.name} — <span class="hottest-line">favored by hungry souls.</span>`;
+      }
+
+      const elDrop=document.getElementById("opsNextDrop");
+      if(elDrop){
+        const text=state.nextDropTime ? `Next drop: ${state.nextDropTime}` : (state.nextDrop || "Next drop soon");
+        elDrop.querySelector("p").textContent=text;
+      }
+    }
+
+    /* ==========================================================
+       Staff Gate (PIN modal + bottom sheet + +/-)
+       ========================================================== */
+    const sheetBackdrop=document.getElementById("sheetBackdrop");
+    const staffGate=document.getElementById("staffGate");
+    const staffGrid=document.getElementById("staffGrid");
+
+    const pinModal=document.getElementById("pinModal");
+    const pinDisplay=document.getElementById("pinDisplay");
+    const pinPad=document.getElementById("pinPad");
+
+    let pinValue="";
+
+    function openPin(){
+      pinValue="";
+      renderPin();
+      pinModal.classList.add("open");
+      pinModal.setAttribute("aria-hidden","false");
+      sheetBackdrop.classList.add("open");
+      sheetBackdrop.setAttribute("aria-hidden","false");
+    }
+    function closePin(){
+      pinModal.classList.remove("open");
+      pinModal.setAttribute("aria-hidden","true");
+      if(!staffGate.classList.contains("open")){
+        sheetBackdrop.classList.remove("open");
+        sheetBackdrop.setAttribute("aria-hidden","true");
+      }
+    }
+
+    function renderPin(){
+      const masked = (pinValue + "••••").slice(0,4).split("").map(c=>c==="•"?"•":"•").join("");
+      // show fixed dots but keep length behavior visually
+      pinDisplay.textContent = "•".repeat(Math.min(4, pinValue.length)) + "•".repeat(Math.max(0, 4-pinValue.length));
+    }
+
+    function submitPin(){
+      if(pinValue === STAFF_PIN){
+        closePin();
+        openStaffGate();
+      } else {
+        pinValue="";
+        renderPin();
+        alert("Access denied.");
+      }
+    }
+
+    function buildPinPad(){
+      const keys=[
+        "1","2","3",
+        "4","5","6",
+        "7","8","9",
+        "⌫","0","ENTER"
+      ];
+      pinPad.innerHTML="";
+      keys.forEach(k=>{
+        const b=document.createElement("button");
+        b.type="button";
+        b.className="pin-key" + (k==="ENTER" ? " alt" : "");
+        b.textContent=k;
+        b.addEventListener("click",()=>{
+          if(k==="⌫"){
+            pinValue = pinValue.slice(0,-1);
+            renderPin();
+            return;
+          }
+          if(k==="ENTER"){
+            submitPin();
+            return;
+          }
+          if(pinValue.length>=4) return;
+          pinValue += k;
+          renderPin();
+          if(pinValue.length===4) submitPin();
+        });
+        pinPad.appendChild(b);
+      });
+    }
+
+    function openStaffGate(){
+      buildStaffUI();
+      staffGate.classList.add("open");
+      staffGate.setAttribute("aria-hidden","false");
+      sheetBackdrop.classList.add("open");
+      sheetBackdrop.setAttribute("aria-hidden","false");
+    }
+    function closeStaffGate(){
+      staffGate.classList.remove("open");
+      staffGate.setAttribute("aria-hidden","true");
+      sheetBackdrop.classList.remove("open");
+      sheetBackdrop.setAttribute("aria-hidden","true");
+    }
+
+    function statusLabel(left, warnAt){
+      if(left<=0) return {t:"SOLD OUT", c:"out"};
+      if(left<=warnAt) return {t:"ALMOST GONE", c:"low"};
+      return {t:"LIVE", c:"live"};
+    }
+
+    function buildStaffUI(){
+      const state=getState();
+      staffGrid.innerHTML="";
+
+      // Item boxes
+      TRACKED.forEach(it=>{
+        const st=state.items[it.id] || {left:0,sold:false};
+        const left = Number(st.left||0);
+        const lab=statusLabel(left,it.warnAt);
+
+        const box=document.createElement("div");
+        box.className="staff-box";
+        box.innerHTML = `
+          <strong>${it.name}</strong>
+          <div class="qty-row">
+            <div class="qty-controls">
+              <button class="qty-btn" type="button" data-act="dec" data-id="${it.id}" aria-label="decrease">–</button>
+              <div class="qty-val" id="val_${it.id}">${left}</div>
+              <button class="qty-btn" type="button" data-act="inc" data-id="${it.id}" aria-label="increase">+</button>
+            </div>
+            <div class="qty-meta">
+              <span class="${lab.c}" id="stat_${it.id}">${lab.t}</span>
+            </div>
+          </div>
+        `;
+        staffGrid.appendChild(box);
+      });
+
+      // Next drop (wide)
+      const wide=document.createElement("div");
+      wide.className="staff-box staff-wide";
+      wide.innerHTML = `
+        <strong>Next Drop</strong>
+        <div class="staff-field">
+          <label for="nextDrop">Text</label>
+          <input id="nextDrop" type="text" value="${(state.nextDrop||"Next batch in ~20 min").replaceAll('"','&quot;')}">
+        </div>
+        <div class="staff-field">
+          <label for="nextDropTime">Exact time</label>
+          <input id="nextDropTime" type="text" placeholder="e.g. 9:30 PM" value="${(state.nextDropTime||"").replaceAll('"','&quot;')}">
+        </div>
+      `;
+      staffGrid.appendChild(wide);
+
+      // Bind +/- buttons
+      staffGrid.querySelectorAll(".qty-btn").forEach(btn=>{
+        btn.addEventListener("click",()=>{
+          const id=btn.getAttribute("data-id");
+          const act=btn.getAttribute("data-act");
+          const s=getState();
+          if(!s.items[id]) return;
+
+          if(act==="dec"){
+            s.items[id].left = Math.max(0, Number(s.items[id].left||0) - 1);
+            s.items[id].sold = (s.items[id].left<=0);
+            s.sales[id] = Number(s.sales[id]||0) + 1; // track hottest
+          } else {
+            s.items[id].left = Number(s.items[id].left||0) + 1;
+            s.items[id].sold = false;
+          }
+          setState(s);
+          updateStaffRow(id);
+          renderInventory();
+        });
+      });
+    }
+
+    function updateStaffRow(id){
+      const s=getState();
+      const it=TRACKED.find(x=>x.id===id);
+      if(!it) return;
+      const left=Number(s.items[id]?.left||0);
+      const lab=statusLabel(left,it.warnAt);
+      const v=document.getElementById(`val_${id}`);
+      const st=document.getElementById(`stat_${id}`);
+      if(v) v.textContent=left;
+      if(st){
+        st.textContent=lab.t;
+        st.className=lab.c;
+      }
+    }
+
+    function saveStaff(){
+      const s=getState();
+      const nextDrop=document.getElementById("nextDrop");
+      const nextDropTime=document.getElementById("nextDropTime");
+      if(nextDrop) s.nextDrop = nextDrop.value.trim();
+      if(nextDropTime) s.nextDropTime = nextDropTime.value.trim();
+      setState(s);
+      renderInventory();
+      closeStaffGate();
+    }
+
+    function resetNight(){
+      // reset sales only (keeps counts as-is)
+      const s=getState();
+      Object.keys(s.sales||{}).forEach(k=>s.sales[k]=0);
+      setState(s);
+      renderInventory();
+      buildStaffUI();
+    }
+
+    function restockAllPlus6(){
+      const s=getState();
+      TRACKED.forEach(it=>{
+        if(!s.items[it.id]) s.items[it.id]={left:0,sold:false};
+        s.items[it.id].left = Number(s.items[it.id].left||0) + 6;
+        s.items[it.id].sold = false;
+      });
+      setState(s);
+      renderInventory();
+      buildStaffUI();
+    }
+
+    /* ==========================================================
+       Logo hold gesture (~3 seconds) for PIN
+       ========================================================== */
+    function initLogoHold(){
+      const logo=document.getElementById("logoGate");
+      if(!logo) return;
+
+      let pressTimer=null;
+      let opened=false;
+
+      function startPress(e){
+        opened=false;
+        pressTimer=setTimeout(()=>{
+          opened=true;
+          openPin();
+        }, 3000); // ~3 seconds
+      }
+      function endPress(){
+        clearTimeout(pressTimer);
+      }
+
+      // Touch
+      logo.addEventListener("touchstart",(e)=>{
+        startPress(e);
+      }, {passive:true});
+      logo.addEventListener("touchend", endPress, {passive:true});
+      logo.addEventListener("touchcancel", endPress, {passive:true});
+
+      // Mouse
+      logo.addEventListener("mousedown",(e)=>{ startPress(e); });
+      logo.addEventListener("mouseup", endPress);
+      logo.addEventListener("mouseleave", endPress);
+
+      // Prevent the click jump-to-top if the hold opened PIN
+      logo.addEventListener("click",(e)=>{
+        if(pinModal.classList.contains("open") || staffGate.classList.contains("open")){
+          e.preventDefault();
+          e.stopPropagation();
+        }
       });
     }
 
     /* ==========================================================
-       4) Loader + header reveal
+       Loader + header reveal
        ========================================================== */
     function hideLoader(){
       document.body.classList.add("loaded");
       const header=document.querySelector(".hb-header");
       if(header) header.classList.add("revealed");
     }
-    window.addEventListener("load",function(){
-      const y=document.getElementById("year");
-      if(y) y.textContent=new Date().getFullYear();
+    window.addEventListener("load",()=>{
+      document.getElementById("year").textContent=new Date().getFullYear();
       hideLoader();
     });
-    setTimeout(hideLoader,2500);
-    window.addEventListener("scroll",function(){
+    setTimeout(hideLoader, 2500);
+
+    window.addEventListener("scroll",()=>{
       const header=document.querySelector(".hb-header");
-      if(!header) return;
-      header.classList.toggle("scrolled",window.scrollY>20);
+      if(header) header.classList.toggle("scrolled", window.scrollY>20);
     });
 
     /* ==========================================================
-       5) Stock Tracker + Almost Gone + Ops
+       Backdrop + buttons
        ========================================================== */
-    const TRACKED = [
-      { id:"cerberus-melt", name:"Cerberus Melt" },
-      { id:"gatekeeper-turkey", name:"Gatekeeper Turkey Melt" },
-      { id:"hellfire-chicken", name:"Hellfire Chicken Melt" },
-      { id:"persephone-garden", name:"Persephone’s Garden" },
-      { id:"tomato-soup", name:"Charred Tomato Soup" }
-    ];
+    function bindOverlays(){
+      const staffClose=document.getElementById("staffClose");
+      const staffSave=document.getElementById("staffSave");
+      const staffResetNight=document.getElementById("staffResetNight");
+      const staffRestockAll=document.getElementById("staffRestockAll");
 
-    const STATE_KEY = "cb_stock_v1";
+      const pinClose=document.getElementById("pinClose");
 
-    function defaultState(){
-      const items={};
-      TRACKED.forEach(it=>{ items[it.id]={ left: 6 }; });
-      if(items["tomato-soup"]) items["tomato-soup"].left = 10;
-      return { items, nextDrop:"Next batch in ~20 min", nextDropTime:"" };
-    }
-    function getState(){
-      try{ return JSON.parse(localStorage.getItem(STATE_KEY)) || defaultState(); }
-      catch(e){ return defaultState(); }
-    }
-    function setState(next){ localStorage.setItem(STATE_KEY, JSON.stringify(next)); }
+      if(staffClose) staffClose.addEventListener("click", closeStaffGate);
+      if(staffSave) staffSave.addEventListener("click", saveStaff);
+      if(staffResetNight) staffResetNight.addEventListener("click", resetNight);
+      if(staffRestockAll) staffRestockAll.addEventListener("click", restockAllPlus6);
 
-    function statusFor(st){
-      const left = (st && typeof st.left==="number") ? st.left : 0;
-      if(left <= 0) return "SOLD OUT";
-      if(left <= 2) return "ALMOST GONE";
-      return "LIVE";
-    }
+      if(pinClose) pinClose.addEventListener("click", closePin);
 
-    function plural(n, word){ return n===1 ? `${n} ${word}` : `${n} ${word}s`; }
-
-    function renderMenuStatuses(){
-      const state=getState();
-      TRACKED.forEach(it=>{
-        const el=document.querySelector(`[data-item-id="${it.id}"]`);
-        if(!el) return;
-        const st=state.items[it.id] || {left:0};
-        const status=statusFor(st);
-        el.classList.toggle("is-soldout", status==="SOLD OUT");
-      });
-    }
-
-    function renderAlmostGoneTop(){
-      const state=getState();
-      const panel=document.getElementById("almostGonePanel");
-      const listEl=document.getElementById("almostGoneList");
-      if(!panel || !listEl) return;
-
-      const almost = TRACKED
-        .map(it=>{
-          const st=state.items[it.id] || {left:0};
-          return { it, st, status: statusFor(st) };
-        })
-        .filter(x=>x.status==="ALMOST GONE")
-        .sort((a,b)=>(a.st.left||0)-(b.st.left||0))
-        .slice(0,4);
-
-      if(almost.length===0){
-        panel.style.display="none";
-        return;
+      if(sheetBackdrop){
+        sheetBackdrop.addEventListener("click",()=>{
+          if(pinModal.classList.contains("open")) closePin();
+          if(staffGate.classList.contains("open")) closeStaffGate();
+        });
       }
-
-      panel.style.display="";
-      listEl.innerHTML = almost
-        .map(x=>`<strong>${x.it.name}</strong> — ${plural(x.st.left,"batch")} left`)
-        .join(" • ");
-    }
-
-    function renderOps(){
-      const state=getState();
-      const list=TRACKED.map(it=>{
-        const st=state.items[it.id] || {left:0};
-        return { it, st, status: statusFor(st) };
-      });
-
-      const available=list.filter(x=>x.status!=="SOLD OUT");
-      const soldout=list.filter(x=>x.status==="SOLD OUT");
-      const almost=list.filter(x=>x.status==="ALMOST GONE");
-
-      const elAlmost=document.getElementById("opsAlmostGone");
-      if(elAlmost){
-        elAlmost.querySelector("p").textContent =
-          almost.length ? almost.slice(0,3).map(x=>`${x.it.name} — ${plural(x.st.left,"batch")} left`).join(" • ")
-                        : "Nothing in the danger zone (yet).";
-      }
-
-      const elSold=document.getElementById("opsSoldOut");
-      if(elSold){
-        elSold.querySelector("p").textContent =
-          soldout.length ? soldout.slice(0,3).map(x=>x.it.name).join(" • ") + (soldout.length>3?` +${soldout.length-3} more`:"")
-                         : "No sell-outs yet.";
-      }
-
-      const elBatch=document.getElementById("opsBatchCounter");
-      if(elBatch){
-        const totalLeft=available.reduce((sum,x)=>sum+Math.max(0,(x.st.left||0)),0);
-        elBatch.querySelector("p").textContent =
-          `${plural(totalLeft,"batch")} left • ${plural(almost.length,"item")} low • ${plural(available.length,"item")} live`;
-      }
-
-      const elDrop=document.getElementById("opsNextDrop");
-      if(elDrop){
-        const text = state.nextDropTime ? `Next drop: ${state.nextDropTime}` : (state.nextDrop || "Next drop soon");
-        elDrop.querySelector("p").textContent=text;
-      }
-    }
-
-    /* ==========================================================
-       6) Staff Gate — FIXED (press works + doesn’t jump page)
-       - triple click OR press & hold logo 3s
-       - uses pointer events for mobile/desktop reliability
-       ========================================================== */
-    function buildStaffUI(){
-      const grid=document.getElementById("staffGrid");
-      if(!grid) return;
-      const state=getState();
-      grid.innerHTML="";
-
-      TRACKED.forEach(it=>{
-        const st=state.items[it.id] || {left:0};
-        const box=document.createElement("div");
-        box.className="staff-box";
-        box.innerHTML = `
-          <strong>${it.name}</strong>
-          <div class="staff-row">
-            <label for="stk_${it.id}">Batches left</label>
-            <input id="stk_${it.id}" type="number" min="-1" step="1" value="${st.left}">
-          </div>
-          <div class="staff-row" style="margin-top:.25rem;">
-            <label>Status</label>
-            <span style="color:var(--gold);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;">
-              ${statusFor(st)}
-            </span>
-          </div>
-        `;
-        grid.appendChild(box);
-      });
-
-      const boxDrop=document.createElement("div");
-      boxDrop.className="staff-box";
-      boxDrop.innerHTML = `
-        <strong>Next Drop</strong>
-        <div class="staff-row">
-          <label for="nextDrop">Text</label>
-          <input id="nextDrop" type="text" value="${state.nextDrop || "Next batch in ~20 min"}" style="width:160px;">
-        </div>
-        <div class="staff-row">
-          <label for="nextDropTime">Exact time</label>
-          <input id="nextDropTime" type="text" value="${state.nextDropTime || ""}" style="width:160px;" placeholder="e.g. 9:30 PM">
-        </div>
-      `;
-      grid.appendChild(boxDrop);
-    }
-
-    function openGate(){
-      const entered = prompt("Enter Staff PIN:");
-      if(String(entered) !== String(STAFF_PIN)){
-        alert("Access denied.");
-        return;
-      }
-      const gate=document.getElementById("staffGate");
-      if(!gate) return;
-      gate.classList.add("open");
-      gate.setAttribute("aria-hidden","false");
-      buildStaffUI();
-    }
-
-    function closeGate(){
-      const gate=document.getElementById("staffGate");
-      if(!gate) return;
-      gate.classList.remove("open");
-      gate.setAttribute("aria-hidden","true");
-    }
-
-    function saveFromStaffUI(){
-      const state=getState();
-      TRACKED.forEach(it=>{
-        const inp=document.getElementById(`stk_${it.id}`);
-        if(!inp) return;
-        const n=parseInt(inp.value,10);
-        state.items[it.id]={ left: isNaN(n) ? 0 : n };
-      });
-
-      const nextDrop=document.getElementById("nextDrop");
-      const nextDropTime=document.getElementById("nextDropTime");
-      state.nextDrop = nextDrop ? nextDrop.value.trim() : state.nextDrop;
-      state.nextDropTime = nextDropTime ? nextDropTime.value.trim() : state.nextDropTime;
-
-      setState(state);
-
-      renderMenuStatuses();
-      renderAlmostGoneTop();
-      renderOps();
-    }
-
-    function resetState(){
-      setState(defaultState());
-      buildStaffUI();
-      renderMenuStatuses();
-      renderAlmostGoneTop();
-      renderOps();
-    }
-
-    function initStaffGateGesture(){
-      const logo=document.getElementById("logoGate");
-      if(!logo) return;
-
-      const PRESS_MS = 3000;
-      let pressTimer=null;
-      let pressFired=false;
-
-      function startPress(e){
-        pressFired=false;
-        // ✅ prevent the anchor from jumping while you hold
-        e.preventDefault();
-        clearTimeout(pressTimer);
-        pressTimer=setTimeout(()=>{
-          pressFired=true;
-          openGate();
-        }, PRESS_MS);
-      }
-      function endPress(){
-        clearTimeout(pressTimer);
-      }
-
-      // Pointer events = reliable across touch + mouse
-      logo.addEventListener("pointerdown", startPress);
-      logo.addEventListener("pointerup", endPress);
-      logo.addEventListener("pointercancel", endPress);
-      logo.addEventListener("pointerleave", endPress);
-
-      // Triple click (also prevent jump)
-      let clicks=0;
-      let clickTimer=null;
-      logo.addEventListener("click",(e)=>{
-        if(pressFired){
-          e.preventDefault();
-          e.stopPropagation();
-          return;
-        }
-        e.preventDefault();
-        clicks++;
-        clearTimeout(clickTimer);
-        clickTimer=setTimeout(()=>{ clicks=0; }, 500);
-        if(clicks>=3){
-          clicks=0;
-          openGate();
-        }
-      });
-
-      // Buttons
-      const closeBtn=document.getElementById("staffClose");
-      const saveBtn=document.getElementById("staffSave");
-      const resetBtn=document.getElementById("staffReset");
-      if(closeBtn) closeBtn.addEventListener("click", closeGate);
-      if(saveBtn) saveBtn.addEventListener("click", saveFromStaffUI);
-      if(resetBtn) resetBtn.addEventListener("click", resetState);
 
       window.addEventListener("keydown",(e)=>{
-        if(e.key==="Escape") closeGate();
+        if(e.key==="Escape"){
+          if(pinModal.classList.contains("open")) closePin();
+          if(staffGate.classList.contains("open")) closeStaffGate();
+        }
       });
     }
 
     /* ==========================================================
-       7) Boot
+       Boot
        ========================================================== */
     (function boot(){
       setHolidayTheme();
       setSeasonCallout();
       initSecretMenu();
-      initStaffGateGesture();
+      initLogoHold();
+      buildPinPad();
+      bindOverlays();
 
-      renderMenuStatuses();
-      renderAlmostGoneTop();
-      renderOps();
-
-      window.addEventListener("storage", ()=>{
-        renderMenuStatuses();
-        renderAlmostGoneTop();
-        renderOps();
-      });
-
-      setInterval(renderOps, 2000);
+      renderInventory();
+      window.addEventListener("storage", renderInventory);
+      setInterval(renderInventory, 1500);
     })();
   </script>
 </body>
 </html>
+```0
