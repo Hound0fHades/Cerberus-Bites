@@ -415,7 +415,7 @@
     .menu-item{padding:.55rem 0;border-bottom:1px dashed rgba(245,201,122,.25);position:relative;}
     .menu-item:last-child{border-bottom:none;}
     .menu-item-name{font-size:.92rem;display:flex;justify-content:space-between;gap:.4rem;}
-    .menu-item-name span{color:var(--gold);font-size:.85rem;opacity:.95;}
+    .menu-item-name .price{color:var(--gold);font-size:.85rem;opacity:.95;}
     .menu-item-desc{font-size:.82rem;color:var(--muted);margin-top:.1rem;}
     .menu-badges{margin-top:.25rem;display:flex;flex-wrap:wrap;gap:.25rem;font-size:.7rem;}
     .badge{border-radius:999px;border:1px solid rgba(255,255,255,.12);padding:.05rem .45rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);}
@@ -708,6 +708,12 @@
       line-height:1.3;
       padding-top:.45rem;
     }
+    .staff-note{
+      margin-top:.45rem;
+      font-size:.72rem;
+      color:color-mix(in srgb,var(--muted) 80%, #fff 20%);
+      opacity:.9;
+    }
 
     /* one-hand mobile staff tweaks */
     .staff-actions{
@@ -739,6 +745,71 @@
       box-shadow:0 0 14px color-mix(in srgb,var(--accent) 55%,transparent);
     }
 
+    /* Quiet admin toasts (subtle confirmations) */
+    .admin-toast-wrap{
+      position:fixed;
+      left:18px;
+      bottom:18px;
+      z-index:99999;
+      display:flex;
+      flex-direction:column;
+      gap:.5rem;
+      pointer-events:none;
+    }
+    .admin-toast{
+      pointer-events:none;
+      min-width:220px;
+      max-width:min(420px,calc(100vw - 36px));
+      border-radius:16px;
+      border:1px solid rgba(245,201,122,.22);
+      background:radial-gradient(circle at top left,rgba(15,3,10,.96),rgba(5,3,8,.98));
+      box-shadow:0 0 20px rgba(0,0,0,.85);
+      padding:.65rem .85rem;
+      opacity:0;
+      transform:translateY(10px);
+      transition:opacity .25s ease, transform .25s ease;
+      display:flex;
+      gap:.6rem;
+      align-items:flex-start;
+    }
+    .admin-toast.show{opacity:1;transform:translateY(0);}
+    .toast-dot{
+      width:10px;height:10px;border-radius:999px;
+      margin-top:.28rem;
+      box-shadow:0 0 16px rgba(0,0,0,.7);
+      border:1px solid rgba(245,201,122,.22);
+      background:rgba(245,201,122,.14);
+      flex:0 0 auto;
+    }
+    .admin-toast.ok .toast-dot{
+      background:radial-gradient(circle at top,var(--gold),rgba(245,201,122,.08));
+      box-shadow:0 0 18px rgba(245,201,122,.22),0 0 26px rgba(202,52,0,.10);
+    }
+    .admin-toast.warn .toast-dot{
+      background:radial-gradient(circle at top,color-mix(in srgb,var(--accent) 95%, #fff 5%),rgba(202,52,0,.08));
+      box-shadow:0 0 18px rgba(202,52,0,.22),0 0 26px rgba(245,201,122,.10);
+    }
+    .toast-text{
+      display:flex;
+      flex-direction:column;
+      gap:.1rem;
+      min-width:0;
+    }
+    .toast-title{
+      font-size:.72rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:color-mix(in srgb,var(--gold) 70%, #fff 30%);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .toast-msg{
+      font-size:.82rem;
+      color:var(--muted);
+      line-height:1.35;
+    }
+
     @media (max-width:840px){
       .hero-grid,.menu-grid,.about-grid,.summon-grid{grid-template-columns:minmax(0,1fr);}
       .nav-links-left{display:none;}
@@ -752,6 +823,7 @@
       .hero-pillars{grid-template-columns:minmax(0,1fr);}
       .about-duo{grid-template-columns:minmax(0,1fr);}
       .contact-icons{grid-template-columns:minmax(0,1fr);}
+      .admin-toast-wrap{left:12px;bottom:12px;}
     }
   </style>
 </head>
@@ -765,6 +837,9 @@
       <div class="loader-text-sub">Please wait, mortal.</div>
     </div>
   </div>
+
+  <!-- Quiet admin toast mount -->
+  <div class="admin-toast-wrap" id="toastWrap" aria-live="polite" aria-atomic="true"></div>
 
   <!-- Banner -->
   <div class="coming-soon-banner">
@@ -885,25 +960,37 @@
 
                 <div class="menu-item" data-item-id="cerberus-melt">
                   <div class="soldout-stamp">SOLD OUT</div>
-                  <div class="menu-item-name">Cerberus Melt <span>$9</span></div>
+                  <div class="menu-item-name">
+                    Cerberus Melt
+                    <span class="price" data-price-for="cerberus-melt">$9</span>
+                  </div>
                   <div class="menu-item-desc">Triple cheese on butter-crisped sourdough.</div>
                 </div>
 
                 <div class="menu-item" data-item-id="gatekeeper-turkey">
                   <div class="soldout-stamp">SOLD OUT</div>
-                  <div class="menu-item-name">Gatekeeper Turkey Melt <span>$11</span></div>
+                  <div class="menu-item-name">
+                    Gatekeeper Turkey Melt
+                    <span class="price" data-price-for="gatekeeper-turkey">$11</span>
+                  </div>
                   <div class="menu-item-desc">Smoked turkey, sharp cheddar, black garlic aioli.</div>
                 </div>
 
                 <div class="menu-item" data-item-id="hellfire-chicken">
                   <div class="soldout-stamp">SOLD OUT</div>
-                  <div class="menu-item-name">Hellfire Chicken Melt <span>$11</span></div>
+                  <div class="menu-item-name">
+                    Hellfire Chicken Melt
+                    <span class="price" data-price-for="hellfire-chicken">$11</span>
+                  </div>
                   <div class="menu-item-desc">Blackened chicken, pepper jack, ember mayo.</div>
                 </div>
 
                 <div class="menu-item" data-item-id="persephone-garden">
                   <div class="soldout-stamp">SOLD OUT</div>
-                  <div class="menu-item-name">Persephone’s Garden (Vegan) 🌿 <span>$10</span></div>
+                  <div class="menu-item-name">
+                    Persephone’s Garden (Vegan) 🌿
+                    <span class="price" data-price-for="persephone-garden">$10</span>
+                  </div>
                   <div class="menu-item-desc">Roasted mushrooms, caramelized onion, herb oil.</div>
                 </div>
               </div>
@@ -914,7 +1001,10 @@
 
                 <div class="menu-item" data-item-id="tomato-soup">
                   <div class="soldout-stamp">SOLD OUT</div>
-                  <div class="menu-item-name">Charred Tomato Soup (Cup) <span>$4</span></div>
+                  <div class="menu-item-name">
+                    Charred Tomato Soup (Cup)
+                    <span class="price" data-price-for="tomato-soup">$4</span>
+                  </div>
                   <div class="menu-item-desc">Rich, smoky, perfect for dipping.</div>
                   <div class="menu-badges">
                     <div class="badge">Add to any melt +$3</div>
@@ -1154,6 +1244,34 @@
     const STAFF_PIN = "1395";
 
     /* ==========================================================
+       0.5) Quiet admin toasts
+       ========================================================== */
+    function toast(title, msg, kind="ok"){
+      const wrap=document.getElementById("toastWrap");
+      if(!wrap) return;
+
+      const el=document.createElement("div");
+      el.className=`admin-toast ${kind}`;
+      el.innerHTML = `
+        <div class="toast-dot" aria-hidden="true"></div>
+        <div class="toast-text">
+          <div class="toast-title">${title}</div>
+          <div class="toast-msg">${msg}</div>
+        </div>
+      `;
+      wrap.appendChild(el);
+
+      requestAnimationFrame(()=> el.classList.add("show"));
+
+      // auto-remove
+      const LIFETIME = 2200;
+      setTimeout(()=>{
+        el.classList.remove("show");
+        setTimeout(()=>{ try{ el.remove(); }catch(e){} }, 260);
+      }, LIFETIME);
+    }
+
+    /* ==========================================================
        1) Pagan Sabbat Color Shifting (unchanged)
        ========================================================== */
     function fmt(d){
@@ -1265,17 +1383,17 @@
     }
 
     /* ==========================================================
-       3) State (stock + ops + secret loaf)
+       3) State (stock + prices + ops + secret loaf)
        ========================================================== */
     const TRACKED = [
-      { id:"cerberus-melt", name:"Cerberus Melt" },
-      { id:"gatekeeper-turkey", name:"Gatekeeper Turkey Melt" },
-      { id:"hellfire-chicken", name:"Hellfire Chicken Melt" },
-      { id:"persephone-garden", name:"Persephone’s Garden" },
-      { id:"tomato-soup", name:"Charred Tomato Soup" }
+      { id:"cerberus-melt", name:"Cerberus Melt", defaultPrice:"$9" },
+      { id:"gatekeeper-turkey", name:"Gatekeeper Turkey Melt", defaultPrice:"$11" },
+      { id:"hellfire-chicken", name:"Hellfire Chicken Melt", defaultPrice:"$11" },
+      { id:"persephone-garden", name:"Persephone’s Garden", defaultPrice:"$10" },
+      { id:"tomato-soup", name:"Charred Tomato Soup", defaultPrice:"$4" }
     ];
 
-    const STATE_KEY = "cb_state_v2";
+    const STATE_KEY = "cb_state_v3"; // bumped version to include prices
 
     const LOAF_TITLES = [
       "Obsidian Speed Loaf",
@@ -1292,9 +1410,19 @@
       "Warden’s Crust"
     ];
 
+    function normalizePrice(raw, fallback){
+      const v = (raw ?? "").toString().trim();
+      if(!v) return fallback || "";
+      if(v.startsWith("$")) return v;
+      // if it's numeric-ish, prefix $
+      const num = v.replace(/[^0-9.]/g,"");
+      if(num && !isNaN(parseFloat(num))) return `$${num}`;
+      return v; // allow custom text if you ever want "Market"
+    }
+
     function defaultState(){
       const items={};
-      TRACKED.forEach(it=> items[it.id]={ left: 6 });
+      TRACKED.forEach(it=> items[it.id]={ left: 6, price: it.defaultPrice });
       if(items["tomato-soup"]) items["tomato-soup"].left = 10;
 
       return {
@@ -1311,10 +1439,36 @@
       };
     }
 
+    function migrateState(raw){
+      const base = defaultState();
+      if(!raw || !raw.items) return base;
+
+      // merge but ensure every item has left + price
+      for(const it of TRACKED){
+        const existing = raw.items[it.id] || {};
+        base.items[it.id].left = (typeof existing.left === "number") ? existing.left : base.items[it.id].left;
+        base.items[it.id].price = normalizePrice(existing.price, base.items[it.id].price);
+
+        // also: if state is old and has no price, sniff from DOM as fallback
+        if(!existing.price){
+          const domPrice = document.querySelector(`[data-price-for="${it.id}"]`);
+          if(domPrice && domPrice.textContent.trim()){
+            base.items[it.id].price = normalizePrice(domPrice.textContent.trim(), base.items[it.id].price);
+          }
+        }
+      }
+
+      base.nextDrop = (raw.nextDrop ?? base.nextDrop);
+      base.nextDropTime = (raw.nextDropTime ?? base.nextDropTime);
+      if(raw.secretLoaf) base.secretLoaf = Object.assign(base.secretLoaf, raw.secretLoaf);
+
+      return base;
+    }
+
     function getState(){
       try{
         const raw=JSON.parse(localStorage.getItem(STATE_KEY));
-        if(raw && raw.items) return Object.assign(defaultState(), raw);
+        if(raw && raw.items) return migrateState(raw);
       }catch(e){}
       const init=defaultState();
       localStorage.setItem(STATE_KEY, JSON.stringify(init));
@@ -1331,7 +1485,7 @@
     function plural(n, word){ return n===1 ? `${n} ${word}` : `${n} ${word}s`; }
 
     /* ==========================================================
-       4) Render menu SOLD OUT + Almost Gone + Secret Loaf
+       4) Render menu SOLD OUT + Almost Gone + Prices + Secret Loaf
        ========================================================== */
     function renderMenuStatuses(){
       const state=getState();
@@ -1341,6 +1495,17 @@
         const st=state.items[it.id] || {left:0};
         const status=statusFor(st);
         el.classList.toggle("is-soldout", status==="SOLD OUT");
+      });
+    }
+
+    function renderPrices(){
+      const state=getState();
+      TRACKED.forEach(it=>{
+        const priceEl = document.querySelector(`[data-price-for="${it.id}"]`);
+        if(!priceEl) return;
+        const st = state.items[it.id] || {};
+        const next = normalizePrice(st.price, priceEl.textContent.trim() || it.defaultPrice);
+        priceEl.textContent = next || it.defaultPrice;
       });
     }
 
@@ -1480,7 +1645,7 @@
     }
 
     /* ==========================================================
-       7) Staff Gate (PIN) + Stock + Next Drop + Secret Loaf editor
+       7) Staff Gate (PIN) + Stock + Prices + Next Drop + Secret Loaf editor
        ========================================================== */
     function buildStaffUI(){
       const grid=document.getElementById("staffGrid");
@@ -1488,23 +1653,32 @@
       const state=getState();
       grid.innerHTML="";
 
-      // Stock inputs
+      // Stock + Price inputs
       TRACKED.forEach(it=>{
-        const st=state.items[it.id] || {left:0};
+        const st=state.items[it.id] || {left:0, price:it.defaultPrice};
         const box=document.createElement("div");
         box.className="staff-box";
         box.innerHTML = `
           <strong>${it.name}</strong>
+
           <div class="staff-row">
             <label for="stk_${it.id}">Batches left</label>
             <input id="stk_${it.id}" type="number" min="-1" step="1" value="${st.left}">
           </div>
+
+          <div class="staff-row">
+            <label for="prc_${it.id}">Price</label>
+            <input id="prc_${it.id}" type="text" value="${(st.price||it.defaultPrice).replace(/"/g,"&quot;")}" placeholder="${it.defaultPrice}">
+          </div>
+
           <div class="staff-row" style="margin-top:.25rem;">
             <label>Status</label>
             <span style="color:var(--gold);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;">
               ${statusFor(st)}
             </span>
           </div>
+
+          <div class="staff-note">Tip: you can type <strong>9</strong> and it’ll become <strong>$9</strong>.</div>
         `;
         grid.appendChild(box);
       });
@@ -1575,6 +1749,7 @@
           if(!inp) return;
           const pick=LOAF_TITLES[Math.floor(Math.random()*LOAF_TITLES.length)];
           inp.value=pick;
+          toast("Loaf shuffled", "A new name has been drawn.", "ok");
         });
       },0);
     }
@@ -1582,7 +1757,7 @@
     function openGate(){
       const entered = prompt("Enter Staff PIN:");
       if(entered !== STAFF_PIN){
-        alert("Access denied.");
+        toast("Access denied", "The gate remains sealed.", "warn");
         return;
       }
       const gate=document.getElementById("staffGate");
@@ -1590,12 +1765,14 @@
       gate.classList.add("open");
       gate.setAttribute("aria-hidden","false");
       buildStaffUI();
+      toast("Staff Gate", "Welcome back, Gatekeeper.", "ok");
     }
     function closeGate(){
       const gate=document.getElementById("staffGate");
       if(!gate) return;
       gate.classList.remove("open");
       gate.setAttribute("aria-hidden","true");
+      toast("Gate closed", "The panel slips back into shadow.", "ok");
     }
 
     function saveFromStaffUI(){
@@ -1603,9 +1780,16 @@
 
       TRACKED.forEach(it=>{
         const inp=document.getElementById(`stk_${it.id}`);
-        if(!inp) return;
-        const n=parseInt(inp.value,10);
-        state.items[it.id]={ left: isNaN(n) ? 0 : n };
+        const prc=document.getElementById(`prc_${it.id}`);
+        if(inp){
+          const n=parseInt(inp.value,10);
+          state.items[it.id]=state.items[it.id] || {};
+          state.items[it.id].left = isNaN(n) ? 0 : n;
+        }
+        if(prc){
+          state.items[it.id]=state.items[it.id] || {};
+          state.items[it.id].price = normalizePrice(prc.value, it.defaultPrice);
+        }
       });
 
       const nd=document.getElementById("nextDrop");
@@ -1623,25 +1807,32 @@
       state.secretLoaf.enabled = (en ? en.value : "yes") === "yes";
       state.secretLoaf.name = ln ? ln.value.trim() : state.secretLoaf.name;
       state.secretLoaf.desc = ld ? ld.value.trim() : state.secretLoaf.desc;
-      state.secretLoaf.price = lp ? lp.value.trim() : state.secretLoaf.price;
+      state.secretLoaf.price = lp ? normalizePrice(lp.value, "$6") : state.secretLoaf.price;
       state.secretLoaf.badge = lb ? lb.value.trim() : state.secretLoaf.badge;
 
       setState(state);
 
+      renderPrices();
       renderMenuStatuses();
       renderAlmostGoneTop();
       renderSecretLoaf();
       renderOps();
+
+      toast("Saved", "Gate sealed — changes applied.", "ok");
     }
 
     function resetState(){
       const fresh=defaultState();
       setState(fresh);
       buildStaffUI();
+
+      renderPrices();
       renderMenuStatuses();
       renderAlmostGoneTop();
       renderSecretLoaf();
       renderOps();
+
+      toast("Reset", "Defaults restored. The kitchen remembers.", "ok");
     }
 
     // Hold logo 3 seconds to open Staff Gate (mobile/desktop)
@@ -1696,6 +1887,7 @@
       hideLoader();
 
       // initial renders
+      renderPrices();
       renderMenuStatuses();
       renderAlmostGoneTop();
       renderSecretLoaf();
@@ -1719,6 +1911,7 @@
 
       // periodic refresh (safe + keeps UI synced with staff edits)
       setInterval(()=>{
+        renderPrices();
         renderMenuStatuses();
         renderAlmostGoneTop();
         renderSecretLoaf();
