@@ -272,7 +272,13 @@
       letter-spacing:.15em;
       text-transform:uppercase;
     }
-    .hero-art-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;font-size:.8rem;}
+    /* UPDATED: 3 boxes (auto-fit) */
+    .hero-art-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(170px, 1fr));
+      gap:.75rem;
+      font-size:.8rem;
+    }
     .hero-card{
       border-radius:16px;
       border:1px solid rgba(245,201,122,.25);
@@ -412,28 +418,6 @@
     }
     .menu-item.is-soldout .soldout-stamp{display:inline-block;}
     .menu-item.is-soldout{opacity:.72;}
-
-    /* Almost Gone list panel */
-    .almost-gone-panel{
-      border:1px solid rgba(245,201,122,.25);
-      border-radius:14px;
-      padding:.9rem 1.1rem;
-      margin:.9rem 0 1.2rem;
-      background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent-soft) 22%,transparent),rgba(5,3,8,.92));
-      box-shadow:0 0 18px rgba(0,0,0,.65);
-    }
-    .almost-gone-title{
-      text-transform:uppercase;
-      letter-spacing:.22em;
-      font-size:.72rem;
-      color:var(--gold);
-      margin-bottom:.35rem;
-    }
-    .almost-gone-list{
-      font-size:.82rem;
-      color:var(--muted);
-    }
-    .almost-gone-list strong{color:var(--gold);}
 
     .menu-art{
       border-radius:20px;
@@ -668,7 +652,7 @@
         </nav>
 
         <div class="nav-center">
-          <!-- THIS is the hidden admin portal target -->
+          <!-- Hidden admin portal target -->
           <a href="#top" class="nav-logo-link" id="logoGate" aria-label="Cerberus Crest (hold to enter)">
             <img src="CerberusLogo2.png" alt="Cerberus Bites Logo" class="logo-img">
           </a>
@@ -715,10 +699,7 @@
             <div class="hero-art-inner">
               <div class="hero-art-title">Tonight in the Underworld</div>
               <div class="hero-art-grid">
-                <div class="hero-card" id="opsAlmostGone">
-                  <h4>Almost Gone</h4>
-                  <p>Loading…</p>
-                </div>
+                <!-- UPDATED: 3 boxes only -->
                 <div class="hero-card" id="opsSoldOut">
                   <h4>Sold Out</h4>
                   <p>Loading…</p>
@@ -757,10 +738,7 @@
             <p class="season-message">Loading the season’s omen…</p>
           </div>
 
-          <div class="almost-gone-panel" id="almostGonePanel" style="display:none;">
-            <div class="almost-gone-title">What’s Almost Gone</div>
-            <div class="almost-gone-list" id="almostGoneList">—</div>
-          </div>
+          <!-- UPDATED: removed public “Almost Gone” panel entirely -->
         </div>
 
         <div class="menu-grid">
@@ -813,7 +791,7 @@
                   </div>
                 </div>
 
-                <!-- Secret menu moves HERE: under sides / under soup -->
+                <!-- Secret menu mounts HERE: under sides / under soup -->
                 <div id="secretMenuMount"></div>
               </div>
 
@@ -834,6 +812,7 @@
         <!-- SECRET MENU (Hidden Specialty Loaf) -->
         <div id="secretMenu" class="secret-menu" aria-hidden="true">
           <div class="secret-menu-inner">
+            <!-- no “off-menu” text, no hints -->
             <div class="secret-menu-label" id="secretLabel">✶</div>
             <div class="secret-menu-title" id="secretLoafName">Obsidian Speed Loaf</div>
             <p class="secret-menu-desc" id="secretLoafDesc">
@@ -864,11 +843,14 @@
           <div class="about-crest">
             <img src="CerberusLogo2.png" alt="Cerberus Bites Crest Logo" class="about-crest-logo">
             <div class="about-crest-title">Official Crest of Cerberus Bites</div>
+
+            <!-- LOCKED CREED (your confirmed version) -->
             <p class="about-crest-text">
               <strong>We are the guardians of souls who enter this realm.</strong><br>
-              The Hound tends the flame.<br>
-              Cerberus keeps the gate.<br>
-              If they don’t agree, it doesn’t leave the kitchen.
+              I watch the flames.<br>
+              I guard the bites.<br>
+              I guide the hungry.<br>
+              We are the eternal watchdog of hunger and flame — and if we don’t approve it, it doesn’t leave the kitchen.
             </p>
           </div>
 
@@ -1148,7 +1130,7 @@
     }
 
     /* ==========================================================
-       4) Render menu SOLD OUT + Almost Gone + Secret Loaf
+       4) Render menu SOLD OUT + Secret Loaf
        ========================================================== */
     function renderMenuStatuses(){
       const state=getState();
@@ -1159,32 +1141,6 @@
         const status=statusFor(st);
         el.classList.toggle("is-soldout", status==="SOLD OUT");
       });
-    }
-
-    function renderAlmostGoneTop(){
-      const state=getState();
-      const panel=document.getElementById("almostGonePanel");
-      const listEl=document.getElementById("almostGoneList");
-      if(!panel || !listEl) return;
-
-      const list=TRACKED.map(it=>{
-        const st=state.items[it.id] || {left:0};
-        return { it, st, status: statusFor(st) };
-      });
-
-      const almost=list.filter(x=>x.status==="ALMOST GONE")
-        .sort((a,b)=>(a.st.left||0)-(b.st.left||0))
-        .slice(0,4);
-
-      if(almost.length===0){
-        panel.style.display="none";
-        return;
-      }
-
-      panel.style.display="";
-      listEl.innerHTML = almost
-        .map(x=>`<strong>${x.it.name}</strong> — ${plural(x.st.left,"batch")} left`)
-        .join(" • ");
     }
 
     function renderSecretLoaf(){
@@ -1231,7 +1187,7 @@
         star.classList.add("active");
         secret.setAttribute("aria-hidden","false");
 
-        // auto-hide after a bit (so it’s truly a “found it” moment)
+        // auto-hide after a bit (true “found it” moment)
         hideTimer=setTimeout(hide, 5200);
       }
       function hide(){
@@ -1241,14 +1197,12 @@
         secret.setAttribute("aria-hidden","true");
       }
 
-      // “poke” behavior
       star.addEventListener("click",(e)=>{
         e.preventDefault();
         if(secret.classList.contains("visible")) hide();
         else show();
       });
 
-      // close if they click elsewhere
       document.addEventListener("click",(e)=>{
         if(!secret.classList.contains("visible")) return;
         if(e.target === star || star.contains(e.target)) return;
@@ -1256,14 +1210,13 @@
         hide();
       });
 
-      // close on ESC
       window.addEventListener("keydown",(e)=>{
         if(e.key==="Escape") hide();
       });
     }
 
     /* ==========================================================
-       6) Ops boxes (Tonight in the Underworld) + favored by hungry souls
+       6) Ops boxes (Tonight in the Underworld) — 3 boxes only
        ========================================================== */
     function renderOps(){
       const state=getState();
@@ -1272,25 +1225,16 @@
         return { it, st, status: statusFor(st) };
       });
 
-      const almost=list.filter(x=>x.status==="ALMOST GONE")
-        .sort((a,b)=>(a.st.left||0)-(b.st.left||0));
       const soldout=list.filter(x=>x.status==="SOLD OUT");
       const live=list.filter(x=>x.status!=="SOLD OUT");
-
-      // Almost Gone
-      const elAlmost=document.getElementById("opsAlmostGone");
-      if(elAlmost){
-        elAlmost.querySelector("p").textContent =
-          almost.length ? almost.slice(0,3).map(x=>`${x.it.name} — ${plural(x.st.left,"batch")} left`).join(" • ")
-                       : "Nothing in the danger zone (yet).";
-      }
 
       // Sold Out
       const elSold=document.getElementById("opsSoldOut");
       if(elSold){
         elSold.querySelector("p").textContent =
-          soldout.length ? soldout.slice(0,3).map(x=>x.it.name).join(" • ") + (soldout.length>3?` +${soldout.length-3} more`:"")
-                         : "No sell-outs yet.";
+          soldout.length
+            ? soldout.slice(0,3).map(x=>x.it.name).join(" • ") + (soldout.length>3?` +${soldout.length-3} more`:"")
+            : "No sell-outs yet.";
       }
 
       // Favored by hungry souls (heuristic: lowest remaining among LIVE items)
@@ -1468,7 +1412,6 @@
 
       // refresh site
       renderMenuStatuses();
-      renderAlmostGoneTop();
       renderSecretLoaf();
       renderOps();
     }
@@ -1478,7 +1421,6 @@
       setState(fresh);
       buildStaffUI();
       renderMenuStatuses();
-      renderAlmostGoneTop();
       renderSecretLoaf();
       renderOps();
     }
@@ -1492,14 +1434,11 @@
       const HOLD_MS=3000;
 
       const startHold = (e)=>{
-        // prevent accidental navigation to #top while holding
-        if(e && typeof e.preventDefault==="function") e.preventDefault();
+        if(e && typeof e.preventDefault==="function") e.preventDefault(); // stop jumping to #top while holding
         clearTimeout(pressTimer);
         pressTimer=setTimeout(openGate, HOLD_MS);
       };
-      const endHold = ()=>{
-        clearTimeout(pressTimer);
-      };
+      const endHold = ()=>{ clearTimeout(pressTimer); };
 
       // Touch
       logo.addEventListener("touchstart", startHold, {passive:false});
@@ -1536,9 +1475,9 @@
       const y=document.getElementById("year");
       if(y) y.textContent=new Date().getFullYear();
       hideLoader();
+
       // initial renders
       renderMenuStatuses();
-      renderAlmostGoneTop();
       renderSecretLoaf();
       renderOps();
     });
@@ -1558,8 +1497,12 @@
       initSecretMenu();
       initStaffGateGesture();
 
-      // refresh ops periodically (in case staff adjusts)
-      setInterval(()=>{ renderMenuStatuses(); renderAlmostGoneTop(); renderSecretLoaf(); renderOps(); }, 1800);
+      // refresh periodically (in case staff adjusts)
+      setInterval(()=>{
+        renderMenuStatuses();
+        renderSecretLoaf();
+        renderOps();
+      }, 1800);
     })();
   </script>
 </body>
