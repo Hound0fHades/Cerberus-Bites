@@ -415,7 +415,13 @@
     .menu-item{padding:.55rem 0;border-bottom:1px dashed rgba(245,201,122,.25);position:relative;}
     .menu-item:last-child{border-bottom:none;}
     .menu-item-name{font-size:.92rem;display:flex;justify-content:space-between;gap:.4rem;}
-    .menu-item-name .price{color:var(--gold);font-size:.85rem;opacity:.95;}
+    .menu-item-name .price{
+      color:var(--gold);
+      font-size:.85rem;
+      opacity:.95;
+      letter-spacing:.08em;
+      white-space:nowrap;
+    }
     .menu-item-desc{font-size:.82rem;color:var(--muted);margin-top:.1rem;}
     .menu-badges{margin-top:.25rem;display:flex;flex-wrap:wrap;gap:.25rem;font-size:.7rem;}
     .badge{border-radius:999px;border:1px solid rgba(255,255,255,.12);padding:.05rem .45rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);}
@@ -518,25 +524,35 @@
     .about-crest-text{font-size:.82rem;color:var(--muted);line-height:1.75;font-family:"Georgia","Times New Roman",serif;}
     .about-content{display:flex;flex-direction:column;gap:1rem;}
 
-    /* refreshed "Standard" + "Stand For" as two balanced cards */
-    .about-duo{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:1rem;
-    }
-    .about-box{
+    /* Single locked Standard card (merged + justified) */
+    .about-standard{
       border-radius:18px;border:1px solid rgba(245,201,122,.20);
-      padding:1.05rem 1.15rem;
+      padding:1.1rem 1.2rem;
       background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent-soft) 45%,transparent),rgba(5,3,8,.95));
-      font-size:.9rem;color:var(--muted);
+      font-size:.92rem;color:var(--muted);
     }
-    .about-label{text-transform:uppercase;letter-spacing:.22em;font-size:.74rem;color:var(--gold);margin-bottom:.45rem;display:flex;align-items:center;gap:.45rem;}
-    .about-box strong{color:var(--gold);}
-    .about-quote{font-family:"Georgia","Times New Roman",serif;font-style:italic;margin-top:.65rem;color:#f8e8c4;}
-
-    .values-list{margin-top:.4rem;display:flex;flex-direction:column;gap:.5rem;}
-    .value-row{display:flex;gap:.55rem;align-items:flex-start;}
-    .value-dot{
+    .about-label{
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      font-size:.74rem;
+      color:var(--gold);
+      margin-bottom:.6rem;
+      display:flex;
+      align-items:center;
+      gap:.45rem;
+    }
+    .decree-list{
+      display:flex;
+      flex-direction:column;
+      gap:.55rem;
+      margin-top:.25rem;
+    }
+    .decree-item{
+      display:flex;
+      gap:.55rem;
+      align-items:flex-start;
+    }
+    .decree-dot{
       width:22px;height:22px;border-radius:999px;
       border:1px solid rgba(245,201,122,.25);
       display:flex;align-items:center;justify-content:center;
@@ -547,7 +563,8 @@
       box-shadow:0 0 10px rgba(0,0,0,.55);
       font-size:.78rem;
     }
-    .value-row p{margin-top:-.05rem;}
+    .decree-item strong{color:var(--gold);}
+    .about-quote{font-family:"Georgia","Times New Roman",serif;font-style:italic;margin-top:.75rem;color:#f8e8c4;}
 
     /* Contact */
     .contact{background:radial-gradient(circle at top,rgba(21,2,11,1),var(--bg));}
@@ -580,42 +597,58 @@
       font-size:.95rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);
       margin-bottom:.5rem;
     }
-    .contact-icons{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
+
+    /* Icon-only ritual row */
+    .sigil-row{
+      display:flex;
+      flex-wrap:wrap;
       gap:.6rem;
-      margin-top:.75rem;
+      margin-top:.85rem;
+      align-items:center;
     }
-    .icon-link{
-      display:flex;align-items:center;gap:.55rem;
-      border-radius:14px;
+    .sigil{
+      --glow: rgba(245,201,122,.18);
+      width:54px;height:54px;
+      border-radius:999px;
       border:1px solid rgba(245,201,122,.18);
-      background:rgba(0,0,0,.18);
-      padding:.7rem .75rem;
-      color:var(--muted);
-      text-decoration:none;
-      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-    }
-    .icon-link:hover{
-      transform:translateY(-1px);
-      border-color:rgba(245,201,122,.35);
-      box-shadow:0 0 18px rgba(0,0,0,.55), 0 0 18px rgba(202,52,0,.10);
-      text-decoration:none;
-    }
-    .icon-badge{
-      width:34px;height:34px;border-radius:12px;
-      display:flex;align-items:center;justify-content:center;
-      border:1px solid rgba(245,201,122,.20);
       background:radial-gradient(circle at top left,rgba(245,201,122,.10),rgba(0,0,0,.18));
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       color:var(--gold);
-      flex:0 0 auto;
+      text-decoration:none;
+      box-shadow:0 0 18px rgba(0,0,0,.55);
+      transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease, filter .16s ease;
+      position:relative;
+      overflow:hidden;
     }
-    .icon-text{
-      display:flex;flex-direction:column;gap:.05rem;
-      min-width:0;
+    .sigil:hover{
+      transform:translateY(-1px) scale(1.02);
+      border-color:rgba(245,201,122,.35);
+      box-shadow:
+        0 0 22px rgba(0,0,0,.6),
+        0 0 26px var(--glow);
+      text-decoration:none;
+      filter:brightness(1.03);
     }
-    .icon-text .t{font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:color-mix(in srgb,var(--gold) 60%, #fff 40%);}
-    .icon-text .s{font-size:.82rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .sigil svg{width:22px;height:22px;display:block;}
+    .sigil:focus-visible{
+      outline:2px solid rgba(245,201,122,.5);
+      outline-offset:3px;
+    }
+
+    /* Subtle hover glow differences per icon */
+    .sigil.email{ --glow: rgba(245,201,122,.22); }
+    .sigil.phone{ --glow: rgba(202,52,0,.18); }
+    .sigil.ig{ --glow: rgba(255,70,140,.18); }
+    .sigil.tt{ --glow: rgba(0,220,220,.14); }
+
+    .sigil-hint{
+      margin-top:.65rem;
+      font-size:.78rem;
+      color:var(--muted);
+      letter-spacing:.06em;
+    }
 
     footer{
       border-top:1px solid rgba(245,201,122,.18);
@@ -629,7 +662,7 @@
     .staff-gate{
       position:fixed;
       inset:auto 18px 18px auto;
-      width:min(460px,calc(100vw - 36px));
+      width:min(520px,calc(100vw - 36px));
       border-radius:18px;
       border:1px solid rgba(245,201,122,.28);
       background:radial-gradient(circle at top left,rgba(15,3,10,.96),rgba(5,3,8,.98));
@@ -693,7 +726,7 @@
     .staff-row{display:flex;gap:.5rem;align-items:center;justify-content:space-between;margin-top:.35rem;}
     .staff-row label{font-size:.74rem;color:var(--muted);}
     .staff-row input, .staff-row textarea, .staff-row select{
-      width:160px;
+      width:170px;
       border-radius:10px;
       border:1px solid rgba(245,201,122,.22);
       background:rgba(0,0,0,.25);
@@ -708,11 +741,11 @@
       line-height:1.3;
       padding-top:.45rem;
     }
-    .staff-note{
+    .staff-help{
       margin-top:.45rem;
       font-size:.72rem;
-      color:color-mix(in srgb,var(--muted) 80%, #fff 20%);
-      opacity:.9;
+      color:color-mix(in srgb,var(--muted) 85%, #fff 15%);
+      letter-spacing:.06em;
     }
 
     /* one-hand mobile staff tweaks */
@@ -745,69 +778,34 @@
       box-shadow:0 0 14px color-mix(in srgb,var(--accent) 55%,transparent);
     }
 
-    /* Quiet admin toasts (subtle confirmations) */
-    .admin-toast-wrap{
-      position:fixed;
-      left:18px;
-      bottom:18px;
-      z-index:99999;
-      display:flex;
-      flex-direction:column;
-      gap:.5rem;
-      pointer-events:none;
-    }
+    /* Quiet admin toast confirmations */
     .admin-toast{
-      pointer-events:none;
-      min-width:220px;
-      max-width:min(420px,calc(100vw - 36px));
-      border-radius:16px;
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%) translateY(10px);
+      background:radial-gradient(circle at top left, rgba(245,201,122,.10), rgba(0,0,0,.55));
       border:1px solid rgba(245,201,122,.22);
-      background:radial-gradient(circle at top left,rgba(15,3,10,.96),rgba(5,3,8,.98));
-      box-shadow:0 0 20px rgba(0,0,0,.85);
-      padding:.65rem .85rem;
-      opacity:0;
-      transform:translateY(10px);
-      transition:opacity .25s ease, transform .25s ease;
-      display:flex;
-      gap:.6rem;
-      align-items:flex-start;
-    }
-    .admin-toast.show{opacity:1;transform:translateY(0);}
-    .toast-dot{
-      width:10px;height:10px;border-radius:999px;
-      margin-top:.28rem;
-      box-shadow:0 0 16px rgba(0,0,0,.7);
-      border:1px solid rgba(245,201,122,.22);
-      background:rgba(245,201,122,.14);
-      flex:0 0 auto;
-    }
-    .admin-toast.ok .toast-dot{
-      background:radial-gradient(circle at top,var(--gold),rgba(245,201,122,.08));
-      box-shadow:0 0 18px rgba(245,201,122,.22),0 0 26px rgba(202,52,0,.10);
-    }
-    .admin-toast.warn .toast-dot{
-      background:radial-gradient(circle at top,color-mix(in srgb,var(--accent) 95%, #fff 5%),rgba(202,52,0,.08));
-      box-shadow:0 0 18px rgba(202,52,0,.22),0 0 26px rgba(245,201,122,.10);
-    }
-    .toast-text{
-      display:flex;
-      flex-direction:column;
-      gap:.1rem;
-      min-width:0;
-    }
-    .toast-title{
-      font-size:.72rem;
-      letter-spacing:.18em;
-      text-transform:uppercase;
       color:color-mix(in srgb,var(--gold) 70%, #fff 30%);
+      border-radius:999px;
+      padding:.55rem .9rem;
+      font-size:.75rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      box-shadow:0 0 22px rgba(0,0,0,.75);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .22s ease, transform .22s ease;
+      z-index:99999;
+      backdrop-filter:blur(8px);
       white-space:nowrap;
+      max-width:calc(100vw - 24px);
       overflow:hidden;
       text-overflow:ellipsis;
     }
-    .toast-msg{
-      font-size:.82rem;
-      color:var(--muted);
-      line-height:1.35;
+    .admin-toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(0);
     }
 
     @media (max-width:840px){
@@ -821,9 +819,6 @@
       .staff-row input, .staff-row textarea, .staff-row select{width:100%;}
       .staff-row{flex-direction:column;align-items:stretch;gap:.35rem;}
       .hero-pillars{grid-template-columns:minmax(0,1fr);}
-      .about-duo{grid-template-columns:minmax(0,1fr);}
-      .contact-icons{grid-template-columns:minmax(0,1fr);}
-      .admin-toast-wrap{left:12px;bottom:12px;}
     }
   </style>
 </head>
@@ -837,9 +832,6 @@
       <div class="loader-text-sub">Please wait, mortal.</div>
     </div>
   </div>
-
-  <!-- Quiet admin toast mount -->
-  <div class="admin-toast-wrap" id="toastWrap" aria-live="polite" aria-atomic="true"></div>
 
   <!-- Banner -->
   <div class="coming-soon-banner">
@@ -962,7 +954,7 @@
                   <div class="soldout-stamp">SOLD OUT</div>
                   <div class="menu-item-name">
                     Cerberus Melt
-                    <span class="price" data-price-for="cerberus-melt">$9</span>
+                    <span class="price" data-price-id="cerberus-melt">$9</span>
                   </div>
                   <div class="menu-item-desc">Triple cheese on butter-crisped sourdough.</div>
                 </div>
@@ -971,7 +963,7 @@
                   <div class="soldout-stamp">SOLD OUT</div>
                   <div class="menu-item-name">
                     Gatekeeper Turkey Melt
-                    <span class="price" data-price-for="gatekeeper-turkey">$11</span>
+                    <span class="price" data-price-id="gatekeeper-turkey">$11</span>
                   </div>
                   <div class="menu-item-desc">Smoked turkey, sharp cheddar, black garlic aioli.</div>
                 </div>
@@ -980,7 +972,7 @@
                   <div class="soldout-stamp">SOLD OUT</div>
                   <div class="menu-item-name">
                     Hellfire Chicken Melt
-                    <span class="price" data-price-for="hellfire-chicken">$11</span>
+                    <span class="price" data-price-id="hellfire-chicken">$11</span>
                   </div>
                   <div class="menu-item-desc">Blackened chicken, pepper jack, ember mayo.</div>
                 </div>
@@ -989,7 +981,7 @@
                   <div class="soldout-stamp">SOLD OUT</div>
                   <div class="menu-item-name">
                     Persephone’s Garden (Vegan) 🌿
-                    <span class="price" data-price-for="persephone-garden">$10</span>
+                    <span class="price" data-price-id="persephone-garden">$10</span>
                   </div>
                   <div class="menu-item-desc">Roasted mushrooms, caramelized onion, herb oil.</div>
                 </div>
@@ -1003,7 +995,7 @@
                   <div class="soldout-stamp">SOLD OUT</div>
                   <div class="menu-item-name">
                     Charred Tomato Soup (Cup)
-                    <span class="price" data-price-for="tomato-soup">$4</span>
+                    <span class="price" data-price-id="tomato-soup">$4</span>
                   </div>
                   <div class="menu-item-desc">Rich, smoky, perfect for dipping.</div>
                   <div class="menu-badges">
@@ -1084,36 +1076,27 @@
           </div>
 
           <div class="about-content">
-            <div class="about-duo">
-              <div class="about-box">
-                <div class="about-label">The Underworld Standard</div>
-                <p>
-                  Cerberus Bites is built for speed, profit, and obsession-level consistency:
-                  sourdough done right, butter-crisped, and served hot.
-                </p>
-                <div class="about-quote">“If it’s not crackling, it’s not leaving.”</div>
-              </div>
+            <!-- LOCKED: merged + beneficial Standard -->
+            <div class="about-standard">
+              <div class="about-label">The Gatekeeper’s Standard</div>
 
-              <div class="about-box">
-                <div class="about-label">What We Stand For</div>
-                <div class="values-list">
-                  <div class="value-row">
-                    <div class="value-dot">✶</div>
-                    <p><strong>Quality first.</strong> Sourdough is the star — everything else serves it.</p>
-                  </div>
-                  <div class="value-row">
-                    <div class="value-dot">✶</div>
-                    <p><strong>Fast service.</strong> A tight menu that moves.</p>
-                  </div>
-                  <div class="value-row">
-                    <div class="value-dot">✶</div>
-                    <p><strong>Mythic experience.</strong> The gatekeeper vibe is part of the meal.</p>
-                  </div>
+              <div class="decree-list">
+                <div class="decree-item">
+                  <div class="decree-dot">✶</div>
+                  <p><strong>Quality is non-negotiable.</strong></p>
+                </div>
+                <div class="decree-item">
+                  <div class="decree-dot">✶</div>
+                  <p><strong>Speed is disciplined, never rushed.</strong></p>
+                </div>
+                <div class="decree-item">
+                  <div class="decree-dot">✶</div>
+                  <p><strong>Nothing leaves unapproved.</strong></p>
                 </div>
               </div>
-            </div>
 
-            <!-- optional: room for future lore callouts without clutter -->
+              <div class="about-quote">“If it’s not crackling, it’s not leaving.”</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1146,63 +1129,40 @@
 
           <aside class="contact-card">
             <div class="contact-card-title">General Inquiries</div>
-            <p>For questions, collaborations, press, or other mischief:</p>
 
-            <div class="contact-icons">
-              <a class="icon-link" href="mailto:cerberusbites@hotmail.com" aria-label="Email Cerberus Bites">
-                <span class="icon-badge" aria-hidden="true">
-                  <!-- mail -->
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.8"/>
-                    <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.8"/>
-                  </svg>
-                </span>
-                <span class="icon-text">
-                  <span class="t">Email</span>
-                  <span class="s">cerberusbites@hotmail.com</span>
-                </span>
+            <div class="sigil-row" aria-label="General inquiry links">
+              <!-- EMAIL -->
+              <a class="sigil email" href="mailto:cerberusbites@hotmail.com" aria-label="Email Cerberus Bites">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.8"/>
+                </svg>
               </a>
 
-              <a class="icon-link" href="tel:15409448898" aria-label="Call Cerberus Bites">
-                <span class="icon-badge" aria-hidden="true">
-                  <!-- phone -->
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M7 3h3l2 5-2 1c1 3 4 6 7 7l1-2 5 2v3c0 1-1 2-2 2C10 21 3 14 3 5c0-1 1-2 2-2h2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                  </svg>
-                </span>
-                <span class="icon-text">
-                  <span class="t">Phone</span>
-                  <span class="s">540-944-8898</span>
-                </span>
+              <!-- PHONE -->
+              <a class="sigil phone" href="tel:15409448898" aria-label="Call Cerberus Bites">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7 3h3l2 5-2 1c1 3 4 6 7 7l1-2 5 2v3c0 1-1 2-2 2C10 21 3 14 3 5c0-1 1-2 2-2h2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                </svg>
               </a>
 
-              <a class="icon-link" href="https://www.instagram.com/cerberus_bites" target="_blank" rel="noopener" aria-label="Open Instagram">
-                <span class="icon-badge" aria-hidden="true">
-                  <!-- instagram -->
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Z" stroke="currentColor" stroke-width="1.8"/>
-                    <path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" stroke="currentColor" stroke-width="1.8"/>
-                    <path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                  </svg>
-                </span>
-                <span class="icon-text">
-                  <span class="t">Instagram</span>
-                  <span class="s">@cerberus_bites</span>
-                </span>
+              <!-- INSTAGRAM (actual-ish glyph) -->
+              <a class="sigil ig" href="https://www.instagram.com/cerberus_bites" target="_blank" rel="noopener" aria-label="Open Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M7.5 2C4.46 2 2 4.46 2 7.5v9C2 19.54 4.46 22 7.5 22h9c3.04 0 5.5-2.46 5.5-5.5v-9C22 4.46 19.54 2 16.5 2h-9Zm0 2h9C18.43 4 20 5.57 20 7.5v9c0 1.93-1.57 3.5-3.5 3.5h-9C5.57 20 4 18.43 4 16.5v-9C4 5.57 5.57 4 7.5 4Zm9.25 2.25a1 1 0 1 0 0 2 1 1 0 0 0 0-2ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"/>
+                </svg>
               </a>
 
-              <a class="icon-link" href="https://www.tiktok.com/@cerberusbites" target="_blank" rel="noopener" aria-label="Open TikTok">
-                <span class="icon-badge" aria-hidden="true">
-                  <!-- simple music note -->
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M14 3v11.5a3.5 3.5 0 1 1-2-3.2V6.2c2.2 1.6 4.2 2.3 6 2.4V5.2c-1.7-.2-3.1-1-4-2.2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                  </svg>
-                </span>
-                <span class="icon-text">
-                  <span class="t">TikTok</span>
-                  <span class="s">@cerberusbites</span>
-                </span>
+              <!-- TIKTOK (actual-ish glyph silhouette) -->
+              <a class="sigil tt" href="https://www.tiktok.com/@cerberusbites" target="_blank" rel="noopener" aria-label="Open TikTok">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M14 3v10.2a3.8 3.8 0 1 1-2.3-3.48V7.2c1.9 1.4 4 2.15 6.3 2.2V7.2c-1.58-.2-2.86-.87-3.76-1.98-.1-.12-.2-.25-.3-.38-.43-.58-.7-1.23-.85-1.84H14Zm-2.3 10.2a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6Z"/>
+                </svg>
               </a>
+            </div>
+
+            <div class="sigil-hint">
+              Email • Phone • Instagram • TikTok
             </div>
           </aside>
         </div>
@@ -1221,6 +1181,9 @@
       </div>
     </div>
   </footer>
+
+  <!-- Quiet admin toast -->
+  <div class="admin-toast" id="adminToast" role="status" aria-live="polite"></div>
 
   <!-- Staff Gate (hidden admin panel) -->
   <div class="staff-gate" id="staffGate" aria-hidden="true">
@@ -1244,31 +1207,16 @@
     const STAFF_PIN = "1395";
 
     /* ==========================================================
-       0.5) Quiet admin toasts
+       Quiet admin toast confirmations
        ========================================================== */
-    function toast(title, msg, kind="ok"){
-      const wrap=document.getElementById("toastWrap");
-      if(!wrap) return;
-
-      const el=document.createElement("div");
-      el.className=`admin-toast ${kind}`;
-      el.innerHTML = `
-        <div class="toast-dot" aria-hidden="true"></div>
-        <div class="toast-text">
-          <div class="toast-title">${title}</div>
-          <div class="toast-msg">${msg}</div>
-        </div>
-      `;
-      wrap.appendChild(el);
-
-      requestAnimationFrame(()=> el.classList.add("show"));
-
-      // auto-remove
-      const LIFETIME = 2200;
-      setTimeout(()=>{
-        el.classList.remove("show");
-        setTimeout(()=>{ try{ el.remove(); }catch(e){} }, 260);
-      }, LIFETIME);
+    let toastTimer = null;
+    function adminToast(msg){
+      const el = document.getElementById("adminToast");
+      if(!el) return;
+      clearTimeout(toastTimer);
+      el.textContent = msg;
+      el.classList.add("show");
+      toastTimer = setTimeout(()=> el.classList.remove("show"), 1800);
     }
 
     /* ==========================================================
@@ -1386,14 +1334,22 @@
        3) State (stock + prices + ops + secret loaf)
        ========================================================== */
     const TRACKED = [
-      { id:"cerberus-melt", name:"Cerberus Melt", defaultPrice:"$9" },
-      { id:"gatekeeper-turkey", name:"Gatekeeper Turkey Melt", defaultPrice:"$11" },
-      { id:"hellfire-chicken", name:"Hellfire Chicken Melt", defaultPrice:"$11" },
-      { id:"persephone-garden", name:"Persephone’s Garden", defaultPrice:"$10" },
-      { id:"tomato-soup", name:"Charred Tomato Soup", defaultPrice:"$4" }
+      { id:"cerberus-melt", name:"Cerberus Melt" },
+      { id:"gatekeeper-turkey", name:"Gatekeeper Turkey Melt" },
+      { id:"hellfire-chicken", name:"Hellfire Chicken Melt" },
+      { id:"persephone-garden", name:"Persephone’s Garden" },
+      { id:"tomato-soup", name:"Charred Tomato Soup" }
     ];
 
-    const STATE_KEY = "cb_state_v3"; // bumped version to include prices
+    const DEFAULT_PRICES = {
+      "cerberus-melt": "$9",
+      "gatekeeper-turkey": "$11",
+      "hellfire-chicken": "$11",
+      "persephone-garden": "$10",
+      "tomato-soup": "$4"
+    };
+
+    const STATE_KEY = "cb_state_v3";
 
     const LOAF_TITLES = [
       "Obsidian Speed Loaf",
@@ -1410,23 +1366,14 @@
       "Warden’s Crust"
     ];
 
-    function normalizePrice(raw, fallback){
-      const v = (raw ?? "").toString().trim();
-      if(!v) return fallback || "";
-      if(v.startsWith("$")) return v;
-      // if it's numeric-ish, prefix $
-      const num = v.replace(/[^0-9.]/g,"");
-      if(num && !isNaN(parseFloat(num))) return `$${num}`;
-      return v; // allow custom text if you ever want "Market"
-    }
-
     function defaultState(){
       const items={};
-      TRACKED.forEach(it=> items[it.id]={ left: 6, price: it.defaultPrice });
+      TRACKED.forEach(it=> items[it.id]={ left: 6 });
       if(items["tomato-soup"]) items["tomato-soup"].left = 10;
 
       return {
         items,
+        prices: { ...DEFAULT_PRICES },
         nextDrop: "Next batch in ~20 min",
         nextDropTime: "",
         secretLoaf: {
@@ -1439,36 +1386,14 @@
       };
     }
 
-    function migrateState(raw){
-      const base = defaultState();
-      if(!raw || !raw.items) return base;
-
-      // merge but ensure every item has left + price
-      for(const it of TRACKED){
-        const existing = raw.items[it.id] || {};
-        base.items[it.id].left = (typeof existing.left === "number") ? existing.left : base.items[it.id].left;
-        base.items[it.id].price = normalizePrice(existing.price, base.items[it.id].price);
-
-        // also: if state is old and has no price, sniff from DOM as fallback
-        if(!existing.price){
-          const domPrice = document.querySelector(`[data-price-for="${it.id}"]`);
-          if(domPrice && domPrice.textContent.trim()){
-            base.items[it.id].price = normalizePrice(domPrice.textContent.trim(), base.items[it.id].price);
-          }
-        }
-      }
-
-      base.nextDrop = (raw.nextDrop ?? base.nextDrop);
-      base.nextDropTime = (raw.nextDropTime ?? base.nextDropTime);
-      if(raw.secretLoaf) base.secretLoaf = Object.assign(base.secretLoaf, raw.secretLoaf);
-
-      return base;
-    }
-
     function getState(){
       try{
         const raw=JSON.parse(localStorage.getItem(STATE_KEY));
-        if(raw && raw.items) return migrateState(raw);
+        if(raw && raw.items){
+          const merged = Object.assign(defaultState(), raw);
+          merged.prices = Object.assign({}, DEFAULT_PRICES, (raw.prices||{}));
+          return merged;
+        }
       }catch(e){}
       const init=defaultState();
       localStorage.setItem(STATE_KEY, JSON.stringify(init));
@@ -1498,14 +1423,13 @@
       });
     }
 
-    function renderPrices(){
+    function renderMenuPrices(){
       const state=getState();
-      TRACKED.forEach(it=>{
-        const priceEl = document.querySelector(`[data-price-for="${it.id}"]`);
-        if(!priceEl) return;
-        const st = state.items[it.id] || {};
-        const next = normalizePrice(st.price, priceEl.textContent.trim() || it.defaultPrice);
-        priceEl.textContent = next || it.defaultPrice;
+      const priceMap = state.prices || {};
+      document.querySelectorAll("[data-price-id]").forEach(span=>{
+        const id = span.getAttribute("data-price-id");
+        const val = (priceMap[id] || DEFAULT_PRICES[id] || "").trim();
+        if(val) span.textContent = val;
       });
     }
 
@@ -1542,7 +1466,6 @@
       const mount=document.getElementById("secretMenuMount");
       if(!menu || !mount) return;
 
-      // ensure mounted under soup
       if(menu.parentElement !== mount) mount.appendChild(menu);
 
       document.getElementById("secretLoafName").textContent = loaf.name || "Obsidian Speed Loaf";
@@ -1614,7 +1537,6 @@
       const soldout=list.filter(x=>x.status==="SOLD OUT");
       const live=list.filter(x=>x.status!=="SOLD OUT");
 
-      // Sold Out pillar
       const elSold=document.getElementById("opsSoldOut");
       if(elSold){
         elSold.querySelector("p").textContent =
@@ -1623,7 +1545,6 @@
             : "No sell-outs yet.";
       }
 
-      // Favored by hungry souls (heuristic: lowest remaining among LIVE items)
       const elFav=document.getElementById("opsFavored");
       if(elFav){
         if(live.length===0){
@@ -1636,7 +1557,6 @@
         }
       }
 
-      // Next Drop pillar
       const elDrop=document.getElementById("opsNextDrop");
       if(elDrop){
         const txt = state.nextDropTime ? `Next batch drop: ${state.nextDropTime}` : (state.nextDrop || "Next drop soon");
@@ -1645,7 +1565,7 @@
     }
 
     /* ==========================================================
-       7) Staff Gate (PIN) + Stock + Prices + Next Drop + Secret Loaf editor
+       7) Staff Gate (PIN) + Stock + PRICES + Next Drop + Secret Loaf editor
        ========================================================== */
     function buildStaffUI(){
       const grid=document.getElementById("staffGrid");
@@ -1653,9 +1573,10 @@
       const state=getState();
       grid.innerHTML="";
 
-      // Stock + Price inputs
       TRACKED.forEach(it=>{
-        const st=state.items[it.id] || {left:0, price:it.defaultPrice};
+        const st=state.items[it.id] || {left:0};
+        const price = (state.prices && state.prices[it.id]) ? state.prices[it.id] : (DEFAULT_PRICES[it.id] || "");
+
         const box=document.createElement("div");
         box.className="staff-box";
         box.innerHTML = `
@@ -1668,7 +1589,7 @@
 
           <div class="staff-row">
             <label for="prc_${it.id}">Price</label>
-            <input id="prc_${it.id}" type="text" value="${(st.price||it.defaultPrice).replace(/"/g,"&quot;")}" placeholder="${it.defaultPrice}">
+            <input id="prc_${it.id}" type="text" value="${String(price).replace(/"/g,"&quot;")}" placeholder="$0">
           </div>
 
           <div class="staff-row" style="margin-top:.25rem;">
@@ -1678,12 +1599,11 @@
             </span>
           </div>
 
-          <div class="staff-note">Tip: you can type <strong>9</strong> and it’ll become <strong>$9</strong>.</div>
+          <div class="staff-help">Tip: enter like <strong>$11</strong> or <strong>$4</strong> — updates instantly after Save.</div>
         `;
         grid.appendChild(box);
       });
 
-      // Next drop
       const drop=document.createElement("div");
       drop.className="staff-box";
       drop.innerHTML = `
@@ -1699,7 +1619,6 @@
       `;
       grid.appendChild(drop);
 
-      // Secret loaf editor
       const loaf=state.secretLoaf || defaultState().secretLoaf;
       const loafBox=document.createElement("div");
       loafBox.className="staff-box";
@@ -1740,7 +1659,6 @@
       `;
       grid.appendChild(loafBox);
 
-      // wire randomize
       setTimeout(()=>{
         const btn=document.getElementById("randLoaf");
         if(!btn) return;
@@ -1749,7 +1667,7 @@
           if(!inp) return;
           const pick=LOAF_TITLES[Math.floor(Math.random()*LOAF_TITLES.length)];
           inp.value=pick;
-          toast("Loaf shuffled", "A new name has been drawn.", "ok");
+          adminToast("Loaf name randomized");
         });
       },0);
     }
@@ -1757,7 +1675,8 @@
     function openGate(){
       const entered = prompt("Enter Staff PIN:");
       if(entered !== STAFF_PIN){
-        toast("Access denied", "The gate remains sealed.", "warn");
+        alert("Access denied.");
+        adminToast("Access denied");
         return;
       }
       const gate=document.getElementById("staffGate");
@@ -1765,14 +1684,14 @@
       gate.classList.add("open");
       gate.setAttribute("aria-hidden","false");
       buildStaffUI();
-      toast("Staff Gate", "Welcome back, Gatekeeper.", "ok");
+      adminToast("Staff gate opened");
     }
     function closeGate(){
       const gate=document.getElementById("staffGate");
       if(!gate) return;
       gate.classList.remove("open");
       gate.setAttribute("aria-hidden","true");
-      toast("Gate closed", "The panel slips back into shadow.", "ok");
+      adminToast("Staff gate closed");
     }
 
     function saveFromStaffUI(){
@@ -1783,12 +1702,11 @@
         const prc=document.getElementById(`prc_${it.id}`);
         if(inp){
           const n=parseInt(inp.value,10);
-          state.items[it.id]=state.items[it.id] || {};
-          state.items[it.id].left = isNaN(n) ? 0 : n;
+          state.items[it.id]={ left: isNaN(n) ? 0 : n };
         }
         if(prc){
-          state.items[it.id]=state.items[it.id] || {};
-          state.items[it.id].price = normalizePrice(prc.value, it.defaultPrice);
+          state.prices = state.prices || {};
+          state.prices[it.id] = prc.value.trim();
         }
       });
 
@@ -1807,35 +1725,32 @@
       state.secretLoaf.enabled = (en ? en.value : "yes") === "yes";
       state.secretLoaf.name = ln ? ln.value.trim() : state.secretLoaf.name;
       state.secretLoaf.desc = ld ? ld.value.trim() : state.secretLoaf.desc;
-      state.secretLoaf.price = lp ? normalizePrice(lp.value, "$6") : state.secretLoaf.price;
+      state.secretLoaf.price = lp ? lp.value.trim() : state.secretLoaf.price;
       state.secretLoaf.badge = lb ? lb.value.trim() : state.secretLoaf.badge;
 
       setState(state);
 
-      renderPrices();
       renderMenuStatuses();
+      renderMenuPrices();
       renderAlmostGoneTop();
       renderSecretLoaf();
       renderOps();
 
-      toast("Saved", "Gate sealed — changes applied.", "ok");
+      adminToast("Saved");
     }
 
     function resetState(){
       const fresh=defaultState();
       setState(fresh);
       buildStaffUI();
-
-      renderPrices();
       renderMenuStatuses();
+      renderMenuPrices();
       renderAlmostGoneTop();
       renderSecretLoaf();
       renderOps();
-
-      toast("Reset", "Defaults restored. The kitchen remembers.", "ok");
+      adminToast("Reset to default");
     }
 
-    // Hold logo 3 seconds to open Staff Gate (mobile/desktop)
     function initStaffGateGesture(){
       const logo=document.getElementById("logoGate");
       if(!logo) return;
@@ -1850,17 +1765,14 @@
       };
       const endHold = ()=>{ clearTimeout(pressTimer); };
 
-      // Touch
       logo.addEventListener("touchstart", startHold, {passive:false});
       logo.addEventListener("touchend", endHold, {passive:true});
       logo.addEventListener("touchcancel", endHold, {passive:true});
 
-      // Mouse
       logo.addEventListener("mousedown", startHold);
       logo.addEventListener("mouseup", endHold);
       logo.addEventListener("mouseleave", endHold);
 
-      // Buttons
       const closeBtn=document.getElementById("staffClose");
       const saveBtn=document.getElementById("staffSave");
       const resetBtn=document.getElementById("staffReset");
@@ -1886,9 +1798,8 @@
       if(y) y.textContent=new Date().getFullYear();
       hideLoader();
 
-      // initial renders
-      renderPrices();
       renderMenuStatuses();
+      renderMenuPrices();
       renderAlmostGoneTop();
       renderSecretLoaf();
       renderOps();
@@ -1909,10 +1820,9 @@
       initSecretMenu();
       initStaffGateGesture();
 
-      // periodic refresh (safe + keeps UI synced with staff edits)
       setInterval(()=>{
-        renderPrices();
         renderMenuStatuses();
+        renderMenuPrices();
         renderAlmostGoneTop();
         renderSecretLoaf();
         renderOps();
