@@ -261,10 +261,10 @@
     .hero-art-inner{
       border-radius:22px;
       background:radial-gradient(circle at bottom,var(--bg) 0,color-mix(in srgb,var(--accent-soft) 18%,var(--bg) 82%) 45%,var(--bg) 100%);
-      padding:1.3rem;
+      padding:1.2rem;
       display:flex;
       flex-direction:column;
-      gap:1rem;
+      gap:.85rem;
     }
     .hero-art-title{
       font-family:"Georgia","Times New Roman",serif;
@@ -272,43 +272,64 @@
       letter-spacing:.15em;
       text-transform:uppercase;
     }
-    /* UPDATED: 3 boxes (auto-fit) */
-    .hero-art-grid{
+
+    /* === Tonight boxes: 3 pillar columns === */
+    .hero-pillars{
       display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(170px, 1fr));
+      grid-template-columns:repeat(3,minmax(0,1fr));
       gap:.75rem;
       font-size:.8rem;
     }
-    .hero-card{
+    .pillar{
       border-radius:16px;
-      border:1px solid rgba(245,201,122,.25);
-      padding:.6rem .7rem;
-      background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent-soft) 55%,transparent),rgba(5,3,8,.9));
+      border:1px solid rgba(245,201,122,.22);
+      padding:.75rem .8rem;
+      background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent-soft) 40%,transparent),rgba(5,3,8,.92));
       position:relative;
       overflow:hidden;
+      min-height:86px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
     }
-    .hero-card h4{
-      font-size:.78rem;
+    .pillar::before{
+      content:"";
+      position:absolute;inset:0;
+      background:
+        radial-gradient(circle at 12% 0%,rgba(245,201,122,.12),transparent 55%),
+        radial-gradient(circle at 90% 100%,rgba(202,52,0,.16),transparent 60%);
+      opacity:.7;
+      pointer-events:none;
+    }
+    .pillar h4{
+      position:relative;
+      font-size:.74rem;
       text-transform:uppercase;
-      letter-spacing:.16em;
+      letter-spacing:.18em;
       color:var(--gold);
-      margin-bottom:.2rem;
+      margin-bottom:.25rem;
     }
-    .hero-card p{font-size:.78rem;color:var(--muted);}
+    .pillar p{
+      position:relative;
+      font-size:.8rem;
+      color:var(--muted);
+      line-height:1.35;
+    }
 
     /* subtle animation for “favored by hungry souls” */
     .favored-glow{
       display:inline-block;
       padding:.02rem .35rem;
       border-radius:999px;
-      border:1px solid rgba(245,201,122,.22);
+      border:1px solid rgba(245,201,122,.18);
       background:rgba(0,0,0,.18);
       box-shadow:0 0 0 rgba(245,201,122,0);
       animation:favoredPulse 2.8s ease-in-out infinite;
+      white-space:nowrap;
     }
     @keyframes favoredPulse{
       0%{box-shadow:0 0 0 rgba(245,201,122,0); transform:translateY(0);}
-      55%{box-shadow:0 0 14px rgba(245,201,122,.22), 0 0 22px rgba(202,52,0,.12); transform:translateY(-.4px);}
+      55%{box-shadow:0 0 14px rgba(245,201,122,.18), 0 0 22px rgba(202,52,0,.10); transform:translateY(-.35px);}
       100%{box-shadow:0 0 0 rgba(245,201,122,0); transform:translateY(0);}
     }
 
@@ -324,7 +345,7 @@
       border:1px solid rgba(245,201,122,.35);
       border-radius:14px;
       padding:.9rem 1.2rem;
-      margin:1rem 0 1.5rem;
+      margin:1rem 0 1.2rem;
       background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent) 16%,transparent),rgba(5,3,8,.9));
       backdrop-filter:blur(4px);
       box-shadow:0 0 18px rgba(0,0,0,.6);
@@ -349,13 +370,13 @@
     .secret-star:hover{opacity:.9;transform:scale(1.05);box-shadow:0 0 10px rgba(245,201,122,.8);}
     .secret-star.active{opacity:1;box-shadow:0 0 12px rgba(245,201,122,1),0 0 20px rgba(202,52,0,.9);}
 
-    /* Secret menu panel */
+    /* Secret menu panel (kept visually lighter) */
     .secret-menu{
       margin-top:.75rem;
       border-radius:18px;
-      border:1px dashed rgba(245,201,122,.4);
-      background:radial-gradient(circle at top left,rgba(15,3,10,.97),rgba(5,3,8,.98));
-      padding:1.05rem 1.2rem;
+      border:1px dashed rgba(245,201,122,.32);
+      background:radial-gradient(circle at top left,rgba(15,3,10,.92),rgba(5,3,8,.98));
+      padding:1.0rem 1.15rem;
       font-size:.85rem;
       display:none;
       position:relative;
@@ -367,22 +388,23 @@
       content:"";
       position:absolute;inset:0;
       background:
-        radial-gradient(circle at 10% 0%,rgba(245,201,122,.18),transparent 55%),
-        radial-gradient(circle at 90% 100%,rgba(202,52,0,.25),transparent 60%);
+        radial-gradient(circle at 10% 0%,rgba(245,201,122,.12),transparent 55%),
+        radial-gradient(circle at 90% 100%,rgba(202,52,0,.18),transparent 60%);
       opacity:.7;
       pointer-events:none;
     }
     .secret-menu-inner{position:relative;z-index:1;}
     .secret-menu.visible{display:block;animation:fadeInUp .38s ease forwards;}
-    .secret-menu-label{text-transform:uppercase;letter-spacing:.22em;font-size:.72rem;color:var(--gold);margin-bottom:.3rem;}
-    .secret-menu-title{font-family:"Georgia","Times New Roman",serif;font-size:1rem;margin-bottom:.25rem;}
-    .secret-menu-desc{color:var(--muted);margin-bottom:.5rem;}
+    .secret-menu-label{text-transform:uppercase;letter-spacing:.22em;font-size:.72rem;color:var(--gold);margin-bottom:.25rem;opacity:.9;}
+    .secret-menu-title{font-family:"Georgia","Times New Roman",serif;font-size:1rem;margin-bottom:.15rem;}
+    .secret-menu-desc{color:var(--muted);margin-bottom:.45rem;}
     .secret-menu-meta{font-size:.78rem;color:var(--muted);}
     .secret-price{color:var(--gold);font-weight:600;}
     .secret-badge{
       display:inline-block;margin-left:.4rem;padding:.05rem .45rem;
-      border-radius:999px;border:1px solid rgba(202,52,0,.7);
+      border-radius:999px;border:1px solid rgba(202,52,0,.55);
       font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:#f5e6dc;
+      opacity:.92;
     }
     @keyframes fadeInUp{0%{opacity:0;transform:translateY(8px);}100%{opacity:1;transform:translateY(0);} }
 
@@ -419,19 +441,65 @@
     .menu-item.is-soldout .soldout-stamp{display:inline-block;}
     .menu-item.is-soldout{opacity:.72;}
 
+    /* Almost Gone list panel */
+    .almost-gone-panel{
+      border:1px solid rgba(245,201,122,.25);
+      border-radius:14px;
+      padding:.9rem 1.1rem;
+      margin:.75rem 0 1.05rem;
+      background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent-soft) 22%,transparent),rgba(5,3,8,.92));
+      box-shadow:0 0 18px rgba(0,0,0,.65);
+    }
+    .almost-gone-title{
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      font-size:.72rem;
+      color:var(--gold);
+      margin-bottom:.35rem;
+    }
+    .almost-gone-list{
+      font-size:.82rem;
+      color:var(--muted);
+    }
+    .almost-gone-list strong{color:var(--gold);}
+
+    /* Spellbook panel (light + collapsible so it doesn't "fight" the creed) */
     .menu-art{
       border-radius:20px;
-      border:1px solid rgba(245,201,122,.25);
+      border:1px solid rgba(245,201,122,.18);
       padding:1rem;
-      background:radial-gradient(circle at top,color-mix(in srgb,var(--accent) 60%,transparent),var(--bg));
+      background:radial-gradient(circle at top,color-mix(in srgb,var(--accent) 40%,transparent),rgba(5,3,8,.92));
       font-size:.82rem;
     }
     .menu-art h4{
-      font-size:.9rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);
-      margin-bottom:.5rem;
+      font-size:.86rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);
+      margin-bottom:.45rem;
+      opacity:.95;
     }
     .menu-art p{color:var(--muted);}
-    .menu-spell{font-family:"Georgia","Times New Roman",serif;font-style:italic;margin-top:.5rem;color:#f8e8c4;}
+    .menu-spell{font-family:"Georgia","Times New Roman",serif;font-style:italic;margin-top:.55rem;color:#f8e8c4;}
+    .spellbook-details{
+      border-top:1px solid rgba(245,201,122,.14);
+      margin-top:.65rem;
+      padding-top:.6rem;
+    }
+    .spellbook-details summary{
+      cursor:pointer;
+      list-style:none;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:.72rem;
+      color:color-mix(in srgb,var(--gold) 70%, #fff 30%);
+      display:flex;align-items:center;justify-content:space-between;
+      user-select:none;
+    }
+    .spellbook-details summary::-webkit-details-marker{display:none;}
+    .spellbook-details summary .chev{
+      opacity:.7;
+      transition:transform .2s ease,opacity .2s ease;
+    }
+    .spellbook-details[open] summary .chev{transform:rotate(180deg);opacity:1;}
+    .spellbook-body{margin-top:.55rem;font-size:.82rem;color:var(--muted);line-height:1.65;}
 
     /* About */
     .about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:2rem;align-items:flex-start;}
@@ -447,22 +515,39 @@
       filter:drop-shadow(0 0 18px color-mix(in srgb,var(--accent) 85%,transparent));
     }
     .about-crest-title{text-transform:uppercase;letter-spacing:.2em;font-size:.75rem;color:var(--gold);margin-bottom:.6rem;}
-    .about-crest-text{font-size:.82rem;color:var(--muted);line-height:1.7;font-family:"Georgia","Times New Roman",serif;}
-    .about-content{display:flex;flex-direction:column;gap:1.2rem;}
+    .about-crest-text{font-size:.82rem;color:var(--muted);line-height:1.75;font-family:"Georgia","Times New Roman",serif;}
+    .about-content{display:flex;flex-direction:column;gap:1rem;}
+
+    /* refreshed "Standard" + "Stand For" as two balanced cards */
+    .about-duo{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:1rem;
+    }
     .about-box{
-      border-radius:18px;border:1px solid rgba(245,201,122,.25);
-      padding:1.1rem 1.2rem;
-      background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent-soft) 60%,transparent),rgba(5,3,8,.95));
+      border-radius:18px;border:1px solid rgba(245,201,122,.20);
+      padding:1.05rem 1.15rem;
+      background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent-soft) 45%,transparent),rgba(5,3,8,.95));
       font-size:.9rem;color:var(--muted);
     }
+    .about-label{text-transform:uppercase;letter-spacing:.22em;font-size:.74rem;color:var(--gold);margin-bottom:.45rem;display:flex;align-items:center;gap:.45rem;}
     .about-box strong{color:var(--gold);}
-    .about-label{text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;color:var(--gold);margin-bottom:.4rem;display:block;}
-    .about-quote{font-family:"Georgia","Times New Roman",serif;font-style:italic;margin-top:.7rem;color:#f8e8c4;}
-    .about-highlight{
-      border-radius:16px;border:1px dashed rgba(245,201,122,.4);
-      padding:.9rem 1rem;font-size:.82rem;color:var(--muted);
-      background:radial-gradient(circle at bottom right,color-mix(in srgb,var(--accent-soft) 40%,transparent),rgba(5,3,8,.96));
+    .about-quote{font-family:"Georgia","Times New Roman",serif;font-style:italic;margin-top:.65rem;color:#f8e8c4;}
+
+    .values-list{margin-top:.4rem;display:flex;flex-direction:column;gap:.5rem;}
+    .value-row{display:flex;gap:.55rem;align-items:flex-start;}
+    .value-dot{
+      width:22px;height:22px;border-radius:999px;
+      border:1px solid rgba(245,201,122,.25);
+      display:flex;align-items:center;justify-content:center;
+      color:var(--gold);
+      background:rgba(0,0,0,.18);
+      flex:0 0 auto;
+      margin-top:.05rem;
+      box-shadow:0 0 10px rgba(0,0,0,.55);
+      font-size:.78rem;
     }
+    .value-row p{margin-top:-.05rem;}
 
     /* Contact */
     .contact{background:radial-gradient(circle at top,rgba(21,2,11,1),var(--bg));}
@@ -486,18 +571,51 @@
 
     .contact-card{
       border-radius:20px;border:1px solid rgba(245,201,122,.25);
-      padding:1.3rem 1.4rem;
-      background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent-soft) 70%,transparent),rgba(5,3,8,.96));
+      padding:1.25rem 1.25rem;
+      background:radial-gradient(circle at top left,color-mix(in srgb,var(--accent-soft) 60%,transparent),rgba(5,3,8,.96));
       box-shadow:0 0 24px rgba(0,0,0,.9);
       font-size:.85rem;color:var(--muted);
     }
     .contact-card-title{
       font-size:.95rem;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);
-      margin-bottom:.4rem;
+      margin-bottom:.5rem;
     }
-    .contact-card-list{list-style:none;padding-left:0;margin:.3rem 0 .6rem;}
-    .contact-card-list li{margin-bottom:.25rem;}
-    .contact-card-list li::before{content:"✶";color:var(--accent);margin-right:.35rem;}
+    .contact-icons{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:.6rem;
+      margin-top:.75rem;
+    }
+    .icon-link{
+      display:flex;align-items:center;gap:.55rem;
+      border-radius:14px;
+      border:1px solid rgba(245,201,122,.18);
+      background:rgba(0,0,0,.18);
+      padding:.7rem .75rem;
+      color:var(--muted);
+      text-decoration:none;
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .icon-link:hover{
+      transform:translateY(-1px);
+      border-color:rgba(245,201,122,.35);
+      box-shadow:0 0 18px rgba(0,0,0,.55), 0 0 18px rgba(202,52,0,.10);
+      text-decoration:none;
+    }
+    .icon-badge{
+      width:34px;height:34px;border-radius:12px;
+      display:flex;align-items:center;justify-content:center;
+      border:1px solid rgba(245,201,122,.20);
+      background:radial-gradient(circle at top left,rgba(245,201,122,.10),rgba(0,0,0,.18));
+      color:var(--gold);
+      flex:0 0 auto;
+    }
+    .icon-text{
+      display:flex;flex-direction:column;gap:.05rem;
+      min-width:0;
+    }
+    .icon-text .t{font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:color-mix(in srgb,var(--gold) 60%, #fff 40%);}
+    .icon-text .s{font-size:.82rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
     footer{
       border-top:1px solid rgba(245,201,122,.18);
@@ -522,6 +640,8 @@
       pointer-events:none;
       transition:opacity .25s ease,transform .25s ease;
       z-index:9998;
+      max-height:min(78vh,720px);
+      overflow:auto;
     }
     .staff-gate.open{
       opacity:1;
@@ -531,6 +651,11 @@
     .staff-title{
       display:flex;align-items:center;justify-content:space-between;gap:.75rem;
       margin-bottom:.65rem;
+      position:sticky;top:0;
+      padding-bottom:.65rem;
+      background:linear-gradient(to bottom, rgba(15,3,10,.98), rgba(15,3,10,0));
+      backdrop-filter:blur(6px);
+      z-index:1;
     }
     .staff-title h4{
       font-family:"Georgia","Times New Roman",serif;
@@ -554,7 +679,7 @@
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
       gap:.75rem;
-      margin-top:.6rem;
+      margin-top:.4rem;
     }
     .staff-box{
       border:1px solid rgba(245,201,122,.22);
@@ -592,6 +717,7 @@
       margin-top:.75rem;
       padding-top:.65rem;
       background:linear-gradient(to top, rgba(5,3,8,.98), rgba(5,3,8,0));
+      z-index:2;
     }
     .staff-btn{
       border-radius:999px;
@@ -623,6 +749,9 @@
       .staff-grid{grid-template-columns:minmax(0,1fr);}
       .staff-row input, .staff-row textarea, .staff-row select{width:100%;}
       .staff-row{flex-direction:column;align-items:stretch;gap:.35rem;}
+      .hero-pillars{grid-template-columns:minmax(0,1fr);}
+      .about-duo{grid-template-columns:minmax(0,1fr);}
+      .contact-icons{grid-template-columns:minmax(0,1fr);}
     }
   </style>
 </head>
@@ -698,21 +827,23 @@
           <div class="hero-art">
             <div class="hero-art-inner">
               <div class="hero-art-title">Tonight in the Underworld</div>
-              <div class="hero-art-grid">
-                <!-- UPDATED: 3 boxes only -->
-                <div class="hero-card" id="opsSoldOut">
+
+              <!-- 3 “pillar” columns -->
+              <div class="hero-pillars">
+                <div class="pillar" id="opsSoldOut">
                   <h4>Sold Out</h4>
                   <p>Loading…</p>
                 </div>
-                <div class="hero-card" id="opsFavored">
+                <div class="pillar" id="opsFavored">
                   <h4>Favored</h4>
                   <p>Loading…</p>
                 </div>
-                <div class="hero-card" id="opsNextDrop">
+                <div class="pillar" id="opsNextDrop">
                   <h4>Next Drop</h4>
                   <p>Loading…</p>
                 </div>
               </div>
+
             </div>
           </div>
 
@@ -738,7 +869,10 @@
             <p class="season-message">Loading the season’s omen…</p>
           </div>
 
-          <!-- UPDATED: removed public “Almost Gone” panel entirely -->
+          <div class="almost-gone-panel" id="almostGonePanel" style="display:none;">
+            <div class="almost-gone-title">What’s Almost Gone</div>
+            <div class="almost-gone-list" id="almostGoneList">—</div>
+          </div>
         </div>
 
         <div class="menu-grid">
@@ -753,28 +887,24 @@
                   <div class="soldout-stamp">SOLD OUT</div>
                   <div class="menu-item-name">Cerberus Melt <span>$9</span></div>
                   <div class="menu-item-desc">Triple cheese on butter-crisped sourdough.</div>
-                  <div class="menu-badges"><div class="badge">Any melt +$3</div></div>
                 </div>
 
                 <div class="menu-item" data-item-id="gatekeeper-turkey">
                   <div class="soldout-stamp">SOLD OUT</div>
                   <div class="menu-item-name">Gatekeeper Turkey Melt <span>$11</span></div>
                   <div class="menu-item-desc">Smoked turkey, sharp cheddar, black garlic aioli.</div>
-                  <div class="menu-badges"><div class="badge">Any melt +$3</div></div>
                 </div>
 
                 <div class="menu-item" data-item-id="hellfire-chicken">
                   <div class="soldout-stamp">SOLD OUT</div>
                   <div class="menu-item-name">Hellfire Chicken Melt <span>$11</span></div>
                   <div class="menu-item-desc">Blackened chicken, pepper jack, ember mayo.</div>
-                  <div class="menu-badges"><div class="badge">Any melt +$3</div></div>
                 </div>
 
                 <div class="menu-item" data-item-id="persephone-garden">
                   <div class="soldout-stamp">SOLD OUT</div>
                   <div class="menu-item-name">Persephone’s Garden (Vegan) 🌿 <span>$10</span></div>
                   <div class="menu-item-desc">Roasted mushrooms, caramelized onion, herb oil.</div>
-                  <div class="menu-badges"><div class="badge">Any melt +$3</div></div>
                 </div>
               </div>
 
@@ -791,28 +921,39 @@
                   </div>
                 </div>
 
-                <!-- Secret menu mounts HERE: under sides / under soup -->
+                <!-- Secret menu mounts under soup -->
                 <div id="secretMenuMount"></div>
               </div>
 
             </div>
           </div>
 
-          <!-- Spellbook-style panel -->
+          <!-- Spellbook-style panel (lighter + collapsible) -->
           <aside class="menu-art">
             <h4>The Spellbook of Sourdough</h4>
             <p>
               House-fermented loaves. Butter-crisped edges. Cheese pulls that don’t lie.
-              The Hound tends the flame — Cerberus keeps the gate.
             </p>
-            <p class="menu-spell">“Three heads. One rule: the bread must crackle.”</p>
+
+            <details class="spellbook-details">
+              <summary>
+                Kitchen notes
+                <span class="chev">▾</span>
+              </summary>
+              <div class="spellbook-body">
+                <p>
+                  We treat the starter like a living oath: fed, watched, and never rushed.
+                  When the crust crackles, it’s done. When it doesn’t—nothing leaves.
+                </p>
+                <p class="menu-spell">“Three heads. One rule: the bread must crackle.”</p>
+              </div>
+            </details>
           </aside>
         </div>
 
         <!-- SECRET MENU (Hidden Specialty Loaf) -->
         <div id="secretMenu" class="secret-menu" aria-hidden="true">
           <div class="secret-menu-inner">
-            <!-- no “off-menu” text, no hints -->
             <div class="secret-menu-label" id="secretLabel">✶</div>
             <div class="secret-menu-title" id="secretLoafName">Obsidian Speed Loaf</div>
             <p class="secret-menu-desc" id="secretLoafDesc">
@@ -843,8 +984,6 @@
           <div class="about-crest">
             <img src="CerberusLogo2.png" alt="Cerberus Bites Crest Logo" class="about-crest-logo">
             <div class="about-crest-title">Official Crest of Cerberus Bites</div>
-
-            <!-- LOCKED CREED (your confirmed version) -->
             <p class="about-crest-text">
               <strong>We are the guardians of souls who enter this realm.</strong><br>
               I watch the flames.<br>
@@ -855,21 +994,36 @@
           </div>
 
           <div class="about-content">
-            <div class="about-box">
-              <span class="about-label">The Underworld Standard</span>
-              <p>
-                Cerberus Bites is built for speed, profit, and obsession-level consistency:
-                sourdough done right, butter-crisped, and served hot.
-              </p>
-              <div class="about-quote">“If it’s not crackling, it’s not leaving.”</div>
+            <div class="about-duo">
+              <div class="about-box">
+                <div class="about-label">The Underworld Standard</div>
+                <p>
+                  Cerberus Bites is built for speed, profit, and obsession-level consistency:
+                  sourdough done right, butter-crisped, and served hot.
+                </p>
+                <div class="about-quote">“If it’s not crackling, it’s not leaving.”</div>
+              </div>
+
+              <div class="about-box">
+                <div class="about-label">What We Stand For</div>
+                <div class="values-list">
+                  <div class="value-row">
+                    <div class="value-dot">✶</div>
+                    <p><strong>Quality first.</strong> Sourdough is the star — everything else serves it.</p>
+                  </div>
+                  <div class="value-row">
+                    <div class="value-dot">✶</div>
+                    <p><strong>Fast service.</strong> A tight menu that moves.</p>
+                  </div>
+                  <div class="value-row">
+                    <div class="value-dot">✶</div>
+                    <p><strong>Mythic experience.</strong> The gatekeeper vibe is part of the meal.</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="about-highlight">
-              <span class="about-label">What We Stand For</span>
-              <p>✶ <strong>Quality first.</strong> Sourdough is the star — everything else serves it.</p>
-              <p style="margin-top:0.4rem;">✶ <strong>Fast service.</strong> A tight menu that moves.</p>
-              <p style="margin-top:0.4rem;">✶ <strong>Mythic experience.</strong> The gatekeeper vibe is part of the meal.</p>
-            </div>
+            <!-- optional: room for future lore callouts without clutter -->
           </div>
         </div>
       </div>
@@ -882,7 +1036,7 @@
           <div class="section-eyebrow">Summon the Underworld Kitchen</div>
           <h2 class="section-title">Bookings & General Inquiries</h2>
           <p class="section-subtitle">
-            Use the calendar to claim your date. For everything else, message the gates below.
+            Use the calendar to claim your date. For everything else, tap the sigils below.
           </p>
         </div>
 
@@ -903,12 +1057,63 @@
           <aside class="contact-card">
             <div class="contact-card-title">General Inquiries</div>
             <p>For questions, collaborations, press, or other mischief:</p>
-            <ul class="contact-card-list">
-              <li><strong>Email:</strong> <a href="mailto:cerberusbites@hotmail.com">cerberusbites@hotmail.com</a></li>
-              <li><strong>Phone:</strong> <a href="tel:15409448898">540-944-8898</a></li>
-              <li><strong>Instagram:</strong> <a href="https://www.instagram.com/cerberus_bites" target="_blank">@cerberus_bites</a></li>
-              <li><strong>TikTok:</strong> <a href="https://www.tiktok.com/@cerberusbites" target="_blank">@cerberusbites</a></li>
-            </ul>
+
+            <div class="contact-icons">
+              <a class="icon-link" href="mailto:cerberusbites@hotmail.com" aria-label="Email Cerberus Bites">
+                <span class="icon-badge" aria-hidden="true">
+                  <!-- mail -->
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.8"/>
+                  </svg>
+                </span>
+                <span class="icon-text">
+                  <span class="t">Email</span>
+                  <span class="s">cerberusbites@hotmail.com</span>
+                </span>
+              </a>
+
+              <a class="icon-link" href="tel:15409448898" aria-label="Call Cerberus Bites">
+                <span class="icon-badge" aria-hidden="true">
+                  <!-- phone -->
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M7 3h3l2 5-2 1c1 3 4 6 7 7l1-2 5 2v3c0 1-1 2-2 2C10 21 3 14 3 5c0-1 1-2 2-2h2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="icon-text">
+                  <span class="t">Phone</span>
+                  <span class="s">540-944-8898</span>
+                </span>
+              </a>
+
+              <a class="icon-link" href="https://www.instagram.com/cerberus_bites" target="_blank" rel="noopener" aria-label="Open Instagram">
+                <span class="icon-badge" aria-hidden="true">
+                  <!-- instagram -->
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Z" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <span class="icon-text">
+                  <span class="t">Instagram</span>
+                  <span class="s">@cerberus_bites</span>
+                </span>
+              </a>
+
+              <a class="icon-link" href="https://www.tiktok.com/@cerberusbites" target="_blank" rel="noopener" aria-label="Open TikTok">
+                <span class="icon-badge" aria-hidden="true">
+                  <!-- simple music note -->
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M14 3v11.5a3.5 3.5 0 1 1-2-3.2V6.2c2.2 1.6 4.2 2.3 6 2.4V5.2c-1.7-.2-3.1-1-4-2.2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="icon-text">
+                  <span class="t">TikTok</span>
+                  <span class="s">@cerberusbites</span>
+                </span>
+              </a>
+            </div>
           </aside>
         </div>
       </div>
@@ -1053,7 +1258,7 @@
         msg=`☀️ <strong>Summer heat</strong><br>
              Hellfire Chicken brings the ember — ask for extra char if you’re brave.`;
       } else {
-        msg=`🍂 <strong>Autumn at the Black Gate</strong><br>
+        msg=`🍂 <strong>Autumn at the gate</strong><br>
              Gatekeeper Turkey + soup is the cleanest combo when the air turns sharp.`;
       }
       seasonMessage.innerHTML=msg;
@@ -1115,9 +1320,7 @@
       localStorage.setItem(STATE_KEY, JSON.stringify(init));
       return init;
     }
-    function setState(next){
-      localStorage.setItem(STATE_KEY, JSON.stringify(next));
-    }
+    function setState(next){ localStorage.setItem(STATE_KEY, JSON.stringify(next)); }
 
     function statusFor(st){
       const left = (st && typeof st.left==="number") ? st.left : 0;
@@ -1125,12 +1328,10 @@
       if(left <= 2) return "ALMOST GONE";
       return "LIVE";
     }
-    function plural(n, word){
-      return n===1 ? `${n} ${word}` : `${n} ${word}s`;
-    }
+    function plural(n, word){ return n===1 ? `${n} ${word}` : `${n} ${word}s`; }
 
     /* ==========================================================
-       4) Render menu SOLD OUT + Secret Loaf
+       4) Render menu SOLD OUT + Almost Gone + Secret Loaf
        ========================================================== */
     function renderMenuStatuses(){
       const state=getState();
@@ -1143,6 +1344,32 @@
       });
     }
 
+    function renderAlmostGoneTop(){
+      const state=getState();
+      const panel=document.getElementById("almostGonePanel");
+      const listEl=document.getElementById("almostGoneList");
+      if(!panel || !listEl) return;
+
+      const list=TRACKED.map(it=>{
+        const st=state.items[it.id] || {left:0};
+        return { it, st, status: statusFor(st) };
+      });
+
+      const almost=list.filter(x=>x.status==="ALMOST GONE")
+        .sort((a,b)=>(a.st.left||0)-(b.st.left||0))
+        .slice(0,4);
+
+      if(almost.length===0){
+        panel.style.display="none";
+        return;
+      }
+
+      panel.style.display="";
+      listEl.innerHTML = almost
+        .map(x=>`<strong>${x.it.name}</strong> — ${plural(x.st.left,"batch")} left`)
+        .join(" • ");
+    }
+
     function renderSecretLoaf(){
       const state=getState();
       const loaf=state.secretLoaf || {};
@@ -1150,18 +1377,14 @@
       const mount=document.getElementById("secretMenuMount");
       if(!menu || !mount) return;
 
-      // Move secret menu under soup area
-      if(menu.parentElement !== mount){
-        mount.appendChild(menu);
-      }
+      // ensure mounted under soup
+      if(menu.parentElement !== mount) mount.appendChild(menu);
 
-      // Populate fields
       document.getElementById("secretLoafName").textContent = loaf.name || "Obsidian Speed Loaf";
       document.getElementById("secretLoafDesc").textContent = loaf.desc || "";
       document.getElementById("secretLoafPrice").textContent = loaf.price || "$6";
       document.getElementById("secretLoafBadge").textContent = loaf.badge || "specialty";
 
-      // if disabled, keep it hidden no matter what
       if(!loaf.enabled){
         menu.classList.remove("visible");
         menu.setAttribute("aria-hidden","true");
@@ -1186,8 +1409,6 @@
         secret.classList.add("visible");
         star.classList.add("active");
         secret.setAttribute("aria-hidden","false");
-
-        // auto-hide after a bit (true “found it” moment)
         hideTimer=setTimeout(hide, 5200);
       }
       function hide(){
@@ -1216,7 +1437,7 @@
     }
 
     /* ==========================================================
-       6) Ops boxes (Tonight in the Underworld) — 3 boxes only
+       6) Ops pillars (Tonight in the Underworld)
        ========================================================== */
     function renderOps(){
       const state=getState();
@@ -1228,7 +1449,7 @@
       const soldout=list.filter(x=>x.status==="SOLD OUT");
       const live=list.filter(x=>x.status!=="SOLD OUT");
 
-      // Sold Out
+      // Sold Out pillar
       const elSold=document.getElementById("opsSoldOut");
       if(elSold){
         elSold.querySelector("p").textContent =
@@ -1242,7 +1463,7 @@
       if(elFav){
         if(live.length===0){
           elFav.querySelector("p").textContent="The gate is quiet.";
-        } else {
+        }else{
           live.sort((a,b)=>(a.st.left||0)-(b.st.left||0));
           const top=live[0];
           elFav.querySelector("p").innerHTML =
@@ -1250,7 +1471,7 @@
         }
       }
 
-      // Next Drop
+      // Next Drop pillar
       const elDrop=document.getElementById("opsNextDrop");
       if(elDrop){
         const txt = state.nextDropTime ? `Next batch drop: ${state.nextDropTime}` : (state.nextDrop || "Next drop soon");
@@ -1345,7 +1566,7 @@
       `;
       grid.appendChild(loafBox);
 
-      // wire randomize button
+      // wire randomize
       setTimeout(()=>{
         const btn=document.getElementById("randLoaf");
         if(!btn) return;
@@ -1380,7 +1601,6 @@
     function saveFromStaffUI(){
       const state=getState();
 
-      // stock
       TRACKED.forEach(it=>{
         const inp=document.getElementById(`stk_${it.id}`);
         if(!inp) return;
@@ -1388,13 +1608,11 @@
         state.items[it.id]={ left: isNaN(n) ? 0 : n };
       });
 
-      // next drop
       const nd=document.getElementById("nextDrop");
       const ndt=document.getElementById("nextDropTime");
       state.nextDrop = nd ? nd.value.trim() : state.nextDrop;
       state.nextDropTime = ndt ? ndt.value.trim() : state.nextDropTime;
 
-      // secret loaf
       state.secretLoaf = state.secretLoaf || {};
       const en=document.getElementById("loafEnabled");
       const ln=document.getElementById("loafName");
@@ -1410,8 +1628,8 @@
 
       setState(state);
 
-      // refresh site
       renderMenuStatuses();
+      renderAlmostGoneTop();
       renderSecretLoaf();
       renderOps();
     }
@@ -1421,6 +1639,7 @@
       setState(fresh);
       buildStaffUI();
       renderMenuStatuses();
+      renderAlmostGoneTop();
       renderSecretLoaf();
       renderOps();
     }
@@ -1434,7 +1653,7 @@
       const HOLD_MS=3000;
 
       const startHold = (e)=>{
-        if(e && typeof e.preventDefault==="function") e.preventDefault(); // stop jumping to #top while holding
+        if(e && typeof e.preventDefault==="function") e.preventDefault();
         clearTimeout(pressTimer);
         pressTimer=setTimeout(openGate, HOLD_MS);
       };
@@ -1478,6 +1697,7 @@
 
       // initial renders
       renderMenuStatuses();
+      renderAlmostGoneTop();
       renderSecretLoaf();
       renderOps();
     });
@@ -1497,9 +1717,10 @@
       initSecretMenu();
       initStaffGateGesture();
 
-      // refresh periodically (in case staff adjusts)
+      // periodic refresh (safe + keeps UI synced with staff edits)
       setInterval(()=>{
         renderMenuStatuses();
+        renderAlmostGoneTop();
         renderSecretLoaf();
         renderOps();
       }, 1800);
@@ -1507,4 +1728,3 @@
   </script>
 </body>
 </html>
-
